@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        style="@style/header_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            style="@style/header_images_style_left"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            style="@style/header_images_style_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/header_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/header_txt" />
+       
+        <TextView
+            android:id="@+id/textView56"
+            style="@style/cust_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:text="@string/drunk_drive"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+                
+        <TextView
+            android:id="@+id/textView52"
+            style="@style/cust_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView56"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-3dp"
+            android:text="@string/app_version"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    
+      <TextView
+          android:id="@+id/minor_text"
+          style="@style/navi_text_style"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/relativeLayout1"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="15dp"
+          android:text="@string/minor"
+          android:gravity="center_horizontal"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          android:textSize="25sp"
+          android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/minor_text"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/header_grnt_padding_ten" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        	android:layout_marginBottom="40dp" 
+        	android:layout_marginLeft="15dp"
+        	android:layout_marginRight="15dp">
+
+           <EditText
+                android:id="@+id/bar"
+                style="@style/edt_custom_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:inputType="text|textCapCharacters" >
+            </EditText>
+            
+           <EditText
+               android:id="@+id/bar_address"
+               style="@style/edt_custom_style"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_below="@id/bar"
+               android:layout_marginTop="20dp"
+               android:textSize="18sp"
+               android:hint=""
+               android:inputType="text|textCapCharacters" >
+
+            </EditText>
+            
+           
+           <LinearLayout 
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:weightSum="1"
+               android:layout_marginTop="25dp"
+               android:layout_below="@id/bar_address">
+               
+                  <Button
+                    android:id="@+id/clear_btn"
+                    style="@style/naviblue_custom_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/header_grnt_padding_five"
+                    android:layout_weight="0.5"
+                    android:text="Clear" />
+
+                <Button
+                    android:id="@+id/ok_btn"
+                    style="@style/naviblue_custom_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Ok" />
+                
+           </LinearLayout>
+            
+          
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

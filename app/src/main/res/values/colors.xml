@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+
+    <color name="colorAccent">#f56432</color>
+    <color name="app_blue">#2f7acb</color>
+    <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
+    <color name="background">#fdf9f4</color>
+    <color name="EditTxt_color">#03044b</color>
+    <color name="white">#ffffff</color>
+
+
+
+
+    <color name="bg">#c6d8f7</color>
+    <!-- <color name="bg">#58D3F7</color> -->
+    <color name="header_bg">#81BEF7</color>
+    <color name="orange_color">#FFBF00</color>
+    <color name="dd_btn_blue_color">#ced6de</color>
+    <color name="navi_color">#001e59</color>
+    <color name="footer_txt_color">#374175</color>
+    <color name="dialog_title">#fb0000</color>
+
+</resources>

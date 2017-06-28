@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        style="@style/header_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            style="@style/header_images_style_left"
+            android:layout_width="@dimen/header_logo_size"
+            android:layout_height="@dimen/header_logo_size"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            style="@style/header_images_style_right"
+            android:layout_width="@dimen/header_logo_size"
+            android:layout_height="@dimen/header_logo_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/header_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/header_txt" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/cust_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_centerHorizontal="true"
+            android:text="@string/app_version"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+
+    <!-- Scrollable Content below header and above footer -->
+    <!--
+    <ScrollView
+    android:id="@+id/container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_above="@id/footer"
+    android:layout_below="@id/header" >
+    -->
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="20dp"
+       android:layout_below="@+id/relativeLayout1">
+       <TextView
+           android:id="@+id/tex"
+           style="@style/styleTextView"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:layout_margin="5dp"
+           android:text="IP Settings"
+           />
+   </RelativeLayout>
+    <ScrollView
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="10dp"
+        android:layout_below="@id/relativeLayout1"
+        >
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp"
+            android:layout_marginTop="150dp"
+            >
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:cardElevation="5dp"
+                card_view:contentPadding="10dp"
+
+               >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="25dp"
+                    >
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/styleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:text="IP Settings"
+                android:visibility="gone"
+                 />
+
+            <!--             <LinearLayout
+                            android:id="@+id/ll_rg_ipsettings_xml"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textView3"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                            android:layout_marginTop="@dimen/header_grnt_padding_five" > -->
+
+            <RadioGroup
+                android:id="@+id/radioGroup_live_test"
+                android:layout_below="@+id/textView3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:padding="0dp">
+
+                <RadioButton
+                    android:id="@+id/radioButton_live"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Live"
+                    android:textSize="@dimen/edittext_font"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"/>
+
+                <RadioButton
+                    android:id="@+id/radioButton_test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Test"
+                    android:textSize="@dimen/edittext_font"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"/>
+            </RadioGroup>
+            <!-- </LinearLayout> -->
+
+            <LinearLayout
+                android:id="@+id/ll_ipsetting"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/radioGroup_live_test"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp" >
+
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/styleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.16"
+                    android:text="Service_Url :"
+
+                    />
+
+                <EditText
+                    android:id="@+id/edt_service_ipsettings_xml"
+                    android:labelFor="@+id/edt_service_ipsettings_xml"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.97"
+                    android:textSize="@dimen/IP_Set_EdtTxtsize"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_ftpurl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_ipsetting"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp" >
+
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/styleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.16"
+                    android:text="Ftp_Url :"
+
+                   />
+
+                <EditText
+                    android:id="@+id/edt_ftpurl_xml"
+                    android:labelFor="@+id/edt_ftpurl_xml"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.97"
+                    android:textSize="@dimen/IP_Set_EdtTxtsize"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_btns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_ftpurl"
+                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true" >
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnback_ipsettings_xml"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Back"
+                    android:background="@drawable/background"
+                    android:padding="5dp"
+                    android:textSize="@dimen/edtTxtLyt_font"
+                    android:textColor="@color/white"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="bold"/>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnsubmit_ipsettings_xml"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background"
+                    android:fontFamily="sans-serif"
+                    android:padding="5dp"
+                    android:text="Save"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/edtTxtLyt_font"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/footer_size"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background"
+        >
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/PoweredBy"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif"
+            android:layout_marginLeft="10dp"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/CompanyName"
+            android:layout_below="@+id/pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/CompanyName"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif"
+            android:textSize="@dimen/footer_text_size"
+            android:padding="5dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:lines="1"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

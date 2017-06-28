@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        style="@style/header_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            style="@style/header_images_style_left"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            style="@style/header_images_style_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/header_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/header_txt" />
+
+        <TextView
+            android:id="@+id/textView56"
+            style="@style/cust_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_centerHorizontal="true"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/header_grnt_padding_ten" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/navi_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/settings"
+                android:textSize="30dp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_btns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/header_grnt_padding_five"
+                android:background="@color/tranparent_color"
+                android:padding="@dimen/margin_twenty" >
+
+                <Button
+                    android:id="@+id/btnpsname_settings_xml"
+                    style="@style/dd_custom_blue_btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:clickable="false"
+                    android:text="@string/select_ps_name" />
+
+                <Button
+                    android:id="@+id/btnpointby_psname_settings_xml"
+                    style="@style/dd_custom_blue_btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnpsname_settings_xml"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                    android:clickable="false"
+                    android:text="@string/select_pointbypsname" />
+
+                <EditText
+                    android:id="@+id/edt_exctlocation_settings_xml"
+                    style="@style/edt_custom_settings_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnpointby_psname_settings_xml"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                    android:gravity="center"
+                    android:hint="@string/exact_location"
+                    android:inputType="text" >
+                </EditText>
+
+                <EditText
+                    android:id="@+id/edt_breatheanalyser_settings_xml"
+                    style="@style/edt_custom_settings_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_exctlocation_settings_xml"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                    android:gravity="center"
+                    android:hint="@string/breathe_analyser"
+                    android:inputType="number"
+                    android:visibility="gone"
+                    android:maxLength="6" >
+                </EditText>
+
+                <EditText
+                    android:id="@+id/edt_bluetoothid_settings_xml"
+                    style="@style/edt_custom_settings_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_breatheanalyser_settings_xml"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                    android:gravity="center"
+                    android:hint="@string/bluetooth_address" >
+                </EditText>
+
+                <EditText
+                    android:id="@+id/edt_pinpad_xml"
+                    style="@style/edt_custom_settings_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_bluetoothid_settings_xml"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                    android:gravity="center"
+                    android:hint="@string/pinpad"
+                    android:visibility="visible" >
+                </EditText>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_weburl_settings_xml"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/header_grnt_padding_ten"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten" >
+                    
+                    <Button
+                        android:id="@+id/btnback_settings_xml"
+                        style="@style/naviblue_custom_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/header_grnt_padding_five"
+                        android:layout_weight="1"
+                        android:text="@string/back" />
+
+                    <Button
+                        android:id="@+id/btncancel_settings_xml"
+                        style="@style/naviblue_custom_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/header_grnt_padding_five"
+                        android:layout_weight="1"
+                        android:text="@string/reset" />
+
+                    <Button
+                        android:id="@+id/btnsubmit_settings_xml"
+                        style="@style/naviblue_custom_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/save" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_bluetoothState"
+                style="@style/navi_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_btns"
+                android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                android:layout_marginTop="@dimen/header_grnt_padding_five"
+                android:text="Bluetooth" />
+
+            <Button
+                android:id="@+id/btnscan_settings_xml"
+                style="@style/naviblue_custom_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_bluetoothState"
+                android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                android:text="@string/scan_bluetooth" />
+
+            <ListView
+                android:id="@+id/listview_devicesfound"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnscan_settings_xml" >
+            </ListView>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

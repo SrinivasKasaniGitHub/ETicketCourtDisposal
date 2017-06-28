@@ -1,0 +1,330 @@
+<resources>
+    <string name="app_name">ETicketCourt</string>
+
+
+    // Login
+
+    <string name="User_Name">User Name</string>
+    <string name="Password">Password</string>
+    <string name="PoweredBy"><u>Developed By:</u></string>
+    <string name="CompanyName"><b> MOTHER TECHNOLOGIES PROJECT VENTURES </b></string>
+    <string name="permissions">Please accept all permissions</string>
+
+
+
+    <!-- DASHBOARD -->
+    <string name="release_documents">Release\nDocuments</string>
+    <string name="release_documents_one_line">Release Documents</string>
+    <string name="towing">Crane \n41 CP ACT</string>
+    <string name="towing_one_line">Crane 41 CP ACT</string>
+    <string name="reports">Reports</string>
+    <string name="app_version">Version-1.5.6</string>
+    <string name="regNo">Regn.No</string>
+    <string name="engine">Engine No</string>
+    <string name="chasis">Chasis No</string>
+    <string name="minor">The Person is Minor please take the Following Details</string>
+    <string name="mobile">Mobile :</string>
+    <string name="hint_mobile">Enter Mobile Number</string>
+    <string name="mail">E-mail ID :</string>
+    <string name="hint_mail">Enter E-mail ID</string>
+
+    <!-- <string name="header_txt">Hyderabad Traffic Police</string> -->
+    <string name="header_txt">E-Court Disposal</string>
+    <string name="sub_header_txt">Drunk &amp; Drive  V 1.0</string>
+    <string name="login">LOGIN</string>
+    <string name="enter_pid">Enter PID</string>
+    <string name="enter_pwd">Enter Password</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="drunk_drive">Drunk &amp; Drive</string>
+    <string name="regno">Regn.No</string>
+    <string name="regncd_no">AP29</string>
+    <string name="regncd_name">BW</string>
+    <string name="regncd_last_num">6249</string>
+    <string name="exact_location">Exact Location</string>
+    <string name="offence_date">Offence Date</string>
+    <string name="offence_time">Offence Time</string>
+    <string name="fined_by">Fined by</string>
+    <string name="finedby_court">Court</string>
+    <string name="finedby_policestation">Police Station</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select Time</string>
+    <string name="owner_dl_no">Enter Owner DL No       </string>
+    <string name="driver_dl_no">Enter Driver DL No      </string>
+    <string name="driver_name">Enter Driver Name</string>
+    <string name="driver_name_only">Driver\'s Name    </string>
+    <string name="driver_details">DRIVER DETAILS</string>
+    <string name="driver_father_name">Driver\'s Father Name</string>
+    <string name="aadhar_no">Aadhar No    </string>
+    <string name="about_version">About version</string>
+    <string name="update_aadhar">Update Aadhar</string>
+    <string name="tv_age">Age</string>
+    <string name="tv_gender">Gender</string>
+    <string name="colon">:</string>
+    <string name="pancard_no">PanCard No    </string>
+    <string name="passport_no">Passport No</string>
+    <string name="voter_id_no">Voter Id No      </string>
+    <string name="driver_contact_no">Enter Driver Contact No</string>
+    <string name="detained_items">Detained Items</string>
+    <string name="detained_items_rc">RC&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</string>
+    <string name="detained_items_vhcle">Vehicle</string>
+    <string name="detained_items_licence">Licence</string>
+    <string name="detained_items_permit">Permit</string>
+    <string name="counselling_date">Counselling Date</string>
+    <string name="alcohol_reading">Enter Alcohol Reading</string>
+    <!-- <string name="age">Age&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</string> -->
+    <string name="age">Enter Age</string>
+    <string name="mole_mark">Enter Identification Mark(Mole)</string>
+    <string name="occupation">Occupation</string>
+    <string name="select">Select</string>
+    <string name="select_occupation">Select Occupation</string>
+    <string name="qualification">Qualification</string>
+    <string name="select_qualification">Select Qualification</string>
+    <string name="gender">Gender</string>
+    <string name="check_sino">Enter Check Serial No</string>
+    <string name="dd_name">Enter Name of Profession</string>
+    <string name="dd_address">Enter Address  of Profession</string>
+    <string name="email">Enter Email ID of Profession</string>
+    <string name="wheller_code">Wheeler Code</string>
+    <string name="maker_cd">Maker Code</string>
+    <string name="veh_main_cat">Veh. Main Category</string>
+    <string name="veh_sub_cat">Veh. Sub Category</string>
+    <string name="address">Enter Address</string>
+    <string name="city">Enter City</string>
+    <string name="next">Next</string>
+    <string name="gen_male">Male</string>
+    <string name="gen_female">Female</string>
+    <string name="gen_others">Others</string>
+    <string name="previous">Previous</string>
+    <string name="settings">Settings</string>
+    <string name="select_ps_name">Select PS Name</string>
+    <string name="select_pointbypsname">Select Point By PS-Name</string>
+    <string name="save">Save</string>
+    <string name="vhcle_cat">Vehicle Category</string>
+    <string name="select_wheeler_code">Select Wheeler Code</string>
+    <string name="select_idproof">Select ID Proof</string>
+    <string name="proffession">Select Profession</string>
+    <string name="bar_type">Select Liquor Seller Type</string>
+    <string name="breathe_analyser">Breath Analyser</string>
+    <string name="eticket_no">E-Ticket No</string>
+    <string name="violation">Violation</string>
+    <string name="drunkand_drive">Drunk &amp; Drive</string>
+    <string name="address_res">Address</string>
+    <string name="city_res">City</string>
+    <string name="police_station">Police Station</string>
+    <string name="driver_dl_no_res">Driver DL No</string>
+    <string name="place_of_violation">Place Of violation</string>
+    <string name="officer_code">Officer Code</string>
+    <string name="office_name">Officer Name</string>
+    <string name="mob_no">Mobile Number</string>
+    <string name="remarks">Remarks</string>
+    <string name="signature">Signature of Driver</string>
+    <string name="print">Print</string>
+    <string name="newtork_txt">Please check your network connection!</string>
+    <string name="owner_name">Owner Name</string>
+    <string name="maker_name">Maker Name</string>
+    <string name="maker_class">Maker Class</string>
+    <string name="color">Color</string>
+    <string name="engine_no">Engine No.</string>
+    <string name="chasos_no">Chasis No.</string>
+    <string name="get_pending_challans">GET PENDING CHALLANS</string>
+    <string name="point_name">Point Name</string>
+    <string name="ps_name">PS Name</string>
+    <string name="offence_desc">Offence Desc</string>
+    <string name="amnt">Amount</string>
+    <string name="dates">Date</string>
+    <string name="ok">OK</string>
+    <string name="okkk">OK</string>
+    <string name="pending_challans">Pending challans</string>
+    <string name="remember_details">Remember Details</string>
+    <string name="generate_challan">Generate Challan</string>
+    <string name="back">Back</string>
+    <string name="ticket_generated_successfully">Ticket Generated Successfully</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="confirm">Confirm</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="city_or_district">City/District</string>
+    <string name="bar">Bar &amp; Restaurant</string>
+    <string name="permit_room">Permit Room</string>
+    <string name="wine_shop">Wine Shop</string>
+    <string name="others">Others</string>
+
+    <!-- rc details card -->
+
+    <string name="rc_details">REGISTRATION OF CERTIFICATE DETAILS</string>
+    <string name="tsp">TELANGANA STATE POLICE</string>
+    <string name="vehicleNo_txt">Regn. Number </string>
+    <string name="Ccapsity_txt">Cubic Capacity </string>
+    <string name="Wbase_txt">Wheel Base </string>
+    <string name="Scapacity_txt">Seating Capacity </string>
+    <string name="Uweight_txt">Unladen Weight </string>
+    <string name="Color_txt">Color </string>
+    <string name="Dor_txt">Date of Registration </string>
+    <string name="RVU_txt">Regn. Valid Up to </string>
+    <string name="Tax_txt">Tax </string>
+    <string name="Sow_txt">Signature of the Owner </string>
+    <string name="Hyp_txt">Hypothecated </string>
+    <string name="Vehnum_txt">Vehicle Number </string>
+    <string name="ownername_txt">Owner Name </string>
+    <string name="Fathername_txt">Father Name	</string>
+    <string name="Address_txt">Address	</string>
+    <string name="vtype_txt">Vehicle Type  </string>
+    <string name="Chasisno_txt">Chasis No  </string>
+    <string name="Engno_txt">Engine Number </string>
+    <string name="InscmpName_txt">Insurance Company Name </string>
+    <string name="Insvf_txt">Insurance Valid From </string>
+    <string name="Insvu_txt">Insurance Valid Up to </string>
+    <string name="title_activity_image">ImageActivity</string>
+
+    <!-- <string name="sync">Sync</string> -->
+    <string name="echallan">E Challan</string>
+    <string name="echallanreports">E Challan Reports</string>
+    <string name="sync">Download\nMasters</string>
+    <string name="sp_drive">Special Drive</string>
+    <string name="reset">Reset</string>
+    <string name="footer_txt">Invented And Developed By \nMother Technologies Project Ventures</string>
+    <string name="licence_owner_name">Licence Owner Name</string>
+    <string name="father_name_only">Father Name</string>
+    <string name="licence_status">Licence Exit</string>
+    <string name="licence_yes">YES</string>
+    <string name="licence_no">NO</string>
+    <string name="scan_bluetooth">Scan Bluetooth Printer</string>
+    <string name="bluetooth_address">Bluetooth Printer Address</string>
+    <string name="duplicate_print">Duplicate\nPrint</string>
+    <string name="pinpad">PIN pad Bluetooth Address</string>
+    <string name="no_pending_challans">No Pending Challans \nPlease Check Details</string>
+    <string name="is_owner">Is Owner</string>
+    <string name="is_driver">Is Driver</string>
+
+    <!-- SPOT CHALLAN -->
+    <string name="spot_challan">Spot Challan</string>
+    <string name="special_drive">Special Drive</string>
+    <string name="select_violation">Select Violation</string>
+
+    <!-- SPOT CHALLAN_TWO.XML VALUES -->
+    <string name="release_items">Release Detained Items</string>
+    <string name="spot_payment">Is It Spot Payment&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</string>
+    <string name="payment_mode">Payment Mode</string>
+    <string name="cash">Cash</string>
+    <string name="card">Card</string>
+    <string name="card_type">Card Type</string>
+    <string name="visa_card">Visa</string>
+    <string name="master_card">Master</string>
+    <string name="maestro_card">Maestro</string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="none">None</string>
+
+    <!-- DASHBOARD -->
+    <string name="get_details">Get Details</string>
+    <string name="generate_ticket">Drunk &amp; Drive</string>
+    <string name="masters">Download Masters</string>
+
+    <!-- PENDING CHALLANS -->
+    <string name="owner_lcnce_no">Owner Licence No.</string>
+    <string name="driver_lcnce_no">Driver Licence No.</string>
+
+    <!-- IP SETTINGS -->
+    <string name="ip_settings_header">IP Settings</string>
+    <string name="service_url">Service URL</string>
+    <string name="ftp_url">FTP URL</string>
+    <string name="live">LIVE</string>
+    <string name="test">TEST</string>
+
+    <!-- AADHAR DETAILS -->
+    <string name="aadhar_no_eid">Aadhar No/EID</string>
+    <string name="name">Name</string>
+    <string name="care_off">C/O</string>
+    <string name="uid">UID</string>
+    <string name="eid">EID</string>
+    <string name="dob">DOB</string>
+    <string name="passport_tx">PassPort No</string>
+
+    <!-- SPOT REPONSE -->
+    <string name="officer_pid">Officer PID</string>
+    <string name="officer_name">Officer Name</string>
+    <string name="driver_contact_number">Driver Contact No</string>
+    <string name="violation_details">Violation Details</string>
+    <string name="select_dup_type">Select Application</string>
+
+    <!-- VEHICLE HISTORY -->
+    <string name="vehicle_history">Vehicle History</string>
+    <string name="response">Response</string>
+    <string name="day_report">Day Report</string>
+    <string name="no_day_report">No Reports Found!</string>
+
+    <!--<color name="bg">#c6d8f7</color>-->
+    <!--&lt;!&ndash; <color name="bg">#58D3F7</color> &ndash;&gt;-->
+    <!--<color name="header_bg">#81BEF7</color>-->
+    <!--<color name="orange_color">#FFBF00</color>-->
+    <!--<color name="dd_btn_blue_color">#58ACFA</color>-->
+    <!--<color name="navi_color">#001e59</color>-->
+    <!--<color name="footer_txt_color">#374175</color>-->
+    <!--<color name="dialog_title">#fb0000</color>-->
+    <!--<color name="black">#000000</color>-->
+
+    <!-- DUPLICATE PRINT -->
+    <string name="dup_drunk_drive">Drunk &amp; Drive</string>
+    <string name="dup_spot_challan">Spot Challan</string>
+    <string name="dup_vhcle_hstry">Vehicle History</string>
+    <string name="select_report_type">Select Report Type</string>
+
+    <!-- NEW VERSION DETAILS -->
+
+    <string name="version_details">Version Deatils</string>
+
+    <!-- 23dbbd green button style -->
+
+    <color name="tranparent_color">#80ffffff</color>
+    <color name="tranparent_color_black">#80000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="green">#568e3a</color>
+
+    <string-array name="violations_arr">
+        <item>MIN</item>
+        <item>MAX</item>
+    </string-array>
+
+    <string name="title_activity_special__drive">Special_Drive</string>
+    <string name="title_activity_special_drive">SpecialDrive</string>
+    <string name="title_activity_offline_dashboard">OfflineDashboardActivity</string>
+    <string name="title_activity_offline__generate_case">Offline_GenerateCase</string>
+    <string name="title_activity_offline__settings">Offline_Settings</string>
+    <string name="title_activity_respone__print">Respone_Print</string>
+    <string name="title_activity_Fake_NO_Dialog">Fake_NO_Dialog</string>
+    <string name="title_activity_otp_input">OTP_input</string>
+    <string name="title_activity_e__challan">E_Challan</string>
+    <string name="title_activity_e__challan__reports">E_Challan_Reports</string>
+    <string name="profession_prompt">Select Profession</string>
+
+    <string-array name="profession_arrays">
+        <item>Select Profession</item>
+        <item>STUDENT</item>
+        <item>BUSSINESS</item>
+        <item>PRIVATE EMPLOYEE</item>
+        <item>GOVT EMPLOYEE</item>
+        <item>SELF EMPLOYEE</item>
+        <item>OTHERS</item>
+    </string-array>
+
+    <string name="title_activity_minor">MinorActivity</string>
+    <string name="title_activity_dd__print">DD_Print</string>
+    <string name="title_activity_pin_pad__list">PinPad_ListActivity</string>
+    <string name="title_activity_pin_pad_list">PinPadList</string>
+    <string name="title_activity_get_pin_pad">GetPinPad</string>
+    <string name="title_activity_blue_tooth_list">BlueToothList</string>
+    <string name="title_activity_bluetooth_list">BluetoothListActivity</string>
+    <string name="title_activity_settings__old">Settings_Old</string>
+    <string name="title_activity_dashboard__old">Dashboard_Old</string>
+    <string name="title_activity_dd__response__print">DD_Response_Print</string>
+    <string name="title_activity_aadhaar_update">AadhaarUpdate</string>
+    <string name="title_activity_aadhaar__update__print">Aadhaar_Update_Print</string>
+    <string name="title_activity_date_of_birth__update">DateOfBirth_Update</string>
+    <string name="title_activity_change_password">ChangePassword</string>
+    <string name="title_activity_releaseversion">ReleaseversionActivity</string>
+    <string name="capture_image">Capture Image</string>
+    <string name="fake_vehicle">FAKE VEHICLE</string>
+    <string name="enter_last_fiv_dig_chass_no">Enter Last Five Digits of Vehicle Chasis No</string>
+    <string name="title_activity_dash_pc__hg">DashPC_HG</string>
+    <string name="title_activity_drunk__drive__fake__dialog">Drunk_Drive_Fake_Dialog</string>
+
+</resources>

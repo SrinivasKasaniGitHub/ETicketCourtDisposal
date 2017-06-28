@@ -1,0 +1,1129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- Header aligned to top -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            style="@style/header_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                style="@style/header_images_style_left"
+                android:layout_width="@dimen/header_logo_size"
+                android:layout_height="@dimen/header_logo_size"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                style="@style/header_images_style_right"
+                android:layout_width="@dimen/header_logo_size"
+                android:layout_height="@dimen/header_logo_size"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:id="@+id/textView1"
+                style="@style/header_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/header_txt" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/cust_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView2"
+                android:layout_centerHorizontal="true"
+                android:text="@string/app_version"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- Footer aligned to bottom -->
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imagefd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/footer"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <!-- Scrollable Content below header and above footer -->
+    <!--  <ScrollView
+       android:id="@+id/container"
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent"
+       android:layout_above="@id/footer"
+       android:layout_below="@id/header" > -->
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/DDdat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="DD Infomation"
+        android:textColor="@color/EditTxt_color"
+        android:textSize="@dimen/Ip_settings_font"
+        android:visibility="gone" />
+
+
+    <LinearLayout
+        android:id="@+id/rl_dp_report_type_xml"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DDdat"
+        android:padding="20dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TxtInptUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:hintTextAppearance="@style/styleInputLayout"
+
+
+            >
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edt_regno_dp_xml"
+                style="@style/styleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="E-Ticket/Reg No"
+                android:inputType="text|textCapCharacters"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btn_dateselection_dp_xml"
+            style="@style/dd_custom_blue_btn_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:padding="7dp"
+            android:text="Select Date" />
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btngetdetails_dp_xml"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_dp_report_type_xml"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/background"
+        android:gravity="center"
+        android:text="GET"
+        android:textColor="@color/white" />
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/btngetdetails_dp_xml"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorAccent" />
+
+    <!--DD Details-->
+    <RelativeLayout
+        android:id="@+id/Lyt_DD_Details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="10dp"
+        android:visibility="gone">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/TxtDD"
+            style="@style/styleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Challan Details" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TxtDD"
+            android:padding="3dp"
+            android:weightSum="2">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="2dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:cardElevation="5dp"
+                card_view:contentPadding="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/TxtDD1"
+                    android:padding="3dp"
+                    android:weightSum="2">
+                    <!--Left Side-->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    style="@style/styleTextViewlyt_DD"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Reg No " />
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    style="@style/styleTextViewlyt_DD"
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Mobile No " />
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    style="@style/styleTextViewlyt_DD"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Offender Date " />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    android:id="@+id/Txt_Regno"
+                                    style="@style/styleTextViewlyt_DD_fromserver"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Reg No :" />
+
+                                <android.support.v7.widget.AppCompatTextView
+
+                                    android:id="@+id/Txt_Mobile_no"
+
+                                    style="@style/styleTextViewlyt_DD_fromserver"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Mobile No :" />
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    android:id="@+id/Txt_Offender_date"
+                                    style="@style/styleTextViewlyt_DD_fromserver"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Offender Date :" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <!--Right Side-->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    style="@style/styleTextViewlyt_DD"
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Challan No" />
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    style="@style/styleTextViewlyt_DD"
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Aadhar No " />
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    style="@style/styleTextViewlyt_DD"
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="DL No " />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    android:id="@+id/Txt_Chaln_No"
+
+                                    style="@style/styleTextViewlyt_DD_fromserver"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Reg No " />
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    android:id="@+id/txt_Adhar_No"
+
+                                    style="@style/styleTextViewlyt_DD_fromserver"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Mobile No " />
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    android:id="@+id/Txt_DlNo"
+                                    style="@style/styleTextViewlyt_DD_fromserver"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Offender Date " />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <!--DD Details End-->
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/Lyt_DD_Details"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorAccent"
+        android:visibility="gone" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footer_lyt"
+        android:layout_below="@+id/view2">
+
+        <RelativeLayout
+            android:id="@+id/Lyt_Pay_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:visibility="visible">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Name of the court" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.8">
+
+                            <fr.ganfra.materialspinner.MaterialSpinner
+                                android:id="@+id/courtSpinner"
+                                android:layout_width="fill_parent"
+                                android:layout_height="55dp"
+                                app:ms_alignLabels="true"
+                                app:ms_arrowColor="@color/black"
+                                app:ms_arrowSize="20dp"
+                                app:ms_baseColor="@color/black"
+                                app:ms_enableErrorLabel="false"
+                                app:ms_enableFloatingLabel="false"
+                                app:ms_errorColor="@color/red"
+                                app:ms_floatingLabelColor="@color/black"
+                                app:ms_floatingLabelText="Select the court"
+                                app:ms_hint="Select Court"
+                                app:ms_hintColor="@color/black"
+                                app:ms_multiline="false" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2"
+                            android:orientation="horizontal">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Court Attended date" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:text=":" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <Button
+                                android:id="@+id/btn_dateselection_dp_xml1"
+                                style="@style/dd_custom_blue_btn_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Select Date" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="STC No" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <android.support.v7.widget.AppCompatEditText
+                                android:id="@+id/edtTxt_STC_NO"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="STC No"
+                                android:inputType="number"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Disposal Type" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <fr.ganfra.materialspinner.MaterialSpinner
+                                android:id="@+id/courtDisSpinner"
+                                android:layout_width="fill_parent"
+                                android:layout_height="55dp"
+                                app:ms_alignLabels="true"
+                                app:ms_arrowColor="@color/black"
+                                app:ms_arrowSize="20dp"
+                                app:ms_baseColor="@color/black"
+                                app:ms_enableErrorLabel="false"
+                                app:ms_enableFloatingLabel="false"
+                                app:ms_errorColor="@color/red"
+                                app:ms_floatingLabelColor="@color/black"
+                                app:ms_floatingLabelText="Select the court"
+                                app:ms_highlightColor="@color/red"
+                                app:ms_hint="Select Court Disposal"
+                                app:ms_hintColor="@color/black"
+                                app:ms_multiline="false" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:id="@+id/lytFineAmnt"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Fine Amount" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <android.support.v7.widget.AppCompatEditText
+                                android:id="@+id/edtTxt_FineAmnt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Fine Amount"
+                                android:inputType="number">
+
+                            </android.support.v7.widget.AppCompatEditText>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Is he/she Convicted" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/radioGRpConvtd"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/radioGRpConvtdS"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/radioGRpConvtdN"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="No" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:id="@+id/lytConvtdFrom"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Conviction from" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <Button
+                                android:id="@+id/btn_dateselection_dp_xml3"
+                                style="@style/dd_custom_blue_btn_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Select Date" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:id="@+id/lytConvtdTo"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Conviction To" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <Button
+                                android:id="@+id/btn_dateselection_dp_xml4"
+                                style="@style/dd_custom_blue_btn_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Select Date" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:id="@+id/lytSoclFrom"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Social Service from" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <Button
+                                android:id="@+id/btn_dateselection_dp_xmlssF"
+                                style="@style/dd_custom_blue_btn_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Select Date" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:id="@+id/lytSclSerTo"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Social Service To" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <Button
+                                android:id="@+id/btn_dateselection_dp_xmlSST"
+                                style="@style/dd_custom_blue_btn_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Select Date" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:id="@+id/lytRisingDays"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:visibility="visible"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Rising Details" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <android.support.v7.widget.AppCompatEditText
+                                android:id="@+id/edtTxt_RisingDays"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Rising days"
+                                android:inputType="number">
+
+                            </android.support.v7.widget.AppCompatEditText>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lytConvtdDays"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Conviction Days" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <android.support.v7.widget.AppCompatEditText
+                                android:id="@+id/edtTxt_ConDays"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="conviction days">
+
+                            </android.support.v7.widget.AppCompatEditText>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Vehicle Released" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:id="@+id/rdoGrp_VehcleRlse"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rdoBtnYes_VehcleRlse"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:checked="true"
+                                        android:text="Yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rdoBtnNo_VehcleRlse"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="No" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Remarks" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1">
+
+                            <android.support.v7.widget.AppCompatEditText
+                                android:id="@+id/edtTxt_Remarks"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Ramraks">
+
+                            </android.support.v7.widget.AppCompatEditText>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center">
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/btn_payment"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background"
+                            android:gravity="center"
+                            android:text="Update payment"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"/>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/footer_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/footer_size"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/PoweredBy"
+            android:textColor="#ffffff" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/CompanyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pwd"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:fontFamily="sans-serif"
+            android:lines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:padding="5dp"
+            android:scrollHorizontally="true"
+            android:text="@string/CompanyName"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/footer_text_size"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

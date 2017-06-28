@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/bg" >
+
+  <!-- Header aligned to top -->
+  <RelativeLayout
+    android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:gravity="center" >
+
+      <RelativeLayout
+          android:id="@+id/relativeLayout1"
+          style="@style/header_style"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentTop="true"
+          android:layout_centerHorizontal="true" >
+
+          <ImageView
+              android:id="@+id/imageView1"
+              style="@style/header_images_style_left"
+              android:layout_width="@dimen/header_logo_size"
+              android:layout_height="@dimen/header_logo_size"
+              android:layout_alignParentStart="true"
+              android:layout_centerVertical="true"
+              android:contentDescription="@null" />
+
+          <ImageView
+              android:id="@+id/imageView2"
+              style="@style/header_images_style_right"
+              android:layout_width="@dimen/header_logo_size"
+              android:layout_height="@dimen/header_logo_size"
+              android:layout_alignParentEnd="true"
+              android:layout_centerVertical="true"
+              android:contentDescription="@null" />
+
+          <TextView
+              android:id="@+id/textView1"
+              style="@style/header_text_style"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerHorizontal="true"
+              android:layout_centerVertical="true"
+              android:text="@string/header_txt" />
+
+          <TextView
+              android:id="@+id/textView2"
+              style="@style/cust_text_style"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignBottom="@+id/imageView2"
+              android:layout_centerHorizontal="true"
+              android:text="@string/app_version"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:visibility="gone"/>
+      </RelativeLayout>
+  </RelativeLayout>
+
+  <!-- Footer aligned to bottom -->
+  <RelativeLayout
+    android:id="@+id/footer"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:gravity="center" >
+
+    <ImageView
+        android:id="@+id/imagefd"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/footer"
+        android:visibility="gone"/>
+  </RelativeLayout>
+
+  <!-- Scrollable Content below header and above footer -->
+ <!--  <ScrollView
+    android:id="@+id/container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_above="@id/footer"
+    android:layout_below="@id/header" > -->
+
+   <ScrollView
+         	android:id="@+id/container"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_above="@id/footer"
+		    android:layout_below="@id/header"
+		    android:layout_margin="10dp" 
+		    android:fadeScrollbars="false"
+		    android:fillViewport="true">
+
+       <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView52"
+                style="@style/navi_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/settings"
+                android:textSize="30dp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_btns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView52"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/header_grnt_padding_five"
+                android:background="@color/tranparent_color"
+                android:padding="@dimen/margin_twenty" >
+
+                <Button
+                    android:id="@+id/btnpsname_settings_xml"
+                    style="@style/dd_custom_blue_btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:clickable="false"
+                    android:text="@string/select_ps_name" />
+
+                <Button
+                    android:id="@+id/btnpointby_psname_settings_xml"
+                    style="@style/dd_custom_blue_btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnpsname_settings_xml"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                    android:clickable="false"
+                    android:text="@string/select_pointbypsname" />
+
+                <EditText
+                    android:id="@+id/edt_exctlocation_settings_xml"
+                    style="@style/edt_custom_settings_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnpointby_psname_settings_xml"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                    android:gravity="center"
+                    android:hint="@string/exact_location"
+                    android:inputType="text" >
+                </EditText>
+
+                <EditText
+                    android:id="@+id/edt_breatheanalyser_settings_xml"
+                    style="@style/edt_custom_settings_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_exctlocation_settings_xml"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                    android:gravity="center"
+                    android:hint="@string/breathe_analyser"
+                    android:inputType="number"
+                    android:visibility="gone"
+                    android:maxLength="6" >
+                </EditText>
+
+                <EditText
+                    android:id="@+id/edt_bluetoothid_settings_xml"
+                    style="@style/edt_custom_settings_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_breatheanalyser_settings_xml"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                    android:gravity="center"
+                    android:hint="@string/bluetooth_address" >
+                </EditText>
+               
+
+               <EditText
+                    android:id="@+id/edt_pinpad_xml"
+                    style="@style/edt_custom_settings_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_bluetoothid_settings_xml"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten"
+                    android:gravity="center"
+                    android:hint="@string/pinpad"
+                    android:visibility="gone" >
+                </EditText>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_pinpad_xml"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/header_grnt_padding_ten"
+                    android:layout_marginTop="@dimen/header_grnt_padding_ten" >
+                    
+                    <Button
+                        android:id="@+id/btnback_settings_xml"
+                        style="@style/naviblue_custom_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/header_grnt_padding_five"
+                        android:layout_weight="1"
+                        android:text="@string/back" />
+
+                    <Button
+                        android:id="@+id/btncancel_settings_xml"
+                        style="@style/naviblue_custom_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/header_grnt_padding_five"
+                        android:layout_weight="1"
+                        android:text="@string/reset" />
+
+                    <Button
+                        android:id="@+id/btnsubmit_settings_xml"
+                        style="@style/naviblue_custom_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/save" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_bluetoothState"
+                style="@style/navi_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_btns"
+                android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                android:layout_marginTop="@dimen/header_grnt_padding_five"
+                android:text="Bluetooth" />
+
+            <Button
+                android:id="@+id/btnscan_settings_xml"
+                style="@style/naviblue_custom_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_bluetoothState"
+                android:layout_marginBottom="20dp"
+                android:text="@string/scan_bluetooth" />
+            
+            <Button
+                android:id="@+id/btn_pinpadscan_xml"
+                style="@style/naviblue_custom_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_below="@+id/btnscan_settings_xml"
+                android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                android:text="Scan PIN pad Bluetooth Address" />
+
+            <Button
+        android:id="@+id/btn_enable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"        
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="text_enable" />
+    
+    <Button
+        android:id="@+id/btn_view_paired"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"        
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:enabled="false"
+        android:visibility="gone"
+        android:text="text_view_paired" />
+    
+    <Button
+        android:id="@+id/btn_scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"        
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:enabled="false"
+        android:visibility="gone"
+        android:text="text_scan_devices" />
+    
+    <TextView
+                android:id="@+id/ffd"
+                style="@style/navi_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blutooth Devices Display Here"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:visibility="gone"
+                android:layout_below="@+id/btn_pinpadscan_xml"/>
+    
+    
+            <ListView
+                android:id="@+id/listview_devicesfound"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ffd"
+                android:visibility="visible"
+                android:layout_marginTop="5dp">
+            </ListView>
+            
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/listview_devicesfound"
+                android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/change_pswd"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/changepassword" />
+            
+            <ImageView
+                android:id="@+id/update_apk"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_below="@+id/listview_devicesfound"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="35dp"
+                android:layout_toRightOf="@+id/change_pswd"
+                android:src="@drawable/updte_btn" />
+
+</LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/footer_size"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background"
+        >
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/PoweredBy"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif"
+            android:layout_marginLeft="10dp"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/CompanyName"
+            android:layout_below="@+id/pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/CompanyName"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif"
+            android:textSize="@dimen/footer_text_size"
+            android:padding="5dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:lines="1"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

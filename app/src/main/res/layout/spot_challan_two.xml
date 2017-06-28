@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/bg" >
+
+  <!-- Header aligned to top -->
+  <RelativeLayout
+    android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:gravity="center" >
+
+   <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        style="@style/header_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            style="@style/header_images_style_left"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            style="@style/header_images_style_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/header_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/header_txt" />
+        
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/cust_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp"
+            android:text="@string/app_version"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_header_spot_challan_xml"
+            style="@style/cust_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
+  </RelativeLayout>
+
+  <!-- Footer aligned to bottom -->
+  <RelativeLayout
+    android:id="@+id/footer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:gravity="center" >
+
+    <ImageView
+        android:id="@+id/imagefd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/footer"/>
+  </RelativeLayout>
+
+  <!-- Scrollable Content below header and above footer -->
+ <!--  <ScrollView
+    android:id="@+id/container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_above="@id/footer"
+    android:layout_below="@id/header" > -->
+
+   <ScrollView
+         	android:id="@+id/container"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_above="@id/footer"
+		    android:layout_below="@id/header"
+		    android:layout_margin="10dp" >
+
+         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/header_grnt_padding_ten" >
+
+            <LinearLayout
+                android:id="@+id/ll_is_spotpayment_spotchallan_two_xml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                android:layout_marginTop="@dimen/header_grnt_padding_five" >
+
+                <TextView
+                    android:id="@+id/tv_spotpymnt_name"
+                    style="@style/navi_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/spot_payment" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_spot_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/radioGroupButton_spotpayment0"
+                        style="@style/dd_custom_radio_btn_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/header_grnt_padding_ten"
+                        android:text="@string/licence_yes" />
+
+                    <RadioButton
+                        android:id="@+id/radioGroupButton_spotpayment1"
+                        style="@style/dd_custom_radio_btn_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:paddingLeft="@dimen/header_grnt_padding_ten"
+                        android:text="@string/licence_no" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_cashorcard_spotchallan_two_xml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_is_spotpayment_spotchallan_two_xml"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                android:layout_marginTop="@dimen/header_grnt_padding_five" >
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_cash_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/radioGroupButton_cashcard0"
+                        style="@style/dd_custom_radio_btn_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:paddingLeft="@dimen/header_grnt_padding_ten"
+                        android:text="@string/cash" />
+
+                    <RadioButton
+                        android:id="@+id/radioGroupButton_cashcard1"
+                        style="@style/dd_custom_radio_btn_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/header_grnt_padding_ten"
+                        android:text="@string/card" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_card_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_below="@+id/ll_cashorcard_spotchallan_two_xml" >
+
+                <TextView
+                    android:id="@+id/tv_cardtype_name"
+                    style="@style/navi_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/card_type" />
+
+                <LinearLayout
+                    android:id="@+id/ll_cash_Detailsspotchallan_two_xml"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_cardtype_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                    android:layout_marginTop="@dimen/header_grnt_padding_five" >
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup_card_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal" >
+
+                        <RadioButton
+                            android:id="@+id/radioGroupButton_card_type0"
+                            style="@style/dd_custom_radio_btn_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:paddingLeft="@dimen/header_grnt_padding_ten"
+                            android:text="@string/visa_card" />
+
+                        <RadioButton
+                            android:id="@+id/radioGroupButton_card_type1"
+                            style="@style/dd_custom_radio_btn_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/header_grnt_padding_ten"
+                            android:text="@string/master_card" />
+
+                        <RadioButton
+                            android:id="@+id/radioGroupButton_card_type2"
+                            style="@style/dd_custom_radio_btn_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/header_grnt_padding_ten"
+                            android:text="@string/maestro_card" />
+                    </RadioGroup>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/edt_cardpin_spotchallantwo_xml"
+                style="@style/edt_custom_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_card_details"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                android:layout_marginTop="@dimen/header_grnt_padding_five"
+                android:hint="@string/enter_pin"
+                android:visibility="gone"
+                android:inputType="textPassword" >
+            </EditText>
+
+            <LinearLayout
+                android:id="@+id/ll_detaineditems_root_spotchallan_two_xml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_cardpin_spotchallantwo_xml"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/ll_gender_spotchallan_two_xml"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                    android:layout_marginTop="@dimen/header_grnt_padding_five" >
+
+                    <TextView
+                        android:id="@+id/tv_gendername"
+                        style="@style/navi_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/release_items" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup_detaineditems"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal" >
+
+                        <RadioButton
+                            android:id="@+id/radioGroupButton_detaineditems_yes"
+                            style="@style/dd_custom_radio_btn_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/header_grnt_padding_ten"
+                            android:text="@string/licence_yes" />
+
+                        <RadioButton
+                            android:id="@+id/radioGroupButton_detaineditems_no"
+                            style="@style/dd_custom_radio_btn_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:paddingLeft="@dimen/header_grnt_padding_ten"
+                            android:text="@string/licence_no" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_detaineditems_spotchallan_two_xml"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/ll_gender_spotchallan_two_xml"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="vertical" >
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_detaineditems_spotchallantwo_xml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_detaineditems_root_spotchallan_two_xml" >
+
+                <TextView
+                    android:id="@+id/tv_detaineditems_name_spotchallantwo_xml"
+                    style="@style/navi_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="@dimen/header_grnt_padding_five"
+                    android:layout_marginTop="@dimen/header_grnt_padding_five"
+                    android:text="@string/detained_items" />
+
+                <LinearLayout
+                    android:id="@+id/ll_detaineditems1_spotchallantwo_xml"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_detaineditems_name_spotchallantwo_xml"
+                    android:layout_centerHorizontal="true" >
+
+                    <CheckBox
+                        android:id="@+id/checkBox_dt_rc_spotchallantwo_xml"
+                        style="@style/dd_custom_check_box_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="@string/detained_items_rc" />
+
+                    <CheckBox
+                        android:id="@+id/checkBox_dt_vchle_spotchallantwo_xml"
+                        style="@style/dd_custom_check_box_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="@string/detained_items_vhcle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_detaineditems2_spotchallantwo_xml"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_detaineditems1_spotchallantwo_xml"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/header_grnt_padding_five" >
+
+                    <CheckBox
+                        android:id="@+id/checkBox_dt_lcns_spotchallantwo_xml"
+                        style="@style/dd_custom_check_box_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="@string/detained_items_licence" />
+
+                    <CheckBox
+                        android:id="@+id/checkBox_dt_permit_spotchallantwo_xml"
+                        style="@style/dd_custom_check_box_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="@string/detained_items_permit" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_detaineditems3_spotchallantwo_xml"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/ll_detaineditems2_spotchallantwo_xml"
+                    android:layout_marginTop="@dimen/header_grnt_padding_five" >
+
+                    <CheckBox
+                        android:id="@+id/checkBox_dt_none_spotchallantwo_xml"
+                        style="@style/dd_custom_check_box_style"
+                        android:layout_width="270dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="@string/none" />
+                </LinearLayout>
+            </RelativeLayout>
+
+           <LinearLayout
+                android:id="@+id/ll_contactnum_spotchallantwo_xml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_detaineditems_spotchallantwo_xml"
+                android:layout_marginTop="@dimen/header_grnt_padding_five"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/edt_drvr_cnctno_spotchallantwo_xml"
+                    style="@style/edt_custom_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:hint="@string/driver_contact_no"
+                    android:inputType="number"
+                    android:maxLength="10" >
+                </EditText>
+
+              <Button
+                    android:id="@+id/btn_sendOTPtoMobile_spotchallantwo_xml"
+                    style="@style/naviblue_custom_style"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/header_grnt_padding_five"
+                    android:text="@string/send_otp" /> 
+            </LinearLayout>
+            
+           
+           <LinearLayout
+                android:id="@+id/proffession_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_contactnum_spotchallantwo_xml"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp" >
+                
+               <TextView 
+	                android:id="@+id/txt"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                style="@style/navi_text_style"
+	                android:textStyle="bold"
+	                android:textSize="30sp"
+	                android:layout_marginBottom="5dp"
+	                android:text="Occupation Details :"/>
+                 <Button
+                    android:id="@+id/btn_select_profession"
+                    style="@style/dd_custom_blue_btn_style"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:text="@string/proffession" 
+                    android:entries="@array/profession_arrays"
+      				android:prompt="@string/profession_prompt"/>
+                     
+                 <EditText
+		              android:id="@+id/edt_candidate_name"
+		              style="@style/edt_custom_style"
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:layout_marginTop="@dimen/header_grnt_padding_five"
+		              android:hint="@string/dd_name"
+		              android:inputType="textCapCharacters" >
+		              </EditText>
+		              
+                 <EditText
+		              android:id="@+id/edt_candidate_Address"
+		              style="@style/edt_custom_style"
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:layout_marginTop="@dimen/header_grnt_padding_five"
+		              android:hint="@string/dd_address"
+		              android:inputType="textCapCharacters">
+		              </EditText>
+		              
+                 <EditText
+		              android:id="@+id/edt_email_ID"
+		              style="@style/edt_custom_style"
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:layout_marginTop="@dimen/header_grnt_padding_five"
+		              android:hint="@string/email"
+		              android:inputType="textEmailAddress">
+		              </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_confirmotp_spotchallantwo_xml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/proffession_layout"
+                android:layout_marginTop="@dimen/header_grnt_padding_five"
+                android:orientation="horizontal"
+                android:visibility="gone" >
+
+                <EditText
+                    android:id="@+id/edt_confrmotp_spotchallantwo_xml"
+                    style="@style/edt_custom_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:hint="@string/enter_otp"
+                    android:inputType="number"
+                    android:maxLength="10" >
+                </EditText>
+
+                <Button
+                    android:id="@+id/btn_confrmotp_spotchallantwo_xml"
+                    style="@style/naviblue_custom_style"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/header_grnt_padding_five"
+                    android:text="@string/confirm" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_idproof_spotchallantwo_xml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_confirmotp_spotchallantwo_xml"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/header_grnt_padding_five" >
+
+                <Button
+                    android:id="@+id/btn_select_idproff_spotchallantwo_xml"
+                    style="@style/dd_custom_blue_btn_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/header_grnt_padding_five"
+                    android:layout_weight="1"
+                    android:text="@string/select_idproof" />
+
+                <EditText
+                    android:id="@+id/edt_idproff_spotchallantwo_xml"
+                    style="@style/edt_custom_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </EditText>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edt_remarks_spotchallantwo_xml"
+                style="@style/edt_custom_style"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/ll_idproof_spotchallantwo_xml"
+                android:layout_marginTop="@dimen/header_grnt_padding_five"
+                android:gravity="top"
+                android:inputType="textCapCharacters"
+                android:hint="@string/remarks" >
+            </EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_remarks_spotchallantwo_xml"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/margin_twenty"
+                android:layout_marginTop="@dimen/margin_twenty" >
+
+                <Button
+                    android:id="@+id/btn_cancel_spotchallantwo_xml"
+                    style="@style/naviblue_custom_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cancel" />
+
+                <Button
+                    android:id="@+id/btn_finalsubmit_spotchallantwo_xml"
+                    style="@style/naviblue_custom_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/header_grnt_padding_five"
+                    android:layout_weight="1"
+                    android:text="@string/submit" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
