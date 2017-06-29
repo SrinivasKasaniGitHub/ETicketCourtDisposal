@@ -1117,6 +1117,7 @@ public class ServiceHelper {
 
 		} catch (SoapFault fault) {
 			Log.i("****SOA**:::", "soapfault = " + fault.getMessage());
+			Opdata_Chalana = "NA";
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -1131,7 +1132,7 @@ public class ServiceHelper {
 													   String imprisFrom, String imprisTo, String courtFine, String risingDetails,
 													   String courtCD, String coutrAttnDT, String vehRelease, String dlRelease,
 													   String ddRemarks, String pidCD, String pidName, String releaseDT,
-													   String rlItems)
+													   String mobileNo)
 	{
 
 		Utils utils = new Utils();
@@ -1156,7 +1157,7 @@ public class ServiceHelper {
 			if (null!=pidCD)request.addProperty("" + utils.P_ID, "" + pidCD);
 			if (null!=pidName)request.addProperty("" + utils.P_NAME, "" + pidName);
 			if (null!=releaseDT)request.addProperty("" + utils.RELSE_DATE, "" + releaseDT);
-			if (null!=rlItems)request.addProperty("" + utils.RELSE_ITEMS, "" + rlItems);
+			if (null!=mobileNo)request.addProperty("" + utils.RELSE_ITEMS, "" + mobileNo);
 
 
 

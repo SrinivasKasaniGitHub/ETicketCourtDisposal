@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgbtn_logout_dashboard_xml"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp" >
+        android:layout_marginTop="30dp" >
 
         <TextView
             android:id="@+id/tv_generateticket_dashboard_xml"
@@ -88,9 +88,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/generate_ticket"
+            android:drawableTop="@drawable/generate_ticket_m"
             android:gravity="center_horizontal|center_vertical"
-            android:text="DD Closing"
+            android:text="Court_Case \n Closing"
             android:textSize="19sp" />
 
         <TextView
@@ -116,7 +116,21 @@
             android:drawableTop="@drawable/vhcle_history"
             android:gravity="center_horizontal|center_vertical"
             android:text="Charge Sheet Closing"
-            android:textSize="19sp" />
+            android:textSize="19sp"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tvduplicateprint_dashboad_xml"
+            style="@style/navi_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableTop="@drawable/print_m"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/duplicate_print"
+            android:textSize="19sp"
+            />
     </LinearLayout>
 
     <TextView
@@ -185,7 +199,7 @@
         android:layout_marginTop="50dp" >
 
         <TextView
-            android:id="@+id/tvduplicateprint_dashboad_xml"
+            android:id="@+id/tvduplicateprint_dashboad_xml1"
             style="@style/navi_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -195,7 +209,8 @@
             android:drawableTop="@drawable/print"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/duplicate_print"
-            android:textSize="19sp" />
+            android:textSize="19sp"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_sync_dashboard_xml"
@@ -204,7 +219,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:drawableTop="@drawable/sync"
+            android:drawableTop="@drawable/sync_m"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/sync"
             android:textSize="19sp"
@@ -217,7 +232,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:drawableTop="@drawable/settings"
+            android:drawableTop="@drawable/settings_m"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/settings"
             android:textSize="19sp" />

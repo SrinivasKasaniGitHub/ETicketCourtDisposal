@@ -93,6 +93,19 @@
 
     </style>
 
+    <style name="styleEdtTextViewlyt_DD_fromserver">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">#c7472a</item>
+        <item name="android:textSize">@dimen/DD_Txt_FS_font</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">sans-serif</item>
+
+    </style>
+
 
     <style name="IP_TextView" style="@style/Widget.AppCompat.TextView">
         <item name="android:layout_width">match_parent</item>

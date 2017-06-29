@@ -207,72 +207,94 @@
                     android:layout_below="@+id/TxtDD1"
                     android:padding="3dp"
                     android:weightSum="2">
+
                     <!--Left Side-->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:weightSum="2">
+                            android:weightSum="2"
+                            android:orientation="vertical">
+
+
+
+
+
+
 
                             <LinearLayout
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
+                                android:weightSum="2"
+                                android:orientation="horizontal">
                                 <android.support.v7.widget.AppCompatTextView
                                     style="@style/styleTextViewlyt_DD"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Reg No " />
-
-                                <android.support.v7.widget.AppCompatTextView
-                                    style="@style/styleTextViewlyt_DD"
-
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:text="Mobile No " />
-
-                                <android.support.v7.widget.AppCompatTextView
-                                    style="@style/styleTextViewlyt_DD"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:text="Offender Date " />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
+                                    android:text="Reg No "
+                                    android:layout_weight="1"/>
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/Txt_Regno"
                                     style="@style/styleTextViewlyt_DD_fromserver"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Reg No :" />
+                                    android:text=""
+                                    android:layout_weight="1"/>
 
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="2">
                                 <android.support.v7.widget.AppCompatTextView
-
+                                    style="@style/styleTextViewlyt_DD"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Mobile No "
+                                    android:layout_weight="1"/>
+                                <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/Txt_Mobile_no"
-
                                     style="@style/styleTextViewlyt_DD_fromserver"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Mobile No :" />
+                                    android:text=""
+                                    android:layout_weight="1"
+                                    android:visibility="gone"
+                                    />
+                                <android.support.v7.widget.AppCompatEditText
+                                    android:id="@+id/edtTxt_Mobile_no"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Mobile_No"
+                                    android:layout_weight="1"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:maxLines="1"
+                                    android:visibility="gone"/>
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="2">
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    style="@style/styleTextViewlyt_DD"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Offender Date "
+                                    android:layout_weight="1"/>
 
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/Txt_Offender_date"
@@ -280,9 +302,19 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Offender Date :" />
+                                    android:text=""
+                                    android:layout_weight="1"/>
 
                             </LinearLayout>
+
+
+
+
+
+
+
+
+
 
 
                         </LinearLayout>
@@ -297,47 +329,25 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:weightSum="2">
+                            android:weightSum="2"
+                            android:orientation="vertical">
+
+
+
+
 
                             <LinearLayout
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
+                                android:weightSum="2"
+                                android:orientation="horizontal">
                                 <android.support.v7.widget.AppCompatTextView
                                     style="@style/styleTextViewlyt_DD"
-
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Challan No" />
-
-                                <android.support.v7.widget.AppCompatTextView
-                                    style="@style/styleTextViewlyt_DD"
-
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:text="Aadhar No " />
-
-                                <android.support.v7.widget.AppCompatTextView
-                                    style="@style/styleTextViewlyt_DD"
-
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:text="DL No " />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
+                                    android:text="Challan No"
+                                    android:layout_weight="1"/>
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/Txt_Chaln_No"
 
@@ -345,26 +355,88 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Reg No " />
+                                    android:text=" "
+                                    android:layout_weight="1"/>
 
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="2"
+                                android:orientation="horizontal">
+                                <android.support.v7.widget.AppCompatTextView
+                                    style="@style/styleTextViewlyt_DD"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Aadhar No "
+                                    android:layout_weight="1"/>
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/txt_Adhar_No"
-
                                     style="@style/styleTextViewlyt_DD_fromserver"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Mobile No " />
+                                    android:text=""
+                                    android:layout_weight="1"
+                                    android:visibility="gone"/>
+                                <android.support.v7.widget.AppCompatEditText
+                                    android:id="@+id/edtTxt_Adhar_no"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Aadhar_No"
+                                    android:inputType="number"
+                                    android:layout_weight="1"
+                                    android:maxLength="12"
+                                    android:maxLines="1"
+                                    android:visibility="gone"/>
 
+
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="2"
+                                android:orientation="horizontal">
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    style="@style/styleTextViewlyt_DD"
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="DL No "
+                                    android:layout_weight="1"/>
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/Txt_DlNo"
                                     style="@style/styleTextViewlyt_DD_fromserver"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Offender Date " />
+                                    android:text=""
+                                    android:layout_weight="1"
+                                    android:visibility="gone"/>
+                                <android.support.v7.widget.AppCompatEditText
+                                    android:id="@+id/edtTxt_Dl_no"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="DL_No"
+                                    android:inputType="text|textCapCharacters"
+                                    android:layout_weight="1"
+                                    android:maxLength="25"
+                                    android:visibility="gone"/>
 
                             </LinearLayout>
+
+
+
+
+
+
+
 
 
                         </LinearLayout>
@@ -405,7 +477,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -452,8 +524,8 @@
                                 app:ms_enableFloatingLabel="false"
                                 app:ms_errorColor="@color/red"
                                 app:ms_floatingLabelColor="@color/black"
-                                app:ms_floatingLabelText="Select the court"
-                                app:ms_hint="Select Court"
+                                app:ms_floatingLabelText="Select Court Name"
+                                app:ms_hint="Select Court Name"
                                 app:ms_hintColor="@color/black"
                                 app:ms_multiline="false" />
 
@@ -542,7 +614,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="STC No"
-                                android:inputType="number"/>
+                                android:inputType="number|textCapCharacters"/>
 
                         </LinearLayout>
 
@@ -588,9 +660,9 @@
                                 app:ms_enableFloatingLabel="false"
                                 app:ms_errorColor="@color/red"
                                 app:ms_floatingLabelColor="@color/black"
-                                app:ms_floatingLabelText="Select the court"
+                                app:ms_floatingLabelText="Select CourtDisposal Name"
                                 app:ms_highlightColor="@color/red"
-                                app:ms_hint="Select Court Disposal"
+                                app:ms_hint="Select CourtDisposal Name"
                                 app:ms_hintColor="@color/black"
                                 app:ms_multiline="false" />
 

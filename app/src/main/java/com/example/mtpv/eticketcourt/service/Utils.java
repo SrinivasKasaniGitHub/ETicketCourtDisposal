@@ -157,7 +157,7 @@ public class Utils {
     String P_ID = "pidCD";
     String P_NAME = "pidName";
     String RELSE_DATE = "releaseDT";
-    String RELSE_ITEMS = "rlItems";
+    String RELSE_ITEMS = "mobileNo";
 
 
 	/* SPOT CHALLAN END */

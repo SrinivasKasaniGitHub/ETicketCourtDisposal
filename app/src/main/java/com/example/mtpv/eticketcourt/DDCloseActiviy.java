@@ -22,6 +22,7 @@ import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -117,6 +118,7 @@ public class DDCloseActiviy extends Activity {
     RelativeLayout dd_lyt;
     RelativeLayout pay_dd_lyt;
     TextView Reg_No, Mobile_No, Offender_Date, Challan_No, Aadhar_No, Dl_No;
+    EditText edtTxt_Mob_No,edtTxt_Aadhar_No,edtTxt_DlNo;
     ArrayList<String> courtNames;
     MaterialSpinner courtspinner;
     ArrayList<String> courtDisNames;
@@ -132,7 +134,7 @@ public class DDCloseActiviy extends Activity {
 
     String selectedCourtCode, selectedCourtDisCode;
 
-    String vehcleRelse = null;
+    String vehcleRelse = "Y";
 
     String vEHICLE_NUMBER, chall_No, offence_Date, driver_Adhar, driver_Mobile, driver_LCNCE;
 
@@ -178,6 +180,9 @@ public class DDCloseActiviy extends Activity {
         pay_dd_lyt = (RelativeLayout) findViewById(R.id.Lyt_Pay_details);
         Reg_No = (TextView) findViewById(R.id.Txt_Regno);
         Mobile_No = (TextView) findViewById(R.id.Txt_Mobile_no);
+        edtTxt_Mob_No=(EditText)findViewById(R.id.edtTxt_Mobile_no);
+        edtTxt_Aadhar_No=(EditText)findViewById(R.id.edtTxt_Adhar_no);
+        edtTxt_DlNo=(EditText)findViewById(R.id.edtTxt_Dl_no);
         Offender_Date = (TextView) findViewById(R.id.Txt_Offender_date);
         Challan_No = (TextView) findViewById(R.id.Txt_Chaln_No);
         Aadhar_No = (TextView) findViewById(R.id.txt_Adhar_No);
@@ -406,17 +411,58 @@ public class DDCloseActiviy extends Activity {
                 String rising_days=edtTxtRisDays.getText().toString();
                 String vhcleRelse = vehcleRelse;
                 String remarks = edtTxt_Remarks.getText().toString();
+                String mob_No=edtTxt_Mob_No.getText().toString();
+                String adhar_No=edtTxt_Aadhar_No.getText().toString();
+                String dl_no=edtTxt_DlNo.getText().toString();
+                String dl=driver_LCNCE;
+                String ml=driver_Mobile;
+                String aN=driver_Adhar;
+                driver_LCNCE=edtTxt_DlNo.getText().toString();
+                driver_Mobile=edtTxt_Mob_No.getText().toString();
+                driver_Adhar=edtTxt_Aadhar_No.getText().toString();
+                if (("null")==dl){
+                    driver_LCNCE=edtTxt_DlNo.getText().toString();
+                }
+                if (("null")==ml){
+                    driver_Mobile=edtTxt_Mob_No.getText().toString();
+                }
+                if (("null")==aN){
+                    driver_Adhar=edtTxt_Aadhar_No.getText().toString();
+                }
+
+//                if (!adhar_No.equals("")){
+//
+//                    if ((adhar_No.length()<=11 || adhar_No.length()>=13)) {
+//                        edtTxt_Aadhar_No.setError(Html.fromHtml("<font color='white'>Enter valid Aadhar Number </font>"));
+//                        edtTxt_Aadhar_No.requestFocus();
+//                    }
+//                }
+
 
 
                 if (court_Code == null) {
-                    showToast("Select Court");
-                } else if (btn_courtAttenddate.getText().toString().equals("Select Date")) {
-                    showToast("Please select Court Attended Date");
+                    showToast("Select Court Name");
+                } else if (mob_No.trim().equals("")) {
+                    edtTxt_Mob_No.setError(Html.fromHtml("<font color='white'>Enter Mobile Number </font>"));
+                    edtTxt_Mob_No.requestFocus();
+                }else if (mob_No.length()<=9 || mob_No.length()>=11) {
+                    edtTxt_Mob_No.setError(Html.fromHtml("<font color='white'>Enter Valid Mobile Number </font>"));
+                    edtTxt_Mob_No.requestFocus();
+                }else if (adhar_No.trim().equals("")&& dl_no.trim().equals("") ) {
+                    showToast("Please enter either Aadhar or Dl No");
+                }else if ((!adhar_No.equals(""))&&(adhar_No.length()<=11 || adhar_No.length()>=13)) {
+                    edtTxt_Aadhar_No.setError(Html.fromHtml("<font color='white'>Enter valid Aadhar Number </font>"));
+                    edtTxt_Aadhar_No.requestFocus();
+                }else if ((!dl_no.equals(""))&&(dl_no.length()<=3)) {
+                    edtTxt_DlNo.setError(Html.fromHtml("<font color='white'>Enter valid Dl Number </font>"));
+                    edtTxt_DlNo.requestFocus();
+                }else if (btn_courtAttenddate.getText().toString().equals("Select Date")) {
+                    showToast("Select Court Attended Date");
                 } else if (sTS_No.trim().equals("")) {
                     edtTxt_STC_No.setError(Html.fromHtml("<font color='white'>Enter STC No</font>"));
                     edtTxt_STC_No.requestFocus();
                 } else if (court_Disposal_code == null) {
-                    showToast("Please select court Disposal");
+                    showToast("Select court Disposal Name");
                 } else if (remarks.trim().equals("")) {
                     edtTxt_Remarks.setError(Html.fromHtml("<font color='white'>Enter Remarks </font>"));
                     edtTxt_Remarks.requestFocus();
@@ -575,7 +621,7 @@ public class DDCloseActiviy extends Activity {
 
             ServiceHelper.getCourtClosingUpdateTicketInfo(chall_No, vEHICLE_NUMBER, driver_LCNCE.toUpperCase(), driver_Adhar, edtTxt_STC_No.getText().toString(),
                     selectedCourtDisCode, edtTxtConDays.getText().toString(), date_convFRom, date_convicTo, edtTxt_FineAmnt.getText().toString(),
-                    edtTxtRisDays.getText().toString(), selectedCourtCode, date_courtAtnd, vehcleRelse, "Y", edtTxt_Remarks.getText().toString(), MainActivity.user_id, MainActivity.arr_logindetails[1], "", "");
+                    edtTxtRisDays.getText().toString(), selectedCourtCode, date_courtAtnd, vehcleRelse, "Y", edtTxt_Remarks.getText().toString(), MainActivity.user_id, MainActivity.arr_logindetails[1], "", driver_Mobile);
 
 
             return null;
@@ -596,13 +642,17 @@ public class DDCloseActiviy extends Activity {
         protected void onPostExecute(String result) {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
-            Intent intent_dashboard = new Intent(getApplicationContext(), Dashboard.class);
-            startActivity(intent_dashboard);
+
 
             Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             removeDialog(PROGRESS_DIALOG);
-
+            if (ServiceHelper.Opdata_Chalana.equals("0")) {
+                showToast("Updated Successfully ! ");
+                Intent intent_dashboard = new Intent(getApplicationContext(), Dashboard.class);
+                startActivity(intent_dashboard);
+            }
             online_report_status = "";
+
 
         }
     }
@@ -640,31 +690,68 @@ public class DDCloseActiviy extends Activity {
 
             online_report_status = "";
             if (!ServiceHelper.Opdata_Chalana.equals("NA")) {
-                dd_lyt.setVisibility(View.VISIBLE);
-                pay_dd_lyt.setVisibility(View.VISIBLE);
-                lytConFrom.setVisibility(View.GONE);
-                lytConTo.setVisibility(View.GONE);
-                lytConDays.setVisibility(View.GONE);
-                lytFineAmnt.setVisibility(View.GONE);
+
                 try {
                     JSONObject jsonObject = new JSONObject(ServiceHelper.Opdata_Chalana);
                     JSONArray jsonArray = jsonObject.getJSONArray("Challan Details");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        if (jsonObject1.toString().isEmpty()||jsonObject1.length()==0){
+                            showToast("No data Found");
+                        }else{
+                            dd_lyt.setVisibility(View.VISIBLE);
+                            pay_dd_lyt.setVisibility(View.VISIBLE);
+                            lytConFrom.setVisibility(View.GONE);
+                            lytConTo.setVisibility(View.GONE);
+                            lytConDays.setVisibility(View.GONE);
+                            lytFineAmnt.setVisibility(View.GONE);
+                            vEHICLE_NUMBER = jsonObject1.getString("VEHICLE NUMBER");
+                            chall_No = jsonObject1.getString("CHALLAN NUMBER");
+                            offence_Date = jsonObject1.getString("OFFENCE DATE");
+                            driver_Adhar = jsonObject1.getString("DRIVER AADHAAR");
+                            driver_Mobile = jsonObject1.getString("DRIVER MOBILE");
+                            driver_LCNCE = jsonObject1.getString("DRIVING LICENSE");
 
-                        vEHICLE_NUMBER = jsonObject1.getString("VEHICLE NUMBER");
-                        chall_No = jsonObject1.getString("CHALLAN NUMBER");
-                        offence_Date = jsonObject1.getString("OFFENCE DATE");
-                        driver_Adhar = jsonObject1.getString("DRIVER AADHAAR");
-                        driver_Mobile = jsonObject1.getString("DRIVER MOBILE");
-                        driver_LCNCE = jsonObject1.getString("DRIVING LICECE");
+                            Reg_No.setText(vEHICLE_NUMBER);
+                            Challan_No.setText(chall_No);
+                            Offender_Date.setText(offence_Date);
+                            if (("null")!=driver_Mobile){
+                                edtTxt_Mob_No.setVisibility(View.GONE);
+                                Mobile_No.setVisibility(View.VISIBLE);
+                                Mobile_No.setText(driver_Mobile);
 
-                        Reg_No.setText(vEHICLE_NUMBER);
-                        Mobile_No.setText(driver_Mobile);
-                        Challan_No.setText(chall_No);
-                        Offender_Date.setText(offence_Date);
-                        Aadhar_No.setText(driver_Adhar);
-                        Dl_No.setText(driver_LCNCE);
+                            }else {
+                                edtTxt_Mob_No.setVisibility(View.VISIBLE);
+                                Mobile_No.setVisibility(View.GONE);
+
+                            }
+
+                            if (("null")!=driver_Adhar){
+                                edtTxt_Aadhar_No.setVisibility(View.GONE);
+                                Aadhar_No.setVisibility(View.VISIBLE);
+                                Aadhar_No.setText(driver_Adhar);
+
+                            }else {
+                                edtTxt_Aadhar_No.setVisibility(View.VISIBLE);
+                                Aadhar_No.setVisibility(View.GONE);
+
+                            }
+
+                            if (("null")!=driver_LCNCE){
+                                edtTxt_DlNo.setVisibility(View.GONE);
+                                Dl_No.setVisibility(View.VISIBLE);
+                                Dl_No.setText(driver_LCNCE);
+
+                            }else {
+                                edtTxt_DlNo.setVisibility(View.VISIBLE);
+                                Dl_No.setVisibility(View.GONE);
+
+                            }
+
+
+                        }
+
+
 
 
                     }
@@ -685,15 +772,34 @@ public class DDCloseActiviy extends Activity {
         // TODO Auto-generated method stub
         // Toast.makeText(getApplicationContext(), "" + msg,
         // Toast.LENGTH_SHORT).show();
-        Toast toast = Toast.makeText(getApplicationContext(), "" + msg, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        View toastView = toast.getView();
+//        Toast toast = Toast.makeText(getApplicationContext(), "" + msg, Toast.LENGTH_SHORT);
+//        toast.setGravity(Gravity.CENTER, 10, 10);
+//
+//
+//        View toastView = toast.getView();
+//
+//        ViewGroup group = (ViewGroup) toast.getView();
+//        TextView messageTextView = (TextView) group.getChildAt(0);
+//        messageTextView.setTextSize(22);
+//
+//        toastView.setBackgroundResource(R.drawable.toast_background);
+//        toast.show();
 
-        ViewGroup group = (ViewGroup) toast.getView();
-        TextView messageTextView = (TextView) group.getChildAt(0);
-        messageTextView.setTextSize(24);
 
-        toastView.setBackgroundResource(R.drawable.toast_background);
+        LayoutInflater inflater = getLayoutInflater();
+
+        View layout = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.custom_toast_layout_id));
+
+        // set a message
+        TextView text = (TextView) layout.findViewById(R.id.text);
+        text.setText(msg);
+
+        // Toast...
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
         toast.show();
     }
 
@@ -800,6 +906,7 @@ public class DDCloseActiviy extends Activity {
 
             format = new SimpleDateFormat("dd-MMM-yyyy");
             date_convicTo = format.format(new Date(present_year - 1900, (present_month), present_day));
+            dayDifference="";
 
 
 
@@ -815,7 +922,7 @@ public class DDCloseActiviy extends Activity {
 
                 date1 = dates.parse(date_convFRom);
                 date2 = dates.parse(date_convicTo);
-                if (date2.after(date1)){
+                if (date2.after(date1) || date2.equals(date1)){
 
                     btn_courtConTo.setText("" + date_convicTo.toUpperCase());
                     //Comparing dates
@@ -884,7 +991,43 @@ public class DDCloseActiviy extends Activity {
 
             format = new SimpleDateFormat("dd-MMM-yyyy");
             date_convicTo = format.format(new Date(present_year - 1900, (present_month), present_day));
-            btn_courtSoclServceTodate.setText("" + date_convicTo.toUpperCase());
+            //btn_courtSoclServceTodate.setText("" + date_convicTo.toUpperCase());
+            dayDifference="";
+
+            Date date1;
+            Date date2;
+
+            SimpleDateFormat dates = new SimpleDateFormat("dd-MMM-yyyy");
+
+
+            //Setting dates
+            try {
+
+
+                date1 = dates.parse(date_convFRom);
+                date2 = dates.parse(date_convicTo);
+                if (date2.after(date1) || date2.equals(date1)){
+
+                    btn_courtSoclServceTodate.setText("" + date_convicTo.toUpperCase());
+                    //Comparing dates
+                    long difference = Math.abs(date1.getTime() - date2.getTime());
+                    long differenceDates = difference / (24 * 60 * 60 * 1000);
+
+                    //Convert long to String
+                    dayDifference = Long.toString(differenceDates);
+                    edtTxtRisDays.setText(dayDifference);
+                }else {
+                    showToast("Date should be greater than From_Date ");
+                    btn_courtSoclServceTodate.setText("Select Date");
+                    edtTxtRisDays.setText("");
+                }
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+
 
 
         }
@@ -919,7 +1062,7 @@ public class DDCloseActiviy extends Activity {
                 DatePickerDialog dp_courtConTo_date = new DatePickerDialog(this, md4, present_year, present_month,
                         present_day);
 
-                dp_courtConTo_date.getDatePicker().setMinDate(date_From.getTime());
+                dp_courtConTo_date.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_courtConTo_date;
             case PROGRESS_DIALOG:
                 ProgressDialog pd = ProgressDialog.show(this, "", "Please Wait...", true);
