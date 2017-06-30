@@ -602,7 +602,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 				/* TO GET WHEELER LENGTH */
                     c_whlr_details = DBHelper.db.rawQuery("select * from " + DBHelper.wheelercode_table, null);
 
-                    if ((cursor_psnames.getCount() == 0)  && (cursor_courtnames.getCount() == 0) &&(cursor_court_disnames.getCount() == 0)&& (c_whlr_details.getCount() == 0)) {
+                    if ((cursor_psnames.getCount() == 0) && (cursor_courtnames.getCount() == 0) && (cursor_court_disnames.getCount() == 0) && (c_whlr_details.getCount() == 0)) {
                         showToast("Please download master's !");
                     } else if ((psname_settings.equals("psname")) && (pointnameBycode_settings.equals("pointname"))) {
                         showToast("Configure Settings!");
@@ -672,7 +672,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 				/* TO GET WHEELER LENGTH */
                     c_whlr_details = DBHelper.db.rawQuery("select * from " + DBHelper.wheelercode_table, null);
 
-                    if ((cursor_psnames.getCount() == 0) && (cursor_courtnames.getCount() == 0) &&(cursor_court_disnames.getCount() == 0) && (c_whlr_details.getCount() == 0)) {
+                    if ((cursor_psnames.getCount() == 0) && (cursor_courtnames.getCount() == 0) && (cursor_court_disnames.getCount() == 0) && (c_whlr_details.getCount() == 0)) {
                         showToast("Please download master's !");
                     } else if ((psname_settings.equals("psname")) && (pointnameBycode_settings.equals("pointname"))) {
                         showToast("Configure Settings!");
@@ -910,7 +910,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
             case R.id.tv_about_version:
             /*
-			 * check_vhleHistory_or_Spot = "specialdrive"; startActivity(new
+             * check_vhleHistory_or_Spot = "specialdrive"; startActivity(new
 			 * Intent(Dashboard.this, SpotChallan.class));
 			 */
                 new Async_About_Version().execute();
@@ -1704,7 +1704,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
             if (ServiceHelper.Opdata_Chalana != null) {
 
-                if (null!=ServiceHelper.occupation_master && ServiceHelper.occupation_master.length > 0) {
+                if (null != ServiceHelper.occupation_master && ServiceHelper.occupation_master.length > 0) {
 
                     try {
                         db.open();

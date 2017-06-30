@@ -262,6 +262,7 @@ public class DBHelper {
             db.execSQL("DROP TABLE IF EXISTS " + vehicleMainCat_table);
             db.execSQL("DROP TABLE IF EXISTS " + psName_table);
             db.execSQL("DROP TABLE IF EXISTS " + courtName_table);
+            db.execSQL("DROP TABLE IF EXISTS " + court_disName_table);
             db.execSQL("DROP TABLE IF EXISTS " + violationPointsTable);
             db.execSQL("DROP TABLE IF EXISTS " + duplicatePrint_table);
             db.execSQL("DROP TABLE IF EXISTS " + vioalation_table);
@@ -396,48 +397,6 @@ public class DBHelper {
 
     }
 
-    public ArrayList<String> getCourtDisNamesFromDB() {
-        try {
-
-            int totalColumn=0;
-            ArrayList<String> CourtNames=new ArrayList<>();
-
-            String query = "select * from "+court_disName_table;
-            Cursor cursor = db.rawQuery(query, null);
-            if (cursor.moveToFirst()) {
-                do {
-                    // get  the  data into array,or class variable
-                    totalColumn = cursor.getColumnCount();
-                    for (int i = 0; i < totalColumn; i++) {
-                        if (cursor.getColumnName(i) != null) {
-
-                            try {
-                                if (cursor.getString(i) != null) {
-                                    //Log.d("TAG_NAME", cursor.getString(i));
-                                    CourtNames.add(Integer.parseInt(cursor.getColumnName(i)), cursor.getString(i));
-
-                                } else {
-                                    CourtNames.add(Integer.parseInt(cursor.getColumnName(i)), "");
-                                }
-                            } catch (Exception e) {
-                                Log.d("TAG_NAME", e.getMessage());
-                            }
-                        }
-
-                    }
-                    Log.d("", "" + CourtNames);
-                    crtnmaes.add(String.valueOf(CourtNames));
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-            db.close();
-
-
-        } catch (Exception e) {
-
-        }
-        return null;
-    }
 
 
     public static void deleteDuplicateRecords(String tablename, String apptype) {

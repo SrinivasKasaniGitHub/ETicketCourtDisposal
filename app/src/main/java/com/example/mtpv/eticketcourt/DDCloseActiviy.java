@@ -61,9 +61,7 @@ import java.util.Map;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
-/**
- * Created by mtpv on 6/20/2017.
- */
+
 
 public class DDCloseActiviy extends Activity {
     TextView compny_Name;
@@ -72,6 +70,7 @@ public class DDCloseActiviy extends Activity {
     HashMap<String, String> paramsCourt = new HashMap<String, String>();
     HashMap<String, String> paramsCourtdis = new HashMap<String, String>();
     ArrayList<HashMap<String, String>> maparrayCourtdis = new ArrayList<HashMap<String, String>>();
+    String print_Data;
 
 
     Calendar cal;
@@ -99,6 +98,8 @@ public class DDCloseActiviy extends Activity {
     final int PRESENT_COURT_CONVI_TO = 7;
     final int PRESENT_COURT_SCL_SRC_FROM = 8;
     final int PRESENT_COURT_SCL_SRC_TO = 9;
+    final int PRINT_DD_DIALOG=10;
+    final int PRINT_DD_DIALOG_EXIT=11;
     final int REPORT_TYPE = 3;
     final int COURT_NAME_DIALOG = 4;
     String online_report_status = "";
@@ -111,6 +112,12 @@ public class DDCloseActiviy extends Activity {
     BluetoothAdapter bluetoothAdapter;
     @SuppressWarnings("unused")
     private BluetoothAdapter mBluetoothAdapter = null;
+
+    ArrayList<String> print_respose, print_apptype;
+    public static String printer_addrss, printer_name;
+    int selected_type = -1;
+
+
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -130,7 +137,7 @@ public class DDCloseActiviy extends Activity {
 
     LinearLayout lytConFrom, lytConTo, lytConDays, lytFineAmnt, lytSoclFrom, lytSclSerTo, lytRisingDays;
     DBHelper db;
-    Cursor c, cursor_courtnames, cursor_court_Disnames;
+    Cursor c, cursor_courtnames, cursor_court_Disnames,printer_cursor;
 
     String selectedCourtCode, selectedCourtDisCode;
 
@@ -148,6 +155,12 @@ public class DDCloseActiviy extends Activity {
         db = new DBHelper(getApplicationContext());
         getCourtDisNamesFromDB();
         getCourtNamesFromDB();
+        cal = Calendar.getInstance();
+		/* FOR DATE PICKER */
+        present_year = cal.get(Calendar.YEAR);
+        present_month = cal.get(Calendar.MONTH);
+        present_day = cal.get(Calendar.DAY_OF_MONTH);
+
         lytConFrom = (LinearLayout) findViewById(R.id.lytConvtdFrom);
         lytConTo = (LinearLayout) findViewById(R.id.lytConvtdTo);
         lytConDays = (LinearLayout) findViewById(R.id.lytConvtdDays);
@@ -193,6 +206,8 @@ public class DDCloseActiviy extends Activity {
         rdoGrp_VehcleRlse = (RadioGroup) findViewById(R.id.rdoGrp_VehcleRlse);
         rdoBtnYes_VehcleRlse = (RadioButton) findViewById(R.id.rdoBtnYes_VehcleRlse);
         rdoBtnNo_VehcleRlse = (RadioButton) findViewById(R.id.rdoBtnNo_VehcleRlse);
+        print_respose = new ArrayList<String>();
+        print_apptype = new ArrayList<String>();
 
         rdoGrp_VehcleRlse.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -217,6 +232,8 @@ public class DDCloseActiviy extends Activity {
 
         courtNames = Dashboard.court_names_arr;
         courtDisNames = Dashboard.court_dis_names_arr;
+
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, mArrayListCourtNames);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -244,10 +261,11 @@ public class DDCloseActiviy extends Activity {
             }
         });
 
-
+//        ArrayAdapter<String> courtDisAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.simple_spinner_item_court_disposal, R.id.spincourtdis, mArrayListCourtDis);
+//        courtDisAdapter.setDropDownViewResource(R.layout.simple_spinner_item_court_disposal);
         ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, mArrayListCourtDis);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         courtDisspinner.setAdapter(dataAdapter1);
         courtDisspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -332,6 +350,72 @@ public class DDCloseActiviy extends Activity {
         });
 
 
+        //PRINTER Data
+
+        db = new DBHelper(getApplicationContext());
+        try {
+            db.open();
+            c = DBHelper.db.rawQuery("select * from " + DBHelper.duplicatePrint_table, null);
+            Log.i("**DUP PRINT***", "" + c.getCount());
+
+            if (c.getCount() == 0) {
+                // showToast("No Duplicate Records Found!");
+                // this.finish();
+            } else {
+                Log.i("Duplicate Records Len", "" + c.getCount());
+
+                while (c.moveToNext()) {
+                    Log.i("Duplicate Records count", "" + c.getCount());
+                    print_respose.add(c.getString(c.getColumnIndex(DBHelper.dup_print_respnse)));
+                    print_apptype.add(c.getString(c.getColumnIndex(DBHelper.dup_print_app_type)));
+
+                    Log.i("Duplicate Records",
+                            "" + c.getString(c.getColumnIndex(DBHelper.dup_print_app_type)));
+
+                }
+
+            }
+            c.close();
+            db.close();
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            c.close();
+            db.close();
+        }
+
+        try {
+            android.database.sqlite.SQLiteDatabase db = openOrCreateDatabase(DBHelper.DATABASE_NAME, MODE_PRIVATE,
+                    null);
+            String selectQuery = "SELECT  * FROM " + DBHelper.BT_PRINTER_TABLE;
+            // SQLiteDatabase db = this.getWritableDatabase();
+            printer_cursor = db.rawQuery(selectQuery, null);
+            // looping through all rows and adding to list
+
+            if (printer_cursor.moveToFirst()) {
+                do {
+                    printer_addrss = printer_cursor.getString(1);
+                    printer_name = printer_cursor.getString(2);
+
+                    Log.i("printer_addrss :", "" + printer_cursor.getString(1));
+                    Log.i("printer_name :", "" + printer_cursor.getString(2));
+
+                    address = printer_addrss;
+
+                } while (printer_cursor.moveToNext());
+            }
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            if (printer_cursor != null) {
+                printer_cursor.close();
+            }
+        }
+
+
         btn_dp_date_selection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -411,18 +495,20 @@ public class DDCloseActiviy extends Activity {
                 String rising_days=edtTxtRisDays.getText().toString();
                 String vhcleRelse = vehcleRelse;
                 String remarks = edtTxt_Remarks.getText().toString();
-                String mob_No=edtTxt_Mob_No.getText().toString();
-                String adhar_No=edtTxt_Aadhar_No.getText().toString();
-                String dl_no=edtTxt_DlNo.getText().toString();
+                //String mob_No=edtTxt_Mob_No.getText().toString();
+               // String adhar_No=edtTxt_Aadhar_No.getText().toString();
+               // String dl_no=edtTxt_DlNo.getText().toString();
                 String dl=driver_LCNCE;
                 String ml=driver_Mobile;
                 String aN=driver_Adhar;
-                driver_LCNCE=edtTxt_DlNo.getText().toString();
-                driver_Mobile=edtTxt_Mob_No.getText().toString();
-                driver_Adhar=edtTxt_Aadhar_No.getText().toString();
+//                driver_LCNCE=edtTxt_DlNo.getText().toString();
+//                driver_Mobile=edtTxt_Mob_No.getText().toString();
+//                driver_Adhar=edtTxt_Aadhar_No.getText().toString();
                 if (("null")==dl){
+
                     driver_LCNCE=edtTxt_DlNo.getText().toString();
                 }
+
                 if (("null")==ml){
                     driver_Mobile=edtTxt_Mob_No.getText().toString();
                 }
@@ -442,18 +528,18 @@ public class DDCloseActiviy extends Activity {
 
                 if (court_Code == null) {
                     showToast("Select Court Name");
-                } else if (mob_No.trim().equals("")) {
+                } else if (driver_Mobile.trim().equals("")) {
                     edtTxt_Mob_No.setError(Html.fromHtml("<font color='white'>Enter Mobile Number </font>"));
                     edtTxt_Mob_No.requestFocus();
-                }else if (mob_No.length()<=9 || mob_No.length()>=11) {
+                }else if (driver_Mobile.length()<=9 || driver_Mobile.length()>=11) {
                     edtTxt_Mob_No.setError(Html.fromHtml("<font color='white'>Enter Valid Mobile Number </font>"));
                     edtTxt_Mob_No.requestFocus();
-                }else if (adhar_No.trim().equals("")&& dl_no.trim().equals("") ) {
+                }else if (driver_Adhar.trim().equals("")&& driver_LCNCE.trim().equals("") ) {
                     showToast("Please enter either Aadhar or Dl No");
-                }else if ((!adhar_No.equals(""))&&(adhar_No.length()<=11 || adhar_No.length()>=13)) {
+                }else if ((!driver_Adhar.equals(""))&&(driver_Adhar.length()<=11 || driver_Adhar.length()>=13)) {
                     edtTxt_Aadhar_No.setError(Html.fromHtml("<font color='white'>Enter valid Aadhar Number </font>"));
                     edtTxt_Aadhar_No.requestFocus();
-                }else if ((!dl_no.equals(""))&&(dl_no.length()<=3)) {
+                }else if ((!driver_LCNCE.equals(""))&&(driver_LCNCE.length()<=3)) {
                     edtTxt_DlNo.setError(Html.fromHtml("<font color='white'>Enter valid Dl Number </font>"));
                     edtTxt_DlNo.requestFocus();
                 }else if (btn_courtAttenddate.getText().toString().equals("Select Date")) {
@@ -552,6 +638,10 @@ public class DDCloseActiviy extends Activity {
         });
 
 
+
+
+
+
     }
 
 
@@ -645,11 +735,15 @@ public class DDCloseActiviy extends Activity {
 
 
             Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
+            print_Data=ServiceHelper.Opdata_Chalana;
             removeDialog(PROGRESS_DIALOG);
             if (ServiceHelper.Opdata_Chalana.equals("0")) {
-                showToast("Updated Successfully ! ");
-                Intent intent_dashboard = new Intent(getApplicationContext(), Dashboard.class);
-                startActivity(intent_dashboard);
+                showToast("Updated failled ! ");
+
+//                Intent intent_dashboard = new Intent(getApplicationContext(), Dashboard.class);
+//                startActivity(intent_dashboard);
+            }else {
+                showDialog(PRINT_DD_DIALOG);
             }
             online_report_status = "";
 
@@ -767,6 +861,589 @@ public class DDCloseActiviy extends Activity {
         }
     }
 
+    public class Aysnc_Print_Data extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... params) {
+            // TODO Auto-generated method stub
+            // printResponse();
+            if (bluetoothAdapter == null) {
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        showToast("Bluetooth NOT support");
+                    }
+                });
+            } else {
+                if (bluetoothAdapter.isEnabled()) {
+                    if (bluetoothAdapter.isDiscovering()) {
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                // TODO Auto-generated method stub
+                                showToast("Bluetooth is currently in device discovery process.");
+                            }
+                        });
+                    } else {
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                // TODO Auto-generated method stub
+                                showToast("Bluetooth is Enabled");
+                            }
+                        });
+
+                        Log.i("PRINT FROM", "" + Dashboard.check_vhleHistory_or_Spot);
+
+                        if (!print_Data.equals("")) {
+
+
+                            try {
+									/*
+									 * String printdata =
+									 * bth_printer.font_Courier_41(""+
+									 * ServiceHelper.Opdata_Chalana);
+									 * actual_printer.Call_PrintertoPrint("" +
+									 * address, "" + printdata);
+									 */
+
+                                Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                String print_data = printer.font_Courier_41("" + print_Data);
+                                actual_printer.openBT(address);
+
+                                actual_printer.printData(print_data);
+                                Thread.sleep(5000);
+                                actual_printer.closeBT();
+                            } catch (Exception e) {
+                                runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        // TODO Auto-generated method stub
+                                        showToast("Check Your Device is Working Condition!");
+                                    }
+                                });
+
+                            }
+
+                        } else {
+
+                            if (address.equals("btaddr")) {
+                                runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        // TODO Auto-generated method stub
+                                        showToast("Check Bluetooth Details!");
+                                    }
+                                });
+
+                            } else if (bluetoothAdapter.isEnabled()) {
+
+                                if (online_report_status.equals("yes")) {
+                                    Log.i("ONLINE PRINT", "ONLINE PRINT");
+
+                                    try {
+                                        Log.i("ONLINE PRINT", "ONLINE PRINT");
+										/*
+										 * String printdata =
+										 * bth_printer.font_Courier_41(""+
+										 * ServiceHelper.Opdata_Chalana);
+										 * actual_printer.Call_PrintertoPrint(
+										 * ""+ address, "" + printdata);
+										 */
+
+                                        Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                        String print_data = printer.font_Courier_41("" + print_Data);
+                                        actual_printer.openBT(address);
+
+                                        actual_printer.printData(print_data);
+                                        Thread.sleep(5000);
+                                        actual_printer.closeBT();
+                                    } catch (Exception e) {
+                                        runOnUiThread(new Runnable() {
+
+                                            @Override
+                                            public void run() {
+                                                // TODO Auto-generated method
+                                                // stub
+                                                showToast("Check Your Device is Working Condition!");
+                                            }
+                                        });
+
+                                    }
+                                } else {
+                                    if (print_apptype.size() > 0) {
+                                        if ((print_apptype.get(selected_type).toString().trim()
+                                                .equals("" + getResources().getString(R.string.dup_drunk_drive)))
+                                                && (!print_respose.get(selected_type).equals(""))) {
+                                            try {
+												/*
+												 * String printdata =
+												 * bth_printer.font_Courier_41(
+												 * ""+ print_respose.get(
+												 * selected_type));
+												 * actual_printer.
+												 * Call_PrintertoPrint("" +
+												 * address, "" + printdata);
+												 */
+
+                                                Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                                String print_data = printer
+                                                        .font_Courier_41("" + print_respose.get(selected_type));
+                                                actual_printer.openBT(address);
+
+                                                actual_printer.printData(print_data);
+                                                Thread.sleep(5000);
+                                                actual_printer.closeBT();
+                                            } catch (Exception e) {
+                                                runOnUiThread(new Runnable() {
+
+                                                    @Override
+                                                    public void run() {
+                                                        // TODO Auto-generated
+                                                        // method stub
+                                                        showToast("Check Your Device is Working Condition!");
+                                                    }
+                                                });
+                                            }
+
+                                        } else if ((print_apptype.get(selected_type).toString().trim()
+                                                .equals("" + getResources().getString(R.string.dup_spot_challan)))
+                                                && (!print_respose.get(selected_type).equals(""))) {
+                                            try {
+												/*
+												 * String printdata =
+												 * bth_printer.font_Courier_41(
+												 * ""+ print_respose.get(
+												 * selected_type));
+												 * actual_printer.
+												 * Call_PrintertoPrint("" +
+												 * address, ""+ printdata);
+												 */
+
+                                                Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                                String print_data = printer
+                                                        .font_Courier_41("" + print_respose.get(selected_type));
+                                                actual_printer.openBT(address);
+
+                                                actual_printer.printData(print_data);
+                                                Thread.sleep(5000);
+                                                actual_printer.closeBT();
+                                            } catch (Exception e) {
+                                                // TODO: handle exception
+                                                runOnUiThread(new Runnable() {
+
+                                                    @Override
+                                                    public void run() {
+                                                        // TODO Auto-generated
+                                                        // method stub
+                                                        showToast("Check Your Device is Working Condition!");
+                                                    }
+                                                });
+                                            }
+                                        } else if ((print_apptype.get(selected_type).toString().trim()
+                                                .equals("" + getResources().getString(R.string.dup_vhcle_hstry)))
+                                                && (!print_respose.get(selected_type).equals(""))) {
+
+                                            try {
+												/*
+												 * String printdata =
+												 * bth_printer.font_Courier_41(
+												 * ""+ print_respose.get(
+												 * selected_type));
+												 * actual_printer.
+												 * Call_PrintertoPrint("" +
+												 * address, ""+ printdata);
+												 */
+                                                Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                                String print_data = printer
+                                                        .font_Courier_41("" + print_respose.get(selected_type));
+                                                actual_printer.openBT(address);
+
+                                                actual_printer.printData(print_data);
+                                                Thread.sleep(5000);
+                                                actual_printer.closeBT();
+                                            } catch (Exception e) {
+                                                runOnUiThread(new Runnable() {
+
+                                                    @Override
+                                                    public void run() {
+                                                        // TODO Auto-generated
+                                                        // method stub
+                                                        showToast("Check Your Device is Working Condition!");
+                                                    }
+                                                });
+                                            }
+                                        } else if ((print_apptype.get(selected_type).toString().trim()
+                                                .equals("" + getResources().getString(R.string.towing_one_line)))
+                                                && (!print_respose.get(selected_type).equals(""))) {
+
+                                            try {
+												/*
+												 * String printdata =
+												 * bth_printer.font_Courier_41(
+												 * ""+ print_respose.get(
+												 * selected_type));
+												 * actual_printer.
+												 * Call_PrintertoPrint("" +
+												 * address, ""+ printdata);
+												 */
+
+                                                Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                                String print_data = printer
+                                                        .font_Courier_41("" + print_respose.get(selected_type));
+                                                actual_printer.openBT(address);
+
+                                                actual_printer.printData(print_data);
+                                                Thread.sleep(5000);
+                                                actual_printer.closeBT();
+                                            } catch (Exception e) {
+                                                runOnUiThread(new Runnable() {
+
+                                                    @Override
+                                                    public void run() {
+                                                        // TODO Auto-generated
+                                                        // method stub
+                                                        showToast("Check Your Device is Working Condition!");
+                                                    }
+                                                });
+                                            }
+                                        } else if ((print_apptype.get(selected_type).toString().trim().equals(
+                                                "" + getResources().getString(R.string.release_documents_one_line)))
+                                                && (!print_respose.get(selected_type).equals(""))) {
+
+                                            try {
+												/*
+												 * String printdata =
+												 * bth_printer.font_Courier_41(
+												 * ""+ print_respose.get(
+												 * selected_type));
+												 * actual_printer.
+												 * Call_PrintertoPrint("" +
+												 * address, ""+ printdata);
+												 */
+
+                                                Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                                String print_data = printer
+                                                        .font_Courier_41("" + print_respose.get(selected_type));
+                                                actual_printer.openBT(address);
+
+                                                actual_printer.printData(print_data);
+                                                Thread.sleep(5000);
+                                                actual_printer.closeBT();
+                                            } catch (Exception e) {
+                                                runOnUiThread(new Runnable() {
+
+                                                    @Override
+                                                    public void run() {
+                                                        // TODO Auto-generated
+                                                        // method stub
+                                                        showToast("Check Your Device is Working Condition!");
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                            }
+                        }
+                    }
+                } else {
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+
+                    if (address.equals("btaddr")) {
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                // TODO Auto-generated method stub
+                                showToast("Check Bluetooth Details!");
+                            }
+                        });
+                    } else if (bluetoothAdapter.isEnabled()) {
+
+                        Log.i("SECOND  CASE", print_apptype.get(selected_type).toString().trim() + ""
+                                + getResources().getString(R.string.dup_drunk_drive));
+
+                        if (!print_Data.equals("")) {
+
+
+                            try {
+									/*
+									 * String printdata =
+									 * bth_printer.font_Courier_41(""+
+									 * ServiceHelper.Opdata_Chalana);
+									 * actual_printer.Call_PrintertoPrint("" +
+									 * address, "" + printdata);
+									 */
+                                Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                String print_data = printer.font_Courier_41("" + print_Data);
+                                actual_printer.openBT(address);
+
+                                actual_printer.printData(print_data);
+                                Thread.sleep(5000);
+                                actual_printer.closeBT();
+                            } catch (Exception e) {
+                                runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        // TODO Auto-generated method stub
+                                        showToast("Check Your Device is Working Condition!");
+                                    }
+                                });
+                            }
+
+                        } else {
+
+                            if (online_report_status.equals("yes")) {
+                                Log.i("ONLINE PRINT", "ONLINE PRINT");
+
+                                try {
+									/*
+									 * String printdata =
+									 * bth_printer.font_Courier_41(""+
+									 * ServiceHelper.Opdata_Chalana);
+									 * actual_printer.Call_PrintertoPrint("" +
+									 * address, "" + printdata);
+									 */
+
+                                    Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                    String print_data = printer.font_Courier_41("" + print_Data);
+                                    actual_printer.openBT(address);
+
+                                    actual_printer.printData(print_data);
+                                    Thread.sleep(5000);
+                                    actual_printer.closeBT();
+                                } catch (Exception e) {
+                                    runOnUiThread(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            // TODO Auto-generated method stub
+                                            showToast("Check Your Device is Working Condition!");
+                                        }
+                                    });
+                                }
+                            } else {
+                                if (print_apptype.size() > 0) {
+                                    if ((print_apptype.get(selected_type).toString().trim()
+                                            .equals("" + getResources().getString(R.string.dup_drunk_drive)))
+                                            && (!print_respose.get(selected_type).equals(""))) {
+                                        try {
+											/*
+											 * String printdata =
+											 * bth_printer.font_Courier_41(""+
+											 * print_respose.get(selected_type))
+											 * ; actual_printer.
+											 * Call_PrintertoPrint(""+ address,
+											 * "" + printdata);
+											 */
+
+                                            Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                            String print_data = printer
+                                                    .font_Courier_41("" + print_respose.get(selected_type));
+                                            actual_printer.openBT(address);
+
+                                            actual_printer.printData(print_data);
+                                            Thread.sleep(5000);
+                                            actual_printer.closeBT();
+                                        } catch (Exception e) {
+                                            runOnUiThread(new Runnable() {
+
+                                                @Override
+                                                public void run() {
+                                                    // TODO Auto-generated
+                                                    // method stub
+                                                    showToast("Check Your Device is Working Condition!");
+                                                }
+                                            });
+                                        }
+
+                                    } else if ((print_apptype.get(selected_type).toString().trim()
+                                            .equals("" + getResources().getString(R.string.dup_spot_challan)))
+                                            && (!print_respose.get(selected_type).equals(""))) {
+
+                                        try {
+											/*
+											 * String printdata =
+											 * bth_printer.font_Courier_41(""+
+											 * print_respose.get(selected_type))
+											 * ; actual_printer.
+											 * Call_PrintertoPrint(""+ address,
+											 * "" + printdata);
+											 */
+
+                                            Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                            String print_data = printer
+                                                    .font_Courier_41("" + print_respose.get(selected_type));
+                                            actual_printer.openBT(address);
+
+                                            actual_printer.printData(print_data);
+                                            Thread.sleep(5000);
+                                            actual_printer.closeBT();
+                                        } catch (Exception e) {
+                                            runOnUiThread(new Runnable() {
+
+                                                @Override
+                                                public void run() {
+                                                    // TODO Auto-generated
+                                                    // method stub
+                                                    showToast("Check Your Device is Working Condition!");
+                                                }
+                                            });
+                                        }
+
+                                    } else if ((print_apptype.get(selected_type).toString().trim()
+                                            .equals("" + getResources().getString(R.string.dup_vhcle_hstry)))
+                                            && (!print_respose.get(selected_type).equals(""))) {
+
+                                        try {
+											/*
+											 * String printdata =
+											 * bth_printer.font_Courier_41(""+
+											 * print_respose.get(selected_type))
+											 * ; actual_printer.
+											 * Call_PrintertoPrint(""+ address,
+											 * "" + printdata);
+											 */
+                                            Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                            String print_data = printer
+                                                    .font_Courier_41("" + print_respose.get(selected_type));
+                                            actual_printer.openBT(address);
+
+                                            actual_printer.printData(print_data);
+                                            Thread.sleep(5000);
+                                            actual_printer.closeBT();
+                                        } catch (Exception e) {
+                                            runOnUiThread(new Runnable() {
+
+                                                @Override
+                                                public void run() {
+                                                    // TODO Auto-generated
+                                                    // method stub
+                                                    showToast("Check Your Device is Working Condition!");
+                                                }
+                                            });
+                                        }
+                                    } else if ((print_apptype.get(selected_type).toString().trim()
+                                            .equals("" + getResources().getString(R.string.towing_one_line)))
+                                            && (!print_respose.get(selected_type).equals(""))) {
+
+                                        try {
+											/*
+											 * String printdata =
+											 * bth_printer.font_Courier_41(""+
+											 * print_respose.get(selected_type))
+											 * ; actual_printer.
+											 * Call_PrintertoPrint(""+ address,
+											 * "" + printdata);
+											 */
+
+                                            Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                            String print_data = printer
+                                                    .font_Courier_41("" + print_respose.get(selected_type));
+                                            actual_printer.openBT(address);
+
+                                            actual_printer.printData(print_data);
+                                            Thread.sleep(5000);
+                                            actual_printer.closeBT();
+                                        } catch (Exception e) {
+                                            runOnUiThread(new Runnable() {
+
+                                                @Override
+                                                public void run() {
+                                                    // TODO Auto-generated
+                                                    // method stub
+                                                    showToast("Check Your Device is Working Condition!");
+                                                }
+                                            });
+                                        }
+                                    } else if ((print_apptype.get(selected_type).toString().trim()
+                                            .equals("" + getResources().getString(R.string.release_documents_one_line)))
+                                            && (!print_respose.get(selected_type).equals(""))) {
+
+                                        try {
+											/*
+											 * String printdata =
+											 * bth_printer.font_Courier_41(""+
+											 * print_respose.get(selected_type))
+											 * ; actual_printer.
+											 * Call_PrintertoPrint(""+ address,
+											 * "" + printdata);
+											 */
+                                            Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
+
+                                            String print_data = printer
+                                                    .font_Courier_41("" + print_respose.get(selected_type));
+                                            actual_printer.openBT(address);
+
+                                            actual_printer.printData(print_data);
+                                            Thread.sleep(5000);
+                                            actual_printer.closeBT();
+                                        } catch (Exception e) {
+                                            runOnUiThread(new Runnable() {
+
+                                                @Override
+                                                public void run() {
+                                                    // TODO Auto-generated
+                                                    // method stub
+                                                    showToast("Check Your Device is Working Condition!");
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+
+            }
+            return null;
+        }
+
+        @SuppressWarnings("deprecation")
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            showDialog(PROGRESS_DIALOG);
+        }
+
+        @SuppressWarnings("deprecation")
+        @Override
+        protected void onPostExecute(String result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
+            removeDialog(PROGRESS_DIALOG);
+
+        }
+    }
+
 
     private void showToast(String msg) {
         // TODO Auto-generated method stub
@@ -812,7 +1489,7 @@ public class DDCloseActiviy extends Activity {
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
             // TODO Auto-generated method stub
-
+//pre
             present_year = selectedYear;
             present_month = monthOfYear;
             present_day = dayOfMonth;
@@ -1055,14 +1732,14 @@ public class DDCloseActiviy extends Activity {
                 DatePickerDialog dp_courtConFrom_date = new DatePickerDialog(this, md3, present_year, present_month,
                         present_day);
 
-                dp_courtConFrom_date.getDatePicker().setMaxDate(System.currentTimeMillis());
+                //dp_courtConFrom_date.getDatePicker().setMaxDate(System.currentTimeMillis());
                // dp_courtConFrom_date.getDatePicker().setMinDate(Long.parseLong(date_convFRom));
                 return dp_courtConFrom_date;
             case PRESENT_COURT_CONVI_TO:
                 DatePickerDialog dp_courtConTo_date = new DatePickerDialog(this, md4, present_year, present_month,
                         present_day);
 
-                dp_courtConTo_date.getDatePicker().setMaxDate(System.currentTimeMillis());
+                //dp_courtConTo_date.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_courtConTo_date;
             case PROGRESS_DIALOG:
                 ProgressDialog pd = ProgressDialog.show(this, "", "Please Wait...", true);
@@ -1084,12 +1761,81 @@ public class DDCloseActiviy extends Activity {
                 dp_SCL_SRC_TO.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_SCL_SRC_TO;
 
+            case PRINT_DD_DIALOG:
+                TextView title = new TextView(this);
+                title.setText("COURT CLOSING");
+                title.setBackgroundColor(Color.BLUE);
+                title.setGravity(Gravity.CENTER);
+                title.setTextColor(Color.WHITE);
+                title.setTextSize(26);
+                title.setTypeface(title.getTypeface(), Typeface.BOLD);
+                title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.dialog_logo, 0, R.drawable.dialog_logo, 0);
+                title.setPadding(20, 0, 20, 0);
+                title.setHeight(70);
+
+                //String otp_message = "Print INfo \n";
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DDCloseActiviy.this,
+                        AlertDialog.THEME_HOLO_LIGHT);
+                alertDialogBuilder.setCustomTitle(title);
+                alertDialogBuilder.setIcon(R.drawable.dialog_logo);
+                alertDialogBuilder.setMessage(print_Data);
+                alertDialogBuilder.setCancelable(false);
+                alertDialogBuilder.setPositiveButton("PRINT", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        new Aysnc_Print_Data().execute();
+                        Toast.makeText(getApplicationContext(),"Printing",Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+                alertDialogBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        dd_lyt.setVisibility(View.GONE);
+                        pay_dd_lyt.setVisibility(View.GONE);
+                        removeDialog(PRINT_DD_DIALOG_EXIT);
+
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                alertDialog.getWindow().getAttributes();
+
+                TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
+                textView.setTextSize(28);
+                textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+                textView.setGravity(Gravity.CENTER);
+
+                Button btn = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                btn.setTextSize(22);
+                btn.setTextColor(Color.WHITE);
+                btn.setTypeface(btn.getTypeface(), Typeface.BOLD);
+                btn.setBackgroundColor(Color.BLUE);
+
+                Button btn2 = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                btn2.setTextSize(22);
+                btn2.setTextColor(Color.WHITE);
+                btn2.setTypeface(btn2.getTypeface(), Typeface.BOLD);
+                btn2.setBackgroundColor(Color.BLUE);
+                return alertDialog;
+
 
             default:
                 break;
         }
         return super.onCreateDialog(id);
     }
+
+
+
 
 
 }

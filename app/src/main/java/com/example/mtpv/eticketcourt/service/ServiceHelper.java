@@ -1102,6 +1102,7 @@ public class ServiceHelper {
 			httpTransportSE.call(NAMESPACE+GET_DDCLOSING_DETAILS, envelope);
 			Object result = envelope.getResponse();
 			Opdata_Chalana = "";
+			//AP29BS7402
 			// Opdata_Chalana = result.toString();
 
 			try {
