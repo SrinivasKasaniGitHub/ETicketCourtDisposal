@@ -89,14 +89,11 @@ public class DBHelper {
     public static String violationPointsTable = "VIOLATION_POINT_TABLE";//
     public static String duplicatePrint_table = "DUPLICATE_PRINT_TABLE";
     public static String vioalation_table = "VIOLATION_TABLE";
-
     public static String bar_table = "BAR_TABLE";
-
     public static String TERMINAL_DETAILS_TABLE = "TERMINAL_DETAILS_TABLE";
     public static String TERMINAL_ID = "TERMINAL_ID";
     public static String BT_NAME = "BT_NAME";
     public static String BT_ADDRESS = "BT_ADDRESS";
-
     public static String Occupation_table = "OCCUPATION_TABLE";
 
     /* TABLE CREATIONS QUERIES */
@@ -228,6 +225,9 @@ public class DBHelper {
 
             db.execSQL(courtNamesCreation);
             Log.i("courtNamesion Table", "Created");
+
+            db.execSQL(court_disNamesCreation);
+            Log.i("courtdisNamesion Table", "Created");
 
 
             db.execSQL(violatioPointsDetaisCreation);

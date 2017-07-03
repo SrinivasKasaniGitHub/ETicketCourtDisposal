@@ -133,7 +133,8 @@
                         style="@style/styleEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/Password" />
+                        android:hint="@string/Password"
+                        />
 
                 </android.support.design.widget.TextInputLayout>
 

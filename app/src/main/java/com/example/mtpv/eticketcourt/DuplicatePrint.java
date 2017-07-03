@@ -122,6 +122,7 @@ public  class DuplicatePrint extends AppCompatActivity implements View.OnClickLi
     TextView tv_dp_text;
     Button btn_print_dp;
     TextView compny_Name;
+    public static String print_data_todf;
 
 	/*-------------------------------------------------------------*/
 
@@ -149,7 +150,27 @@ public  class DuplicatePrint extends AppCompatActivity implements View.OnClickLi
             Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
             compny_Name.startAnimation(marquee);
         }
-
+        //print_data_todf="print da t ajdhsufsd /t gysydf print da t ajdhsufsd /t gysydf print da t ajdhsufsd /t gysydf print da t ajdhsufsd /t gysydf";
+        print_data_todf="Payment Successfull at court  TELANGANA STATE POLICE  \n" +
+                "\t\tHYDERABAD TRAFFIC POLICE \n" +
+                "\t\t\tE-CHALLAN SYSTEM \n" +
+                "\t\t E-COURT PAYMENT RECEIPT \n" +
+                "Challan Number : RAC01EC171047764\n" +
+                "Transaction ID : 80040570 \n" +
+                "Date Of Payment: 29-May-2017\n" +
+                "Total Amount Paid: 56987 \n" +
+                "\n" +
+                "----------------------------------------\n" +
+                "Detained Items were Successfully Released \n" +
+                "  \n" +
+                "  \n" +
+                " RESPONDENT SIGN  OFFICER'S SIGN \n" +
+                "\t\t\t\tDEVELOPER\n" +
+                "\t\t\t\t23001004\n" +
+                "\n" +
+                " ----------------------------------------\n" +
+                "\t Conceptualised & Developed By \n" +
+                " Mother Technologies Project Ventures \n";
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         cal = Calendar.getInstance();
@@ -198,8 +219,8 @@ public  class DuplicatePrint extends AppCompatActivity implements View.OnClickLi
         btn_dp_apptype_selection.setOnClickListener(this);
         btn_print_dp.setOnClickListener(this);
 
-        tv_dp_text.setVisibility(View.GONE);
-        btn_print_dp.setVisibility(View.GONE);
+        tv_dp_text.setVisibility(View.VISIBLE);
+        btn_print_dp.setVisibility(View.VISIBLE);
 
         print_respose = new ArrayList<String>();
         print_apptype = new ArrayList<String>();
@@ -290,8 +311,8 @@ public  class DuplicatePrint extends AppCompatActivity implements View.OnClickLi
 
 		/* DUPLICATE PRINT */
             case R.id.btnprint_dup_res_xml:
-                new Aysnc_Print().execute();
-                // printResponse();
+                //new Aysnc_Print().execute();
+                printResponse();
                 break;
 
             case R.id.btnselect_dateselection_report_xml:
@@ -1078,8 +1099,8 @@ public  class DuplicatePrint extends AppCompatActivity implements View.OnClickLi
                     showToast("Bluetooth is Enabled");
                     Log.i("PRINT FROM", "" + Dashboard.check_vhleHistory_or_Spot);
 
-                    if (Dashboard.check_vhleHistory_or_Spot.equals("reports")) {
-                        if ((Dashboard.check_vhleHistory_or_Spot.equals("reports"))
+                    if (!Dashboard.check_vhleHistory_or_Spot.equals("reports")) {
+                        if ((!Dashboard.check_vhleHistory_or_Spot.equals("reports"))
                                 && (!ServiceHelper.Opdata_Chalana.equals("NA"))) {
 
                             try {
@@ -1092,8 +1113,10 @@ public  class DuplicatePrint extends AppCompatActivity implements View.OnClickLi
 								 */
                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
-                                String print_data = printer.font_Courier_41("" + ServiceHelper.Opdata_Chalana);
+                                String print_data = printer.font_Courier_41("" +print_data_todf);
+
                                 actual_printer.openBT(address);
+
 
                                 actual_printer.printData(print_data);
                                 Thread.sleep(5000);
@@ -1123,7 +1146,7 @@ public  class DuplicatePrint extends AppCompatActivity implements View.OnClickLi
 
                                     Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
-                                    String print_data = printer.font_Courier_41("" + ServiceHelper.Opdata_Chalana);
+                                    String print_data = printer.font_Courier_41("" + print_data_todf);
                                     actual_printer.openBT(address);
 
                                     actual_printer.printData(print_data);
@@ -1454,6 +1477,7 @@ public  class DuplicatePrint extends AppCompatActivity implements View.OnClickLi
 
                                         String print_data = printer
                                                 .font_Courier_41("" + print_respose.get(selected_type));
+                                        printer.form_Feed();
                                         actual_printer.openBT(address);
 
                                         actual_printer.printData(print_data);

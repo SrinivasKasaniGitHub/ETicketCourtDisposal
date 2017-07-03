@@ -473,8 +473,6 @@ public class DDCloseActiviy extends Activity {
                     showToast("Select Date");
                 } else {
                     new Async_getDD_details().execute();
-
-
                 }
 
             }
@@ -1500,14 +1498,7 @@ public class DDCloseActiviy extends Activity {
 
             Log.i("DAY REPORT : ", "" + present_date_toSend);
 
-			/* ONLY IN REPORT ON DATE SELECTION SERVICE NEED TO CALL */
-            /* IN DUPLIATE PRINT ON PRESS OF GO BUTTON SERVICE NEED TO CALL */
-//            if (Dashboard.check_vhleHistory_or_Spot.equals("reports")) {
-//                btn_dp_date_selection.setText("" + present_date_toSend.toUpperCase());
-//
-//            } else {
-//                btn_dp_date_selection.setText("" + present_date_toSend.toUpperCase());
-//            }
+
 
         }
     };
@@ -1527,16 +1518,7 @@ public class DDCloseActiviy extends Activity {
             date_courtAtnd = format.format(new Date(present_year - 1900, (present_month), present_day));
             btn_courtAttenddate.setText("" + date_courtAtnd.toUpperCase());
 
-            //Log.i("DAY REPORT : ", "" + present_date_toSend);
 
-			/* ONLY IN REPORT ON DATE SELECTION SERVICE NEED TO CALL */
-            /* IN DUPLIATE PRINT ON PRESS OF GO BUTTON SERVICE NEED TO CALL */
-//            if (Dashboard.check_vhleHistory_or_Spot.equals("reports")) {
-//                btn_dp_date_selection.setText("" + present_date_toSend.toUpperCase());
-//
-//            } else {
-//                btn_dp_date_selection.setText("" + present_date_toSend.toUpperCase());
-//            }
 
         }
     };
@@ -1620,16 +1602,7 @@ public class DDCloseActiviy extends Activity {
             }
 
 
-            //Log.i("DAY REPORT : ", "" + present_date_toSend);
 
-			/* ONLY IN REPORT ON DATE SELECTION SERVICE NEED TO CALL */
-            /* IN DUPLIATE PRINT ON PRESS OF GO BUTTON SERVICE NEED TO CALL */
-//            if (Dashboard.check_vhleHistory_or_Spot.equals("reports")) {
-//                btn_dp_date_selection.setText("" + present_date_toSend.toUpperCase());
-//
-//            } else {
-//                btn_dp_date_selection.setText("" + present_date_toSend.toUpperCase());
-//            }
 
         }
     };

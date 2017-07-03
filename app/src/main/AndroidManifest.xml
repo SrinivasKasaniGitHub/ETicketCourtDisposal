@@ -20,9 +20,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_hyd"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_hyd"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
         <activity android:name=".MainActivity">
@@ -34,7 +34,7 @@
         </activity>
         <activity android:name=".IPSettings" />
         <activity android:name=".Dashboard" />
-        <activity android:name=".Settings"></activity>
+        <activity android:name=".Settings"/>
         <activity android:name=".Dashboard_PC"/>
         <activity android:name=".ChangePassword"/>
         <activity android:name=".DateOfBirth_Update"/>
