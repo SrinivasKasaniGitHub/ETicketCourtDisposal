@@ -1024,7 +1024,7 @@ public class Settings extends Activity implements View.OnClickListener {
             case PS_NAME_DIALOG:
                 TextView title = new TextView(this);
                 title.setText("Select PS Name");
-                title.setBackgroundColor(Color.parseColor("#007300"));
+                title.setBackgroundColor(Color.BLUE);
                 title.setGravity(Gravity.CENTER);
                 title.setTextColor(Color.WHITE);
                 title.setTextSize(26);
@@ -1079,7 +1079,7 @@ public class Settings extends Activity implements View.OnClickListener {
             case PS_CODE_DIALOG:
                 TextView title2 = new TextView(this);
                 title2.setText("Select PS By Point Name");
-                title2.setBackgroundColor(Color.parseColor("#007300"));
+                title2.setBackgroundColor(Color.BLUE);
                 title2.setGravity(Gravity.CENTER);
                 title2.setTextColor(Color.WHITE);
                 title2.setTextSize(26);

@@ -156,10 +156,19 @@ public class DDCloseActiviy extends Activity {
         getCourtDisNamesFromDB();
         getCourtNamesFromDB();
         cal = Calendar.getInstance();
+
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
 		/* FOR DATE PICKER */
         present_year = cal.get(Calendar.YEAR);
         present_month = cal.get(Calendar.MONTH);
         present_day = cal.get(Calendar.DAY_OF_MONTH);
+
+        preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+        editor = preferences.edit();
+        address = preferences.getString("btaddress", "btaddr");
+
+        Log.i("BT address :::::", "" + address);
 
         lytConFrom = (LinearLayout) findViewById(R.id.lytConvtdFrom);
         lytConTo = (LinearLayout) findViewById(R.id.lytConvtdTo);
@@ -335,12 +344,14 @@ public class DDCloseActiviy extends Activity {
                 } else {
                     lytConFrom.setVisibility(View.GONE);
                     lytConTo.setVisibility(View.GONE);
+
                     lytConDays.setVisibility(View.GONE);
                     lytFineAmnt.setVisibility(View.GONE);
                     lytSoclFrom.setVisibility(View.GONE);
                     lytSclSerTo.setVisibility(View.GONE);
                     lytRisingDays.setVisibility(View.GONE);
                 }
+
             }
 
             @Override
