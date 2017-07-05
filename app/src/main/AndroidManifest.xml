@@ -51,6 +51,8 @@
         <activity android:name=".VehicleHistoryPendingChallans"/>
         <activity android:name=".DDCloseActiviy"/>
         <activity android:name=".ChargeSheetClose"/>
+        <activity android:name=".PendingBookedCaseActiviy"/>
+        <activity android:name=".CourtCaseStatus"/>
 
     </application>
 

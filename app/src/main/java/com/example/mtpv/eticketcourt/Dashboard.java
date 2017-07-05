@@ -84,7 +84,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
     int totalSize = 0;
     TextView cur_val;
 
-    TextView tv_login_username, echallan, echallan_reports;
+    TextView tv_login_username, echallan, echallan_reports,tv_pending_booked_dashboard_xml;
     TextView tv_drunk_and_drive;// drunk & drive
     TextView tv_spot_challan;
     TextView tv_vehicle_history;
@@ -532,13 +532,14 @@ public class Dashboard extends Activity implements View.OnClickListener {
         tv_login_username = (TextView) findViewById(R.id.tv_login_username_dashboard_xml);
         tv_drunk_and_drive = (TextView) findViewById(R.id.tv_generateticket_dashboard_xml);// drunk&drive
         tv_spot_challan = (TextView) findViewById(R.id.tv_spot_dashboard_xml);
-        tv_vehicle_history = (TextView) findViewById(R.id.tv_vhclehistory_dashboard_xml);
+       // tv_vehicle_history = (TextView) findViewById(R.id.tv_vhclehistory_dashboard_xml);
         tv_towing_cp_act = (TextView) findViewById(R.id.tv_towing_dashboard_xml);
         tv_release_document = (TextView) findViewById(R.id.tv_releasedocuments_dashboard_xml);
         tv_reports = (TextView) findViewById(R.id.tv_reports_dashboard_xml);
         tv_duplicate_print = (TextView) findViewById(R.id.tvduplicateprint_dashboad_xml);
         tv_settings = (TextView) findViewById(R.id.tv_settings_dashboard_xml);
         tv_sync = (TextView) findViewById(R.id.tv_sync_dashboard_xml);
+        tv_pending_booked_dashboard_xml=(TextView)findViewById(R.id.tv_pending_booked_dashboard_xml);
         tv_about_version = (ImageView) findViewById(R.id.tv_about_version);
 
         aadhaar = (ImageView) findViewById(R.id.aadhaar);
@@ -555,7 +556,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
         tv_sync.setOnClickListener(this);
         tv_duplicate_print.setOnClickListener(this);
         tv_spot_challan.setOnClickListener(this);
-        tv_vehicle_history.setOnClickListener(this);
+        tv_pending_booked_dashboard_xml.setOnClickListener(this);
         tv_towing_cp_act.setOnClickListener(this);
         tv_release_document.setOnClickListener(this);
         tv_reports.setOnClickListener(this);
@@ -611,6 +612,49 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     } else {
                         if (isOnline()) {
                             startActivity(new Intent(Dashboard.this, DDCloseActiviy.class));
+                        } else {
+                            showToast("" + netwrk_info_txt);
+                        }
+                    }
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    c_whlr_details.close();
+                    cursor_psnames.close();
+                    db.close();
+                }
+                c_whlr_details.close();
+                cursor_psnames.close();
+                db.close();
+                break;
+
+            case R.id.tv_pending_booked_dashboard_xml:
+                check_vhleHistory_or_Spot = "drunkdrive";
+            /* TO CHECK PS NAME AND POINT NAME HAS SET OR NOT IN SETTINGS */
+                getPreferenceValues();
+                preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                editor = preferences.edit();
+                address_spot = preferences.getString("btaddress", "btaddr");
+
+                try {
+                    db.open();
+                    cursor_psnames = DBHelper.db.rawQuery("select * from " + db.psName_table, null);
+                    cursor_courtnames = DBHelper.db.rawQuery("select * from " + db.courtName_table, null);
+
+                    cursor_court_disnames = DBHelper.db.rawQuery("select * from " + db.court_disName_table, null);
+
+				/* TO GET WHEELER LENGTH */
+                    c_whlr_details = DBHelper.db.rawQuery("select * from " + DBHelper.wheelercode_table, null);
+
+                    if ((cursor_psnames.getCount() == 0) && (cursor_courtnames.getCount() == 0) && (cursor_court_disnames.getCount() == 0) && (c_whlr_details.getCount() == 0)) {
+                        showToast("Please download master's !");
+                    } else if ((psname_settings.equals("psname")) && (pointnameBycode_settings.equals("pointname"))) {
+                        showToast("Configure Settings!");
+                    } else if (address_spot.trim() != null && address_spot.trim().length() < 15) {
+                        showToast("Configure BlueTooth Settings!");
+                    } else {
+                        if (isOnline()) {
+                            startActivity(new Intent(Dashboard.this, CourtCaseStatus.class));
                         } else {
                             showToast("" + netwrk_info_txt);
                         }

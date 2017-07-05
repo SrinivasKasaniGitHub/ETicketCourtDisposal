@@ -160,6 +160,13 @@ public class Utils {
     String RELSE_ITEMS = "mobileNo";
 
 
+    String CC_PIDCODE="pidCode";
+    String CC_OFFENCE_FROM_DATE="offenceFrDT";
+    String CC_OFFENCE_TO_DATE="offenceToDT";
+    String CC_OFFENCE_MONTH="offMn";
+    String CC_OFFENCE_YEAR="offYear";
+
+
 	/* SPOT CHALLAN END */
 
 //	,String nameOfBarWineShop,String addressOfBarWineShop,String occupationName,String occupationAddress,String occupationEmailId);

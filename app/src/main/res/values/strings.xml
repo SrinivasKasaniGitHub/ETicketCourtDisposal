@@ -327,4 +327,11 @@
     <string name="title_activity_dash_pc__hg">DashPC_HG</string>
     <string name="title_activity_drunk__drive__fake__dialog">Drunk_Drive_Fake_Dialog</string>
 
+
+    <!--COURT CASE STATUS-->
+    <string name="dd_Bkd"><u>DD_BKD_Num</u></string>
+    <string name="dd_Pnd"><u>DD_PND_Num</u></string>
+    <string name="chg_Bkd"><u>CHG_BKD_Num</u></string>
+    <string name="chg_Pnd"><u>CHG_PND_Num</u></string>
+
 </resources>

@@ -107,17 +107,17 @@
             android:visibility="gone"/>
 
         <TextView
-            android:id="@+id/tv_vhclehistory_dashboard_xml"
+            android:id="@+id/tv_pending_booked_dashboard_xml"
             style="@style/navi_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:drawableTop="@drawable/vhcle_history"
+            android:drawableTop="@drawable/vhcle_history_m"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Charge Sheet Closing"
+            android:text="Court cases\n Status"
             android:textSize="19sp"
-            android:visibility="gone"/>
+            />
         <TextView
             android:id="@+id/tvduplicateprint_dashboad_xml"
             style="@style/navi_text_style"

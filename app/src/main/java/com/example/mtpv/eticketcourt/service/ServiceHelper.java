@@ -120,6 +120,8 @@ public class ServiceHelper {
 
 	public static String GET_DDCLOSING_DETAILS="getCourtClosingTicketInfo";
 
+	public static String GET_COURTCASES_INFO="getCourtCasesInfo";
+
 	public static String GET_COURT_CLOSING_UPDATE_TCKT_INFO="getCourtClosingUpdateTicketInfo";
 
 	public static String[] whlr_details_master;
@@ -1127,6 +1129,56 @@ public class ServiceHelper {
 
 
 	}
+
+
+
+	public static void getCourtCasesInfo(String pidCode, String offenceFrDT,String offenceToDT){
+
+		Utils utils = new Utils();
+		try {
+			SoapObject request = new SoapObject(NAMESPACE, "" + GET_COURTCASES_INFO);
+			if (null!=pidCode)request.addProperty("" + utils.CC_PIDCODE, "" + pidCode);
+			if (null!=offenceFrDT)request.addProperty("" + utils.CC_OFFENCE_FROM_DATE, "" + offenceFrDT);
+			if (null!=offenceToDT)request.addProperty("" + utils.CC_OFFENCE_TO_DATE, "" + offenceToDT);
+
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(request);
+
+			HttpTransportSE httpTransportSE = new HttpTransportSE(MainActivity.URL);
+			httpTransportSE.call(NAMESPACE+GET_COURTCASES_INFO, envelope);
+			Object result = envelope.getResponse();
+			Opdata_Chalana = "";
+			//AP29BS7402
+			// Opdata_Chalana = result.toString();
+
+			try {
+				Opdata_Chalana = result.toString();
+
+				//Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString().trim());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			Log.i("***SERVICE DAYNSE**", "" + Opdata_Chalana);
+
+		} catch (SoapFault fault) {
+			Log.i("****SOA**:::", "soapfault = " + fault.getMessage());
+			Opdata_Chalana = "NA";
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			Opdata_Chalana = "NA";
+		}
+
+
+	}
+
+
+
+
+
 
 	public static void getCourtClosingUpdateTicketInfo(String eticketNo, String regnNo, String dlNO, String aadhaarNO,
 													   String stcNO, String courtDispCD, String imprisDays,

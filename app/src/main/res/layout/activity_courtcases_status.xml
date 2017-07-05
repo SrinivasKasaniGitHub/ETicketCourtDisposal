@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- Header aligned to top -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            style="@style/header_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                style="@style/header_images_style_left"
+                android:layout_width="@dimen/header_logo_size"
+                android:layout_height="@dimen/header_logo_size"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                style="@style/header_images_style_right"
+                android:layout_width="@dimen/header_logo_size"
+                android:layout_height="@dimen/header_logo_size"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:id="@+id/textView1"
+                style="@style/header_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/header_txt" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/cust_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView2"
+                android:layout_centerHorizontal="true"
+                android:text="@string/app_version"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/rl_dp_report_type_xml"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:padding="20dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Offence From Date"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/DD_Txt_font" />
+
+            <Button
+                android:id="@+id/btn_date_offence_Form"
+                style="@style/dd_custom_blue_btn_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:padding="7dp"
+                android:text="Select Date" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Offence To Date"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/DD_Txt_font" />
+
+            <Button
+                android:id="@+id/btn_date_offence_To"
+                style="@style/dd_custom_blue_btn_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:padding="7dp"
+                android:text="Select Date" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_CC_getdetails"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_dp_report_type_xml"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/background"
+        android:gravity="center"
+        android:text="GET"
+        android:textColor="@color/white" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_CC_getdetails"
+        android:layout_marginTop="50dp">
+
+        <TableLayout
+            android:id="@+id/table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#90dedc"
+                android:weightSum="3"
+                >
+
+
+                   <TextView
+                       android:id="@+id/textView12"
+                       android:layout_width="0dp"
+                       android:layout_height="50dp"
+                       android:layout_weight="1"
+                       android:text="Date"
+                       android:textColor="@color/colorAccent"
+                       android:gravity="center"
+                       android:textStyle="bold"
+                       android:textSize="@dimen/edittext_font"/>
+
+                   <LinearLayout
+                       android:layout_width="2dp"
+                       android:layout_height="match_parent">
+
+                       <View style="@style/Divider" />
+                   </LinearLayout>
+
+                   <TextView
+                       android:id="@+id/textView13"
+                       android:layout_weight="1"
+                       android:layout_width="0dp"
+                       android:layout_height="50dp"
+                       android:text="DD Cases"
+                       android:textColor="@color/colorAccent"
+                       android:gravity="center"
+                       android:textStyle="bold"
+                       android:textSize="@dimen/edittext_font" />
+
+                   <LinearLayout
+                       android:layout_width="2dp"
+                       android:layout_height="match_parent">
+
+                       <View style="@style/Divider" />
+                   </LinearLayout>
+
+                   <TextView
+                       android:id="@+id/textView14"
+                       android:layout_weight="1"
+                       android:layout_width="0dp"
+                       android:layout_height="50dp"
+                       android:text="ChargeSheet Cases"
+                       android:textColor="@color/colorAccent"
+                       android:gravity="center"
+                       android:textStyle="bold"
+                       android:textSize="@dimen/edittext_font"/>
+
+
+
+
+
+
+            </TableRow>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent">
+
+                <View style="@style/Divider" />
+            </LinearLayout>
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#daf7f6"
+                android:weightSum="3"
+                >
+
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Booked"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/edittext_font"/>
+
+                <LinearLayout
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent">
+
+                    <View style="@style/Divider" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/Txt_DD_Booked"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:text="@string/dd_Bkd"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/edittext_font" />
+
+                <LinearLayout
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent">
+
+                    <View style="@style/Divider" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/Txt_ChgBkd"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:text="@string/chg_Bkd"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/edittext_font" />
+
+
+
+
+
+
+            </TableRow>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent">
+
+                <View style="@style/Divider" />
+            </LinearLayout>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#daf7f6"
+                android:weightSum="3"
+                >
+
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Pending"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/edittext_font"/>
+
+                <LinearLayout
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent">
+
+                    <View style="@style/Divider" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/Txt_DD_Pendg"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:text="@string/dd_Pnd"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/edittext_font"/>
+
+                <LinearLayout
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent">
+
+                    <View style="@style/Divider" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/Txt_ChgPnd"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:text="@string/chg_Pnd"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/edittext_font" />
+
+
+
+
+
+
+            </TableRow>
+
+
+        </TableLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/footer_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/footer_size"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/PoweredBy"
+            android:textColor="#ffffff" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/CompanyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pwd"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:fontFamily="sans-serif"
+            android:lines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:padding="5dp"
+            android:scrollHorizontally="true"
+            android:text="@string/CompanyName"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/footer_text_size"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
