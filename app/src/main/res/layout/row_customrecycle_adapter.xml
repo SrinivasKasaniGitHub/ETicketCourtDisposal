@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:padding="3.5dip">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="0dp"
+        android:background="#ffffff"
+        card_view:cardCornerRadius="5.5dp"
+        card_view:contentPadding="1.5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#daf7f6"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Reg NO"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Challan No"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/courtcase_checkBox"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:checked="false"
+
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="50dp"
+                        android:gravity="center">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/Txt_REGNO"
+                            style="@style/styleTxtVw_CTMRowAdapter"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/Txt_CHALLNNO"
+                            style="@style/styleTxtVw_CTMRowAdapter"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lyt_DL_ADHR_MOB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            style="@style/styleTxtVw_CTMRowAdapter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Driving License" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/Txt_Dl"
+                            style="@style/styleTxtVw_CTMRowAdapter1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="DDDDDDDD" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            style="@style/styleTxtVw_CTMRowAdapter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Driver Aadhaar" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/Txt_Adhar"
+                            style="@style/styleTxtVw_CTMRowAdapter1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="DDDDDDDD" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            style="@style/styleTxtVw_CTMRowAdapter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Driver MobileNo" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/Txt_Mobile"
+                            style="@style/styleTxtVw_CTMRowAdapter1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="DDDDDDDD" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

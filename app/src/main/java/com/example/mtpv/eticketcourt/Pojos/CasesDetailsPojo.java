@@ -1,6 +1,7 @@
 package com.example.mtpv.eticketcourt.Pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by mtpv on 7/5/2017.
@@ -19,6 +20,8 @@ public class CasesDetailsPojo implements Serializable
     public String COUNC_DATE;
     public String COURT_NOTICE_DT;
     public String DISPOSAL_CD;
+
+    public ArrayList<CasesDetailsPojo> arrayList_DD_Bkd;
 
     public String getVEHICLE_NUMBER() {
         return VEHICLE_NUMBER;
@@ -106,5 +109,13 @@ public class CasesDetailsPojo implements Serializable
 
     public void setDISPOSAL_CD(String DISPOSAL_CD) {
         this.DISPOSAL_CD = DISPOSAL_CD;
+    }
+
+    public ArrayList<CasesDetailsPojo> getArrayList_DD_Bkd() {
+        return arrayList_DD_Bkd;
+    }
+
+    public void setArrayList_DD_Bkd(ArrayList<CasesDetailsPojo> arrayList_DD_Bkd) {
+        this.arrayList_DD_Bkd = arrayList_DD_Bkd;
     }
 }

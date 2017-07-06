@@ -139,10 +139,12 @@
 
 
     <RelativeLayout
+        android:id="@+id/lyt_TableData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_CC_getdetails"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:visibility="gone">
 
         <TableLayout
             android:id="@+id/table"

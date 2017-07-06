@@ -24,8 +24,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -654,7 +652,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         showToast("Configure BlueTooth Settings!");
                     } else {
                         if (isOnline()) {
-                            startActivity(new Intent(Dashboard.this, CourtCaseStatus.class));
+                            startActivity(new Intent(Dashboard.this, CourtCaseStatusActivity.class));
                         } else {
                             showToast("" + netwrk_info_txt);
                         }

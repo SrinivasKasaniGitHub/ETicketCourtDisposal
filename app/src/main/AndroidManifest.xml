@@ -52,7 +52,9 @@
         <activity android:name=".DDCloseActiviy"/>
         <activity android:name=".ChargeSheetClose"/>
         <activity android:name=".PendingBookedCaseActiviy"/>
-        <activity android:name=".CourtCaseStatus"/>
+        <activity android:name=".CourtCaseStatusActivity"/>
+        <activity android:name=".CourtCaseDetailsActivity"/>
+
 
     </application>
 

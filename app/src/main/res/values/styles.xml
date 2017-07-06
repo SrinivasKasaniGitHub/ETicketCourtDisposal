@@ -151,6 +151,30 @@
         <item name="android:textColor">#0c1931</item>
     </style>
 
+    <style name="styleTxtVw_CTMRowAdapter" style="@style/Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#03044b</item>
+        <item name="android:textSize">@dimen/DD_MOB_ADHAR_FONT</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="styleTxtVw_CTMRowAdapter1" style="@style/Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/DD_MOB_ADHAR_FONT</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
 
 
 
