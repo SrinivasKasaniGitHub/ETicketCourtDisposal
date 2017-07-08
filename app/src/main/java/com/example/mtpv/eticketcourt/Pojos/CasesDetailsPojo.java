@@ -20,6 +20,7 @@ public class CasesDetailsPojo implements Serializable
     public String COUNC_DATE;
     public String COURT_NOTICE_DT;
     public String DISPOSAL_CD;
+    private boolean isSelected;
 
     public ArrayList<CasesDetailsPojo> arrayList_DD_Bkd;
 
@@ -109,6 +110,14 @@ public class CasesDetailsPojo implements Serializable
 
     public void setDISPOSAL_CD(String DISPOSAL_CD) {
         this.DISPOSAL_CD = DISPOSAL_CD;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public ArrayList<CasesDetailsPojo> getArrayList_DD_Bkd() {

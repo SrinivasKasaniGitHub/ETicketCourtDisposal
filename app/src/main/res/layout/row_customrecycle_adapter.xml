@@ -26,8 +26,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="#daf7f6"
+                android:orientation="vertical"
                 android:padding="5dp">
 
                 <LinearLayout
@@ -42,7 +42,7 @@
                         android:layout_weight="1"
                         android:text="Reg NO"
                         android:textColor="@color/colorAccent"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="0dp"
@@ -50,7 +50,7 @@
                         android:layout_weight="1"
                         android:text="Challan No"
                         android:textColor="@color/colorAccent"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
@@ -68,6 +68,8 @@
 
                         />
 
+
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -79,8 +81,7 @@
                             style="@style/styleTxtVw_CTMRowAdapter"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            />
+                            android:layout_weight="1" />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/Txt_CHALLNNO"
@@ -105,6 +106,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="horizontal"
                     android:padding="5dp"
                     android:weightSum="2">
@@ -125,14 +127,27 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/Txt_Dl"
                             style="@style/styleTxtVw_CTMRowAdapter1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="DDDDDDDD" />
+                            android:visibility="gone" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/edt_Txt_Dl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="License Number"
+                            android:inputType="text|textCapCharacters"
+                            android:maxLines="1"
+                            android:visibility="gone"
+
+
+                            />
 
                     </LinearLayout>
 
@@ -162,14 +177,25 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/Txt_Adhar"
                             style="@style/styleTxtVw_CTMRowAdapter1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="DDDDDDDD" />
+                            android:visibility="gone" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/edt_Txt_Adhar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Aadhaar Number"
+                            android:inputType="number"
+                            android:maxLength="12"
+                            android:maxLines="1"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
@@ -199,14 +225,26 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/Txt_Mobile"
                             style="@style/styleTxtVw_CTMRowAdapter1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="DDDDDDDD" />
+                            android:text="DDDDDDDD"
+                            android:visibility="gone" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/edt_Txt_Mobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Mobile Number"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 

@@ -237,7 +237,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Booked"
+                    android:text="Booked Cases"
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textStyle="bold"
@@ -305,9 +305,9 @@
                 <TextView
                     android:id="@+id/textView31"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:text="Pending"
+                    android:text="Counselling not attended Date"
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textStyle="bold"
@@ -321,11 +321,11 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/Txt_DD_Pendg"
+                    android:id="@+id/Txt_DD_CouncelngNot_Atnd"
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:text="@string/dd_Pnd"
+                    android:layout_height="100dp"
+
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textStyle="bold"
@@ -339,11 +339,80 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/Txt_ChgPnd"
+                    android:id="@+id/Txt_CHG_CouncelngNot_Atnd"
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:text="@string/chg_Pnd"
+                    android:layout_height="100dp"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/edittext_font" />
+
+
+
+
+
+
+            </TableRow>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent">
+
+                <View style="@style/Divider" />
+            </LinearLayout>
+
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#daf7f6"
+                android:weightSum="3"
+                >
+
+
+                <TextView
+                    android:id="@+id/textView41"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Court not attended Date"
+                    android:textColor="@color/black"
+
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/edittext_font"/>
+
+                <LinearLayout
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent">
+
+                    <View style="@style/Divider" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/Txt_DD_CourtNot_Atndg"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/edittext_font"/>
+
+                <LinearLayout
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent">
+
+                    <View style="@style/Divider" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/Txt_CHG_CourtNot_Atndg"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textStyle="bold"

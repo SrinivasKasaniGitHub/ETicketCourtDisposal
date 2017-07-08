@@ -2,19 +2,14 @@ package com.example.mtpv.eticketcourt;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.bluetooth.BluetoothAdapter;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,10 +35,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by mtpv on 7/5/2017.
- */
-
 public class CourtCaseStatusActivity extends Activity {
     Button btn_offenceDate_From, btn_offenceDate_To, btn_get_details;
     Calendar cal;
@@ -59,11 +50,13 @@ public class CourtCaseStatusActivity extends Activity {
     String offence_From_Date, offence_To_Date;
     CasesDetailsPojo casesDetailsPojo;
     RelativeLayout layout_TbleData;
-    TextView Txt_DD_Bkd, Txt_DD_Pdng, Txt_CHG_Bkd, Txt_CHG_Pdng;
+    TextView Txt_DD_Bkd, Txt_DD_CouncelngNot_Atnd, Txt_CHG_Bkd, Txt_CHG_CouncelngNot_Atnd, Txt_DD_CourtNot_Atnd, Txt_CHG_CourtNot_Atnd;
     public static ArrayList<CasesDetailsPojo> arrayList_DD_Booked;
-    public static ArrayList<CasesDetailsPojo> arrayList_DD_Pending;
+    public static ArrayList<CasesDetailsPojo> arrayList_DD_CouncelngNot_Atnd;
     public static ArrayList<CasesDetailsPojo> arrayList_CHG_Booked;
-    public static ArrayList<CasesDetailsPojo> arrayList_CHG_Pending;
+    public static ArrayList<CasesDetailsPojo> arrayList_CHG_CouncelngNot_Atnd;
+    public static ArrayList<CasesDetailsPojo> arrayList_DD_CourtNot_Atnd;
+    public static ArrayList<CasesDetailsPojo> arrayList_CHG_CourtNot_Atnd;
 
 
     @Override
@@ -75,9 +68,11 @@ public class CourtCaseStatusActivity extends Activity {
         btn_get_details = (Button) findViewById(R.id.btn_CC_getdetails);
         layout_TbleData = (RelativeLayout) findViewById(R.id.lyt_TableData);
         Txt_DD_Bkd = (TextView) findViewById(R.id.Txt_DD_Booked);
-        Txt_DD_Pdng = (TextView) findViewById(R.id.Txt_DD_Pendg);
+        Txt_DD_CouncelngNot_Atnd = (TextView) findViewById(R.id.Txt_DD_CouncelngNot_Atnd);
         Txt_CHG_Bkd = (TextView) findViewById(R.id.Txt_ChgBkd);
-        Txt_CHG_Pdng = (TextView) findViewById(R.id.Txt_ChgPnd);
+        Txt_CHG_CouncelngNot_Atnd = (TextView) findViewById(R.id.Txt_CHG_CouncelngNot_Atnd);
+        Txt_DD_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_DD_CourtNot_Atndg);
+        Txt_CHG_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_CHG_CourtNot_Atndg);
         cal = Calendar.getInstance();
 
 
@@ -121,35 +116,56 @@ public class CourtCaseStatusActivity extends Activity {
                 startActivity(intent_DD_Bkd);
             }
         });
-        Txt_DD_Pdng.setOnClickListener(new View.OnClickListener() {
+        Txt_DD_CouncelngNot_Atnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_DD_Bkd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                Intent intent_DD_CouncelngNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("ArrayValue", "DD_Pdng");
-                intent_DD_Bkd.putExtras(bundle);
-                startActivity(intent_DD_Bkd);
+                bundle.putString("ArrayValue", "Txt_DD_CouncelngNot_Atnd");
+                intent_DD_CouncelngNot_Atnd.putExtras(bundle);
+                startActivity(intent_DD_CouncelngNot_Atnd);
             }
         });
         Txt_CHG_Bkd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_DD_Bkd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                Intent intent_CHG_Bkd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("ArrayValue", "CHG_Bkd");
-                intent_DD_Bkd.putExtras(bundle);
-                startActivity(intent_DD_Bkd);
+                intent_CHG_Bkd.putExtras(bundle);
+                startActivity(intent_CHG_Bkd);
             }
         });
 
-        Txt_CHG_Pdng.setOnClickListener(new View.OnClickListener() {
+        Txt_CHG_CouncelngNot_Atnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_DD_Bkd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                Intent intent_CHG_CouncelngNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("ArrayValue", "CHG_Pdng");
-                intent_DD_Bkd.putExtras(bundle);
-                startActivity(intent_DD_Bkd);
+                bundle.putString("ArrayValue", "Txt_CHG_CouncelngNot_Atnd");
+                intent_CHG_CouncelngNot_Atnd.putExtras(bundle);
+                startActivity(intent_CHG_CouncelngNot_Atnd);
+            }
+        });
+        Txt_DD_CourtNot_Atnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_DD_CourtNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("ArrayValue", "Txt_DD_CourtNot_Atnd");
+                intent_DD_CourtNot_Atnd.putExtras(bundle);
+                startActivity(intent_DD_CourtNot_Atnd);
+            }
+        });
+
+        Txt_CHG_CourtNot_Atnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_CHG_CourtNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("ArrayValue", "Txt_CHG_CourtNot_Atnd");
+                intent_CHG_CourtNot_Atnd.putExtras(bundle);
+                startActivity(intent_CHG_CourtNot_Atnd);
             }
         });
 
@@ -185,16 +201,19 @@ public class CourtCaseStatusActivity extends Activity {
             super.onPostExecute(result);
 
 
-            Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
+            Log.d("DD D" +
+                    "etails", "" + ServiceHelper.Opdata_Chalana);
 
 
             removeDialog(PROGRESS_DIALOG);
             if (!ServiceHelper.Opdata_Chalana.equals("NA")) {
 
                 arrayList_DD_Booked = new ArrayList<>();
-                arrayList_DD_Pending = new ArrayList<>();
+                arrayList_DD_CouncelngNot_Atnd = new ArrayList<>();
                 arrayList_CHG_Booked = new ArrayList<CasesDetailsPojo>();
-                arrayList_CHG_Pending = new ArrayList<>();
+                arrayList_CHG_CouncelngNot_Atnd = new ArrayList<>();
+                arrayList_DD_CourtNot_Atnd = new ArrayList<>();
+                arrayList_CHG_CourtNot_Atnd = new ArrayList<>();
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(ServiceHelper.Opdata_Chalana);
@@ -218,29 +237,37 @@ public class CourtCaseStatusActivity extends Activity {
                         if (jb.getString("CHALLAN_TYPE").equals("12") || jb.getString("CHALLAN_TYPE").equals("23")) {
                             arrayList_DD_Booked.add(casesDetailsPojo);
                         }
-                        if ((jb.getString("CHALLAN_TYPE").equals("12") || jb.getString("CHALLAN_TYPE").equals("23")) && jb.getString("PAYMENT_STATUS").equals("U")) {
-                            arrayList_DD_Pending.add(casesDetailsPojo);
+                        if ((jb.getString("CHALLAN_TYPE").equals("12") || jb.getString("CHALLAN_TYPE").equals("23")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COUNC_STATUS").equals("0")) {
+                            arrayList_DD_CouncelngNot_Atnd.add(casesDetailsPojo);
                         }
                         if (jb.getString("CHALLAN_TYPE").equals("26")) {
                             arrayList_CHG_Booked.add(casesDetailsPojo);
                         }
-                        if ((jb.getString("CHALLAN_TYPE").equals("26")) && jb.getString("PAYMENT_STATUS").equals("U")) {
-                            arrayList_CHG_Pending.add(casesDetailsPojo);
+                        if ((jb.getString("CHALLAN_TYPE").equals("26")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COUNC_STATUS").equals("0")) {
+                            arrayList_CHG_CouncelngNot_Atnd.add(casesDetailsPojo);
+                        }
+                        if ((jb.getString("CHALLAN_TYPE").equals("12") || jb.getString("CHALLAN_TYPE").equals("23")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COURT_NOTICE_DT").equals("")) {
+                            arrayList_DD_CourtNot_Atnd.add(casesDetailsPojo);
+                        }
+                        if ((jb.getString("CHALLAN_TYPE").equals("26")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COURT_NOTICE_DT").equals("0")) {
+                            arrayList_CHG_CourtNot_Atnd.add(casesDetailsPojo);
                         }
                     }
                     layout_TbleData.setVisibility(View.VISIBLE);
 
                     Txt_DD_Bkd.setText(Html.fromHtml("<u>" + arrayList_DD_Booked.size() + "</u>"));
-                    Txt_DD_Pdng.setText(Html.fromHtml("<u>"+arrayList_DD_Pending.size()+"</u>"));
+                    Txt_DD_CouncelngNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_DD_CouncelngNot_Atnd.size() + "</u>"));
                     Txt_CHG_Bkd.setText(Html.fromHtml("<u>" + arrayList_CHG_Booked.size() + "</u>"));
-                    Txt_CHG_Pdng.setText(Html.fromHtml("<u>"+arrayList_CHG_Pending.size()+"</u>"));
+                    Txt_CHG_CouncelngNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_CHG_CouncelngNot_Atnd.size() + "</u>"));
+                    Txt_DD_CourtNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_DD_CourtNot_Atnd.size() + "</u>"));
+                    Txt_CHG_CourtNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_CHG_CourtNot_Atnd.size() + "</u>"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
             } else {
-
+                showToast("No data found");
             }
 
 
@@ -329,7 +356,7 @@ public class CourtCaseStatusActivity extends Activity {
                         btn_offenceDate_To.setText("Select Date");
 
                     }
-                }else{
+                } else {
                     showToast("Please select From date");
                 }
 

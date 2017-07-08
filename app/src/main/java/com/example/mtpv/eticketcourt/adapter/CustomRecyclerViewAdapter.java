@@ -2,8 +2,10 @@ package com.example.mtpv.eticketcourt.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,8 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
     MyViewHolder viewHolder;
     View view;
     private ArrayList<CasesDetailsPojo> casesDetailsPojos_List;
+    private ArrayList<CasesDetailsPojo> casesDetailsPojos_Checked_List=new ArrayList<>();
+
 
 
     public CustomRecyclerViewAdapter(Context context, ArrayList<CasesDetailsPojo> casesDetailsPojos_List) {
@@ -57,31 +61,75 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         final AppCompatTextView challan_No = holder.challan_No;
         final LinearLayout linearLayout = holder.lyt_DL_A_M;
         final AppCompatCheckBox appCompatCheckBox = holder.compatCheckBox;
+        final AppCompatEditText edt_driving_License = holder.edt_driving_License;
+        final AppCompatEditText edt_adhar_Num = holder.edt_adhar_Num;
+        final AppCompatEditText edt_mob_Num = holder.edt_mob_Num;
 
         reg_No.setText(casesDetailsPojos_List.get(listPosition).getVEHICLE_NUMBER());
         challan_No.setText(casesDetailsPojos_List.get(listPosition).getCHALLAN_NUMBER());
+
+        appCompatCheckBox.setOnCheckedChangeListener(null);
+        appCompatCheckBox.setChecked(casesDetailsPojos_List.get(listPosition).isSelected());
+
+
 
 
         appCompatCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                casesDetailsPojos_List.get(holder.getAdapterPosition()).setSelected(isChecked);
+
                 if (isChecked) {
+                    // casesDetailsPojos_List.get(listPosition).setVEHICLE_NUMBER("");
+                    //casesDetailsPojos_List.remove(listPosition);
+
                     linearLayout.setVisibility(View.VISIBLE);
-                    driving_License.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_LICENSE());
-                    adhar_Num.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_AADHAAR());
-                    mob_Num.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_MOBILE());
-//                    driving_License.setText(" hfjsdhfjhj");
-//                    adhar_Num.setText("gjhjdhjf");
-//                    mob_Num.setText("ghjdhjfhjd");
+                    if (casesDetailsPojos_List.get(listPosition).getDRIVER_LICENSE().equals("")) {
+                        driving_License.setVisibility(View.GONE);
+                        edt_driving_License.setVisibility(View.VISIBLE);
+
+
+                    } else {
+                        edt_driving_License.setVisibility(View.GONE);
+                        driving_License.setVisibility(View.VISIBLE);
+                        driving_License.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_LICENSE());
+
+                    }
+
+                    if (casesDetailsPojos_List.get(listPosition).getDRIVER_AADHAAR().equals("")) {
+                        adhar_Num.setVisibility(View.GONE);
+                        edt_adhar_Num.setVisibility(View.VISIBLE);
+                        //casesDetailsPojos_List.get(listPosition).setDRIVER_AADHAAR(edt_adhar_Num.getText().toString());
+                    } else {
+                        edt_adhar_Num.setVisibility(View.GONE);
+                        adhar_Num.setVisibility(View.VISIBLE);
+                        adhar_Num.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_AADHAAR());
+                    }
+
+                    if (casesDetailsPojos_List.get(listPosition).getDRIVER_MOBILE().equals("")) {
+                        mob_Num.setVisibility(View.GONE);
+                        edt_mob_Num.setVisibility(View.VISIBLE);
+                    } else {
+                        edt_mob_Num.setVisibility(View.GONE);
+                        mob_Num.setVisibility(View.VISIBLE);
+                        mob_Num.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_MOBILE());
+                    }
+
+
+
+
+
+
+
                 } else {
+                    //casesDetailsPojos_Checked_List.remove(listPosition);
                     linearLayout.setVisibility(View.GONE);
                 }
 
             }
         });
-//        driving_License.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_LICENSE());
-//        adhar_Num.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_AADHAAR());
-//        mob_Num.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_MOBILE());
+
 
 
     }
@@ -102,6 +150,7 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         AppCompatTextView driving_License, adhar_Num, mob_Num, reg_No, challan_No;
         LinearLayout lyt_DL_A_M;
         AppCompatCheckBox compatCheckBox;
+        AppCompatEditText edt_driving_License, edt_adhar_Num, edt_mob_Num;
         private Context context;
 
 
@@ -113,8 +162,12 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
             this.mob_Num = (AppCompatTextView) itemView.findViewById(R.id.Txt_Mobile);
             this.reg_No = (AppCompatTextView) itemView.findViewById(R.id.Txt_REGNO);
             this.challan_No = (AppCompatTextView) itemView.findViewById(R.id.Txt_CHALLNNO);
-            lyt_DL_A_M = (LinearLayout) itemView.findViewById(R.id.lyt_DL_ADHR_MOB);
-            compatCheckBox = (AppCompatCheckBox) itemView.findViewById(R.id.courtcase_checkBox);
+            this.lyt_DL_A_M = (LinearLayout) itemView.findViewById(R.id.lyt_DL_ADHR_MOB);
+            this.compatCheckBox = (AppCompatCheckBox) itemView.findViewById(R.id.courtcase_checkBox);
+            this.edt_driving_License = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Dl);
+            this.edt_adhar_Num = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Adhar);
+            this.edt_mob_Num = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Mobile);
+
         }
 
 
@@ -127,6 +180,9 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
             this.challan_No = (AppCompatTextView) itemView.findViewById(R.id.Txt_CHALLNNO);
             lyt_DL_A_M = (LinearLayout) itemView.findViewById(R.id.lyt_DL_ADHR_MOB);
             compatCheckBox = (AppCompatCheckBox) itemView.findViewById(R.id.courtcase_checkBox);
+            this.edt_driving_License = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Dl);
+            this.edt_adhar_Num = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Adhar);
+            this.edt_mob_Num = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Mobile);
 
         }
 

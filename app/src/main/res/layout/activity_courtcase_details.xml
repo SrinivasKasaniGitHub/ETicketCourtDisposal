@@ -65,9 +65,10 @@
 
 
     <RelativeLayout
+        android:id="@+id/lyt_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/footer_lyt"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lyt_date_butn"
         android:layout_below="@+id/header">
 
         <android.support.v7.widget.RecyclerView
@@ -79,6 +80,42 @@
             android:scrollbars="vertical"
             />
     </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lyt_date_butn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/footer_lyt"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+        <Button
+            android:id="@+id/btn_Councelling_Date"
+            style="@style/dd_custom_blue_btn_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:padding="7dp"
+            android:text="Select Date"
+            android:layout_weight="3"/>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_Update_CasesDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background"
+            android:text="Update"
+            android:textColor="@color/white"
+            android:layout_weight="2"
+            android:layout_marginLeft="20dp"
+
+            />
+
+    </LinearLayout>
+
+
+
 
 
     <RelativeLayout
