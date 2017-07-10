@@ -5,6 +5,8 @@ import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +31,7 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
     MyViewHolder viewHolder;
     View view;
     private ArrayList<CasesDetailsPojo> casesDetailsPojos_List;
-    private ArrayList<CasesDetailsPojo> casesDetailsPojos_Checked_List=new ArrayList<>();
-
+    private ArrayList<CasesDetailsPojo> casesDetailsPojos_Checked_List = new ArrayList<>();
 
 
     public CustomRecyclerViewAdapter(Context context, ArrayList<CasesDetailsPojo> casesDetailsPojos_List) {
@@ -72,8 +73,6 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         appCompatCheckBox.setChecked(casesDetailsPojos_List.get(listPosition).isSelected());
 
 
-
-
         appCompatCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -88,6 +87,27 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
                     if (casesDetailsPojos_List.get(listPosition).getDRIVER_LICENSE().equals("")) {
                         driving_License.setVisibility(View.GONE);
                         edt_driving_License.setVisibility(View.VISIBLE);
+                        edt_driving_License.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                if (s.toString().length()>0){
+                                    casesDetailsPojos_List.get(listPosition).setDRIVER_LICENSE(s.toString());
+                                }else {
+                                    casesDetailsPojos_List.get(listPosition).setDRIVER_LICENSE("");
+                                }
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+
+                            }
+                        });
+
 
 
                     } else {
@@ -95,12 +115,33 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
                         driving_License.setVisibility(View.VISIBLE);
                         driving_License.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_LICENSE());
 
+
                     }
 
                     if (casesDetailsPojos_List.get(listPosition).getDRIVER_AADHAAR().equals("")) {
                         adhar_Num.setVisibility(View.GONE);
                         edt_adhar_Num.setVisibility(View.VISIBLE);
-                        //casesDetailsPojos_List.get(listPosition).setDRIVER_AADHAAR(edt_adhar_Num.getText().toString());
+                        edt_adhar_Num.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                if (s.toString().length()>0){
+                                    casesDetailsPojos_List.get(listPosition).setDRIVER_AADHAAR(s.toString());
+                                }else {
+                                    casesDetailsPojos_List.get(listPosition).setDRIVER_AADHAAR("");
+                                }
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+
+                            }
+                        });
+
                     } else {
                         edt_adhar_Num.setVisibility(View.GONE);
                         adhar_Num.setVisibility(View.VISIBLE);
@@ -110,16 +151,31 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
                     if (casesDetailsPojos_List.get(listPosition).getDRIVER_MOBILE().equals("")) {
                         mob_Num.setVisibility(View.GONE);
                         edt_mob_Num.setVisibility(View.VISIBLE);
+                        edt_mob_Num.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                if (s.toString().length()>0){
+                                    casesDetailsPojos_List.get(listPosition).setDRIVER_MOBILE(s.toString());
+                                }else {
+                                    casesDetailsPojos_List.get(listPosition).setDRIVER_MOBILE("");
+                                }
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+
+                            }
+                        });
                     } else {
                         edt_mob_Num.setVisibility(View.GONE);
                         mob_Num.setVisibility(View.VISIBLE);
                         mob_Num.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_MOBILE());
                     }
-
-
-
-
-
 
 
                 } else {
@@ -129,7 +185,6 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
 
             }
         });
-
 
 
     }
@@ -150,7 +205,7 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         AppCompatTextView driving_License, adhar_Num, mob_Num, reg_No, challan_No;
         LinearLayout lyt_DL_A_M;
         AppCompatCheckBox compatCheckBox;
-        AppCompatEditText edt_driving_License, edt_adhar_Num, edt_mob_Num;
+        public static AppCompatEditText edt_driving_License, edt_adhar_Num, edt_mob_Num;
         private Context context;
 
 

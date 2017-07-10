@@ -122,6 +122,8 @@ public class ServiceHelper {
 
 	public static String GET_COURTCASES_INFO="getCourtCasesInfo";
 
+	public static String SEND_COURTCASEINFO="sendCourtCasesInfo";
+
 	public static String GET_COURT_CLOSING_UPDATE_TCKT_INFO="getCourtClosingUpdateTicketInfo";
 
 	public static String[] whlr_details_master;
@@ -1129,6 +1131,48 @@ public class ServiceHelper {
 
 
 	}
+
+	public static void sendCourtCasesInfo(String jsonrequest){
+
+		Utils utils = new Utils();
+		try {
+			SoapObject request = new SoapObject(NAMESPACE, "" + SEND_COURTCASEINFO);
+			request.addProperty("" + utils.JSON_REQUEST, "" + jsonrequest);
+
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(request);
+
+			HttpTransportSE httpTransportSE = new HttpTransportSE(MainActivity.URL);
+			httpTransportSE.call(NAMESPACE+SEND_COURTCASEINFO, envelope);
+			Object result = envelope.getResponse();
+			Opdata_Chalana = "";
+			//AP29BS7402
+			// Opdata_Chalana = result.toString();
+
+			try {
+				Opdata_Chalana = result.toString();
+
+				//Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString().trim());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			Log.i("***SERVICE DAYNSE**", "" + Opdata_Chalana);
+
+		} catch (SoapFault fault) {
+			Log.i("****SOA**:::", "soapfault = " + fault.getMessage());
+			Opdata_Chalana = "NA";
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			Opdata_Chalana = "NA";
+		}
+
+
+	}
+
 
 
 

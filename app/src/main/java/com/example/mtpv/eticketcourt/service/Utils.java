@@ -167,6 +167,9 @@ public class Utils {
     String CC_OFFENCE_YEAR="offYear";
 
 
+    String JSON_REQUEST="request";
+
+
 	/* SPOT CHALLAN END */
 
 //	,String nameOfBarWineShop,String addressOfBarWineShop,String occupationName,String occupationAddress,String occupationEmailId);

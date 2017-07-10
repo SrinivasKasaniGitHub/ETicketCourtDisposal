@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
@@ -16,20 +18,30 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.mtpv.eticketcourt.Pojos.CasesDetailsPojo;
 import com.example.mtpv.eticketcourt.adapter.CustomRecyclerViewAdapter;
+import com.example.mtpv.eticketcourt.service.DBHelper;
+import com.example.mtpv.eticketcourt.service.ServiceHelper;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+
+import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class CourtCaseDetailsActivity extends Activity {
     private static RecyclerView.Adapter custom_CourtCase_DetailsAdapter;
@@ -49,21 +61,35 @@ public class CourtCaseDetailsActivity extends Activity {
     SimpleDateFormat format;
 
     final int COUNCELLING_DATE_PICKER = 1;
+    final int PROGRESS_DIALOG = 2;
 
     String councelng_Date;
+
+    ArrayList<String> mArrayListCourtNames = new ArrayList<String>();
+    HashMap<String, String> paramsCourt = new HashMap<String, String>();
+    DBHelper db;
+    Cursor c, cursor_courtnames;
+    ArrayList<String> courtNames;
+    MaterialSpinner courtspinner;
+    String selectedCourtCode;
+    String selectedCourtName;
+    String jsonResult;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courtcase_details);
+
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         btn_Update_Case_Details = (AppCompatButton) findViewById(R.id.btn_Update_CasesDetails);
-        btn_councelling_Date=(Button)findViewById(R.id.btn_Councelling_Date);
+        btn_councelling_Date = (Button) findViewById(R.id.btn_Councelling_Date);
+        courtspinner = (MaterialSpinner) findViewById(R.id.courtSpinner);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getApplicationContext().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        db = new DBHelper(getApplicationContext());
+        getCourtNamesFromDB();
         cal = Calendar.getInstance();
         present_year = cal.get(Calendar.YEAR);
         present_month = cal.get(Calendar.MONTH);
@@ -99,6 +125,33 @@ public class CourtCaseDetailsActivity extends Activity {
 
         custom_CourtCase_DetailsAdapter = new CustomRecyclerViewAdapter(this, arrayList_CourtCase_Detilas);
         recyclerView.setAdapter(custom_CourtCase_DetailsAdapter);
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, mArrayListCourtNames);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        courtspinner.setAdapter(dataAdapter);
+
+        courtspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCourtName = courtspinner.getSelectedItem().toString();
+
+                Log.i("court map size : ", "" + paramsCourt.size());
+                for (String mapCourtName : paramsCourt.keySet()) {
+                    if (selectedCourtName.equals(mapCourtName)) {
+                        selectedCourtCode = paramsCourt.get(mapCourtName);
+                        //Toast.makeText(getApplicationContext(), "COURT NAME : " + mapCourtName + " COURT CODE : " + selectedCourtCode, Toast.LENGTH_LONG).show();
+                        break;
+                    }// int longitude = Integer.parseInt(menuItem.get(KEY_LON));
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         btn_councelling_Date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,49 +162,130 @@ public class CourtCaseDetailsActivity extends Activity {
         btn_Update_Case_Details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 jsonArray_caseDetails = new JSONArray();
-                jsonObject = new JSONObject();
+
                 for (CasesDetailsPojo casesDetailsPojo : arrayList_CourtCase_Detilas) {
                     if (casesDetailsPojo.isSelected()) {
+                        jsonObject = new JSONObject();
+                        if (casesDetailsPojo.getDRIVER_AADHAAR().equals("")) {
+                            showToast("Please Enter Aadhaar Number!");
+                            jsonArray_caseDetails = new JSONArray();
+                        } else if (casesDetailsPojo.getDRIVER_MOBILE().equals("")) {
+                            showToast("Please enter Mobile Number!");
+                            jsonArray_caseDetails = new JSONArray();
+                        } else if (casesDetailsPojo.getDRIVER_LICENSE().equals("")) {
+                            showToast("Please enter License Number!");
+                            jsonArray_caseDetails = new JSONArray();
+                        } else {
 
-                        try {
+                            try {
+                                jsonObject.put("VEHICLE_NUMBER", casesDetailsPojo.getVEHICLE_NUMBER());
+                                jsonObject.put("CHALLAN_NUMBER", casesDetailsPojo.getCHALLAN_NUMBER());
+                                jsonObject.put("DRIVER_LICENSE", casesDetailsPojo.getDRIVER_LICENSE());
+                                jsonObject.put("DRIVER_AADHAAR", casesDetailsPojo.getDRIVER_AADHAAR());
+                                jsonObject.put("DRIVER_MOBILE", casesDetailsPojo.getDRIVER_MOBILE());
+                                jsonObject.put("SELECTED_COUNC_DATE", councelng_Date);
+                                jsonObject.put("COURT_NAME", selectedCourtName);
+                                jsonObject.put("COURT_CODE", selectedCourtCode);
+                                jsonObject.put("PID_CODE", MainActivity.user_id);
+                                jsonObject.put("PID_NAME", MainActivity.arr_logindetails[1]);
+                                jsonObject.put("PID_MOBILE", MainActivity.arr_logindetails[6]);
+                                jsonArray_caseDetails.put(jsonObject);
 
-                            jsonObject.put("VEHICLE_NUMBER", casesDetailsPojo.getVEHICLE_NUMBER());
-                            jsonObject.put("CHALLAN_NUMBER", casesDetailsPojo.getCHALLAN_NUMBER());
-                            jsonObject.put("DRIVER_LICENSE", casesDetailsPojo.getDRIVER_LICENSE());
-                            jsonObject.put("DRIVER_AADHAAR", casesDetailsPojo.getDRIVER_AADHAAR());
-                            jsonObject.put("DRIVER_MOBILE", casesDetailsPojo.getDRIVER_MOBILE());
-                            jsonObject.put("CHALLAN_TYPE", casesDetailsPojo.getCHALLAN_TYPE());
-                            jsonObject.put("PAYMENT_STATUS", casesDetailsPojo.getPAYMENT_STATUS());
-                            jsonObject.put("COUNC_STATUS", casesDetailsPojo.getCOUNC_STATUS());
-                            jsonObject.put("COUNC_DATE", casesDetailsPojo.getCOUNC_DATE());
-                            jsonObject.put("COURT_NOTICE_DT", casesDetailsPojo.getCOURT_NOTICE_DT());
-                            jsonObject.put("DISPOSAL_CD", casesDetailsPojo.getDISPOSAL_CD());
-                            jsonObject.put("SELECTED_COUNC_DATE",councelng_Date);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-                            jsonArray_caseDetails.put(jsonObject);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
 
-//                        if (stringBuilder.length() > 0)
-//                            stringBuilder.append(", ");
-//                        stringBuilder.append(casesDetailsPojo.getCHALLAN_NUMBER());
+
                     }
                 }
                 JSONObject caseDetailsObj = new JSONObject();
                 try {
                     caseDetailsObj.put("Case_Updation_Details", jsonArray_caseDetails);
-                    Log.d("Case_Details", "" + caseDetailsObj.toString());
+                    if (jsonArray_caseDetails.length() == 0) {
+                        showToast("Plese fill the details");
+                    } else {
+                        jsonResult = caseDetailsObj.toString();
+                        new Async_sendCourtCasesInfo().execute();
+//                        Toast.makeText(getApplicationContext(), caseDetailsObj.toString(), Toast.LENGTH_LONG).show();
+                        Log.d("Case_Details", "" + caseDetailsObj.toString());
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getApplicationContext(), caseDetailsObj.toString(), Toast.LENGTH_LONG).show();
+
 
             }
         });
 
     }
+
+    public class Async_sendCourtCasesInfo extends AsyncTask<Void, Void, String> {
+        @SuppressLint("DefaultLocale")
+        @SuppressWarnings("unused")
+        @Override
+        protected String doInBackground(Void... params) {
+
+            ServiceHelper.sendCourtCasesInfo("" + jsonResult);
+
+            return null;
+        }
+
+        @SuppressWarnings("deprecation")
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            showDialog(PROGRESS_DIALOG);
+
+        }
+
+        @SuppressWarnings("deprecation")
+        @Override
+        protected void onPostExecute(String result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
+
+            Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
+            removeDialog(PROGRESS_DIALOG);
+
+
+        }
+    }
+
+
+    public void getCourtNamesFromDB() {
+        try {
+            db.open();
+            cursor_courtnames = DBHelper.db.rawQuery("select * from " + db.courtName_table, null);
+
+
+//            if (cursor_court_Disnames.getCount() == 0) {
+//                showToast("Please download master's !");
+//            } else {
+
+            if (cursor_courtnames.moveToFirst()) {
+                paramsCourt = new HashMap<String, String>();
+                while (!cursor_courtnames.isAfterLast()) {
+                    mArrayListCourtNames.add(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)));
+
+                    paramsCourt.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_code_settings)));
+                    cursor_courtnames.moveToNext();
+                }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        cursor_courtnames.close();
+        db.close();
+
+    }
+
+
     private void showToast(String msg) {
 
 
@@ -191,7 +325,6 @@ public class CourtCaseDetailsActivity extends Activity {
             btn_councelling_Date.setText("" + councelng_Date.toUpperCase());
 
 
-
         }
     };
 
@@ -206,6 +339,11 @@ public class CourtCaseDetailsActivity extends Activity {
 
                 dp_councelling_Date.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_councelling_Date;
+            case PROGRESS_DIALOG:
+                ProgressDialog pd = ProgressDialog.show(this, "", "Please Wait...", true);
+                pd.setContentView(R.layout.custom_progress_dialog);
+                pd.setCancelable(false);
+                return pd;
 
 
             default:

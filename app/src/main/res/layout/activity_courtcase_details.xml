@@ -99,7 +99,25 @@
             android:layout_marginRight="5dp"
             android:padding="7dp"
             android:text="Select Date"
-            android:layout_weight="3"/>
+            android:layout_weight="2"/>
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/courtSpinner"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            app:ms_alignLabels="true"
+            app:ms_arrowColor="@color/black"
+            app:ms_arrowSize="20dp"
+            app:ms_baseColor="@color/black"
+            app:ms_enableErrorLabel="false"
+            app:ms_enableFloatingLabel="false"
+            app:ms_errorColor="@color/red"
+            app:ms_floatingLabelColor="@color/black"
+            app:ms_floatingLabelText="Select Court Name"
+            app:ms_hint="Select Court Name"
+            app:ms_hintColor="@color/black"
+            app:ms_multiline="false"
+            android:layout_weight="2"/>
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_Update_CasesDetails"
             android:layout_width="0dp"
@@ -107,7 +125,7 @@
             android:background="@drawable/background"
             android:text="Update"
             android:textColor="@color/white"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_marginLeft="20dp"
 
             />
