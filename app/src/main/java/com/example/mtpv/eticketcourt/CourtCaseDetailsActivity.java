@@ -74,6 +74,7 @@ public class CourtCaseDetailsActivity extends Activity {
     String selectedCourtCode;
     String selectedCourtName;
     String jsonResult;
+    String spinnerAvailblity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,26 +102,45 @@ public class CourtCaseDetailsActivity extends Activity {
         if (array_Value.equals("DD_Bkd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_Booked;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.VISIBLE);
+            spinnerAvailblity = "1";
+
         }
         if (array_Value.equals("Txt_DD_CouncelngNot_Atnd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CouncelngNot_Atnd;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.GONE);
+            spinnerAvailblity = "0";
         }
         if (array_Value.equals("CHG_Bkd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_Booked;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.VISIBLE);
+            spinnerAvailblity = "1";
         }
         if (array_Value.equals("Txt_CHG_CouncelngNot_Atnd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CouncelngNot_Atnd;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.GONE);
+            spinnerAvailblity = "0";
         }
         if (array_Value.equals("Txt_DD_CourtNot_Atnd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CourtNot_Atnd;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.VISIBLE);
+            spinnerAvailblity = "1";
         }
         if (array_Value.equals("Txt_CHG_CourtNot_Atnd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CourtNot_Atnd;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.VISIBLE);
+            spinnerAvailblity = "1";
         }
 
         custom_CourtCase_DetailsAdapter = new CustomRecyclerViewAdapter(this, arrayList_CourtCase_Detilas);
@@ -162,24 +182,34 @@ public class CourtCaseDetailsActivity extends Activity {
         btn_Update_Case_Details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (btn_councelling_Date.getText().toString().equals("Select Date")) {
+                    showToast("Please select date!");
+                } else if (spinnerAvailblity.equals("1") && selectedCourtCode == null) {
+                    showToast("Please select CourtName!");
+                }else{
 
-                jsonArray_caseDetails = new JSONArray();
+                JSONArray jsonArray_caseDetails = new JSONArray();
 
                 for (CasesDetailsPojo casesDetailsPojo : arrayList_CourtCase_Detilas) {
+
                     if (casesDetailsPojo.isSelected()) {
                         jsonObject = new JSONObject();
                         if (casesDetailsPojo.getDRIVER_AADHAAR().equals("")) {
                             showToast("Please Enter Aadhaar Number!");
                             jsonArray_caseDetails = new JSONArray();
+                            break;
                         } else if (casesDetailsPojo.getDRIVER_MOBILE().equals("")) {
                             showToast("Please enter Mobile Number!");
                             jsonArray_caseDetails = new JSONArray();
+                            break;
                         } else if (casesDetailsPojo.getDRIVER_LICENSE().equals("")) {
                             showToast("Please enter License Number!");
                             jsonArray_caseDetails = new JSONArray();
+                            break;
                         } else {
 
                             try {
+
                                 jsonObject.put("VEHICLE_NUMBER", casesDetailsPojo.getVEHICLE_NUMBER());
                                 jsonObject.put("CHALLAN_NUMBER", casesDetailsPojo.getCHALLAN_NUMBER());
                                 jsonObject.put("DRIVER_LICENSE", casesDetailsPojo.getDRIVER_LICENSE());
@@ -219,7 +249,9 @@ public class CourtCaseDetailsActivity extends Activity {
 
 
             }
+            }
         });
+
 
     }
 

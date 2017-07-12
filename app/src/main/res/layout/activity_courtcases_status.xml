@@ -307,7 +307,8 @@
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:text="Counselling not attended Date"
+                    android:text="Counselling not attended Cases
+"
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textStyle="bold"
@@ -377,7 +378,7 @@
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:text="Court not attended Date"
+                    android:text="Court not attended Cases"
                     android:textColor="@color/black"
 
                     android:gravity="center"
@@ -387,7 +388,6 @@
                 <LinearLayout
                     android:layout_width="2dp"
                     android:layout_height="match_parent">
-
                     <View style="@style/Divider" />
                 </LinearLayout>
 
@@ -404,7 +404,6 @@
                 <LinearLayout
                     android:layout_width="2dp"
                     android:layout_height="match_parent">
-
                     <View style="@style/Divider" />
                 </LinearLayout>
 
@@ -417,6 +416,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="@dimen/edittext_font" />
+
 
 
 

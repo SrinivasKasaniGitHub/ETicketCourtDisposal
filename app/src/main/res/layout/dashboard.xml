@@ -117,9 +117,10 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="Court cases\n Status"
             android:textSize="19sp"
+
             />
         <TextView
-            android:id="@+id/tvduplicateprint_dashboad_xml"
+            android:id="@+id/tvduplicateprint_dashboad_xmld"
             style="@style/navi_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -130,6 +131,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/duplicate_print"
             android:textSize="19sp"
+            android:visibility="gone"
             />
     </LinearLayout>
 
@@ -150,53 +152,7 @@
         android:layout_below="@+id/ll_dashbrd1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/tv_towing_dashboard_xml"
-            style="@style/navi_text_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:drawableTop="@drawable/towing"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/towing"
-            android:textSize="19sp" />
-
-        <TextView
-            android:id="@+id/tv_releasedocuments_dashboard_xml"
-            style="@style/navi_text_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:drawableTop="@drawable/releasedocument"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/release_documents"
-            android:textSize="19sp" />
-
-        <TextView
-            android:id="@+id/tv_reports_dashboard_xml"
-            style="@style/navi_text_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:drawableTop="@drawable/reports"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/reports"
-            android:textSize="19sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        style="@style/margin_top_btm_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" >
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/tvduplicateprint_dashboad_xml1"
@@ -239,6 +195,68 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
+        style="@style/margin_top_btm_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp" >
+        <TextView
+            android:id="@+id/tvduplicateprint_dashboad_xml"
+            style="@style/navi_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="80dp"
+            android:background="@null"
+            android:drawableTop="@drawable/print_m"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/duplicate_print"
+            android:textSize="19sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_towing_dashboard_xml"
+            style="@style/navi_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableTop="@drawable/towing"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/towing"
+            android:textSize="19sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_releasedocuments_dashboard_xml"
+            style="@style/navi_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableTop="@drawable/releasedocument"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/release_documents"
+            android:textSize="19sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_reports_dashboard_xml"
+            style="@style/navi_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableTop="@drawable/reports"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/reports"
+            android:textSize="19sp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout4"
         style="@style/margin_top_btm_style"
         android:layout_width="match_parent"
@@ -250,7 +268,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:visibility="gone"
+
         >
         <TextView
             android:id="@+id/tv_sync_dashboard_xml1"
@@ -263,7 +281,9 @@
             android:text="@string/sync"
             android:textSize="19sp"
             android:layout_gravity="center"
+            android:visibility="gone"
             />
+
         </LinearLayout>
 
         <LinearLayout

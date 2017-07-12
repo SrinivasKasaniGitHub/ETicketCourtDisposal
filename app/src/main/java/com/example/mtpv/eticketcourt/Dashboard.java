@@ -2137,7 +2137,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
         // TODO Auto-generated method stub
         TextView title = new TextView(this);
         title.setText("Hyderabad E-Ticket");
-        title.setBackgroundColor(Color.RED);
+        title.setBackgroundColor(Color.BLUE);
         title.setGravity(Gravity.CENTER);
         title.setTextColor(Color.WHITE);
         title.setTextSize(26);
@@ -2187,13 +2187,13 @@ public class Dashboard extends Activity implements View.OnClickListener {
         btn.setTextSize(22);
         btn.setTextColor(Color.WHITE);
         btn.setTypeface(btn.getTypeface(), Typeface.BOLD);
-        btn.setBackgroundColor(Color.RED);
+        btn.setBackgroundColor(Color.BLUE);
 
         Button btn2 = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
         btn2.setTextSize(22);
         btn2.setTextColor(Color.WHITE);
         btn2.setTypeface(btn2.getTypeface(), Typeface.BOLD);
-        btn2.setBackgroundColor(Color.RED);
+        btn2.setBackgroundColor(Color.BLUE);
 
     }
 
