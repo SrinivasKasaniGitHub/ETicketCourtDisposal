@@ -49,7 +49,6 @@ public class CourtCaseDetailsActivity extends Activity {
     public static RecyclerView recyclerView;
     public static AppCompatButton btn_Update_Case_Details;
     public static ArrayList<CasesDetailsPojo> arrayList_CourtCase_Detilas;
-    JSONArray jsonArray_caseDetails;
     JSONObject jsonObject;
     Bundle bundle;
 
@@ -59,12 +58,10 @@ public class CourtCaseDetailsActivity extends Activity {
     int present_month;
     int present_day;
     SimpleDateFormat format;
-
     final int COUNCELLING_DATE_PICKER = 1;
     final int PROGRESS_DIALOG = 2;
 
     String councelng_Date;
-
     ArrayList<String> mArrayListCourtNames = new ArrayList<String>();
     HashMap<String, String> paramsCourt = new HashMap<String, String>();
     DBHelper db;
@@ -162,8 +159,7 @@ public class CourtCaseDetailsActivity extends Activity {
                         selectedCourtCode = paramsCourt.get(mapCourtName);
                         //Toast.makeText(getApplicationContext(), "COURT NAME : " + mapCourtName + " COURT CODE : " + selectedCourtCode, Toast.LENGTH_LONG).show();
                         break;
-                    }// int longitude = Integer.parseInt(menuItem.get(KEY_LON));
-
+                    }
                 }
             }
 
@@ -186,69 +182,70 @@ public class CourtCaseDetailsActivity extends Activity {
                     showToast("Please select date!");
                 } else if (spinnerAvailblity.equals("1") && selectedCourtCode == null) {
                     showToast("Please select CourtName!");
-                }else{
+                } else {
 
-                JSONArray jsonArray_caseDetails = new JSONArray();
+                    JSONArray jsonArray_caseDetails = new JSONArray();
 
-                for (CasesDetailsPojo casesDetailsPojo : arrayList_CourtCase_Detilas) {
+                    for (CasesDetailsPojo casesDetailsPojo : arrayList_CourtCase_Detilas) {
 
-                    if (casesDetailsPojo.isSelected()) {
-                        jsonObject = new JSONObject();
-                        if (casesDetailsPojo.getDRIVER_AADHAAR().equals("")) {
-                            showToast("Please Enter Aadhaar Number!");
-                            jsonArray_caseDetails = new JSONArray();
-                            break;
-                        } else if (casesDetailsPojo.getDRIVER_MOBILE().equals("")) {
-                            showToast("Please enter Mobile Number!");
-                            jsonArray_caseDetails = new JSONArray();
-                            break;
-                        } else if (casesDetailsPojo.getDRIVER_LICENSE().equals("")) {
-                            showToast("Please enter License Number!");
-                            jsonArray_caseDetails = new JSONArray();
-                            break;
-                        } else {
+                        if (casesDetailsPojo.isSelected()) {
+                            jsonObject = new JSONObject();
+                            if (casesDetailsPojo.getDRIVER_AADHAAR().equals("")) {
+                                showToast("Please Enter Aadhaar Number!");
+                                jsonArray_caseDetails = new JSONArray();
+                                break;
+                            } else if (casesDetailsPojo.getDRIVER_MOBILE().equals("")) {
+                                showToast("Please enter Mobile Number!");
+                                jsonArray_caseDetails = new JSONArray();
+                                break;
+                            } else if (casesDetailsPojo.getDRIVER_LICENSE().equals("")) {
+                                showToast("Please enter License Number!");
+                                jsonArray_caseDetails = new JSONArray();
+                                break;
+                            } else {
 
-                            try {
+                                try {
 
-                                jsonObject.put("VEHICLE_NUMBER", casesDetailsPojo.getVEHICLE_NUMBER());
-                                jsonObject.put("CHALLAN_NUMBER", casesDetailsPojo.getCHALLAN_NUMBER());
-                                jsonObject.put("DRIVER_LICENSE", casesDetailsPojo.getDRIVER_LICENSE());
-                                jsonObject.put("DRIVER_AADHAAR", casesDetailsPojo.getDRIVER_AADHAAR());
-                                jsonObject.put("DRIVER_MOBILE", casesDetailsPojo.getDRIVER_MOBILE());
-                                jsonObject.put("SELECTED_COUNC_DATE", councelng_Date);
-                                jsonObject.put("COURT_NAME", selectedCourtName);
-                                jsonObject.put("COURT_CODE", selectedCourtCode);
-                                jsonObject.put("PID_CODE", MainActivity.user_id);
-                                jsonObject.put("PID_NAME", MainActivity.arr_logindetails[1]);
-                                jsonObject.put("PID_MOBILE", MainActivity.arr_logindetails[6]);
-                                jsonArray_caseDetails.put(jsonObject);
+                                    jsonObject.put("VEHICLE_NUMBER", casesDetailsPojo.getVEHICLE_NUMBER());
+                                    jsonObject.put("CHALLAN_NUMBER", casesDetailsPojo.getCHALLAN_NUMBER());
+                                    jsonObject.put("DRIVER_LICENSE", casesDetailsPojo.getDRIVER_LICENSE());
+                                    jsonObject.put("DRIVER_AADHAAR", casesDetailsPojo.getDRIVER_AADHAAR());
+                                    jsonObject.put("DRIVER_MOBILE", casesDetailsPojo.getDRIVER_MOBILE());
+                                    jsonObject.put("SELECTED_COUNC_DATE", councelng_Date);
+                                    jsonObject.put("COURT_NAME", selectedCourtName);
+                                    jsonObject.put("COURT_CODE", selectedCourtCode);
+                                    jsonObject.put("PID_CODE", MainActivity.user_id);
+                                    jsonObject.put("PID_NAME", MainActivity.arr_logindetails[1]);
+                                    jsonObject.put("PID_MOBILE", MainActivity.arr_logindetails[6]);
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                    jsonArray_caseDetails.put(jsonObject);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
                             }
 
+
                         }
-
-
                     }
-                }
-                JSONObject caseDetailsObj = new JSONObject();
-                try {
-                    caseDetailsObj.put("Case_Updation_Details", jsonArray_caseDetails);
-                    if (jsonArray_caseDetails.length() == 0) {
-                        showToast("Plese fill the details");
-                    } else {
-                        jsonResult = caseDetailsObj.toString();
-                        new Async_sendCourtCasesInfo().execute();
+                    JSONObject caseDetailsObj = new JSONObject();
+                    try {
+                        caseDetailsObj.put("Case_Updation_Details", jsonArray_caseDetails);
+                        if (jsonArray_caseDetails.length() == 0) {
+                            showToast("Please fill the details");
+                        } else {
+                            jsonResult = caseDetailsObj.toString();
+                            new Async_sendCourtCasesInfo().execute();
 //                        Toast.makeText(getApplicationContext(), caseDetailsObj.toString(), Toast.LENGTH_LONG).show();
-                        Log.d("Case_Details", "" + caseDetailsObj.toString());
+                            Log.d("Case_Details", "" + caseDetailsObj.toString());
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+
+
                 }
-
-
-            }
             }
         });
 
@@ -392,6 +389,5 @@ public class CourtCaseDetailsActivity extends Activity {
                 casesDetailsPojo.setSelected(false);
             }
         }
-
     }
 }
