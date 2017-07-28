@@ -129,25 +129,40 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
-
-                        <android.support.v7.widget.AppCompatTextView
-                            android:id="@+id/Txt_Dl"
-                            style="@style/styleTxtVw_CTMRowAdapter1"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone" />
+                            android:layout_height="wrap_content">
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/Txt_Dl"
+                                style="@style/styleTxtVw_CTMRowAdapter1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone" />
 
-                        <android.support.v7.widget.AppCompatEditText
-                            android:id="@+id/edt_Txt_Dl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="License Number"
-                            android:inputType="text|textCapCharacters"
-                            android:maxLines="1"
-                            android:visibility="gone"
+                            <android.support.v7.widget.AppCompatEditText
+                                android:id="@+id/edt_Txt_Dl"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="License Number"
+                                android:inputType="text|textCapCharacters"
+                                android:maxLines="1"
+                                android:visibility="gone"
+                                />
+                            <ImageView
+                                android:id="@+id/img_wright"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/logo_hyd"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"
+                                android:visibility="gone">
+
+                            </ImageView>
+
+                        </RelativeLayout>
 
 
-                            />
+
 
                     </LinearLayout>
 
@@ -179,6 +194,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/Txt_Adhar"
@@ -196,6 +214,24 @@
                             android:maxLength="12"
                             android:maxLines="1"
                             android:visibility="gone" />
+                            <ImageView
+                                android:id="@+id/img_Adhar_wrt"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/wright"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"
+                                android:visibility="gone"/>
+                            <ImageView
+                                android:id="@+id/img_Adhar_wrng"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/wrong"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"
+                                android:visibility="gone"/>
+                        </RelativeLayout>
+
 
                     </LinearLayout>
 

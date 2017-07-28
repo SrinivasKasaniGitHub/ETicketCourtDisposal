@@ -1220,10 +1220,6 @@ public class ServiceHelper {
 	}
 
 
-
-
-
-
 	public static void getCourtClosingUpdateTicketInfo(String eticketNo, String regnNo, String dlNO, String aadhaarNO,
 													   String stcNO, String courtDispCD, String imprisDays,
 													   String imprisFrom, String imprisTo, String courtFine, String risingDetails,
@@ -1231,7 +1227,6 @@ public class ServiceHelper {
 													   String ddRemarks, String pidCD, String pidName, String releaseDT,
 													   String mobileNo)
 	{
-
 		Utils utils = new Utils();
 		try {
 			SoapObject request = new SoapObject(NAMESPACE, "" + GET_COURT_CLOSING_UPDATE_TCKT_INFO);
@@ -1256,8 +1251,6 @@ public class ServiceHelper {
 			if (null!=releaseDT)request.addProperty("" + utils.RELSE_DATE, "" + releaseDT);
 			if (null!=mobileNo)request.addProperty("" + utils.RELSE_ITEMS, "" + mobileNo);
 
-
-
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
 			envelope.setOutputSoapObject(request);
@@ -1266,24 +1259,16 @@ public class ServiceHelper {
 			httpTransportSE.call(NAMESPACE+GET_COURT_CLOSING_UPDATE_TCKT_INFO, envelope);
 			Object result = envelope.getResponse();
 			Opdata_Chalana = "";
-			// Opdata_Chalana = result.toString();
-
 			try {
 				Opdata_Chalana = result.toString();
-
-				//Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString().trim());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 			Log.i("***SERVICE DAYNSE**", "" + Opdata_Chalana);
-
 		} catch (SoapFault fault) {
-			Log.i("****SOA**:::", "soapfault = " + fault.getMessage());
+			Log.i("****SOA**:::","soapfault = "+ fault.getMessage());
 
 		} catch (Exception e) {
-			// TODO: handle exception
 			Opdata_Chalana = "NA";
 		}
 

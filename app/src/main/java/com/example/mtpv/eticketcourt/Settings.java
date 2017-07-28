@@ -862,7 +862,7 @@ public class Settings extends Activity implements View.OnClickListener {
                             // showToast("your is Upto Date");
                             TextView title = new TextView(Settings.this);
                             title.setText("Hyderabad E-Ticket");
-                            title.setBackgroundColor(Color.RED);
+                            title.setBackgroundColor(Color.BLUE);
                             title.setGravity(Gravity.CENTER);
                             title.setTextColor(Color.WHITE);
                             title.setTextSize(26);
@@ -903,7 +903,7 @@ public class Settings extends Activity implements View.OnClickListener {
                             btn1.setTextSize(22);
                             btn1.setTextColor(Color.WHITE);
                             btn1.setTypeface(btn1.getTypeface(), Typeface.BOLD);
-                            btn1.setBackgroundColor(Color.RED);
+                            btn1.setBackgroundColor(Color.BLUE);
                         }
                     });
                 }

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background" >
+    android:background="@color/background">
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true">
 
         <ImageView
             android:id="@+id/imageView1"
@@ -48,7 +48,7 @@
             android:layout_centerHorizontal="true"
             android:text="@string/app_version"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </RelativeLayout>
 
     <ImageButton
@@ -62,7 +62,8 @@
         android:layout_marginTop="10dp"
         android:background="@null"
         android:contentDescription="@null"
-        android:src="@drawable/logout" />
+        android:src="@drawable/logout"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/tv_login_username_dashboard_xml"
@@ -80,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgbtn_logout_dashboard_xml"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" >
+        android:layout_marginTop="30dp">
 
         <TextView
             android:id="@+id/tv_generateticket_dashboard_xml"
@@ -104,7 +105,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/spot_challan"
             android:textSize="19sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_pending_booked_dashboard_xml"
@@ -115,10 +116,11 @@
             android:background="@null"
             android:drawableTop="@drawable/vhcle_history_m"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Court cases\n Status"
+            android:text="Court/Councelling\n Status"
             android:textSize="19sp"
 
             />
+
         <TextView
             android:id="@+id/tvduplicateprint_dashboad_xmld"
             style="@style/navi_text_style"
@@ -131,8 +133,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/duplicate_print"
             android:textSize="19sp"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
     </LinearLayout>
 
     <TextView
@@ -142,7 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -151,7 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_dashbrd1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:visibility="visible">
 
         <TextView
@@ -166,7 +167,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/duplicate_print"
             android:textSize="19sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_sync_dashboard_xml"
@@ -178,8 +179,7 @@
             android:drawableTop="@drawable/sync_m"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/sync"
-            android:textSize="19sp"
-            />
+            android:textSize="19sp" />
 
         <TextView
             android:id="@+id/tv_settings_dashboard_xml"
@@ -201,20 +201,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp" >
+        android:layout_marginTop="0dp">
+
         <TextView
             android:id="@+id/tvduplicateprint_dashboad_xml"
             style="@style/navi_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginLeft="80dp"
             android:background="@null"
             android:drawableTop="@drawable/print_m"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/duplicate_print"
             android:textSize="19sp"
-            />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_towing_dashboard_xml"
@@ -227,7 +227,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/towing"
             android:textSize="19sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_releasedocuments_dashboard_xml"
@@ -240,7 +240,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/release_documents"
             android:textSize="19sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_reports_dashboard_xml"
@@ -253,7 +253,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/reports"
             android:textSize="19sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
@@ -261,28 +261,28 @@
         style="@style/margin_top_btm_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout3"
-         >
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/linearLayout3">
 
-        >
-        <TextView
-            android:id="@+id/tv_sync_dashboard_xml1"
-            style="@style/navi_text_style"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:drawableTop="@drawable/sync"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/sync"
-            android:textSize="19sp"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            />
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+
+            >
+
+            <TextView
+                android:id="@+id/tv_sync_dashboard_xml1"
+                style="@style/navi_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:drawableTop="@drawable/sync"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/sync"
+                android:textSize="19sp"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -343,7 +343,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/aadhaar"
@@ -402,35 +402,35 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/footer_size"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/background"
-        >
+        android:background="@drawable/background">
+
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/PoweredBy"
-            android:textColor="#ffffff"
+            android:layout_marginLeft="10dp"
             android:fontFamily="sans-serif"
-            android:layout_marginLeft="10dp"/>
+            android:text="@string/PoweredBy"
+            android:textColor="#ffffff" />
+
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/CompanyName"
-            android:layout_below="@+id/pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/CompanyName"
-            android:textColor="#ffffff"
-            android:fontFamily="sans-serif"
-            android:textSize="@dimen/footer_text_size"
-            android:padding="5dp"
+            android:layout_below="@+id/pwd"
+            android:layout_centerHorizontal="true"
             android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:fontFamily="sans-serif"
             android:lines="1"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"/>
-
+            android:marqueeRepeatLimit="marquee_forever"
+            android:padding="5dp"
+            android:scrollHorizontally="true"
+            android:text="@string/CompanyName"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/footer_text_size"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>

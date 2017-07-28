@@ -315,7 +315,8 @@
                 android:layout_height="100dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="35dp"
-                android:src="@drawable/changepassword" />
+                android:src="@drawable/changepassword"
+                android:visibility="invisible"/>
             
             <ImageView
                 android:id="@+id/update_apk"
@@ -325,7 +326,8 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="35dp"
                 android:layout_toRightOf="@+id/change_pswd"
-                android:src="@drawable/updte_btn" />
+                android:src="@drawable/updte_btn"
+                android:visibility="invisible"/>
 
 </LinearLayout>
         </RelativeLayout>

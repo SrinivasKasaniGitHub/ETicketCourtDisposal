@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,7 +54,6 @@ public class CourtCaseDetailsActivity extends Activity {
     public static ArrayList<CasesDetailsPojo> arrayList_CourtCase_Detilas;
     JSONObject jsonObject;
     Bundle bundle;
-
     Button btn_councelling_Date;
     Calendar cal;
     int present_year;
@@ -72,16 +74,20 @@ public class CourtCaseDetailsActivity extends Activity {
     String selectedCourtName;
     String jsonResult;
     String spinnerAvailblity;
+    String sms_key;
+    TextView compny_Name;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courtcase_details);
-
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         btn_Update_Case_Details = (AppCompatButton) findViewById(R.id.btn_Update_CasesDetails);
         btn_councelling_Date = (Button) findViewById(R.id.btn_Councelling_Date);
         courtspinner = (MaterialSpinner) findViewById(R.id.courtSpinner);
+        compny_Name = (TextView) findViewById(R.id.CompanyName);
+        Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
+        compny_Name.startAnimation(marquee);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getApplicationContext().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -92,7 +98,6 @@ public class CourtCaseDetailsActivity extends Activity {
         present_year = cal.get(Calendar.YEAR);
         present_month = cal.get(Calendar.MONTH);
         present_day = cal.get(Calendar.DAY_OF_MONTH);
-
         bundle = getIntent().getExtras();
         String array_Value = bundle.getString("ArrayValue");
 
@@ -102,35 +107,43 @@ public class CourtCaseDetailsActivity extends Activity {
             btn_councelling_Date.setVisibility(View.VISIBLE);
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
-
+            sms_key = "COURT";
         }
+
         if (array_Value.equals("Txt_DD_CouncelngNot_Atnd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CouncelngNot_Atnd;
             btn_councelling_Date.setVisibility(View.VISIBLE);
             courtspinner.setVisibility(View.GONE);
             spinnerAvailblity = "0";
+            sms_key = "COUNC";
         }
+
         if (array_Value.equals("CHG_Bkd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_Booked;
             btn_councelling_Date.setVisibility(View.VISIBLE);
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
+            sms_key = "COURT";
         }
+
         if (array_Value.equals("Txt_CHG_CouncelngNot_Atnd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CouncelngNot_Atnd;
             btn_councelling_Date.setVisibility(View.VISIBLE);
             courtspinner.setVisibility(View.GONE);
             spinnerAvailblity = "0";
+            sms_key = "COUNC";
         }
+
         if (array_Value.equals("Txt_DD_CourtNot_Atnd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CourtNot_Atnd;
             btn_councelling_Date.setVisibility(View.VISIBLE);
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
+            sms_key = "COURT";
         }
         if (array_Value.equals("Txt_CHG_CourtNot_Atnd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
@@ -138,6 +151,7 @@ public class CourtCaseDetailsActivity extends Activity {
             btn_councelling_Date.setVisibility(View.VISIBLE);
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
+            sms_key = "COURT";
         }
 
         custom_CourtCase_DetailsAdapter = new CustomRecyclerViewAdapter(this, arrayList_CourtCase_Detilas);
@@ -194,16 +208,19 @@ public class CourtCaseDetailsActivity extends Activity {
                                 showToast("Please Enter Aadhaar Number!");
                                 jsonArray_caseDetails = new JSONArray();
                                 break;
+                            } else if (casesDetailsPojo.getDRIVER_AADHAAR().length() < 12) {
+                                showToast("Please Enter valid Aadhaar Number!");
+                                jsonArray_caseDetails = new JSONArray();
+                                break;
                             } else if (casesDetailsPojo.getDRIVER_MOBILE().equals("")) {
                                 showToast("Please enter Mobile Number!");
                                 jsonArray_caseDetails = new JSONArray();
                                 break;
-                            } else if (casesDetailsPojo.getDRIVER_LICENSE().equals("")) {
-                                showToast("Please enter License Number!");
+                            } else if (casesDetailsPojo.getDRIVER_MOBILE().length() < 10) {
+                                showToast("Please enter valid Mobile Number!");
                                 jsonArray_caseDetails = new JSONArray();
                                 break;
                             } else {
-
                                 try {
 
                                     jsonObject.put("VEHICLE_NUMBER", casesDetailsPojo.getVEHICLE_NUMBER());
@@ -217,16 +234,13 @@ public class CourtCaseDetailsActivity extends Activity {
                                     jsonObject.put("PID_CODE", MainActivity.user_id);
                                     jsonObject.put("PID_NAME", MainActivity.arr_logindetails[1]);
                                     jsonObject.put("PID_MOBILE", MainActivity.arr_logindetails[6]);
-
+                                    jsonObject.put("SMS_KEY", sms_key);
                                     jsonArray_caseDetails.put(jsonObject);
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-
                             }
-
-
                         }
                     }
                     JSONObject caseDetailsObj = new JSONObject();
@@ -243,13 +257,9 @@ public class CourtCaseDetailsActivity extends Activity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 }
             }
         });
-
-
     }
 
     public class Async_sendCourtCasesInfo extends AsyncTask<Void, Void, String> {
@@ -266,22 +276,19 @@ public class CourtCaseDetailsActivity extends Activity {
         @SuppressWarnings("deprecation")
         @Override
         protected void onPreExecute() {
-            // TODO Auto-generated method stub
             super.onPreExecute();
             showDialog(PROGRESS_DIALOG);
 
         }
-
         @SuppressWarnings("deprecation")
         @Override
         protected void onPostExecute(String result) {
-            // TODO Auto-generated method stub
             super.onPostExecute(result);
-
             Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             removeDialog(PROGRESS_DIALOG);
-
-
+            showToast(ServiceHelper.Opdata_Chalana);
+//            Intent intent=new Intent(getApplicationContext(),CourtCaseDetailsActivity.class);
+//            startActivity(intent);
         }
     }
 
@@ -313,8 +320,6 @@ public class CourtCaseDetailsActivity extends Activity {
         db.close();
 
     }
-
-
     private void showToast(String msg) {
 
 
@@ -334,8 +339,6 @@ public class CourtCaseDetailsActivity extends Activity {
         toast.setView(layout);
         toast.show();
     }
-
-
     /* FOR OFFENSE DATE */
     DatePickerDialog.OnDateSetListener councelling_Date_Dialog = new DatePickerDialog.OnDateSetListener() {
 
@@ -343,24 +346,18 @@ public class CourtCaseDetailsActivity extends Activity {
         @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
-//pre
             present_year = selectedYear;
             present_month = monthOfYear;
             present_day = dayOfMonth;
-
             format = new SimpleDateFormat("dd-MMM-yyyy");
             councelng_Date = format.format(new Date(present_year - 1900, (present_month), present_day));
             btn_councelling_Date.setText("" + councelng_Date.toUpperCase());
-
-
         }
     };
 
     @SuppressWarnings("deprecation")
     @Override
     protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
         switch (id) {
             case COUNCELLING_DATE_PICKER:
                 DatePickerDialog dp_councelling_Date = new DatePickerDialog(this, councelling_Date_Dialog, present_year, present_month,
@@ -373,8 +370,6 @@ public class CourtCaseDetailsActivity extends Activity {
                 pd.setContentView(R.layout.custom_progress_dialog);
                 pd.setCancelable(false);
                 return pd;
-
-
             default:
                 break;
         }

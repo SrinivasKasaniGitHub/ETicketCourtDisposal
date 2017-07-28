@@ -16,6 +16,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
@@ -42,15 +44,15 @@ public class CourtCaseStatusActivity extends Activity {
     int present_month;
     int present_day;
     SimpleDateFormat format;
-
+    TextView compny_Name;
     final int OFFENCE_FROM_DATE_PICKER = 1;
     final int PROGRESS_DIALOG = 2;
     final int OFFENCE_TO_DATE_PICKER = 3;
-
     String offence_From_Date, offence_To_Date;
     CasesDetailsPojo casesDetailsPojo;
     RelativeLayout layout_TbleData;
     TextView Txt_DD_Bkd, Txt_DD_CouncelngNot_Atnd, Txt_CHG_Bkd, Txt_CHG_CouncelngNot_Atnd, Txt_DD_CourtNot_Atnd, Txt_CHG_CourtNot_Atnd;
+
     public static ArrayList<CasesDetailsPojo> arrayList_DD_Booked;
     public static ArrayList<CasesDetailsPojo> arrayList_DD_CouncelngNot_Atnd;
     public static ArrayList<CasesDetailsPojo> arrayList_CHG_Booked;
@@ -73,6 +75,9 @@ public class CourtCaseStatusActivity extends Activity {
         Txt_CHG_CouncelngNot_Atnd = (TextView) findViewById(R.id.Txt_CHG_CouncelngNot_Atnd);
         Txt_DD_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_DD_CourtNot_Atndg);
         Txt_CHG_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_CHG_CourtNot_Atndg);
+        compny_Name = (TextView) findViewById(R.id.CompanyName);
+        Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
+        compny_Name.startAnimation(marquee);
         cal = Calendar.getInstance();
 
 
@@ -172,7 +177,7 @@ public class CourtCaseStatusActivity extends Activity {
 
     }
 
-    public class Async_getCourtCasesInfo extends AsyncTask<Void, Void, String> {
+    private class Async_getCourtCasesInfo extends AsyncTask<Void, Void, String> {
         @SuppressLint("DefaultLocale")
         @SuppressWarnings("unused")
         @Override
@@ -187,7 +192,6 @@ public class CourtCaseStatusActivity extends Activity {
         @SuppressWarnings("deprecation")
         @Override
         protected void onPreExecute() {
-            // TODO Auto-generated method stub
             super.onPreExecute();
             showDialog(PROGRESS_DIALOG);
             layout_TbleData.setVisibility(View.GONE);
@@ -197,20 +201,14 @@ public class CourtCaseStatusActivity extends Activity {
         @SuppressWarnings("deprecation")
         @Override
         protected void onPostExecute(String result) {
-            // TODO Auto-generated method stub
             super.onPostExecute(result);
-
-
-            Log.d("DD D" +
-                    "etails", "" + ServiceHelper.Opdata_Chalana);
-
-
+            Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             removeDialog(PROGRESS_DIALOG);
             if (!ServiceHelper.Opdata_Chalana.equals("NA")) {
 
                 arrayList_DD_Booked = new ArrayList<>();
                 arrayList_DD_CouncelngNot_Atnd = new ArrayList<>();
-                arrayList_CHG_Booked = new ArrayList<CasesDetailsPojo>();
+                arrayList_CHG_Booked = new ArrayList<>();
                 arrayList_CHG_CouncelngNot_Atnd = new ArrayList<>();
                 arrayList_DD_CourtNot_Atnd = new ArrayList<>();
                 arrayList_CHG_CourtNot_Atnd = new ArrayList<>();
@@ -218,8 +216,8 @@ public class CourtCaseStatusActivity extends Activity {
                 try {
                     jsonObject = new JSONObject(ServiceHelper.Opdata_Chalana);
                     JSONArray jsonArray = jsonObject.getJSONArray("Cases Details");
-
                     for (int i = 0; i < jsonArray.length(); i++) {
+
                         JSONObject jb = jsonArray.getJSONObject(i);
                         casesDetailsPojo = new CasesDetailsPojo();
                         casesDetailsPojo.setVEHICLE_NUMBER(jb.getString("VEHICLE_NUMBER") != null ? jb.getString("VEHICLE_NUMBER") : "");
@@ -249,7 +247,7 @@ public class CourtCaseStatusActivity extends Activity {
                         if ((jb.getString("CHALLAN_TYPE").equals("12") || jb.getString("CHALLAN_TYPE").equals("23")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COURT_NOTICE_DT").equals("")) {
                             arrayList_DD_CourtNot_Atnd.add(casesDetailsPojo);
                         }
-                        if ((jb.getString("CHALLAN_TYPE").equals("26")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COURT_NOTICE_DT").equals("0")) {
+                        if ((jb.getString("CHALLAN_TYPE").equals("26")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COURT_NOTICE_DT").equals("")) {
                             arrayList_CHG_CourtNot_Atnd.add(casesDetailsPojo);
                         }
                     }
@@ -269,17 +267,11 @@ public class CourtCaseStatusActivity extends Activity {
             } else {
                 showToast("No data found");
             }
-
-
         }
     }
 
-
     private void showToast(String msg) {
-
-
         LayoutInflater inflater = getLayoutInflater();
-
         View layout = inflater.inflate(R.layout.custom_toast,
                 (ViewGroup) findViewById(R.id.custom_toast_layout_id));
 
@@ -295,7 +287,6 @@ public class CourtCaseStatusActivity extends Activity {
         toast.show();
     }
 
-
     /* FOR OFFENSE DATE */
     DatePickerDialog.OnDateSetListener offence_FromDate_Dialog = new DatePickerDialog.OnDateSetListener() {
 
@@ -303,15 +294,13 @@ public class CourtCaseStatusActivity extends Activity {
         @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
-//pre
             present_year = selectedYear;
             present_month = monthOfYear;
             present_day = dayOfMonth;
 
             format = new SimpleDateFormat("dd-MMM-yyyy");
             offence_From_Date = format.format(new Date(present_year - 1900, (present_month), present_day));
-            btn_offenceDate_From.setText("" + offence_From_Date.toUpperCase());
+            btn_offenceDate_From.setText(offence_From_Date.toUpperCase());
 
             Log.i("DAY REPORT : ", "" + offence_From_Date);
 
@@ -326,7 +315,6 @@ public class CourtCaseStatusActivity extends Activity {
         @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
 //pre
             present_year = selectedYear;
             present_month = monthOfYear;
@@ -349,7 +337,7 @@ public class CourtCaseStatusActivity extends Activity {
                     date2 = dates.parse(offence_To_Date);
                     if (date2.after(date1) || date2.equals(date1)) {
 
-                        btn_offenceDate_To.setText("" + offence_To_Date.toUpperCase());
+                        btn_offenceDate_To.setText(offence_To_Date.toUpperCase());
 
                     } else {
                         showToast("Date should be greater than From_Date ");
@@ -372,7 +360,6 @@ public class CourtCaseStatusActivity extends Activity {
     @SuppressWarnings("deprecation")
     @Override
     protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
         switch (id) {
             case OFFENCE_FROM_DATE_PICKER:
                 DatePickerDialog dp_offenceFrom_date = new DatePickerDialog(this, offence_FromDate_Dialog, present_year, present_month,

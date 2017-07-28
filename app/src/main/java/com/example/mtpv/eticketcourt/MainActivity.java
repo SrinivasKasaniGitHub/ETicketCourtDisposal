@@ -127,7 +127,6 @@ public class MainActivity extends Activity implements LocationListener {
     ArrayList<String> arr_for_logindetails;
 
     public static String appVersion = "Version-1.5.6";
-
     private static final int REQUEST_PERMISSIONS = 20;
     public SparseIntArray mErrorString;
     private static final String[] requiredPermissions = new String[]{
@@ -140,7 +139,6 @@ public class MainActivity extends Activity implements LocationListener {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.INSTALL_SHORTCUT
-/* ETC.. */
     };
 
 
@@ -154,8 +152,8 @@ public class MainActivity extends Activity implements LocationListener {
         btn_login = (Button) findViewById(R.id.btnlog);
         et_pid = (EditText) findViewById(R.id.edtTxt_pid);
         et_pid_pwd = (EditText) findViewById(R.id.edtTxt_pwd);
-        et_pid.setText("23001004");
-        et_pid_pwd.setText("WdSt48Pr");
+//        et_pid.setText("23001004");
+//        et_pid_pwd.setText("WdSt48Pr");
         progIndicator = (AVLoadingIndicatorView) findViewById(R.id.progIndicator);
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
         compny_Name.startAnimation(marquee);
@@ -178,7 +176,8 @@ public class MainActivity extends Activity implements LocationListener {
         if (Build.VERSION.SDK_INT > 22 && !hasPermissions(requiredPermissions)) {
 
             MainActivity.this.requestAppPermissions(new
-                            String[]{Manifest.permission.READ_PHONE_STATE,
+                            String[]{
+                            Manifest.permission.READ_PHONE_STATE,
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_NETWORK_STATE,
                             Manifest.permission.ACCESS_WIFI_STATE,
@@ -188,10 +187,7 @@ public class MainActivity extends Activity implements LocationListener {
                             Manifest.permission.READ_EXTERNAL_STORAGE,
                             Manifest.permission.INSTALL_SHORTCUT}, R.string.permissions
                     , REQUEST_PERMISSIONS);
-
         }
-
-
     }
 
     private void showDialog() {
@@ -413,25 +409,19 @@ public class MainActivity extends Activity implements LocationListener {
             //removeDialog(PROGRESS_DIALOG);
             // hideDialog();
             stopAnim();
-            /*
-			 * 1-invalid login id 2-invalid password 3-un authorized device in
-			 * else condition you will get correct response
-			 */
             MainActivity.arr_logindetails = ServiceHelper.Opdata_Chalana.split(":");
 
             if (ServiceHelper.Opdata_Chalana != null) {
                 if (ServiceHelper.Opdata_Chalana.toString().trim().equals("1")) {
                     showToast("Invalid Login ID");
-                } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("2")) {
+                } else if (ServiceHelper.Opdata_Chalana.trim().equals("2")) {
                     showToast("Invalid Password");
                 } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("3")) {
                     showToast("Unautherized Device");
-
                 } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("4")) {
                     showToast("Error, Please Contact E Challan Team at 040-27852721");
                 } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("5")) {
-                    showToast(
-                            "You have Exceeded Number of \n Attempts with Wrong Password,\n Please Contact E Challan Team at 040-27852721 ");
+                    showToast("You have Exceeded Number of \n Attempts with Wrong Password,\n Please Contact E Challan Team at 040-27852721 ");
                 } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("0")) {
                     showToast("Please Contact E Challan Team at 040-27852721");
                 } else {
@@ -462,12 +452,7 @@ public class MainActivity extends Activity implements LocationListener {
                     String cashless_flg = "" + arr_logindetails[12];
                     String mobileNo_flg = "" + arr_logindetails[13];
 
-					/*
-					 * "PID_CD" "TR_EMP_NAME" "PS_CODE" "PS_NAME" "CADRE_CD"
-					 * "CADRE" "CONTACT_NO" "Version" "RTA_DATA_FLAG"
-					 * "DL_DATA_FLAG" "AADHAAR_DATA_FLAG" "OTP_NO_FLAG"
-					 * "CASHLESS_FLAG" "MOBILE_NO_FLAG"
-					 */
+
 
                     // PUTTING IN SHARED PREFERENCES
                     editors.putString("PID_CODE", pidCode);

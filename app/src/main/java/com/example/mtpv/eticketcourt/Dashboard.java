@@ -62,9 +62,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-/**
- * Created by mtpv on 6/17/2017.
- */
 
 public class Dashboard extends Activity implements View.OnClickListener {
 
@@ -605,9 +602,11 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         showToast("Please download master's !");
                     } else if ((psname_settings.equals("psname")) && (pointnameBycode_settings.equals("pointname"))) {
                         showToast("Configure Settings!");
-                    } else if (address_spot.trim() != null && address_spot.trim().length() < 15) {
-                        showToast("Configure BlueTooth Settings!");
-                    } else {
+                    }
+//                    else if (address_spot.trim() != null && address_spot.trim().length() < 15) {
+//                        showToast("Configure BlueTooth Settings!");
+//                    }
+                    else {
                         if (isOnline()) {
                             startActivity(new Intent(Dashboard.this, DDCloseActiviy.class));
                         } else {
@@ -1048,7 +1047,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
             case EXIT_DIALOG:
                 TextView title = new TextView(this);
                 title.setText("Hyderabad E-Ticket");
-                title.setBackgroundColor(Color.RED);
+                title.setBackgroundColor(Color.BLUE);
                 title.setGravity(Gravity.CENTER);
                 title.setTextColor(Color.WHITE);
                 title.setTextSize(26);
@@ -1101,19 +1100,19 @@ public class Dashboard extends Activity implements View.OnClickListener {
                 btn.setTextSize(22);
                 btn.setTextColor(Color.WHITE);
                 btn.setTypeface(btn.getTypeface(), Typeface.BOLD);
-                btn.setBackgroundColor(Color.RED);
+                btn.setBackgroundColor(Color.BLUE);
 
                 Button btn2 = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
                 btn2.setTextSize(22);
                 btn2.setTextColor(Color.WHITE);
                 btn2.setTypeface(btn2.getTypeface(), Typeface.BOLD);
-                btn2.setBackgroundColor(Color.RED);
+                btn2.setBackgroundColor(Color.BLUE);
                 return alertDialog;
 
             case ALERT_USER:
                 TextView title2 = new TextView(this);
                 title2.setText("ALERT");
-                title2.setBackgroundColor(Color.RED);
+                title2.setBackgroundColor(Color.BLUE);
                 title2.setGravity(Gravity.CENTER);
                 title2.setTextColor(Color.WHITE);
                 title2.setTextSize(26);
@@ -1255,13 +1254,13 @@ public class Dashboard extends Activity implements View.OnClickListener {
                 btn1.setTextSize(22);
                 btn1.setTextColor(Color.WHITE);
                 btn1.setTypeface(btn1.getTypeface(), Typeface.BOLD);
-                btn1.setBackgroundColor(Color.RED);
+                btn1.setBackgroundColor(Color.BLUE);
 
                 Button btn3 = alert_Dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
                 btn3.setTextSize(22);
                 btn3.setTextColor(Color.WHITE);
                 btn3.setTypeface(btn3.getTypeface(), Typeface.BOLD);
-                btn3.setBackgroundColor(Color.RED);
+                btn3.setBackgroundColor(Color.BLUE);
 
                 return alert_Dialog;
             case PROGRESS_DIALOG:

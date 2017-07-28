@@ -100,6 +100,7 @@ public class IPSettings extends Activity implements View.OnClickListener {
 		/*---------SERVICE URL-------------*/
         rbtn_live = (RadioButton) findViewById(R.id.radioButton_live);
         rbtn_test = (RadioButton) findViewById(R.id.radioButton_test);
+        rbtn_test.setChecked(true);
 
         // if (!SERVICE_URL_PREF.equals("url1")) {
         // et_service_url.setText(SERVICE_URL_PREF);

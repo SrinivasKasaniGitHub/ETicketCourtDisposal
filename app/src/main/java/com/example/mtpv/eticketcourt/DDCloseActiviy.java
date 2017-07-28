@@ -15,10 +15,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -36,7 +34,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,19 +53,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.Objects;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 
 public class DDCloseActiviy extends Activity {
     TextView compny_Name;
-    ArrayList<String> mArrayListCourtNames = new ArrayList<String>();
-    ArrayList<String> mArrayListCourtDis = new ArrayList<String>();
-    HashMap<String, String> paramsCourt = new HashMap<String, String>();
-    HashMap<String, String> paramsCourtdis = new HashMap<String, String>();
-    ArrayList<HashMap<String, String>> maparrayCourtdis = new ArrayList<HashMap<String, String>>();
+    ArrayList<String> mArrayListCourtNames = new ArrayList<>();
+    ArrayList<String> mArrayListCourtDis = new ArrayList<>();
+    HashMap<String, String> paramsCourt = new HashMap<>();
+    HashMap<String, String> paramsCourtdis = new HashMap<>();
+    ArrayList<HashMap<String, String>> maparrayCourtdis = new ArrayList<>();
     String print_Data;
 
     Calendar cal;
@@ -77,11 +73,8 @@ public class DDCloseActiviy extends Activity {
     int present_day;
     SimpleDateFormat format;
     Date date_From;
-    TelephonyManager telephonyManager;
-    String imei_send;
-    String simid_send;
-    String present_date_toSend, date_courtAtnd, date_convFRom, date_convicTo, date_soclserveFrom, date_soclserveTo;
-    String netwrk_info_txt;
+
+    String present_date_toSend, date_courtAtnd, date_convFRom, date_convicTo;
     EditText et_dp_regno;
     EditText edtTxt_STC_No, edtTxt_FineAmnt, edtTxtConDays, edtTxtRisDays, edtTxt_Remarks;
     Button btn_dp_date_selection, btn_courtAttenddate, btn_courtConFromdate, btn_courtConTo, btn_courtSoclServceFromdate, btn_courtSoclServceTodate;
@@ -549,9 +542,6 @@ public class DDCloseActiviy extends Activity {
                     edtTxt_STC_No.requestFocus();
                 } else if (court_Disposal_code == null) {
                     showToast("Select court Disposal Name");
-                } else if (remarks.trim().equals("")) {
-                    edtTxt_Remarks.setError(Html.fromHtml("<font color='white'>Enter Remarks </font>"));
-                    edtTxt_Remarks.requestFocus();
                 } else if (court_Disposal_code.equals("3")) {
 
                     if (btn_courtConFromdate.getText().toString().equals("Select Date")) {
@@ -712,7 +702,6 @@ public class DDCloseActiviy extends Activity {
         @SuppressWarnings("deprecation")
         @Override
         protected void onPreExecute() {
-            // TODO Auto-generated method stub
             super.onPreExecute();
             showDialog(PROGRESS_DIALOG);
 //            dd_lyt.setVisibility(View.GONE);
@@ -724,22 +713,19 @@ public class DDCloseActiviy extends Activity {
         protected void onPostExecute(String result) {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
-
-
             Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             print_Data = ServiceHelper.Opdata_Chalana;
             removeDialog(PROGRESS_DIALOG);
-            if (ServiceHelper.Opdata_Chalana.equals("0")) {
-                showToast("Updated failled ! ");
+            if (null!=ServiceHelper.Opdata_Chalana) {
+                showToast(ServiceHelper.Opdata_Chalana);
 
 //                Intent intent_dashboard = new Intent(getApplicationContext(), Dashboard.class);
 //                startActivity(intent_dashboard);
-            } else {
-                showDialog(PRINT_DD_DIALOG);
             }
+//            else {
+//                showDialog(PRINT_DD_DIALOG);
+//            }
             online_report_status = "";
-
-
         }
     }
 
@@ -797,7 +783,6 @@ public class DDCloseActiviy extends Activity {
                             driver_Adhar = jsonObject1.getString("DRIVER AADHAAR");
                             driver_Mobile = jsonObject1.getString("DRIVER MOBILE");
                             driver_LCNCE = jsonObject1.getString("DRIVING LICENSE");
-
                             Reg_No.setText(vEHICLE_NUMBER);
                             Challan_No.setText(chall_No);
                             Offender_Date.setText(offence_Date);
@@ -805,25 +790,19 @@ public class DDCloseActiviy extends Activity {
                                 edtTxt_Mob_No.setVisibility(View.GONE);
                                 Mobile_No.setVisibility(View.VISIBLE);
                                 Mobile_No.setText(driver_Mobile);
-
                             } else {
                                 edtTxt_Mob_No.setVisibility(View.VISIBLE);
                                 Mobile_No.setVisibility(View.GONE);
-
                             }
-
                             if (("null") != driver_Adhar) {
                                 edtTxt_Aadhar_No.setVisibility(View.GONE);
                                 Aadhar_No.setVisibility(View.VISIBLE);
                                 Aadhar_No.setText(driver_Adhar);
-
                             } else {
                                 edtTxt_Aadhar_No.setVisibility(View.VISIBLE);
                                 Aadhar_No.setVisibility(View.GONE);
-
                             }
-
-                            if (("null") != driver_LCNCE) {
+                            if (!Objects.equals("null", driver_LCNCE)) {
                                 edtTxt_DlNo.setVisibility(View.GONE);
                                 Dl_No.setVisibility(View.VISIBLE);
                                 Dl_No.setText(driver_LCNCE);
@@ -831,18 +810,12 @@ public class DDCloseActiviy extends Activity {
                             } else {
                                 edtTxt_DlNo.setVisibility(View.VISIBLE);
                                 Dl_No.setVisibility(View.GONE);
-
                             }
-
-
                         }
-
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
 
             } else {
                 online_report_status = "";
@@ -894,7 +867,7 @@ public class DDCloseActiviy extends Activity {
 
                             try {
                                     /*
-									 * String printdata =
+                                     * String printdata =
 									 * bth_printer.font_Courier_41(""+
 									 * ServiceHelper.Opdata_Chalana);
 									 * actual_printer.Call_PrintertoPrint("" +
@@ -940,8 +913,8 @@ public class DDCloseActiviy extends Activity {
 
                                     try {
                                         Log.i("ONLINE PRINT", "ONLINE PRINT");
-										/*
-										 * String printdata =
+                                        /*
+                                         * String printdata =
 										 * bth_printer.font_Courier_41(""+
 										 * ServiceHelper.Opdata_Chalana);
 										 * actual_printer.Call_PrintertoPrint(
@@ -1436,23 +1409,6 @@ public class DDCloseActiviy extends Activity {
 
 
     private void showToast(String msg) {
-        // TODO Auto-generated method stub
-        // Toast.makeText(getApplicationContext(), "" + msg,
-        // Toast.LENGTH_SHORT).show();
-//        Toast toast = Toast.makeText(getApplicationContext(), "" + msg, Toast.LENGTH_SHORT);
-//        toast.setGravity(Gravity.CENTER, 10, 10);
-//
-//
-//        View toastView = toast.getView();
-//
-//        ViewGroup group = (ViewGroup) toast.getView();
-//        TextView messageTextView = (TextView) group.getChildAt(0);
-//        messageTextView.setTextSize(22);
-//
-//        toastView.setBackgroundResource(R.drawable.toast_background);
-//        toast.show();
-
-
         LayoutInflater inflater = getLayoutInflater();
 
         View layout = inflater.inflate(R.layout.custom_toast,
@@ -1475,42 +1431,34 @@ public class DDCloseActiviy extends Activity {
     DatePickerDialog.OnDateSetListener md1 = new DatePickerDialog.OnDateSetListener() {
 
         @SuppressWarnings("deprecation")
-        @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
+        @SuppressLint({"SimpleDateFormat","DefaultLocale"})
+
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
-//pre
             present_year = selectedYear;
             present_month = monthOfYear;
             present_day = dayOfMonth;
-
             format = new SimpleDateFormat("dd-MMM-yyyy");
             present_date_toSend = format.format(new Date(present_year - 1900, (present_month), present_day));
             btn_dp_date_selection.setText("" + present_date_toSend.toUpperCase());
-
             Log.i("DAY REPORT : ", "" + present_date_toSend);
-
-
         }
     };
     DatePickerDialog.OnDateSetListener md2 = new DatePickerDialog.OnDateSetListener() {
+
 
         @SuppressWarnings("deprecation")
         @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
-
             present_year = selectedYear;
             present_month = monthOfYear;
             present_day = dayOfMonth;
-
             format = new SimpleDateFormat("dd-MMM-yyyy");
             date_courtAtnd = format.format(new Date(present_year - 1900, (present_month), present_day));
             btn_courtAttenddate.setText("" + date_courtAtnd.toUpperCase());
-
-
         }
+
     };
     DatePickerDialog.OnDateSetListener md3 = new DatePickerDialog.OnDateSetListener() {
 
@@ -1518,12 +1466,9 @@ public class DDCloseActiviy extends Activity {
         @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
-
             present_year = selectedYear;
             present_month = monthOfYear;
             present_day = dayOfMonth;
-
             format = new SimpleDateFormat("dd-MMM-yyyy");
             date_convFRom = "";
             date_convFRom = format.format(new Date(present_year - 1900, (present_month), present_day));
@@ -1547,32 +1492,23 @@ public class DDCloseActiviy extends Activity {
         @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
-
             present_year = selectedYear;
             present_month = monthOfYear;
             present_day = dayOfMonth;
-
             format = new SimpleDateFormat("dd-MMM-yyyy");
             date_convicTo = format.format(new Date(present_year - 1900, (present_month), present_day));
             dayDifference = "";
-
-
             Date date1;
             Date date2;
-
             SimpleDateFormat dates = new SimpleDateFormat("dd-MMM-yyyy");
-
 
             //Setting dates
             try {
-
-
                 date1 = dates.parse(date_convFRom);
                 date2 = dates.parse(date_convicTo);
                 if (date2.after(date1) || date2.equals(date1)) {
+                    btn_courtConTo.setText(date_convicTo.toUpperCase());
 
-                    btn_courtConTo.setText("" + date_convicTo.toUpperCase());
                     //Comparing dates
                     long difference = Math.abs(date1.getTime() - date2.getTime());
                     long differenceDates = difference / (24 * 60 * 60 * 1000);
@@ -1600,8 +1536,6 @@ public class DDCloseActiviy extends Activity {
         @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
-
             present_year = selectedYear;
             present_month = monthOfYear;
             present_day = dayOfMonth;
@@ -1620,8 +1554,6 @@ public class DDCloseActiviy extends Activity {
         @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
-
             present_year = selectedYear;
             present_month = monthOfYear;
             present_day = dayOfMonth;
@@ -1671,7 +1603,6 @@ public class DDCloseActiviy extends Activity {
     @SuppressWarnings("deprecation")
     @Override
     protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
         switch (id) {
             case PRESENT_DATE_PICKER:
                 DatePickerDialog dp_offence_date = new DatePickerDialog(this, md1, present_year, present_month,
@@ -1740,7 +1671,6 @@ public class DDCloseActiviy extends Activity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
                         new Aysnc_Print_Data().execute();
                         Toast.makeText(getApplicationContext(), "Printing", Toast.LENGTH_LONG).show();
 
@@ -1751,7 +1681,6 @@ public class DDCloseActiviy extends Activity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
                         dd_lyt.setVisibility(View.GONE);
                         pay_dd_lyt.setVisibility(View.GONE);
                         removeDialog(PRINT_DD_DIALOG_EXIT);

@@ -109,11 +109,13 @@
         android:layout_below="@+id/DDdat"
         android:padding="20dp"
         android:weightSum="2">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:layout_weight="1">
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/TxtInptUserName"
                 android:layout_width="match_parent"
@@ -140,19 +142,20 @@
         </LinearLayout>
 
 
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Offence Date"
                 android:gravity="center_horizontal"
+                android:text="Offence Date"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/DD_Txt_font"/>
+                android:textSize="@dimen/DD_Txt_font" />
+
             <Button
                 android:id="@+id/btn_dateselection_dp_xml"
                 style="@style/dd_custom_blue_btn_style"
@@ -163,9 +166,6 @@
                 android:text="Select Date" />
 
         </LinearLayout>
-
-
-
 
 
     </LinearLayout>
@@ -242,35 +242,32 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:weightSum="2"
-                            android:orientation="vertical">
-
-
-
-
-
+                            android:orientation="vertical"
+                            android:weightSum="2">
 
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:weightSum="2"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
                                 <android.support.v7.widget.AppCompatTextView
                                     style="@style/styleTextViewlyt_DD"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Reg No "
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1"
+                                    android:text="Reg No " />
+
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/Txt_Regno"
                                     style="@style/styleTextViewlyt_DD_fromserver"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text=""
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1"
+                                    android:text="" />
 
 
                             </LinearLayout>
@@ -279,35 +276,38 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:weightSum="2">
+
                                 <android.support.v7.widget.AppCompatTextView
                                     style="@style/styleTextViewlyt_DD"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Mobile No "
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1"
+                                    android:text="Mobile No " />
+
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/Txt_Mobile_no"
                                     style="@style/styleTextViewlyt_DD_fromserver"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text=""
                                     android:layout_weight="1"
-                                    android:visibility="gone"
-                                    />
+                                    android:text=""
+                                    android:visibility="gone" />
+
                                 <android.support.v7.widget.AppCompatEditText
                                     android:id="@+id/edtTxt_Mobile_no"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Mobile_No"
                                     android:layout_weight="1"
+                                    android:hint="Mobile_No"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:maxLines="1"
-                                    android:visibility="gone"/>
+                                    android:visibility="gone" />
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -318,8 +318,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Offender Date "
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1"
+                                    android:text="Offender Date " />
 
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/Txt_Offender_date"
@@ -327,19 +327,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text=""
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1"
+                                    android:text="" />
 
                             </LinearLayout>
-
-
-
-
-
-
-
-
-
 
 
                         </LinearLayout>
@@ -354,25 +345,24 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:weightSum="2"
-                            android:orientation="vertical">
-
-
-
+                            android:orientation="vertical"
+                            android:weightSum="2">
 
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:weightSum="2"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
                                 <android.support.v7.widget.AppCompatTextView
                                     style="@style/styleTextViewlyt_DD"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Challan No"
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1"
+                                    android:text="Challan No" />
+
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/Txt_Chaln_No"
 
@@ -380,43 +370,45 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text=" "
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1"
+                                    android:text=" " />
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:weightSum="2"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
                                 <android.support.v7.widget.AppCompatTextView
                                     style="@style/styleTextViewlyt_DD"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="Aadhar No "
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1"
+                                    android:text="Aadhar No " />
+
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/txt_Adhar_No"
                                     style="@style/styleTextViewlyt_DD_fromserver"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text=""
                                     android:layout_weight="1"
-                                    android:visibility="gone"/>
+                                    android:text=""
+                                    android:visibility="gone" />
+
                                 <android.support.v7.widget.AppCompatEditText
                                     android:id="@+id/edtTxt_Adhar_no"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_weight="1"
                                     android:hint="Aadhar_No"
                                     android:inputType="number"
-                                    android:layout_weight="1"
                                     android:maxLength="12"
                                     android:maxLines="1"
-                                    android:visibility="gone"/>
-
-
+                                    android:visibility="gone" />
 
 
                             </LinearLayout>
@@ -424,8 +416,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:weightSum="2"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:weightSum="2">
 
                                 <android.support.v7.widget.AppCompatTextView
                                     style="@style/styleTextViewlyt_DD"
@@ -433,37 +425,30 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="DL No "
-                                    android:layout_weight="1"/>
+                                    android:layout_weight="1"
+                                    android:text="DL No " />
+
                                 <android.support.v7.widget.AppCompatTextView
                                     android:id="@+id/Txt_DlNo"
                                     style="@style/styleTextViewlyt_DD_fromserver"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text=""
                                     android:layout_weight="1"
-                                    android:visibility="gone"/>
+                                    android:text=""
+                                    android:visibility="gone" />
+
                                 <android.support.v7.widget.AppCompatEditText
                                     android:id="@+id/edtTxt_Dl_no"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_weight="1"
                                     android:hint="DL_No"
                                     android:inputType="text|textCapCharacters"
-                                    android:layout_weight="1"
                                     android:maxLength="25"
-                                    android:visibility="gone"/>
+                                    android:visibility="gone" />
 
                             </LinearLayout>
-
-
-
-
-
-
-
-
-
                         </LinearLayout>
 
 
@@ -639,7 +624,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="STC No"
-                                android:inputType="number|textCapCharacters"/>
+                                android:inputType="number|textCapCharacters" />
 
                         </LinearLayout>
 
@@ -1059,7 +1044,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -1126,7 +1112,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_weight="1">
+                            android:layout_weight="1.2">
 
                             <android.support.v7.widget.AppCompatTextView
                                 style="@style/styleTextViewlyt_DD"
@@ -1140,7 +1126,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_weight="1">
+                            android:layout_weight="1.8">
 
                             <android.support.v7.widget.AppCompatEditText
                                 android:id="@+id/edtTxt_Remarks"
@@ -1168,9 +1154,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/background"
                             android:gravity="center"
-                            android:text="Update payment"
+                            android:text="Update Details"
                             android:textColor="@color/white"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>
