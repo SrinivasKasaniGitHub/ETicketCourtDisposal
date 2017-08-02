@@ -1521,7 +1521,6 @@ public class DDCloseActiviy extends Activity {
                     btn_courtConTo.setText("Select Date");
                     edtTxtConDays.setText("");
                 }
-
             } catch (ParseException e) {
                 e.printStackTrace();
             }

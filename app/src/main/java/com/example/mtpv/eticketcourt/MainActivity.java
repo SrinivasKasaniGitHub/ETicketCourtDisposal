@@ -126,7 +126,7 @@ public class MainActivity extends Activity implements LocationListener {
     ArrayList<String> ar_test = new ArrayList<String>();
     ArrayList<String> arr_for_logindetails;
 
-    public static String appVersion = "Version-1.5.6";
+    public static String appVersion = "Version-1.5.7";
     private static final int REQUEST_PERMISSIONS = 20;
     public SparseIntArray mErrorString;
     private static final String[] requiredPermissions = new String[]{
@@ -392,11 +392,7 @@ public class MainActivity extends Activity implements LocationListener {
         @SuppressWarnings("deprecation")
         @Override
         protected void onPreExecute() {
-            // TODO Auto-generated method stub
             super.onPreExecute();
-            //showDialog(PROGRESS_DIALOG);
-//            pDialog.setMessage("Logging in ...");
-//            showDialog();
             startAnim();
 
         }
@@ -404,13 +400,9 @@ public class MainActivity extends Activity implements LocationListener {
         @SuppressWarnings("deprecation")
         @Override
         protected void onPostExecute(String result) {
-            // TODO Auto-generated method stub
             super.onPostExecute(result);
-            //removeDialog(PROGRESS_DIALOG);
-            // hideDialog();
             stopAnim();
             MainActivity.arr_logindetails = ServiceHelper.Opdata_Chalana.split(":");
-
             if (ServiceHelper.Opdata_Chalana != null) {
                 if (ServiceHelper.Opdata_Chalana.toString().trim().equals("1")) {
                     showToast("Invalid Login ID");
@@ -427,13 +419,9 @@ public class MainActivity extends Activity implements LocationListener {
                 } else {
                     for (int i = 0; i < MainActivity.arr_logindetails.length; i++) {
                     }
-                    // officerName|pscode|psname|cadre_cd|cadre
-                    // TESTING PURPOSE|2300|TRAFFIC CELL|00|DEVP
                     SharedPreferences sharedPreferences = PreferenceManager
                             .getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editors = sharedPreferences.edit();
-                    // 23001004|TESTING PURPOSE|2300|TRAFFIC
-                    // CELL|00|DEVP|7893816681|Y
                     String pidCode = "" + arr_logindetails[0];
                     String pidName = "" + arr_logindetails[1];
                     String psCd = "" + arr_logindetails[2];
@@ -453,9 +441,9 @@ public class MainActivity extends Activity implements LocationListener {
                     String mobileNo_flg = "" + arr_logindetails[13];
 
 
-
                     // PUTTING IN SHARED PREFERENCES
                     editors.putString("PID_CODE", pidCode);
+
                     editors.putString("PID_NAME", pidName);
                     editors.putString("PS_CODE", psCd);
                     editors.putString("PS_NAME", psName);

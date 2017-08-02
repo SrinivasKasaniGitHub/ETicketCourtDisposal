@@ -239,55 +239,55 @@ public class Dashboard extends Activity implements View.OnClickListener {
         SharedPreferences sharedPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         current_version = sharedPreference.getString("CURRENT_VERSION", "");
 
-        if (current_version.equals("N")) {
-
-            TextView title = new TextView(this);
-            title.setText("Hyderabad E-Ticket");
-            title.setBackgroundColor(Color.RED);
-            title.setGravity(Gravity.CENTER);
-            title.setTextColor(Color.WHITE);
-            title.setTextSize(26);
-            title.setTypeface(title.getTypeface(), Typeface.BOLD);
-            title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.dialog_logo, 0, R.drawable.dialog_logo, 0);
-            title.setPadding(20, 0, 20, 0);
-            title.setHeight(70);
-
-            String otp_message = "\nPlease Update your Application...! \n";
-
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Dashboard.this,
-                    AlertDialog.THEME_HOLO_LIGHT);
-            alertDialogBuilder.setCustomTitle(title);
-            alertDialogBuilder.setIcon(R.drawable.dialog_logo);
-            alertDialogBuilder.setMessage(otp_message);
-            alertDialogBuilder.setCancelable(false);
-            alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
-                    // new Async_wheler_details().execute();
-                    new Async_UpdateApk().execute();
-                    current_version = "Y";
-                }
-            });
-
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-
-            alertDialog.getWindow().getAttributes();
-
-            TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
-            textView.setTextSize(28);
-            textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
-            textView.setGravity(Gravity.CENTER);
-
-            Button btn = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-            btn.setTextSize(22);
-            btn.setTextColor(Color.WHITE);
-            btn.setTypeface(btn.getTypeface(), Typeface.BOLD);
-            btn.setBackgroundColor(Color.RED);
-
-        }
+//        if (current_version.equals("N")) {
+//
+//            TextView title = new TextView(this);
+//            title.setText("Hyderabad E-Ticket");
+//            title.setBackgroundColor(Color.RED);
+//            title.setGravity(Gravity.CENTER);
+//            title.setTextColor(Color.WHITE);
+//            title.setTextSize(26);
+//            title.setTypeface(title.getTypeface(), Typeface.BOLD);
+//            title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.dialog_logo, 0, R.drawable.dialog_logo, 0);
+//            title.setPadding(20, 0, 20, 0);
+//            title.setHeight(70);
+//
+//            String otp_message = "\nPlease Update your Application...! \n";
+//
+//            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Dashboard.this,
+//                    AlertDialog.THEME_HOLO_LIGHT);
+//            alertDialogBuilder.setCustomTitle(title);
+//            alertDialogBuilder.setIcon(R.drawable.dialog_logo);
+//            alertDialogBuilder.setMessage(otp_message);
+//            alertDialogBuilder.setCancelable(false);
+//            alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    // TODO Auto-generated method stub
+//                    // new Async_wheler_details().execute();
+//                    new Async_UpdateApk().execute();
+//                    current_version = "Y";
+//                }
+//            });
+//
+//            AlertDialog alertDialog = alertDialogBuilder.create();
+//            alertDialog.show();
+//
+//            alertDialog.getWindow().getAttributes();
+//
+//            TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
+//            textView.setTextSize(28);
+//            textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+//            textView.setGravity(Gravity.CENTER);
+//
+//            Button btn = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+//            btn.setTextSize(22);
+//            btn.setTextColor(Color.WHITE);
+//            btn.setTypeface(btn.getTypeface(), Typeface.BOLD);
+//            btn.setBackgroundColor(Color.RED);
+//
+//        }
 
         if (android.os.Build.VERSION.SDK_INT > 11) {
             StrictMode.ThreadPolicy polocy = new StrictMode.ThreadPolicy.Builder().build();
