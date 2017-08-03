@@ -52,7 +52,7 @@
             android:layout_centerHorizontal="true"
             android:text="@string/app_version"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:visibility="gone"/>
+            />
     </RelativeLayout>
 
 

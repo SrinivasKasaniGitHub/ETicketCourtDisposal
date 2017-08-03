@@ -62,7 +62,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-
 public class Dashboard extends Activity implements View.OnClickListener {
 
     String server = "192.168.11.9";
@@ -79,7 +78,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
     int totalSize = 0;
     TextView cur_val;
 
-    TextView tv_login_username, echallan, echallan_reports,tv_pending_booked_dashboard_xml;
+    TextView tv_login_username, echallan, echallan_reports, tv_pending_booked_dashboard_xml;
     TextView tv_drunk_and_drive;// drunk & drive
     TextView tv_spot_challan;
     TextView tv_vehicle_history;
@@ -219,7 +218,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dashboard);
@@ -227,67 +225,62 @@ public class Dashboard extends Activity implements View.OnClickListener {
         compny_Name = (TextView) findViewById(R.id.CompanyName);
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
         compny_Name.startAnimation(marquee);
-
         db = new DBHelper(getApplicationContext());
-
         netwrk_info_txt = "" + getResources().getString(R.string.newtork_txt);
-
         versin_txt = (TextView) findViewById(R.id.textView2);
-
         version = versin_txt.getText().toString().trim().split("\\-")[1];
-
         SharedPreferences sharedPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         current_version = sharedPreference.getString("CURRENT_VERSION", "");
 
-//        if (current_version.equals("N")) {
-//
-//            TextView title = new TextView(this);
-//            title.setText("Hyderabad E-Ticket");
-//            title.setBackgroundColor(Color.RED);
-//            title.setGravity(Gravity.CENTER);
-//            title.setTextColor(Color.WHITE);
-//            title.setTextSize(26);
-//            title.setTypeface(title.getTypeface(), Typeface.BOLD);
-//            title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.dialog_logo, 0, R.drawable.dialog_logo, 0);
-//            title.setPadding(20, 0, 20, 0);
-//            title.setHeight(70);
-//
-//            String otp_message = "\nPlease Update your Application...! \n";
-//
-//            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Dashboard.this,
-//                    AlertDialog.THEME_HOLO_LIGHT);
-//            alertDialogBuilder.setCustomTitle(title);
-//            alertDialogBuilder.setIcon(R.drawable.dialog_logo);
-//            alertDialogBuilder.setMessage(otp_message);
-//            alertDialogBuilder.setCancelable(false);
-//            alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    // TODO Auto-generated method stub
-//                    // new Async_wheler_details().execute();
-//                    new Async_UpdateApk().execute();
-//                    current_version = "Y";
-//                }
-//            });
-//
-//            AlertDialog alertDialog = alertDialogBuilder.create();
-//            alertDialog.show();
-//
-//            alertDialog.getWindow().getAttributes();
-//
-//            TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
-//            textView.setTextSize(28);
-//            textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
-//            textView.setGravity(Gravity.CENTER);
-//
-//            Button btn = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-//            btn.setTextSize(22);
-//            btn.setTextColor(Color.WHITE);
-//            btn.setTypeface(btn.getTypeface(), Typeface.BOLD);
-//            btn.setBackgroundColor(Color.RED);
-//
-//        }
+        if (current_version.equals("N")) {
+
+            TextView title = new TextView(this);
+            title.setText("Hyderabad E-Court");
+            title.setBackgroundColor(Color.RED);
+            title.setGravity(Gravity.CENTER);
+            title.setTextColor(Color.WHITE);
+            title.setTextSize(26);
+            title.setTypeface(title.getTypeface(), Typeface.BOLD);
+            title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.dialog_logo, 0, R.drawable.dialog_logo, 0);
+            title.setPadding(20, 0, 20, 0);
+            title.setHeight(70);
+
+            String otp_message = "\nPlease Update your Application...! \n";
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Dashboard.this,
+                    AlertDialog.THEME_HOLO_LIGHT);
+            alertDialogBuilder.setCustomTitle(title);
+            alertDialogBuilder.setIcon(R.drawable.dialog_logo);
+            alertDialogBuilder.setMessage(otp_message);
+            alertDialogBuilder.setCancelable(false);
+            alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                    // new Async_wheler_details().execute();
+                    new Async_UpdateApk().execute();
+                    current_version = "Y";
+                }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+
+            alertDialog.getWindow().getAttributes();
+
+            TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
+            textView.setTextSize(28);
+            textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+            textView.setGravity(Gravity.CENTER);
+
+            Button btn = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            btn.setTextSize(22);
+            btn.setTextColor(Color.WHITE);
+            btn.setTypeface(btn.getTypeface(), Typeface.BOLD);
+            btn.setBackgroundColor(Color.RED);
+
+        }
 
         if (android.os.Build.VERSION.SDK_INT > 11) {
             StrictMode.ThreadPolicy polocy = new StrictMode.ThreadPolicy.Builder().build();
@@ -300,7 +293,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
         @SuppressWarnings("deprecation")
         @Override
         protected void onPreExecute() {
-            // TODO Auto-generated method stub
             super.onPreExecute();
             showDialog(PROGRESS_DIALOG);
 
@@ -309,10 +301,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
         @SuppressLint("SdCardPath")
         @Override
         protected String doInBackground(Void... arg0) {
-            // TODO Auto-generated method stub
-
             FTPClient ftpClient = new FTPClient();
-
             try {
                 ftpClient.connect(server, port);
                 ftpClient.login(username, password);
@@ -321,9 +310,9 @@ public class Dashboard extends Activity implements View.OnClickListener {
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
                 // ftp://192.168.11.9:99/23/TabAPK/Version-1.5.1.txt
-                File downloadFile1 = new File("/sdcard/Download/ETicketHYD.apk");
+                File downloadFile1 = new File("/sdcard/Download/ECourt.apk");
                 // String remoteFile1 = "/23/TabAPK" + "/" + version;
-                String remoteFile1 = "/23/TabAPK" + "/ETicketHYD.apk";
+                String remoteFile1 = "/23/TabAPK" + "/ECourt.apk";
 
                 OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(downloadFile1));
                 boolean success = ftpClient.retrieveFile(remoteFile1, outputStream);
@@ -345,7 +334,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
                             // showToast("your is Upto Date");
                             TextView title = new TextView(Dashboard.this);
-                            title.setText("Hyderabad E-Ticket");
+                            title.setText("Hyderabad E-Court");
                             title.setBackgroundColor(Color.RED);
                             title.setGravity(Gravity.CENTER);
                             title.setTextColor(Color.WHITE);
@@ -450,6 +439,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                             Log.i("SUCCess LOG ::::::::", "***********ENTERED*******");
                             db.open();
                             db.execSQL("delete from " + DBHelper.psName_table);
+                            db.execSQL("delete from " + DBHelper.wheelercode_table);
                         } catch (Exception e) {
                             // TODO: handle exception
                             e.printStackTrace();
@@ -464,7 +454,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setDataAndType(
                                 Uri.fromFile(new File(
-                                        Environment.getExternalStorageDirectory() + "/download/" + "ETicketHYD.apk")),
+                                        Environment.getExternalStorageDirectory() + "/download/" + "ECourt.apk")),
                                 "application/vnd.android.package-archive");
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -473,13 +463,10 @@ public class Dashboard extends Activity implements View.OnClickListener {
                 }
 
             } catch (SocketException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             return null;
@@ -487,7 +474,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(String result) {
-            // TODO Auto-generated method stub
             super.onPostExecute(result);
             // removeDialog(PROGRESS_DIALOG);
         }
@@ -501,7 +487,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
     @SuppressWarnings("deprecation")
     private void showProgress(String server) {
-        // TODO Auto-generated method stub
         dialog = new Dialog(Dashboard.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.myprogressdialog);
@@ -522,19 +507,17 @@ public class Dashboard extends Activity implements View.OnClickListener {
     }
 
     private void LoadUIComponents() {
-        // TODO Auto-generated method stub
-
         tv_login_username = (TextView) findViewById(R.id.tv_login_username_dashboard_xml);
         tv_drunk_and_drive = (TextView) findViewById(R.id.tv_generateticket_dashboard_xml);// drunk&drive
         tv_spot_challan = (TextView) findViewById(R.id.tv_spot_dashboard_xml);
-       // tv_vehicle_history = (TextView) findViewById(R.id.tv_vhclehistory_dashboard_xml);
+        // tv_vehicle_history = (TextView) findViewById(R.id.tv_vhclehistory_dashboard_xml);
         tv_towing_cp_act = (TextView) findViewById(R.id.tv_towing_dashboard_xml);
         tv_release_document = (TextView) findViewById(R.id.tv_releasedocuments_dashboard_xml);
         tv_reports = (TextView) findViewById(R.id.tv_reports_dashboard_xml);
         tv_duplicate_print = (TextView) findViewById(R.id.tvduplicateprint_dashboad_xml);
         tv_settings = (TextView) findViewById(R.id.tv_settings_dashboard_xml);
         tv_sync = (TextView) findViewById(R.id.tv_sync_dashboard_xml);
-        tv_pending_booked_dashboard_xml=(TextView)findViewById(R.id.tv_pending_booked_dashboard_xml);
+        tv_pending_booked_dashboard_xml = (TextView) findViewById(R.id.tv_pending_booked_dashboard_xml);
         tv_about_version = (ImageView) findViewById(R.id.tv_about_version);
 
         aadhaar = (ImageView) findViewById(R.id.aadhaar);
@@ -578,7 +561,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
     @SuppressWarnings({"static-access", "deprecation"})
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
         switch (v.getId()) {
             case R.id.tv_generateticket_dashboard_xml:
                 check_vhleHistory_or_Spot = "drunkdrive";
@@ -614,7 +596,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         }
                     }
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     c_whlr_details.close();
                     cursor_psnames.close();
@@ -637,7 +618,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     db.open();
                     cursor_psnames = DBHelper.db.rawQuery("select * from " + db.psName_table, null);
                     cursor_courtnames = DBHelper.db.rawQuery("select * from " + db.courtName_table, null);
-
                     cursor_court_disnames = DBHelper.db.rawQuery("select * from " + db.court_disName_table, null);
 
 				/* TO GET WHEELER LENGTH */
@@ -657,7 +637,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         }
                     }
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     c_whlr_details.close();
                     cursor_psnames.close();
@@ -678,7 +657,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         startActivity(new Intent(this, Settings.class));
                     }
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 cursor_psnames.close();
@@ -727,7 +705,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         }
                     }
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     c_whlr_details.close();
                     cursor_psnames.close();
@@ -768,7 +745,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         }
                     }
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     c_whlr_details.close();
                     cursor_psnames.close();
@@ -810,7 +786,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         }
                     }
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     c_whlr_details.close();
                     cursor_psnames.close();
@@ -853,7 +828,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         }
                     }
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     c_whlr_details.close();
                     cursor_psnames.close();
@@ -895,7 +869,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         }
                     }
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     c_whlr_details.close();
                     cursor_psnames.close();
@@ -937,7 +910,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         }
                     }
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     c_whlr_details.close();
                     cursor_psnames.close();
@@ -981,31 +953,24 @@ public class Dashboard extends Activity implements View.OnClickListener {
         @SuppressWarnings("deprecation")
         @Override
         protected void onPreExecute() {
-            // TODO Auto-generated method stub
             super.onPreExecute();
             showDialog(PROGRESS_DIALOG);
         }
 
         @Override
         protected String doInBackground(Void... params) {
-            // TODO Auto-generated method stub
-
             ServiceHelper.getversiondetails(UNIT_CODE, "TAB", version);
-
             return null;
         }
 
         @Override
         protected void onPostExecute(String result) {
-            // TODO Auto-generated method stub
             super.onPostExecute(result);
             // removeDialog(PROGRESS_DIALOG);
 
             if (!ServiceHelper.version_response.equals("NA")) {
-
                 Intent i = new Intent(getApplicationContext(), ReleaseversionActivity.class);
                 startActivity(i);
-
             } else {
                 showToast("No Updates Found !!!");
             }
@@ -1019,8 +984,8 @@ public class Dashboard extends Activity implements View.OnClickListener {
         // TODO Auto-generated method stub
 
         telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        imei_send = telephonyManager.getDeviceId();// TO GET IMEI NUMBER
-
+        imei_send = telephonyManager.getDeviceId();
+        // TO GET IMEI NUMBER
         if (telephonyManager.getSimState() != TelephonyManager.SIM_STATE_ABSENT) {
             simid_send = "" + telephonyManager.getSimSerialNumber();
         } else {
@@ -1277,7 +1242,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
     }
 
 	/*
-	 * FOR GETTING WHEELER'S DETAILS 2-3-4 WHEELERS
+     * FOR GETTING WHEELER'S DETAILS 2-3-4 WHEELERS
 	 */
 
     // getViolationPointSystemMasterData()

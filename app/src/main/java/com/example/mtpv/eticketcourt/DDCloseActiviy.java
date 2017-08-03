@@ -608,7 +608,6 @@ public class DDCloseActiviy extends Activity {
                         edtTxtConDays.requestFocus();
                     } else {
                         new Async_getCourtClosingUpdateTicketInfo().execute();
-
                     }
 
                 } else if (court_Disposal_code.equals("4")) {
@@ -618,7 +617,6 @@ public class DDCloseActiviy extends Activity {
                         edtTxtRisDays.requestFocus();
                     } else {
                         new Async_getCourtClosingUpdateTicketInfo().execute();
-
                     }
 
                 }
@@ -687,7 +685,7 @@ public class DDCloseActiviy extends Activity {
 
     }
 
-    public class Async_getCourtClosingUpdateTicketInfo extends AsyncTask<Void, Void, String> {
+    private class Async_getCourtClosingUpdateTicketInfo extends AsyncTask<Void, Void, String> {
         @SuppressLint("DefaultLocale")
         @SuppressWarnings("unused")
         @Override
@@ -711,26 +709,18 @@ public class DDCloseActiviy extends Activity {
         @SuppressWarnings("deprecation")
         @Override
         protected void onPostExecute(String result) {
-            // TODO Auto-generated method stub
             super.onPostExecute(result);
             Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             print_Data = ServiceHelper.Opdata_Chalana;
             removeDialog(PROGRESS_DIALOG);
             if (null!=ServiceHelper.Opdata_Chalana) {
                 showToast(ServiceHelper.Opdata_Chalana);
-
-//                Intent intent_dashboard = new Intent(getApplicationContext(), Dashboard.class);
-//                startActivity(intent_dashboard);
             }
-//            else {
-//                showDialog(PRINT_DD_DIALOG);
-//            }
             online_report_status = "";
         }
     }
 
-
-    public class Async_getDD_details extends AsyncTask<Void, Void, String> {
+    private class Async_getDD_details extends AsyncTask<Void, Void, String> {
         @SuppressLint("DefaultLocale")
         @SuppressWarnings("unused")
         @Override
@@ -824,7 +814,7 @@ public class DDCloseActiviy extends Activity {
         }
     }
 
-    public class Aysnc_Print_Data extends AsyncTask<Void, Void, String> {
+    private class Aysnc_Print_Data extends AsyncTask<Void, Void, String> {
 
         @Override
         protected String doInBackground(Void... params) {
@@ -1407,7 +1397,6 @@ public class DDCloseActiviy extends Activity {
         }
     }
 
-
     private void showToast(String msg) {
         LayoutInflater inflater = getLayoutInflater();
 
@@ -1425,7 +1414,6 @@ public class DDCloseActiviy extends Activity {
         toast.setView(layout);
         toast.show();
     }
-
 
     /* FOR OFFENSE DATE */
     DatePickerDialog.OnDateSetListener md1 = new DatePickerDialog.OnDateSetListener() {

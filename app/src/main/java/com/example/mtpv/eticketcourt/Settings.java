@@ -836,9 +836,9 @@ public class Settings extends Activity implements View.OnClickListener {
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
                 // ftp://192.168.11.9:99/23/TabAPK/Version-1.5.1.txt
-                File downloadFile1 = new File("/sdcard/Download/ETicketHYD.apk");
+                File downloadFile1 = new File("/sdcard/Download/ECourt.apk");
                 //String remoteFile1 = "/23/TabAPK" + "/" + version;
-                String remoteFile1 = "/23/TabAPK" + "/ETicketHYD.apk";
+                String remoteFile1 = "/23/TabAPK" + "/ECourt.apk";
 
                 OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(downloadFile1));
                 boolean success = ftpClient.retrieveFile(remoteFile1, outputStream);
@@ -861,7 +861,7 @@ public class Settings extends Activity implements View.OnClickListener {
 
                             // showToast("your is Upto Date");
                             TextView title = new TextView(Settings.this);
-                            title.setText("Hyderabad E-Ticket");
+                            title.setText("Hyderabad E-Court");
                             title.setBackgroundColor(Color.BLUE);
                             title.setGravity(Gravity.CENTER);
                             title.setTextColor(Color.WHITE);
@@ -967,6 +967,7 @@ public class Settings extends Activity implements View.OnClickListener {
                             Log.i("SUCCess LOG ::::::::", "***********ENTERED*******");
                             db.open();
                             db.execSQL("delete from " + DBHelper.psName_table);
+                            db.execSQL("delete from " + DBHelper.wheelercode_table);
                         } catch (Exception e) {
                             // TODO: handle exception
                             e.printStackTrace();
@@ -980,7 +981,7 @@ public class Settings extends Activity implements View.OnClickListener {
 
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory()+ "/download/"
-                                + "ETicketHYD.apk")),"application/vnd.android.package-archive");
+                                + "ECourt.apk")),"application/vnd.android.package-archive");
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
 

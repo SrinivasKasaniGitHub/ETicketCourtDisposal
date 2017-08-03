@@ -190,15 +190,6 @@ public class MainActivity extends Activity implements LocationListener {
         }
     }
 
-    private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
-
-    private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-    }
 
     void startAnim() {
         // progIndicator.show();
