@@ -53,6 +53,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
@@ -66,7 +67,6 @@ public class DDCloseActiviy extends Activity {
     HashMap<String, String> paramsCourtdis = new HashMap<>();
     ArrayList<HashMap<String, String>> maparrayCourtdis = new ArrayList<>();
     String print_Data;
-
     Calendar cal;
     int present_year;
     int present_month;
@@ -142,10 +142,12 @@ public class DDCloseActiviy extends Activity {
         getCourtDisNamesFromDB();
         getCourtNamesFromDB();
         cal = Calendar.getInstance();
+        int a = 4;
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
 		/* FOR DATE PICKER */
+
         present_year = cal.get(Calendar.YEAR);
         present_month = cal.get(Calendar.MONTH);
         present_day = cal.get(Calendar.DAY_OF_MONTH);
@@ -160,11 +162,9 @@ public class DDCloseActiviy extends Activity {
         lytConTo = (LinearLayout) findViewById(R.id.lytConvtdTo);
         lytConDays = (LinearLayout) findViewById(R.id.lytConvtdDays);
         lytFineAmnt = (LinearLayout) findViewById(R.id.lytFineAmnt);
-
         lytSoclFrom = (LinearLayout) findViewById(R.id.lytSoclFrom);
         lytSclSerTo = (LinearLayout) findViewById(R.id.lytSclSerTo);
         lytRisingDays = (LinearLayout) findViewById(R.id.lytRisingDays);
-
         compny_Name = (TextView) findViewById(R.id.CompanyName);
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
         compny_Name.startAnimation(marquee);
@@ -245,7 +245,7 @@ public class DDCloseActiviy extends Activity {
                         selectedCourtCode = paramsCourt.get(mapCourtName);
                         //Toast.makeText(getApplicationContext(), "COURT NAME : " + mapCourtName + " COURT CODE : " + selectedCourtCode, Toast.LENGTH_LONG).show();
                         break;
-                    }// int longitude = Integer.parseInt(menuItem.get(KEY_LON));
+                    }
 
                 }
             }
@@ -499,14 +499,15 @@ public class DDCloseActiviy extends Activity {
 //                driver_LCNCE=edtTxt_DlNo.getText().toString();
 //                driver_Mobile=edtTxt_Mob_No.getText().toString();
 //                driver_Adhar=edtTxt_Aadhar_No.getText().toString();
-                if (("null") == dl) {
+                if (("null").equals(dl)) {
                     driver_LCNCE = edtTxt_DlNo.getText().toString();
                 }
 
-                if (("null") == ml) {
+                if (("null").equals(ml)) {
                     driver_Mobile = edtTxt_Mob_No.getText().toString();
                 }
-                if (("null") == aN) {
+
+                if (("null").equals(aN)) {
                     driver_Adhar = edtTxt_Aadhar_No.getText().toString();
                 }
 
@@ -532,10 +533,12 @@ public class DDCloseActiviy extends Activity {
                 } else if ((!driver_Adhar.equals("")) && (driver_Adhar.length() <= 11 || driver_Adhar.length() >= 13)) {
                     edtTxt_Aadhar_No.setError(Html.fromHtml("<font color='white'>Enter valid Aadhar Number </font>"));
                     edtTxt_Aadhar_No.requestFocus();
-                } else if ((!driver_LCNCE.equals("")) && (driver_LCNCE.length() <= 3)) {
-                    edtTxt_DlNo.setError(Html.fromHtml("<font color='white'>Enter valid Dl Number </font>"));
-                    edtTxt_DlNo.requestFocus();
-                } else if (btn_courtAttenddate.getText().toString().equals("Select Date")) {
+                }
+//                else if ((!driver_LCNCE.equals("")) && (driver_LCNCE.length() <= 3)) {
+//                    edtTxt_DlNo.setError(Html.fromHtml("<font color='white'>Enter valid Dl Number </font>"));
+//                    edtTxt_DlNo.requestFocus();
+//                }
+                else if (btn_courtAttenddate.getText().toString().equals("Select Date")) {
                     showToast("Select Court Attended Date");
                 } else if (sTS_No.trim().equals("")) {
                     edtTxt_STC_No.setError(Html.fromHtml("<font color='white'>Enter STC No</font>"));
@@ -677,7 +680,6 @@ public class DDCloseActiviy extends Activity {
                 }
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         cursor_courtnames.close();
@@ -713,7 +715,7 @@ public class DDCloseActiviy extends Activity {
             Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             print_Data = ServiceHelper.Opdata_Chalana;
             removeDialog(PROGRESS_DIALOG);
-            if (null!=ServiceHelper.Opdata_Chalana) {
+            if (null != ServiceHelper.Opdata_Chalana) {
                 showToast(ServiceHelper.Opdata_Chalana);
             }
             online_report_status = "";
@@ -776,7 +778,7 @@ public class DDCloseActiviy extends Activity {
                             Reg_No.setText(vEHICLE_NUMBER);
                             Challan_No.setText(chall_No);
                             Offender_Date.setText(offence_Date);
-                            if (("null") != driver_Mobile) {
+                            if (!Objects.equals("null", driver_Mobile)) {
                                 edtTxt_Mob_No.setVisibility(View.GONE);
                                 Mobile_No.setVisibility(View.VISIBLE);
                                 Mobile_No.setText(driver_Mobile);
@@ -784,7 +786,7 @@ public class DDCloseActiviy extends Activity {
                                 edtTxt_Mob_No.setVisibility(View.VISIBLE);
                                 Mobile_No.setVisibility(View.GONE);
                             }
-                            if (("null") != driver_Adhar) {
+                            if (!Objects.equals("null", driver_Adhar)) {
                                 edtTxt_Aadhar_No.setVisibility(View.GONE);
                                 Aadhar_No.setVisibility(View.VISIBLE);
                                 Aadhar_No.setText(driver_Adhar);
@@ -825,7 +827,7 @@ public class DDCloseActiviy extends Activity {
 
                     @Override
                     public void run() {
-                        // TODO Auto-generated method stub
+
                         showToast("Bluetooth NOT support");
                     }
                 });
@@ -856,13 +858,6 @@ public class DDCloseActiviy extends Activity {
 
 
                             try {
-                                    /*
-                                     * String printdata =
-									 * bth_printer.font_Courier_41(""+
-									 * ServiceHelper.Opdata_Chalana);
-									 * actual_printer.Call_PrintertoPrint("" +
-									 * address, "" + printdata);
-									 */
 
                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -903,13 +898,6 @@ public class DDCloseActiviy extends Activity {
 
                                     try {
                                         Log.i("ONLINE PRINT", "ONLINE PRINT");
-                                        /*
-                                         * String printdata =
-										 * bth_printer.font_Courier_41(""+
-										 * ServiceHelper.Opdata_Chalana);
-										 * actual_printer.Call_PrintertoPrint(
-										 * ""+ address, "" + printdata);
-										 */
 
                                         Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -937,15 +925,6 @@ public class DDCloseActiviy extends Activity {
                                                 .equals("" + getResources().getString(R.string.dup_drunk_drive)))
                                                 && (!print_respose.get(selected_type).equals(""))) {
                                             try {
-												/*
-												 * String printdata =
-												 * bth_printer.font_Courier_41(
-												 * ""+ print_respose.get(
-												 * selected_type));
-												 * actual_printer.
-												 * Call_PrintertoPrint("" +
-												 * address, "" + printdata);
-												 */
 
                                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -958,11 +937,8 @@ public class DDCloseActiviy extends Activity {
                                                 actual_printer.closeBT();
                                             } catch (Exception e) {
                                                 runOnUiThread(new Runnable() {
-
                                                     @Override
                                                     public void run() {
-                                                        // TODO Auto-generated
-                                                        // method stub
                                                         showToast("Check Your Device is Working Condition!");
                                                     }
                                                 });
@@ -972,15 +948,6 @@ public class DDCloseActiviy extends Activity {
                                                 .equals("" + getResources().getString(R.string.dup_spot_challan)))
                                                 && (!print_respose.get(selected_type).equals(""))) {
                                             try {
-												/*
-												 * String printdata =
-												 * bth_printer.font_Courier_41(
-												 * ""+ print_respose.get(
-												 * selected_type));
-												 * actual_printer.
-												 * Call_PrintertoPrint("" +
-												 * address, ""+ printdata);
-												 */
 
                                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -994,11 +961,8 @@ public class DDCloseActiviy extends Activity {
                                             } catch (Exception e) {
                                                 // TODO: handle exception
                                                 runOnUiThread(new Runnable() {
-
                                                     @Override
                                                     public void run() {
-                                                        // TODO Auto-generated
-                                                        // method stub
                                                         showToast("Check Your Device is Working Condition!");
                                                     }
                                                 });
@@ -1008,15 +972,6 @@ public class DDCloseActiviy extends Activity {
                                                 && (!print_respose.get(selected_type).equals(""))) {
 
                                             try {
-												/*
-												 * String printdata =
-												 * bth_printer.font_Courier_41(
-												 * ""+ print_respose.get(
-												 * selected_type));
-												 * actual_printer.
-												 * Call_PrintertoPrint("" +
-												 * address, ""+ printdata);
-												 */
                                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
                                                 String print_data = printer
@@ -1042,15 +997,6 @@ public class DDCloseActiviy extends Activity {
                                                 && (!print_respose.get(selected_type).equals(""))) {
 
                                             try {
-												/*
-												 * String printdata =
-												 * bth_printer.font_Courier_41(
-												 * ""+ print_respose.get(
-												 * selected_type));
-												 * actual_printer.
-												 * Call_PrintertoPrint("" +
-												 * address, ""+ printdata);
-												 */
 
                                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
@@ -1077,16 +1023,6 @@ public class DDCloseActiviy extends Activity {
                                                 && (!print_respose.get(selected_type).equals(""))) {
 
                                             try {
-												/*
-												 * String printdata =
-												 * bth_printer.font_Courier_41(
-												 * ""+ print_respose.get(
-												 * selected_type));
-												 * actual_printer.
-												 * Call_PrintertoPrint("" +
-												 * address, ""+ printdata);
-												 */
-
                                                 Bluetooth_Printer_3inch_ThermalAPI printer = new Bluetooth_Printer_3inch_ThermalAPI();
 
                                                 String print_data = printer
@@ -1101,8 +1037,7 @@ public class DDCloseActiviy extends Activity {
 
                                                     @Override
                                                     public void run() {
-                                                        // TODO Auto-generated
-                                                        // method stub
+
                                                         showToast("Check Your Device is Working Condition!");
                                                     }
                                                 });
@@ -1419,7 +1354,7 @@ public class DDCloseActiviy extends Activity {
     DatePickerDialog.OnDateSetListener md1 = new DatePickerDialog.OnDateSetListener() {
 
         @SuppressWarnings("deprecation")
-        @SuppressLint({"SimpleDateFormat","DefaultLocale"})
+        @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
 
         @Override
         public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
@@ -1433,8 +1368,6 @@ public class DDCloseActiviy extends Activity {
         }
     };
     DatePickerDialog.OnDateSetListener md2 = new DatePickerDialog.OnDateSetListener() {
-
-
         @SuppressWarnings("deprecation")
         @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
         @Override

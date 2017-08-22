@@ -1019,7 +1019,7 @@ public class Settings extends Activity implements View.OnClickListener {
     @SuppressLint({ "NewApi", "WorldReadableFiles" })
     @Override
     protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
+
         switch (id) {
 
             case PS_NAME_DIALOG:
@@ -1038,14 +1038,12 @@ public class Settings extends Activity implements View.OnClickListener {
                 ad_ps_name.setCustomTitle(title);
                 ad_ps_name.setSingleChoiceItems(psname_name, selected_ps_name,
                         new DialogInterface.OnClickListener() {
-
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // TODO Auto-generated method stub
+
                                 selected_ps_name = which;
                                 btn_ps_name.setText(""+ psname_name[which].toString().trim());
                                 ps_code_pos = which;
-
                                 dashboard.preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
                                 dashboard.editor = dashboard.preferences.edit();
                                 dashboard.editor.putInt("psname_code_toSet", which);
@@ -1053,13 +1051,6 @@ public class Settings extends Activity implements View.OnClickListener {
                                 dashboard.editor.putString("psname_name", psname_name[which].toString());
                                 dashboard.editor.commit();
                                 removeDialog(PS_NAME_DIALOG);
-
-                                // if ((pointNameBy_PsName_code_arr.size() > 0)
-                                // && (pointNameBy_PsName_arr.size() > 0)) {
-                                // pointNameBy_PsName_code_arr.clear();
-                                // pointNameBy_PsName_arr.clear();
-                                // }
-
                                 if (isOnline()) {
                                     selected_pointby_psname = -1;
                                     dashboard.preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);

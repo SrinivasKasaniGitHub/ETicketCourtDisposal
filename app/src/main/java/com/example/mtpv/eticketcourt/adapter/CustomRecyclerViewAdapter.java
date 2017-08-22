@@ -23,9 +23,6 @@ import org.apache.commons.validator.routines.checkdigit.VerhoeffCheckDigit;
 import java.util.ArrayList;
 
 
-/**
- * Created by mtpv on 7/6/2017.
- */
 
 public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecyclerViewAdapter.MyViewHolder> {
 
@@ -215,6 +212,8 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
+
+
         }
     }
 

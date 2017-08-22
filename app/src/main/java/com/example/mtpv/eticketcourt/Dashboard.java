@@ -462,10 +462,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     }
                 }
 
-            } catch (SocketException e) {
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -521,10 +517,8 @@ public class Dashboard extends Activity implements View.OnClickListener {
         tv_about_version = (ImageView) findViewById(R.id.tv_about_version);
 
         aadhaar = (ImageView) findViewById(R.id.aadhaar);
-
         echallan = (TextView) findViewById(R.id.echallan);
         echallan_reports = (TextView) findViewById(R.id.echallan_reports);
-
         ibtn_logout = (ImageButton) findViewById(R.id.imgbtn_logout_dashboard_xml);
         // offline_btn = (ImageView) findViewById(R.id.offline);
         // offline_btn.setOnClickListener(this);
@@ -540,7 +534,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
         tv_reports.setOnClickListener(this);
         tv_about_version.setOnClickListener(this);
         aadhaar.setOnClickListener(this);
-
         echallan.setOnClickListener(this);
         echallan_reports.setOnClickListener(this);
 
@@ -564,7 +557,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.tv_generateticket_dashboard_xml:
                 check_vhleHistory_or_Spot = "drunkdrive";
-            /* TO CHECK PS NAME AND POINT NAME HAS SET OR NOT IN SETTINGS */
+
                 getPreferenceValues();
                 preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                 editor = preferences.edit();

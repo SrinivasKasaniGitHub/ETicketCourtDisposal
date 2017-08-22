@@ -362,14 +362,13 @@ public class MainActivity extends Activity implements LocationListener {
     public Boolean isOnline() {
         ConnectivityManager conManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo nwInfo = conManager.getActiveNetworkInfo();
-        // return nwInfo != null;
         if (nwInfo != null && nwInfo.isConnected()) {
             return true;
         }
         return false;
     }
 
-    public class Async_task_login extends AsyncTask<Void, Void, String> {
+    private class Async_task_login extends AsyncTask<Void, Void, String> {
 
         @Override
         protected String doInBackground(Void... params) {
@@ -468,12 +467,6 @@ public class MainActivity extends Activity implements LocationListener {
                     Log.i("MOBILE_NO_FLAG   :::", mobileNo_flg);
                     editors.commit();
 
-					/*
-					 * if(cadre_code!=null && Integer.parseInt(cadre_code)<=13){
-					 * startActivity(new Intent(getApplicationContext(),
-					 * Dashboard.class)); } else { startActivity(new
-					 * Intent(getApplicationContext(), Dashboard_PC.class)); }
-					 */
                     startActivity(new Intent(getApplicationContext(), Dashboard.class));
                     finish();
                 }
@@ -523,12 +516,9 @@ public class MainActivity extends Activity implements LocationListener {
                 // First get location from Network Provider
                 if (isNetworkEnabled) {
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-
                         m_locationlistner.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES,
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                         Log.d("Network", "Network");
-
                         if (m_locationlistner != null) {
                             location = m_locationlistner.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
@@ -553,7 +543,7 @@ public class MainActivity extends Activity implements LocationListener {
                         }
                     }
                 }
-                // if GPS Enabled get lat/long using GPS Services
+
                 if (isGPSEnabled) {
                     if (location == null) {
                         m_locationlistner.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES,

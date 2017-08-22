@@ -78,7 +78,7 @@ public class CourtCaseDetailsActivity extends Activity {
     TextView compny_Name;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courtcase_details);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
@@ -101,58 +101,61 @@ public class CourtCaseDetailsActivity extends Activity {
         bundle = getIntent().getExtras();
         String array_Value = bundle.getString("ArrayValue");
 
-        if (array_Value.equals("DD_Bkd")) {
-            arrayList_CourtCase_Detilas = new ArrayList<>();
-            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_Booked;
-            btn_councelling_Date.setVisibility(View.VISIBLE);
-            courtspinner.setVisibility(View.VISIBLE);
-            spinnerAvailblity = "1";
-            sms_key = "COURT";
-        }
 
-        if (array_Value.equals("Txt_DD_CouncelngNot_Atnd")) {
-            arrayList_CourtCase_Detilas = new ArrayList<>();
-            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CouncelngNot_Atnd;
-            btn_councelling_Date.setVisibility(View.VISIBLE);
-            courtspinner.setVisibility(View.GONE);
-            spinnerAvailblity = "0";
-            sms_key = "COUNC";
-        }
 
-        if (array_Value.equals("CHG_Bkd")) {
-            arrayList_CourtCase_Detilas = new ArrayList<>();
-            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_Booked;
-            btn_councelling_Date.setVisibility(View.VISIBLE);
-            courtspinner.setVisibility(View.VISIBLE);
-            spinnerAvailblity = "1";
-            sms_key = "COURT";
-        }
+            if (array_Value.equals("DD_Bkd")) {
+                arrayList_CourtCase_Detilas = new ArrayList<>();
+                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_Booked;
+                btn_councelling_Date.setVisibility(View.VISIBLE);
+                courtspinner.setVisibility(View.VISIBLE);
+                spinnerAvailblity = "1";
+                sms_key = "COURT";
+            }
 
-        if (array_Value.equals("Txt_CHG_CouncelngNot_Atnd")) {
-            arrayList_CourtCase_Detilas = new ArrayList<>();
-            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CouncelngNot_Atnd;
-            btn_councelling_Date.setVisibility(View.VISIBLE);
-            courtspinner.setVisibility(View.GONE);
-            spinnerAvailblity = "0";
-            sms_key = "COUNC";
-        }
+            if (array_Value.equals("Txt_DD_CouncelngNot_Atnd")) {
+                arrayList_CourtCase_Detilas = new ArrayList<>();
+                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CouncelngNot_Atnd;
+                btn_councelling_Date.setVisibility(View.VISIBLE);
+                courtspinner.setVisibility(View.GONE);
+                spinnerAvailblity = "0";
+                sms_key = "COUNC";
+            }
 
-        if (array_Value.equals("Txt_DD_CourtNot_Atnd")) {
-            arrayList_CourtCase_Detilas = new ArrayList<>();
-            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CourtNot_Atnd;
-            btn_councelling_Date.setVisibility(View.VISIBLE);
-            courtspinner.setVisibility(View.VISIBLE);
-            spinnerAvailblity = "1";
-            sms_key = "COURT";
-        }
-        if (array_Value.equals("Txt_CHG_CourtNot_Atnd")) {
-            arrayList_CourtCase_Detilas = new ArrayList<>();
-            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CourtNot_Atnd;
-            btn_councelling_Date.setVisibility(View.VISIBLE);
-            courtspinner.setVisibility(View.VISIBLE);
-            spinnerAvailblity = "1";
-            sms_key = "COURT";
-        }
+            if (array_Value.equals("CHG_Bkd")) {
+                arrayList_CourtCase_Detilas = new ArrayList<>();
+                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_Booked;
+                btn_councelling_Date.setVisibility(View.VISIBLE);
+                courtspinner.setVisibility(View.VISIBLE);
+                spinnerAvailblity = "1";
+                sms_key = "COURT";
+            }
+
+            if (array_Value.equals("Txt_CHG_CouncelngNot_Atnd")) {
+                arrayList_CourtCase_Detilas = new ArrayList<>();
+                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CouncelngNot_Atnd;
+                btn_councelling_Date.setVisibility(View.VISIBLE);
+                courtspinner.setVisibility(View.GONE);
+                spinnerAvailblity = "0";
+                sms_key = "COUNC";
+            }
+
+            if (array_Value.equals("Txt_DD_CourtNot_Atnd")) {
+                arrayList_CourtCase_Detilas = new ArrayList<>();
+                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CourtNot_Atnd;
+                btn_councelling_Date.setVisibility(View.VISIBLE);
+                courtspinner.setVisibility(View.VISIBLE);
+                spinnerAvailblity = "1";
+                sms_key = "COURT";
+            }
+            if (array_Value.equals("Txt_CHG_CourtNot_Atnd")) {
+                arrayList_CourtCase_Detilas = new ArrayList<>();
+                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CourtNot_Atnd;
+                btn_councelling_Date.setVisibility(View.VISIBLE);
+                courtspinner.setVisibility(View.VISIBLE);
+                spinnerAvailblity = "1";
+                sms_key = "COURT";
+            }
+
 
         custom_CourtCase_DetailsAdapter = new CustomRecyclerViewAdapter(this, arrayList_CourtCase_Detilas);
         recyclerView.setAdapter(custom_CourtCase_DetailsAdapter);
@@ -197,11 +200,8 @@ public class CourtCaseDetailsActivity extends Activity {
                 } else if (spinnerAvailblity.equals("1") && selectedCourtCode == null) {
                     showToast("Please select CourtName!");
                 } else {
-
                     JSONArray jsonArray_caseDetails = new JSONArray();
-
                     for (CasesDetailsPojo casesDetailsPojo : arrayList_CourtCase_Detilas) {
-
                         if (casesDetailsPojo.isSelected()) {
                             jsonObject = new JSONObject();
                             if (casesDetailsPojo.getDRIVER_AADHAAR().equals("")) {
@@ -229,7 +229,7 @@ public class CourtCaseDetailsActivity extends Activity {
                                     jsonObject.put("DRIVER_AADHAAR", casesDetailsPojo.getDRIVER_AADHAAR());
                                     jsonObject.put("DRIVER_MOBILE", casesDetailsPojo.getDRIVER_MOBILE());
                                     jsonObject.put("SELECTED_COUNC_DATE", councelng_Date);
-                                    jsonObject.put("COURT_NAME", selectedCourtName);
+                                    jsonObject.put("COURT_NAME", selectedCourtName!=null?selectedCourtName:"");
                                     jsonObject.put("COURT_CODE", selectedCourtCode);
                                     jsonObject.put("PID_CODE", MainActivity.user_id);
                                     jsonObject.put("PID_NAME", MainActivity.arr_logindetails[1]);
@@ -363,7 +363,7 @@ public class CourtCaseDetailsActivity extends Activity {
                 DatePickerDialog dp_councelling_Date = new DatePickerDialog(this, councelling_Date_Dialog, present_year, present_month,
                         present_day);
 
-                dp_councelling_Date.getDatePicker().setMaxDate(System.currentTimeMillis());
+//                dp_councelling_Date.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_councelling_Date;
             case PROGRESS_DIALOG:
                 ProgressDialog pd = ProgressDialog.show(this, "", "Please Wait...", true);

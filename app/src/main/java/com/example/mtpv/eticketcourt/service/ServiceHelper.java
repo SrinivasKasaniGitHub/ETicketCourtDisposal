@@ -1155,7 +1155,6 @@ public class ServiceHelper {
 
 				//Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString().trim());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -1166,7 +1165,6 @@ public class ServiceHelper {
 			Opdata_Chalana = "NA";
 
 		} catch (Exception e) {
-			// TODO: handle exception
 			Opdata_Chalana = "NA";
 		}
 
@@ -1271,9 +1269,7 @@ public class ServiceHelper {
 		} catch (Exception e) {
 			Opdata_Chalana = "NA";
 		}
-
-
-	}
+    }
 
 
 
