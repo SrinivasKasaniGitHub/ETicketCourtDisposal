@@ -364,13 +364,13 @@ public class CourtCaseStatusActivity extends Activity {
                 DatePickerDialog dp_offenceFrom_date = new DatePickerDialog(this, offence_FromDate_Dialog, present_year, present_month,
                         present_day);
 
-                dp_offenceFrom_date.getDatePicker().setMaxDate(System.currentTimeMillis());
+//                dp_offenceFrom_date.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_offenceFrom_date;
             case OFFENCE_TO_DATE_PICKER:
                 DatePickerDialog dp_offenceTo_date = new DatePickerDialog(this, offence_ToDate_Dialog, present_year, present_month,
                         present_day);
 
-                dp_offenceTo_date.getDatePicker().setMaxDate(System.currentTimeMillis());
+//                dp_offenceTo_date.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_offenceTo_date;
 
             case PROGRESS_DIALOG:

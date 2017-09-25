@@ -536,15 +536,15 @@ public class DDCloseActiviy extends Activity {
 //                driver_LCNCE=edtTxt_DlNo.getText().toString();
 //                driver_Mobile=edtTxt_Mob_No.getText().toString();
 //                driver_Adhar=edtTxt_Aadhar_No.getText().toString();
-                if (("null").equals(dl)) {
+                if (("null").equals(dl)||("").equals(dl)) {
                     driver_LCNCE = edtTxt_DlNo.getText().toString();
                 }
 
-                if (("null").equals(ml)) {
+                if (("null").equals(ml)||("").equals(ml)) {
                     driver_Mobile = edtTxt_Mob_No.getText().toString();
                 }
 
-                if (("null").equals(aN)) {
+                if (("null").equals(aN)||("").equals(aN)) {
                     driver_Adhar = edtTxt_Aadhar_No.getText().toString();
                 }
 
@@ -784,10 +784,13 @@ public class DDCloseActiviy extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
-                dd_lyt.setVisibility(View.GONE);
-                pay_dd_lyt.setVisibility(View.GONE);
-                et_dp_regno.setText("");
-                btn_dp_date_selection.setText("Select Date");
+//                dd_lyt.setVisibility(View.GONE);
+//                pay_dd_lyt.setVisibility(View.GONE);
+//                et_dp_regno.setText("");
+//                btn_dp_date_selection.setText("Select Date");
+                Intent intent=new Intent(getApplicationContext(),DDCloseActiviy.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
 
             }
         });

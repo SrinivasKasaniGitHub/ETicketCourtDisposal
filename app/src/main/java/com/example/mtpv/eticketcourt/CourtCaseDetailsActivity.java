@@ -287,8 +287,9 @@ public class CourtCaseDetailsActivity extends Activity {
             Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             removeDialog(PROGRESS_DIALOG);
             showToast(ServiceHelper.Opdata_Chalana);
-//            Intent intent=new Intent(getApplicationContext(),CourtCaseDetailsActivity.class);
-//            startActivity(intent);
+            Intent intent=new Intent(getApplicationContext(),CourtCaseStatusActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
     }
 
