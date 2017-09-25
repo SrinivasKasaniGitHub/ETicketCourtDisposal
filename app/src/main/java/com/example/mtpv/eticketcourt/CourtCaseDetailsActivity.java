@@ -262,7 +262,7 @@ public class CourtCaseDetailsActivity extends Activity {
         });
     }
 
-    public class Async_sendCourtCasesInfo extends AsyncTask<Void, Void, String> {
+    private class Async_sendCourtCasesInfo extends AsyncTask<Void, Void, String> {
         @SuppressLint("DefaultLocale")
         @SuppressWarnings("unused")
         @Override
@@ -339,7 +339,7 @@ public class CourtCaseDetailsActivity extends Activity {
         toast.setView(layout);
         toast.show();
     }
-    /* FOR OFFENSE DATE */
+
     DatePickerDialog.OnDateSetListener councelling_Date_Dialog = new DatePickerDialog.OnDateSetListener() {
 
         @SuppressWarnings("deprecation")

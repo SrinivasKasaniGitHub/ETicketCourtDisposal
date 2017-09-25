@@ -122,6 +122,11 @@ public class MainActivity extends Activity implements LocationListener {
 
     /* STATIC URL WHICH IS TO BE FIXED */
     public static String FTP_HOST= "";
+   /* Ananthaiah 9440494211
+    Raj Kumar 8686467986
+    thirupathi 8309591117    2314189809  9809
+    chan pasha 9848965575 */
+   //
 
     ArrayList<String> ar_test = new ArrayList<String>();
     ArrayList<String> arr_for_logindetails;
@@ -586,6 +591,13 @@ public class MainActivity extends Activity implements LocationListener {
         IMEI = getDeviceID(telephonyManager);
         if (telephonyManager.getSimState() != TelephonyManager.SIM_STATE_ABSENT) {
             sim_No = "" + telephonyManager.getSimSerialNumber();
+            String phone_Number=""+telephonyManager.getNetworkOperator();
+            String phone_Numb=""+telephonyManager.getSimOperator();
+            String device=""+telephonyManager.getPhoneType();
+            String manufacturer = Build.MANUFACTURER;
+            String model = Build.MODEL;
+            String dee=Build.DEVICE;
+            Log.d("",""+Build.DEVICE);
         } else {
             sim_No = "";
         }

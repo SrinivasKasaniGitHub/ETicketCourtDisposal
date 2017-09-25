@@ -1223,7 +1223,7 @@ public class ServiceHelper {
 													   String imprisFrom, String imprisTo, String courtFine, String risingDetails,
 													   String courtCD, String coutrAttnDT, String vehRelease, String dlRelease,
 													   String ddRemarks, String pidCD, String pidName, String releaseDT,
-													   String mobileNo)
+													   String mobileNo,String dlSusp, String dlCancel)
 	{
 		Utils utils = new Utils();
 		try {
@@ -1248,6 +1248,8 @@ public class ServiceHelper {
 			if (null!=pidName)request.addProperty("" + utils.P_NAME, "" + pidName);
 			if (null!=releaseDT)request.addProperty("" + utils.RELSE_DATE, "" + releaseDT);
 			if (null!=mobileNo)request.addProperty("" + utils.RELSE_ITEMS, "" + mobileNo);
+			if (null!=dlSusp)request.addProperty("dlSusp", "" + dlSusp);
+			if (null!=dlCancel)request.addProperty("dlCancel", "" + dlCancel);
 
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
@@ -1258,9 +1260,15 @@ public class ServiceHelper {
 			Object result = envelope.getResponse();
 			Opdata_Chalana = "";
 			try {
-				Opdata_Chalana = result.toString();
+				if (result!=null){
+					Opdata_Chalana = result.toString();
+				}else{
+					Opdata_Chalana = "NA";
+				}
+
 			} catch (Exception e) {
 				e.printStackTrace();
+				Opdata_Chalana = "NA";
 			}
 			Log.i("***SERVICE DAYNSE**", "" + Opdata_Chalana);
 		} catch (SoapFault fault) {

@@ -30,4 +30,19 @@
 
 
 
+    <dimen name="DD_Txt_font">17dp</dimen>
+    <dimen name="DD_Txt_FS_font">16dp</dimen>
+    <dimen name="DD_RADIO_Txt_font">15dp</dimen>
+
+
+
+
+
+    <!--LOGIN END-->
+
+    <!--Custom Adapter lyt-->
+    <dimen name="DD_MOB_ADHAR_FONT">22sp</dimen>
+
+
+
 </resources>

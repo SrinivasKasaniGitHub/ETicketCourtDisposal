@@ -11,9 +11,11 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.example.mtpv.eticketcourt.Pojos.CasesDetailsPojo;
 import com.example.mtpv.eticketcourt.R;
@@ -21,7 +23,7 @@ import com.example.mtpv.eticketcourt.R;
 import org.apache.commons.validator.routines.checkdigit.VerhoeffCheckDigit;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecyclerViewAdapter.MyViewHolder> {
@@ -75,6 +77,18 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
 
         reg_No.setText(casesDetailsPojos_List.get(listPosition).getVEHICLE_NUMBER());
         challan_No.setText(casesDetailsPojos_List.get(listPosition).getCHALLAN_NUMBER());
+
+
+
+        List<String> list = new ArrayList<String>();
+        list.add("TEST");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item,list);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+
 
         appCompatCheckBox.setOnCheckedChangeListener(null);
         appCompatCheckBox.setChecked(casesDetailsPojos_List.get(listPosition).isSelected());

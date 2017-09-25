@@ -54,9 +54,10 @@ public class IPSettings extends Activity implements View.OnClickListener {
     // private String test_service_url =
     // "http://192.168.11.10:8080/eTicketMobile";
 
-    private String test_service_url = "http://192.168.11.10:8080/eTicketMobileHyd";
+//    private String test_service_url = "http://192.168.11.10:8080/eTicketMobileHyd";
     private String live_service_url = "http://192.168.11.4/eTicketMobileHyd";
-
+    private String test_service_url ="https://www.echallan.org/eTicketMobileHyd";
+//862633026465174 IMEI
 	/*
 	 * private String test_service_url =
 	 * "http://125.16.1.70:8080/eTicketMobileHyd"; private String

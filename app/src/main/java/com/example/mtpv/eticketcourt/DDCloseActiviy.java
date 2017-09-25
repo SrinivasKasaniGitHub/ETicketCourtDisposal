@@ -120,9 +120,9 @@ public class DDCloseActiviy extends Activity {
     ArrayList<String> courtDisNames;
     MaterialSpinner courtDisspinner;
 
-    RadioGroup rdoGrp_VehcleRlse;
-    RadioButton rdoBtnYes_VehcleRlse;
-    RadioButton rdoBtnNo_VehcleRlse;
+    RadioGroup rdoGrp_VehcleRlse,rdoGrp_DLSUSCAN;
+    RadioButton rdoBtnYes_VehcleRlse,rdoBtn_DLSUS;
+    RadioButton rdoBtnNo_VehcleRlse,rdoBtn_DLCAN;
 
     LinearLayout lytConFrom, lytConTo, lytConDays, lytFineAmnt, lytSoclFrom, lytSclSerTo, lytRisingDays;
     DBHelper db;
@@ -130,6 +130,8 @@ public class DDCloseActiviy extends Activity {
 
     String selectedCourtCode, selectedCourtDisCode;
     String vehcleRelse = "Y";
+    String dl_SUS="No";
+    String dl_CAN="No";
     String vEHICLE_NUMBER, chall_No, offence_Date, driver_Adhar, driver_Mobile, driver_LCNCE;
     String dayDifference;
 
@@ -221,6 +223,41 @@ public class DDCloseActiviy extends Activity {
                     default:
                         break;
                 }
+            }
+        });
+
+        rdoGrp_DLSUSCAN = (RadioGroup) findViewById(R.id.rdoGrpDLSUSCAN);
+        rdoBtn_DLSUS = (RadioButton) findViewById(R.id.rdoBtnDLSUS);
+        rdoBtn_DLCAN = (RadioButton) findViewById(R.id.rdoBtnDLCAN);
+
+        rdoGrp_DLSUSCAN.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+
+                switch (checkedId) {
+                    case R.id.rdoBtnDLSUS:
+                        dl_SUS = "";
+                        dl_SUS = "Yes";
+                        dl_CAN = "No";
+                        break;
+
+                    case R.id.rdoBtnDLCAN:
+                        dl_CAN = "";
+                        dl_CAN = "Yes";
+                        dl_SUS = "No";
+                        break;
+
+                    case R.id.rdoBtnNONE:
+                        dl_CAN = "";
+                        dl_SUS = "";
+                        dl_CAN = "No";
+                        dl_SUS = "No";
+                        break;
+
+                    default:
+                        break;
+                }
+
             }
         });
 
@@ -695,7 +732,8 @@ public class DDCloseActiviy extends Activity {
 
             ServiceHelper.getCourtClosingUpdateTicketInfo(chall_No, vEHICLE_NUMBER, driver_LCNCE.toUpperCase(), driver_Adhar, edtTxt_STC_No.getText().toString(),
                     selectedCourtDisCode, edtTxtConDays.getText().toString(), date_convFRom, date_convicTo, edtTxt_FineAmnt.getText().toString(),
-                    edtTxtRisDays.getText().toString(), selectedCourtCode, date_courtAtnd, vehcleRelse, "Y", edtTxt_Remarks.getText().toString(), MainActivity.user_id, MainActivity.arr_logindetails[1], "", driver_Mobile);
+                    edtTxtRisDays.getText().toString(), selectedCourtCode, date_courtAtnd, vehcleRelse, "Y", edtTxt_Remarks.getText().toString(),
+                    MainActivity.user_id, MainActivity.arr_logindetails[1], "", driver_Mobile,dl_SUS,dl_CAN);
             return null;
         }
 
@@ -715,11 +753,62 @@ public class DDCloseActiviy extends Activity {
             Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             print_Data = ServiceHelper.Opdata_Chalana;
             removeDialog(PROGRESS_DIALOG);
-            if (null != ServiceHelper.Opdata_Chalana) {
-                showToast(ServiceHelper.Opdata_Chalana);
+            if (null != ServiceHelper.Opdata_Chalana && "Updated Successfully".equals(ServiceHelper.Opdata_Chalana)) {
+                sucessFull_DialogMSG(ServiceHelper.Opdata_Chalana);
+            }else{
+                sucessFull_DialogMSG("Updation Failed \n Please try again");
             }
-            online_report_status = "";
+
         }
+    }
+
+    public void sucessFull_DialogMSG(String msg){
+        TextView title = new TextView(this);
+        title.setText("Hyderabad E-Ticket");
+        title.setBackgroundColor(Color.BLUE);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(26);
+        title.setTypeface(title.getTypeface(), Typeface.BOLD);
+        title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.dialog_logo, 0, R.drawable.dialog_logo, 0);
+        title.setPadding(20, 0, 20, 0);
+        title.setHeight(70);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DDCloseActiviy.this, AlertDialog.THEME_HOLO_LIGHT);
+        alertDialogBuilder.setCustomTitle(title);
+        alertDialogBuilder.setIcon(R.drawable.dialog_logo);
+        alertDialogBuilder.setMessage(msg);
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                dd_lyt.setVisibility(View.GONE);
+                pay_dd_lyt.setVisibility(View.GONE);
+                et_dp_regno.setText("");
+                btn_dp_date_selection.setText("Select Date");
+
+            }
+        });
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+        alertDialog.getWindow().getAttributes();
+
+        TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
+        textView.setTextSize(28);
+        textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+        textView.setGravity(Gravity.CENTER);
+
+        Button btn = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        btn.setTextSize(22);
+        btn.setTextColor(Color.WHITE);
+        btn.setTypeface(btn.getTypeface(), Typeface.BOLD);
+        btn.setBackgroundColor(Color.BLUE);
+
     }
 
     private class Async_getDD_details extends AsyncTask<Void, Void, String> {

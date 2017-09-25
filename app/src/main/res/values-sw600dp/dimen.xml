@@ -25,6 +25,9 @@
 
     <dimen name="DD_Txt_font">17dp</dimen>
     <dimen name="DD_Txt_FS_font">16dp</dimen>
+    <dimen name="DD_RADIO_Txt_font">15dp</dimen>
+
+
 
     <!--footer-->
     <dimen name="footer_size">55dp</dimen>

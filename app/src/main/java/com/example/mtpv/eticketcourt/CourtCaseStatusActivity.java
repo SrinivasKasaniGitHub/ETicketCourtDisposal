@@ -308,6 +308,7 @@ public class CourtCaseStatusActivity extends Activity {
         }
     };
 
+
     /* FOR OFFENSE DATE */
     DatePickerDialog.OnDateSetListener offence_ToDate_Dialog = new DatePickerDialog.OnDateSetListener() {
 
@@ -322,12 +323,9 @@ public class CourtCaseStatusActivity extends Activity {
 
             format = new SimpleDateFormat("dd-MMM-yyyy");
             offence_To_Date = format.format(new Date(present_year - 1900, (present_month), present_day));
-
             Date date1;
             Date date2;
-
             SimpleDateFormat dates = new SimpleDateFormat("dd-MMM-yyyy");
-
 
             //Setting dates
             try {
@@ -360,6 +358,7 @@ public class CourtCaseStatusActivity extends Activity {
     @SuppressWarnings("deprecation")
     @Override
     protected Dialog onCreateDialog(int id) {
+        //10/02/2017
         switch (id) {
             case OFFENCE_FROM_DATE_PICKER:
                 DatePickerDialog dp_offenceFrom_date = new DatePickerDialog(this, offence_FromDate_Dialog, present_year, present_month,

@@ -1114,6 +1114,76 @@
                             android:layout_gravity="center"
                             android:layout_weight="1.2">
 
+                           <TextView
+                               style="@style/styleTextViewlyt_DD"
+                               android:id="@+id/chkBox_DLSUS"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:text="DL SUSPENDED/CANCEL"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <RadioGroup
+                                android:id="@+id/rdoGrpDLSUSCAN"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="3">
+
+                                <RadioButton
+                                    android:id="@+id/rdoBtnDLSUS"
+                                    style="@style/styleTextViewlyt_DD_RadioText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="SUSPEND" />
+
+                                <RadioButton
+                                    android:id="@+id/rdoBtnDLCAN"
+                                    style="@style/styleTextViewlyt_DD_RadioText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="CANCELLED" />
+                                <RadioButton
+                                    android:id="@+id/rdoBtnNONE"
+                                    style="@style/styleTextViewlyt_DD_RadioText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:checked="true"
+                                    android:text="NONE" />
+
+
+                            </RadioGroup>
+
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
                             <android.support.v7.widget.AppCompatTextView
                                 style="@style/styleTextViewlyt_DD"
                                 android:layout_width="match_parent"
@@ -1140,6 +1210,8 @@
 
 
                     </LinearLayout>
+
+
 
 
                     <!--Single Item start-->
