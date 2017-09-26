@@ -7,12 +7,15 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -506,7 +509,11 @@ public class DDCloseActiviy extends Activity {
                 } else if (btn_dp_date_selection.getText().toString().equals("Select Date")) {
                     showToast("Select Date");
                 } else {
-                    new Async_getDD_details().execute();
+                    if (isOnline()) {
+                        new Async_getDD_details().execute();
+                    }else {
+                        showToast("Please check your network connection!");
+                    }
                 }
 
             }
@@ -616,7 +623,11 @@ public class DDCloseActiviy extends Activity {
                         edtTxtRisDays.setError(Html.fromHtml("<font color='white'>Enter Convicted Days </font>"));
                         edtTxtRisDays.requestFocus();
                     } else {
-                        new Async_getCourtClosingUpdateTicketInfo().execute();
+                        if (isOnline()) {
+                            new Async_getCourtClosingUpdateTicketInfo().execute();
+                        }else{
+                            showToast("Please check your network connection");
+                        }
 
                     }
 
@@ -665,6 +676,11 @@ public class DDCloseActiviy extends Activity {
         });
 
 
+    }
+    public Boolean isOnline() {
+        ConnectivityManager conManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo nwInfo = conManager.getActiveNetworkInfo();
+        return nwInfo != null;
     }
 
     public void getCourtDisNamesFromDB() {
@@ -750,14 +766,18 @@ public class DDCloseActiviy extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
-            print_Data = ServiceHelper.Opdata_Chalana;
             removeDialog(PROGRESS_DIALOG);
-            if (null != ServiceHelper.Opdata_Chalana && "Updated Successfully".equals(ServiceHelper.Opdata_Chalana)) {
-                sucessFull_DialogMSG(ServiceHelper.Opdata_Chalana);
-            }else{
+            try {
+                if (null != ServiceHelper.Opdata_Chalana && !ServiceHelper.Opdata_Chalana.equals("NA") && "Updated Successfully".equals(ServiceHelper.Opdata_Chalana)) {
+                    sucessFull_DialogMSG(ServiceHelper.Opdata_Chalana);
+                } else {
+                    sucessFull_DialogMSG("Updation Failed \n Please try again");
+                }
+            }catch (Exception e){
+                e.printStackTrace();
                 sucessFull_DialogMSG("Updation Failed \n Please try again");
             }
+
 
         }
     }
@@ -840,12 +860,10 @@ public class DDCloseActiviy extends Activity {
         protected void onPostExecute(String result) {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
-
-            Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             removeDialog(PROGRESS_DIALOG);
 
             online_report_status = "";
-            if (!ServiceHelper.Opdata_Chalana.equals("NA")) {
+            if (null!=ServiceHelper.Opdata_Chalana && !ServiceHelper.Opdata_Chalana.equals("NA") ) {
 
                 try {
                     JSONObject jsonObject = new JSONObject(ServiceHelper.Opdata_Chalana);
@@ -899,6 +917,7 @@ public class DDCloseActiviy extends Activity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    showToast("" + getResources().getString(R.string.no_day_report));
                 }
 
             } else {

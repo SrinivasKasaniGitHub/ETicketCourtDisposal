@@ -166,7 +166,12 @@ public class MainActivity extends Activity implements LocationListener {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userlogin();
+                if (isOnline()){
+                    userlogin();
+                }else{
+                    showToast("Please check your Internet Connection");
+                }
+
             }
         });
         pDialog = new ProgressDialog(this);

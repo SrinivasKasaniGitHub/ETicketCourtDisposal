@@ -67,11 +67,14 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         final AppCompatTextView mob_Num = holder.mob_Num;
         final AppCompatTextView reg_No = holder.reg_No;
         final AppCompatTextView challan_No = holder.challan_No;
+        final AppCompatTextView driver_Name=holder.driver_Name;
+        final AppCompatTextView driver_Violation=holder.driver_Violation;
         final LinearLayout linearLayout = holder.lyt_DL_A_M;
         final AppCompatCheckBox appCompatCheckBox = holder.compatCheckBox;
         final AppCompatEditText edt_driving_License = holder.edt_driving_License;
         final AppCompatEditText edt_adhar_Num = holder.edt_adhar_Num;
         final AppCompatEditText edt_mob_Num = holder.edt_mob_Num;
+        final AppCompatEditText edt_driver_Name=holder.edt_driver_Name;
         final ImageView img_adhar_wrt = holder.img_Adhar_wrt;
         final ImageView img_adhar_wrng = holder.img_adhar_wrng;
 
@@ -105,6 +108,44 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
                     //casesDetailsPojos_List.remove(listPosition);
 
                     linearLayout.setVisibility(View.VISIBLE);
+                    if (null!=casesDetailsPojos_List.get(listPosition).getVIOLATION()){
+                        driver_Violation.setText(casesDetailsPojos_List.get(listPosition).getVIOLATION());
+                    }else{
+                        driver_Violation.setText("");
+                    }
+
+                    if (null!=casesDetailsPojos_List.get(listPosition).getDRIVER_NAME()) {
+                        driver_Name.setVisibility(View.GONE);
+                        edt_driver_Name.setVisibility(View.VISIBLE);
+                        edt_driver_Name.setText(casesDetailsPojos_List.get(listPosition).getDRIVER_NAME());
+                        edt_driver_Name.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                if (s.toString().length() > 0) {
+                                    casesDetailsPojos_List.get(listPosition).setDRIVER_NAME(s.toString());
+                                } else {
+                                    casesDetailsPojos_List.get(listPosition).setDRIVER_NAME("");
+                                }
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+
+                            }
+                        });
+
+                    }
+                    else {
+                        edt_driver_Name.setVisibility(View.VISIBLE);
+                        driver_Name.setVisibility(View.GONE);
+                        driver_Name.setText("");
+                    }
+
                     if (casesDetailsPojos_List.get(listPosition).getDRIVER_LICENSE().equals("")) {
                         driving_License.setVisibility(View.GONE);
                         edt_driving_License.setVisibility(View.VISIBLE);
@@ -234,10 +275,10 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        AppCompatTextView driving_License, adhar_Num, mob_Num, reg_No, challan_No;
+        AppCompatTextView driving_License, adhar_Num, mob_Num, reg_No, challan_No,driver_Name,driver_Violation;
         LinearLayout lyt_DL_A_M;
         AppCompatCheckBox compatCheckBox;
-        public AppCompatEditText edt_driving_License, edt_adhar_Num, edt_mob_Num;
+        public AppCompatEditText edt_driving_License, edt_adhar_Num, edt_mob_Num,edt_driver_Name;
         public ImageView img_Adhar_wrt, img_adhar_wrng;
         private Context context;
 
@@ -245,6 +286,8 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         public MyViewHolder(View itemView) {
             super(itemView);
             context = itemView.getContext();
+            this.driver_Name=(AppCompatTextView) itemView.findViewById(R.id.Txt_DName);
+            this.driver_Violation=(AppCompatTextView) itemView.findViewById(R.id.Txt_Violation);
             this.driving_License = (AppCompatTextView) itemView.findViewById(R.id.Txt_Dl);
             this.adhar_Num = (AppCompatTextView) itemView.findViewById(R.id.Txt_Adhar);
             this.mob_Num = (AppCompatTextView) itemView.findViewById(R.id.Txt_Mobile);
@@ -255,12 +298,15 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
             this.edt_driving_License = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Dl);
             this.edt_adhar_Num = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Adhar);
             this.edt_mob_Num = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Mobile);
+            this.edt_driver_Name=(AppCompatEditText) itemView.findViewById(R.id.edt_Txt_DName);
             this.img_adhar_wrng = (ImageView) itemView.findViewById(R.id.img_Adhar_wrng);
             this.img_Adhar_wrt = (ImageView) itemView.findViewById(R.id.img_Adhar_wrt);
         }
 
         public MyViewHolder(View itemView, Context context) {
             super(itemView);
+            this.driver_Name=(AppCompatTextView) itemView.findViewById(R.id.Txt_DName);
+            this.driver_Violation=(AppCompatTextView) itemView.findViewById(R.id.Txt_Violation);
             this.driving_License = (AppCompatTextView) itemView.findViewById(R.id.Txt_Dl);
             this.adhar_Num = (AppCompatTextView) itemView.findViewById(R.id.Txt_Adhar);
             this.mob_Num = (AppCompatTextView) itemView.findViewById(R.id.Txt_Mobile);
@@ -271,6 +317,7 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
             this.edt_driving_License = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Dl);
             this.edt_adhar_Num = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Adhar);
             this.edt_mob_Num = (AppCompatEditText) itemView.findViewById(R.id.edt_Txt_Mobile);
+            this.edt_driver_Name=(AppCompatEditText) itemView.findViewById(R.id.edt_Txt_DName);
             this.img_adhar_wrng = (ImageView) itemView.findViewById(R.id.img_Adhar_wrng);
             this.img_Adhar_wrt = (ImageView) itemView.findViewById(R.id.img_Adhar_wrt);
         }

@@ -1106,22 +1106,22 @@ public class ServiceHelper {
 			httpTransportSE.call(NAMESPACE+GET_DDCLOSING_DETAILS, envelope);
 			Object result = envelope.getResponse();
 			Opdata_Chalana = "";
-			//AP29BS7402
-			// Opdata_Chalana = result.toString();
-
 			try {
-				Opdata_Chalana = result.toString();
+				if (null!=result){
+					Opdata_Chalana = result.toString();
+				}else{
+					Opdata_Chalana = "NA";
+				}
+
 
 				//Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString().trim());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				Opdata_Chalana = "NA";
 			}
 
-			Log.i("***SERVICE DAYNSE**", "" + Opdata_Chalana);
-
 		} catch (SoapFault fault) {
-			Log.i("****SOA**:::", "soapfault = " + fault.getMessage());
 			Opdata_Chalana = "NA";
 
 		} catch (Exception e) {
@@ -1147,21 +1147,21 @@ public class ServiceHelper {
 			httpTransportSE.call(NAMESPACE+SEND_COURTCASEINFO, envelope);
 			Object result = envelope.getResponse();
 			Opdata_Chalana = "";
-			//AP29BS7402
-			// Opdata_Chalana = result.toString();
-
 			try {
-				Opdata_Chalana = result.toString();
+				if (null!=result) {
+					Opdata_Chalana = result.toString();
+				}else{
+					Opdata_Chalana = "NA";
 
-				//Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString().trim());
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				Opdata_Chalana = "NA";
+
 			}
 
-			Log.i("***SERVICE DAYNSE**", "" + Opdata_Chalana);
 
 		} catch (SoapFault fault) {
-			Log.i("****SOA**:::", "soapfault = " + fault.getMessage());
 			Opdata_Chalana = "NA";
 
 		} catch (Exception e) {
@@ -1195,12 +1195,18 @@ public class ServiceHelper {
 			// Opdata_Chalana = result.toString();
 
 			try {
-				Opdata_Chalana = result.toString();
+                if (null!=result){
+                    Opdata_Chalana = result.toString();
+                }else{
+                    Opdata_Chalana="NA";
+                }
+
 
 				//Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString().trim());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+                Opdata_Chalana="NA";
 			}
 
 			Log.i("***SERVICE DAYNSE**", "" + Opdata_Chalana);
@@ -1270,10 +1276,9 @@ public class ServiceHelper {
 				e.printStackTrace();
 				Opdata_Chalana = "NA";
 			}
-			Log.i("***SERVICE DAYNSE**", "" + Opdata_Chalana);
-		} catch (SoapFault fault) {
-			Log.i("****SOA**:::","soapfault = "+ fault.getMessage());
 
+		} catch (SoapFault fault) {
+			Opdata_Chalana = "NA";
 		} catch (Exception e) {
 			Opdata_Chalana = "NA";
 		}

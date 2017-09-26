@@ -6,7 +6,10 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -106,7 +109,11 @@ public class CourtCaseStatusActivity extends Activity {
                 } else if (btn_offenceDate_To.getText().toString().equals("Select Date")) {
                     showToast("Please select Offence To date");
                 } else {
-                    new Async_getCourtCasesInfo().execute();
+                    if (isOnline()) {
+                        new Async_getCourtCasesInfo().execute();
+                    }else{
+                        showToast("Please check your internet Connection");
+                    }
                 }
             }
         });
@@ -114,67 +121,101 @@ public class CourtCaseStatusActivity extends Activity {
         Txt_DD_Bkd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_DD_Bkd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("ArrayValue", "DD_Bkd");
-                intent_DD_Bkd.putExtras(bundle);
-                startActivity(intent_DD_Bkd);
+                if (arrayList_DD_Booked.size()>0) {
+                    Intent intent_DD_Bkd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ArrayValue", "DD_Bkd");
+                    intent_DD_Bkd.putExtras(bundle);
+                    startActivity(intent_DD_Bkd);
+                }else{
+                    showToast("No reports Found");
+                }
             }
         });
         Txt_DD_CouncelngNot_Atnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_DD_CouncelngNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("ArrayValue", "Txt_DD_CouncelngNot_Atnd");
-                intent_DD_CouncelngNot_Atnd.putExtras(bundle);
-                startActivity(intent_DD_CouncelngNot_Atnd);
+                if (arrayList_DD_CouncelngNot_Atnd.size()>0) {
+                    Intent intent_DD_CouncelngNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ArrayValue", "Txt_DD_CouncelngNot_Atnd");
+                    intent_DD_CouncelngNot_Atnd.putExtras(bundle);
+                    startActivity(intent_DD_CouncelngNot_Atnd);
+                }else{
+                    showToast("No reports Found");
+                }
             }
         });
         Txt_CHG_Bkd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_CHG_Bkd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("ArrayValue", "CHG_Bkd");
-                intent_CHG_Bkd.putExtras(bundle);
-                startActivity(intent_CHG_Bkd);
+
+                if (arrayList_CHG_Booked.size()>0) {
+                    Intent intent_CHG_Bkd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ArrayValue", "CHG_Bkd");
+                    intent_CHG_Bkd.putExtras(bundle);
+                    startActivity(intent_CHG_Bkd);
+                }else{
+                    showToast("No reports Found");
+                }
             }
         });
 
         Txt_CHG_CouncelngNot_Atnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_CHG_CouncelngNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("ArrayValue", "Txt_CHG_CouncelngNot_Atnd");
-                intent_CHG_CouncelngNot_Atnd.putExtras(bundle);
-                startActivity(intent_CHG_CouncelngNot_Atnd);
+                if (arrayList_CHG_CouncelngNot_Atnd.size()>0) {
+                    Intent intent_CHG_CouncelngNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ArrayValue", "Txt_CHG_CouncelngNot_Atnd");
+                    intent_CHG_CouncelngNot_Atnd.putExtras(bundle);
+                    startActivity(intent_CHG_CouncelngNot_Atnd);
+                }else{
+                    showToast("No reports Found");
+                }
             }
         });
         Txt_DD_CourtNot_Atnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_DD_CourtNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("ArrayValue", "Txt_DD_CourtNot_Atnd");
-                intent_DD_CourtNot_Atnd.putExtras(bundle);
-                startActivity(intent_DD_CourtNot_Atnd);
+                if (arrayList_DD_CourtNot_Atnd.size()>0) {
+                    Intent intent_DD_CourtNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ArrayValue", "Txt_DD_CourtNot_Atnd");
+                    intent_DD_CourtNot_Atnd.putExtras(bundle);
+                    startActivity(intent_DD_CourtNot_Atnd);
+                }else{
+                    showToast("No reports Found");
+                }
             }
         });
 
         Txt_CHG_CourtNot_Atnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_CHG_CourtNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("ArrayValue", "Txt_CHG_CourtNot_Atnd");
-                intent_CHG_CourtNot_Atnd.putExtras(bundle);
-                startActivity(intent_CHG_CourtNot_Atnd);
+
+                if (arrayList_CHG_CourtNot_Atnd.size()>0) {
+                    Intent intent_CHG_CourtNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ArrayValue", "Txt_CHG_CourtNot_Atnd");
+                    intent_CHG_CourtNot_Atnd.putExtras(bundle);
+                    startActivity(intent_CHG_CourtNot_Atnd);
+                }else{
+                    showToast("No reports Found");
+                }
             }
         });
 
 
+    }
+    public Boolean isOnline() {
+        ConnectivityManager conManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo nwInfo = conManager.getActiveNetworkInfo();
+        if (nwInfo != null && nwInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
     private class Async_getCourtCasesInfo extends AsyncTask<Void, Void, String> {
@@ -204,7 +245,7 @@ public class CourtCaseStatusActivity extends Activity {
             super.onPostExecute(result);
             Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             removeDialog(PROGRESS_DIALOG);
-            if (!ServiceHelper.Opdata_Chalana.equals("NA")) {
+            if (!ServiceHelper.Opdata_Chalana.equals("NA")&&null!=ServiceHelper.Opdata_Chalana) {
 
                 arrayList_DD_Booked = new ArrayList<>();
                 arrayList_DD_CouncelngNot_Atnd = new ArrayList<>();
@@ -224,6 +265,9 @@ public class CourtCaseStatusActivity extends Activity {
                         casesDetailsPojo.setCHALLAN_NUMBER(jb.getString("CHALLAN_NUMBER") != null ? jb.getString("CHALLAN_NUMBER") : "");
                         casesDetailsPojo.setDRIVER_LICENSE(jb.getString("DRIVER_LICENSE") != null ? jb.getString("DRIVER_LICENSE") : "");
                         casesDetailsPojo.setDRIVER_AADHAAR(jb.getString("DRIVER_AADHAAR") != null ? jb.getString("DRIVER_AADHAAR") : "");
+                        casesDetailsPojo.setDRIVER_NAME(null!=jb.getString("DRIVER_NAME") ?  jb.getString("DRIVER_NAME"):"");
+                        casesDetailsPojo.setVIOLATION(null!=jb.getString("VIOLATION") ?  jb.getString("VIOLATION"):"");
+                        casesDetailsPojo.setDISTRICT_NAME(null!=jb.getString("DISTRICT_NAME") ?  jb.getString("DISTRICT_NAME"):"");
                         casesDetailsPojo.setDRIVER_MOBILE(null != jb.getString("DRIVER_MOBILE") ? jb.getString("DRIVER_MOBILE") : "");
                         casesDetailsPojo.setCHALLAN_TYPE(null != jb.getString("CHALLAN_TYPE") ? jb.getString("CHALLAN_TYPE") : "");
                         casesDetailsPojo.setPAYMENT_STATUS(null != jb.getString("PAYMENT_STATUS") ? jb.getString("PAYMENT_STATUS") : "");
@@ -262,6 +306,7 @@ public class CourtCaseStatusActivity extends Activity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    showToast("No data found");
                 }
 
             } else {

@@ -20,6 +20,9 @@ public class CasesDetailsPojo implements Serializable
     public String COUNC_DATE;
     public String COURT_NOTICE_DT;
     public String DISPOSAL_CD;
+    public String DRIVER_NAME;
+    public String VIOLATION;
+    public String DISTRICT_NAME;
     private boolean isSelected;
 
     public ArrayList<CasesDetailsPojo> arrayList_DD_Bkd;
@@ -120,11 +123,37 @@ public class CasesDetailsPojo implements Serializable
         isSelected = selected;
     }
 
+    public String getDRIVER_NAME() {
+        return DRIVER_NAME;
+    }
+
+    public void setDRIVER_NAME(String DRIVER_NAME) {
+        this.DRIVER_NAME = DRIVER_NAME;
+    }
+
+    public String getVIOLATION() {
+        return VIOLATION;
+    }
+
+    public void setVIOLATION(String VIOLATION) {
+        this.VIOLATION = VIOLATION;
+    }
+
+    public String getDISTRICT_NAME() {
+        return DISTRICT_NAME;
+    }
+
+    public void setDISTRICT_NAME(String DISTRICT_NAME) {
+        this.DISTRICT_NAME = DISTRICT_NAME;
+    }
+
     public ArrayList<CasesDetailsPojo> getArrayList_DD_Bkd() {
         return arrayList_DD_Bkd;
     }
 
     public void setArrayList_DD_Bkd(ArrayList<CasesDetailsPojo> arrayList_DD_Bkd) {
         this.arrayList_DD_Bkd = arrayList_DD_Bkd;
+
     }
+
 }

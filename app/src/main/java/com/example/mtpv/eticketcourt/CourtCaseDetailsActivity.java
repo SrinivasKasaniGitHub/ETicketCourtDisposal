@@ -5,8 +5,11 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -228,6 +231,9 @@ public class CourtCaseDetailsActivity extends Activity {
                                     jsonObject.put("DRIVER_LICENSE", casesDetailsPojo.getDRIVER_LICENSE());
                                     jsonObject.put("DRIVER_AADHAAR", casesDetailsPojo.getDRIVER_AADHAAR());
                                     jsonObject.put("DRIVER_MOBILE", casesDetailsPojo.getDRIVER_MOBILE());
+                                    jsonObject.put("DRIVER_NAME", casesDetailsPojo.getDRIVER_NAME());
+                                    jsonObject.put("VIOLATION",casesDetailsPojo.getVIOLATION());
+                                    jsonObject.put("DISTRICT_NAME",casesDetailsPojo.getDISTRICT_NAME());
                                     jsonObject.put("SELECTED_COUNC_DATE", councelng_Date);
                                     jsonObject.put("COURT_NAME", selectedCourtName!=null?selectedCourtName:"");
                                     jsonObject.put("COURT_CODE", selectedCourtCode);
@@ -239,6 +245,9 @@ public class CourtCaseDetailsActivity extends Activity {
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    jsonObject=new JSONObject();
+                                    jsonArray_caseDetails=new JSONArray();
+
                                 }
                             }
                         }
@@ -250,16 +259,26 @@ public class CourtCaseDetailsActivity extends Activity {
                             showToast("Please fill the details");
                         } else {
                             jsonResult = caseDetailsObj.toString();
-                            new Async_sendCourtCasesInfo().execute();
+                            if (isOnline()) {
+                                new Async_sendCourtCasesInfo().execute();
+                            }else{
+                                showToast("Please check your net work connection");
+                            }
 //                        Toast.makeText(getApplicationContext(), caseDetailsObj.toString(), Toast.LENGTH_LONG).show();
-                            Log.d("Case_Details", "" + caseDetailsObj.toString());
+                            //Log.d("Case_Details", "" + caseDetailsObj.toString());
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        jsonResult="";
                     }
                 }
             }
         });
+    }
+    public Boolean isOnline() {
+        ConnectivityManager conManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo nwInfo = conManager.getActiveNetworkInfo();
+        return nwInfo != null;
     }
 
     private class Async_sendCourtCasesInfo extends AsyncTask<Void, Void, String> {
@@ -284,12 +303,19 @@ public class CourtCaseDetailsActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d("DD Details", "" + ServiceHelper.Opdata_Chalana);
             removeDialog(PROGRESS_DIALOG);
-            showToast(ServiceHelper.Opdata_Chalana);
-            Intent intent=new Intent(getApplicationContext(),CourtCaseStatusActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            if (null!=ServiceHelper.Opdata_Chalana && !ServiceHelper.Opdata_Chalana.equals("NA")) {
+                try {
+                    showToast(ServiceHelper.Opdata_Chalana);
+                    Intent intent = new Intent(getApplicationContext(), CourtCaseStatusActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }catch (Exception e){
+                    showToast("Updation Failed Please try again");
+                }
+            }else{
+                showToast("Updation Failed Please try again");
+            }
         }
     }
 
@@ -340,6 +366,7 @@ public class CourtCaseDetailsActivity extends Activity {
         toast.setView(layout);
         toast.show();
     }
+
 
     DatePickerDialog.OnDateSetListener councelling_Date_Dialog = new DatePickerDialog.OnDateSetListener() {
 

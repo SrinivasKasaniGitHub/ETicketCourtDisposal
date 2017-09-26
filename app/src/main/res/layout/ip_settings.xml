@@ -147,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="MPLS Network"
+                    android:text="Open Network"
                     android:textSize="@dimen/edittext_font"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif"/>
@@ -156,7 +156,7 @@
                     android:id="@+id/radioButton_test"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Open Network"
+                    android:text="MPLS Network"
                     android:textSize="@dimen/edittext_font"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif"/>

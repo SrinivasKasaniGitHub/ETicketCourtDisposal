@@ -83,16 +83,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp">
 
-        <TextView
-            android:id="@+id/tv_generateticket_dashboard_xml"
-            style="@style/navi_text_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/generate_ticket_m"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="Court_Case \n Closing"
-            android:textSize="19sp" />
+
 
         <TextView
             android:id="@+id/tv_spot_dashboard_xml"
@@ -116,10 +107,21 @@
             android:background="@null"
             android:drawableTop="@drawable/vhcle_history_m"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Court/Councelling\n Status"
+            android:text="Court/Councelling\n SMS Intimation"
             android:textSize="19sp"
 
             />
+
+        <TextView
+            android:id="@+id/tv_generateticket_dashboard_xml"
+            style="@style/navi_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/generate_ticket_m"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Court-Details \n Upadation"
+            android:textSize="19sp" />
 
         <TextView
             android:id="@+id/tvduplicateprint_dashboad_xmld"
