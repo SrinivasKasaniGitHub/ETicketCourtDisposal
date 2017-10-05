@@ -533,6 +533,7 @@ public class ServiceHelper {
 			}
 		} catch (SoapFault fault) {
 			Log.i("soaps", "soapfault = " + fault.getMessage());
+			court_details_master = new String[0];
 		} catch (Exception e) {
 			// TODO: handle exception
 			court_details_master = new String[0];
@@ -548,43 +549,32 @@ public class ServiceHelper {
             HttpTransportSE httpTransportSE = new HttpTransportSE(MainActivity.URL);
             httpTransportSE.call(NAMESPACE+GET_COURT_DIS_NAMES, envelope);
             Object result = envelope.getResponse();
-            // Opdata_Chalana = "";
+            Opdata_Chalana = "";
             // Opdata_Chalana = result.toString();
 
             try {
-                Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString());
+				if (null!=result) {
+					Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString());
+					if (Opdata_Chalana == null) {
+						court_dis_details_master = new String[0];
+					} else {
+						court_dis_details_master = new String[0];
+						court_dis_details_master = Opdata_Chalana.split("!");
+						for (int i = 0; i < ServiceHelper.court_dis_details_master.length; i++) {
+							Log.i("**NAMES MASTER***", "" + ServiceHelper.court_dis_details_master[i]);
+						}
+					}
+				}
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
+				court_dis_details_master = new String[0];
             }
-            Log.i("COURT_DIS_NAMREONSE :::", "" + Opdata_Chalana);
-			/*
-			 * !2399@COURT!2302@MAHANKALI TRPS!2301@GOPALPURAM
-			 * TRPS!2304@TRIMULGHERRY TRPS! 2310@BEGUMPET TRPS!2306@PUNJAGUTTA
-			 * TRPS!2309@BANJARA HILLS TRPS!2307@S.R.NAGAR TRPS!
-			 * 2312@CHIKKADPALLY TRPS!2315@SAIFABAD TRPS!2313@ABIDS
-			 * TRPS!2330@GOSHAMAHAL TRPS! 2329@NAMPALLY TRPS!2328@ASIF NAGAR
-			 * TRPS!2319@CHARMINAR TRPS!2318@FALAKNUMA TRPS! 2317@MIRCHOWK
-			 * TRPS!2322@KACHIGUDA TRPS!2324@SULTAN BAZAR TRPS!2325@MALAKPET
-			 * TRPS! 2300@TRAFFIC CELL!2333@TTI GOSHAMAHAL!2303@MARREDPALLY
-			 * TRPS!2308@JUBLEE HILLS TRPS! 2323@NALLAKUNTA TRPS!2327@TOLICHOWKI
-			 * TRPS!2314@NARAYANAGUDA TRPS!2320@BAHADHURPURA TRPS!
-			 * 2398@UNDEFINED!2334@TTI BEGUMPET
-			 */
 
-            if (Opdata_Chalana == null) {
-                Log.i("NO_PS_DATA_FOUND", "NO_PS_DATA_FOUND");
-            } else {
-                court_dis_details_master = new String[0];
-                court_dis_details_master = Opdata_Chalana.split("!");
-                for (int i = 0; i < ServiceHelper.court_dis_details_master.length; i++) {
-                    Log.i("**NAMES MASTER***", "" + ServiceHelper.court_dis_details_master[i]);
-                }
-            }
+
         } catch (SoapFault fault) {
-            Log.i("soaps", "soapfault = " + fault.getMessage());
+			court_dis_details_master = new String[0];
         } catch (Exception e) {
-            // TODO: handle exception
+
             court_dis_details_master = new String[0];
         }
     }

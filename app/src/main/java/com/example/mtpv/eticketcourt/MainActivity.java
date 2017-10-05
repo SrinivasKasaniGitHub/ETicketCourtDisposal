@@ -107,7 +107,6 @@ public class MainActivity extends Activity implements LocationListener {
     String services_url = "";
     String ftps_url = "";
     public static String URL = "";
-
     TextView textView2;
     private ProgressDialog pDialog;
 
@@ -120,18 +119,16 @@ public class MainActivity extends Activity implements LocationListener {
     @SuppressWarnings("unused")
     private String live_service_url = "http://192.168.11.4/eTicketMobileHyd";
 
-    /* STATIC URL WHICH IS TO BE FIXED */
-    public static String FTP_HOST= "";
-   /* Ananthaiah 9440494211
+    public static String FTP_HOST = "";
+    /*Ananthaiah 9440494211
     Raj Kumar 8686467986
     thirupathi 8309591117    2314189809  9809
     chan pasha 9848965575 */
-   //
 
     ArrayList<String> ar_test = new ArrayList<String>();
     ArrayList<String> arr_for_logindetails;
 
-    public static String appVersion = "Version-1.5.7";
+    public static String appVersion;
     private static final int REQUEST_PERMISSIONS = 20;
     public SparseIntArray mErrorString;
     private static final String[] requiredPermissions = new String[]{
@@ -157,8 +154,10 @@ public class MainActivity extends Activity implements LocationListener {
         btn_login = (Button) findViewById(R.id.btnlog);
         et_pid = (EditText) findViewById(R.id.edtTxt_pid);
         et_pid_pwd = (EditText) findViewById(R.id.edtTxt_pwd);
-//        et_pid.setText("23001004");
-//        et_pid_pwd.setText("WdSt48Pr");
+
+
+       /* et_pid.setText("23001004");
+        et_pid_pwd.setText("WdSt48Pr");*/
         progIndicator = (AVLoadingIndicatorView) findViewById(R.id.progIndicator);
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
         compny_Name.startAnimation(marquee);
@@ -166,9 +165,9 @@ public class MainActivity extends Activity implements LocationListener {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isOnline()){
+                if (isOnline()) {
                     userlogin();
-                }else{
+                } else {
                     showToast("Please check your Internet Connection");
                 }
 
@@ -198,6 +197,9 @@ public class MainActivity extends Activity implements LocationListener {
                             Manifest.permission.INSTALL_SHORTCUT}, R.string.permissions
                     , REQUEST_PERMISSIONS);
         }
+
+
+        appVersion=getResources().getString(R.string.app_version);
     }
 
 
@@ -409,7 +411,7 @@ public class MainActivity extends Activity implements LocationListener {
                 } else if (ServiceHelper.Opdata_Chalana.trim().equals("2")) {
                     showToast("Invalid Password");
                 } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("3")) {
-                    showToast("Unautherized Device");
+                    showToast("Unauthorized Device");
                 } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("4")) {
                     showToast("Error, Please Contact E Challan Team at 040-27852721");
                 } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("5")) {
@@ -596,13 +598,13 @@ public class MainActivity extends Activity implements LocationListener {
         IMEI = getDeviceID(telephonyManager);
         if (telephonyManager.getSimState() != TelephonyManager.SIM_STATE_ABSENT) {
             sim_No = "" + telephonyManager.getSimSerialNumber();
-            String phone_Number=""+telephonyManager.getNetworkOperator();
-            String phone_Numb=""+telephonyManager.getSimOperator();
-            String device=""+telephonyManager.getPhoneType();
+            String phone_Number = "" + telephonyManager.getNetworkOperator();
+            String phone_Numb = "" + telephonyManager.getSimOperator();
+            String device = "" + telephonyManager.getPhoneType();
             String manufacturer = Build.MANUFACTURER;
             String model = Build.MODEL;
-            String dee=Build.DEVICE;
-            Log.d("",""+Build.DEVICE);
+            String dee = Build.DEVICE;
+            Log.d("", "" + Build.DEVICE);
         } else {
             sim_No = "";
         }
@@ -713,7 +715,7 @@ public class MainActivity extends Activity implements LocationListener {
         ViewGroup group = (ViewGroup) toast.getView();
         TextView messageTextView = (TextView) group.getChildAt(0);
         messageTextView.setTextSize(24);
-            // toastView.setBackgroundResource(R.drawable.toast_background);
+        // toastView.setBackgroundResource(R.drawable.toast_background);
         toast.show();
     }
 

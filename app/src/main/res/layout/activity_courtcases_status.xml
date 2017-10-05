@@ -151,86 +151,113 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
+
+            <View
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
+
 
             <TableRow
                 android:id="@+id/tableRow1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#90dedc"
-                android:weightSum="3"
-                >
+                android:weightSum="4">
+
+                <View
+                    style="@style/Divider"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent" />
 
 
-                   <TextView
-                       android:id="@+id/textView12"
-                       android:layout_width="0dp"
-                       android:layout_height="50dp"
-                       android:layout_weight="1"
-                       android:text="Cases"
-                       android:textColor="@color/colorAccent"
-                       android:gravity="center"
-                       android:textStyle="bold"
-                       android:textSize="@dimen/edittext_font"/>
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Cases"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
-                   <LinearLayout
-                       android:layout_width="2dp"
-                       android:layout_height="match_parent">
+                <View
+                    style="@style/Divider"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent" />
 
-                       <View style="@style/Divider" />
-                   </LinearLayout>
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="DD "
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
-                   <TextView
-                       android:id="@+id/textView13"
-                       android:layout_weight="1"
-                       android:layout_width="0dp"
-                       android:layout_height="50dp"
-                       android:text="DD Cases"
-                       android:textColor="@color/colorAccent"
-                       android:gravity="center"
-                       android:textStyle="bold"
-                       android:textSize="@dimen/edittext_font" />
+                <View
+                    style="@style/Divider"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent" />
 
-                   <LinearLayout
-                       android:layout_width="2dp"
-                       android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="ChargeSheet "
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
-                       <View style="@style/Divider" />
-                   </LinearLayout>
+                <View
+                    style="@style/Divider"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent" />
 
-                   <TextView
-                       android:id="@+id/textView14"
-                       android:layout_weight="1"
-                       android:layout_width="0dp"
-                       android:layout_height="50dp"
-                       android:text="ChargeSheet Cases"
-                       android:textColor="@color/colorAccent"
-                       android:gravity="center"
-                       android:textStyle="bold"
-                       android:textSize="@dimen/edittext_font"/>
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="TopViolator"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
-
-
-
+                <View
+                    style="@style/Divider"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent" />
 
 
             </TableRow>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorAccent">
 
-                <View style="@style/Divider" />
-            </LinearLayout>
+            <View
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
+
 
             <TableRow
                 android:id="@+id/tableRow2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#daf7f6"
-                android:weightSum="3"
-                >
+                android:gravity="center"
+                android:weightSum="4">
+
+
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
 
                 <TextView
@@ -238,69 +265,89 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Booked Cases"
-                    android:textColor="@color/black"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/edittext_font"/>
+                    android:text="Booked"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent">
-
-                    <View style="@style/Divider" />
-                </LinearLayout>
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/Txt_DD_Booked"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/dd_Bkd"
                     android:textColor="@color/black"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/edittext_font" />
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent">
-
-                    <View style="@style/Divider" />
-                </LinearLayout>
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/Txt_ChgBkd"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/chg_Bkd"
                     android:textColor="@color/black"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
+
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/Txt_TopVltnBkd"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/edittext_font" />
+                    android:text="@string/TopVltn_Bkd"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
-
-
-
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
 
             </TableRow>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorAccent">
 
-                <View style="@style/Divider" />
-            </LinearLayout>
+
+            <View
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
+
 
             <TableRow
                 android:id="@+id/tableRow3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#daf7f6"
-                android:weightSum="3"
-                >
+                android:gravity="center"
+                android:weightSum="4">
+
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+
 
 
                 <TextView
@@ -308,70 +355,92 @@
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:text="Counselling not attended Cases
-"
-                    android:textColor="@color/black"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/edittext_font"/>
+                    android:text="Counselling \n not attended "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
+
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
                 <LinearLayout
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent">
-
-                    <View style="@style/Divider" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/Txt_DD_CouncelngNot_Atnd"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/Txt_DD_CouncelngNot_Atnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/edittext_font"
+                        android:textStyle="bold" />
 
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/edittext_font"/>
-
-                <LinearLayout
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent">
-
-                    <View style="@style/Divider" />
                 </LinearLayout>
+
+
+
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/Txt_CHG_CouncelngNot_Atnd"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/edittext_font" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
+                <TextView
+                    android:id="@+id/Txt_TV_CouncelngNot_Atnd"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
-
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
 
             </TableRow>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorAccent">
 
-                <View style="@style/Divider" />
-            </LinearLayout>
+            <View
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
+
 
             <TableRow
                 android:id="@+id/tableRow4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#daf7f6"
-                android:weightSum="3"
-                >
+                android:gravity="center"
+                android:weightSum="4">
+
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
 
                 <TextView
@@ -379,52 +448,71 @@
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:text="Court not attended Cases"
-                    android:textColor="@color/black"
-
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/edittext_font"/>
+                    android:text="Court not attended"
 
-                <LinearLayout
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent">
-                    <View style="@style/Divider" />
-                </LinearLayout>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
+
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/Txt_DD_CourtNot_Atndg"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/edittext_font"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent">
-                    <View style="@style/Divider" />
-                </LinearLayout>
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/Txt_CHG_CourtNot_Atndg"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/edittext_font" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
+                <TextView
+                    android:id="@+id/Txt_TV_CourtNot_Atndg"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/edittext_font"
+                    android:textStyle="bold" />
 
-
-
+                <View
+                    style="@style/Divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
 
 
             </TableRow>
+
+
+            <View
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
 
 
         </TableLayout>

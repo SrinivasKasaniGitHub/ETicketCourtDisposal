@@ -410,6 +410,7 @@ public class DDCloseActiviy extends Activity {
                             "" + c.getString(c.getColumnIndex(DBHelper.dup_print_app_type)));
 
                 }
+                
 
             }
             c.close();

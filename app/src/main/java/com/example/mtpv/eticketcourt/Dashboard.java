@@ -149,6 +149,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
     //    COURT NAMES
     public static ArrayList<String> court_codes_fr_names_arr;
     public static ArrayList<String> court_names_arr;
+    public static ArrayList<String> court_address_arr;
     String[][] court_name_code_arr;
 
     //    COURT Disposal NAMES
@@ -244,9 +245,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
             title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.dialog_logo, 0, R.drawable.dialog_logo, 0);
             title.setPadding(20, 0, 20, 0);
             title.setHeight(70);
-
             String otp_message = "\nPlease Update your Application...! \n";
-
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Dashboard.this,
                     AlertDialog.THEME_HOLO_LIGHT);
             alertDialogBuilder.setCustomTitle(title);
@@ -254,7 +253,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
             alertDialogBuilder.setMessage(otp_message);
             alertDialogBuilder.setCancelable(false);
             alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // TODO Auto-generated method stub
@@ -266,9 +264,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
-
             alertDialog.getWindow().getAttributes();
-
             TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
             textView.setTextSize(28);
             textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
@@ -329,10 +325,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         @SuppressWarnings("deprecation")
                         @Override
                         public void run() {
-                            // TODO Auto-generated method stub
                             removeDialog(PROGRESS_DIALOG);
-
-                            // showToast("your is Upto Date");
                             TextView title = new TextView(Dashboard.this);
                             title.setText("Hyderabad E-Court");
                             title.setBackgroundColor(Color.RED);
@@ -344,9 +337,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                                     R.drawable.dialog_logo, 0);
                             title.setPadding(20, 0, 20, 0);
                             title.setHeight(70);
-
                             String otp_message = "\n Your Application is Upto Date \n No Need to Update \n";
-
                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Dashboard.this,
                                     AlertDialog.THEME_HOLO_LIGHT);
                             alertDialogBuilder.setCustomTitle(title);
@@ -354,7 +345,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                             alertDialogBuilder.setMessage(otp_message);
                             alertDialogBuilder.setCancelable(false);
                             alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     // TODO Auto-generated method stub
@@ -364,9 +354,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
                             AlertDialog alertDialog = alertDialogBuilder.create();
                             alertDialog.show();
-
                             alertDialog.getWindow().getAttributes();
-
                             TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
                             textView.setTextSize(28);
                             textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
@@ -1388,7 +1376,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
             if (ServiceHelper.Opdata_Chalana != null) {
 
-                if (ServiceHelper.psNames_master.length > 0) {
+                if (null!=ServiceHelper.psNames_master && ServiceHelper.psNames_master.length > 0) {
                     psname_name_code_arr = new String[ServiceHelper.psNames_master.length][2];
                     for (int i = 1; i < ServiceHelper.psNames_master.length; i++) {
                         psname_name_code_arr[i] = ServiceHelper.psNames_master[i].split("@");
@@ -1416,8 +1404,10 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     }
                     db.close();
                     db2.close();
+                }else {
+                    showToast("Try Again");
                 }
-                // new Async_ocuptn().execute();
+
             } else {
                 showToast("Try Again");
             }
@@ -1469,20 +1459,26 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
                     court_codes_fr_names_arr = new ArrayList<String>();
                     court_names_arr = new ArrayList<String>();
+                    court_address_arr=new ArrayList<>();
                     court_codes_fr_names_arr.clear();
                     court_names_arr.clear();
+                    court_address_arr.clear();
 
                     for (int j = 1; j < court_name_code_arr.length; j++) {
                         court_codes_fr_names_arr.add(court_name_code_arr[j][0]);
                         court_names_arr.add(court_name_code_arr[j][1]);
+                        court_address_arr.add(court_name_code_arr[j][2]);
+
 
                         Log.d("ghf", "" + court_name_code_arr[j][0]);
                         Log.d("fdfgh", "" + court_name_code_arr[j][1]);
 
-                        db.insertCourtNameDetails("" + court_name_code_arr[j][0], "" + court_name_code_arr[j][1]);
+                        db.insertCourtNameDetails("" + court_name_code_arr[j][0], "" + court_name_code_arr[j][1],""+ court_name_code_arr[j][2]);
                     }
                     db.close();
                     db2.close();
+                }else {
+                    showToast("Try Again");
                 }
                 // new Async_ocuptn().execute();
             } else {
@@ -1517,7 +1513,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
             if (ServiceHelper.Opdata_Chalana != null) {
 
-                if (ServiceHelper.court_dis_details_master.length > 0) {
+                if (null!=ServiceHelper.court_dis_details_master && ServiceHelper.court_dis_details_master.length > 0) {
                     court_dis_name_code_arr = new String[ServiceHelper.court_dis_details_master.length][2];
                     for (int i = 1; i < ServiceHelper.court_dis_details_master.length; i++) {
 
@@ -1550,8 +1546,9 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     }
                     db.close();
                     db2.close();
+                }else {
+                    showToast("Try Again");
                 }
-                // new Async_ocuptn().execute();
             } else {
                 showToast("Try Again");
             }
@@ -1779,6 +1776,8 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     db.close();
                     db2.close();
                     // new Async_getViolationPoint_SystemMasterData().execute();
+                }else {
+                    showToast("Try Again");
                 }
             } else {
                 showToast("Try Again");

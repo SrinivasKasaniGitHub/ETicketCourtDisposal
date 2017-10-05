@@ -50,6 +50,7 @@ public class DBHelper {
 
     public static String court_code_settings = "COURT_CODE";
     public static String court_name_settings = "COURT_NAME";
+    public static String court_address_settings = "COURT_ADDRESS";
 
     public static String court_dis_code_settings = "COURT_DIS_CODE";
     public static String court_dis_name_settings = "COURT_DIS_NAME";
@@ -130,7 +131,7 @@ public class DBHelper {
 
     public static String courtNamesCreation = "create table " + courtName_table
             + " ( SNO INTEGER PRIMARY KEY AUTOINCREMENT , " + court_code_settings + " varchar2(20), " + court_name_settings
-            + " varchar2(40));";
+            + " varchar2(40)," + court_address_settings + " varchar2(50));";
     public static String court_disNamesCreation = "create table " + court_disName_table
             + " ( SNO INTEGER PRIMARY KEY AUTOINCREMENT , " + court_dis_code_settings + " varchar2(20), " + court_dis_name_settings
             + " varchar2(40));";
@@ -355,10 +356,11 @@ public class DBHelper {
         db.insert(psName_table, null, con);
     }
 
-    public static void insertCourtNameDetails(String court_code, String court_name) {
+    public static void insertCourtNameDetails(String court_code, String court_name,String court_address) {
         ContentValues con = new ContentValues();
         con.put(court_code_settings, court_code);
         con.put(court_name_settings, court_name);
+        con.put(court_address_settings,court_address);
         db.insert(courtName_table, null, con);
     }
 

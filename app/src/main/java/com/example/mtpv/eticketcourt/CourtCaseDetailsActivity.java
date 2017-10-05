@@ -69,11 +69,12 @@ public class CourtCaseDetailsActivity extends Activity {
     String councelng_Date;
     ArrayList<String> mArrayListCourtNames = new ArrayList<String>();
     HashMap<String, String> paramsCourt = new HashMap<String, String>();
+    HashMap<String, String> paramsCourt_Address = new HashMap<String, String>();
     DBHelper db;
     Cursor c, cursor_courtnames;
     ArrayList<String> courtNames;
     MaterialSpinner courtspinner;
-    String selectedCourtCode;
+    String selectedCourtCode,selectedCourtAddress;
     String selectedCourtName;
     String jsonResult;
     String spinnerAvailblity;
@@ -104,60 +105,86 @@ public class CourtCaseDetailsActivity extends Activity {
         bundle = getIntent().getExtras();
         String array_Value = bundle.getString("ArrayValue");
 
+        if (array_Value.equals("DD_Bkd")) {
+            arrayList_CourtCase_Detilas = new ArrayList<>();
+            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_Booked;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.VISIBLE);
+            spinnerAvailblity = "1";
+            sms_key = "COURT";
+        }
 
+        if (array_Value.equals("Txt_DD_CouncelngNot_Atnd")) {
+            arrayList_CourtCase_Detilas = new ArrayList<>();
+            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CouncelngNot_Atnd;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.GONE);
+            spinnerAvailblity = "0";
+            sms_key = "COUNC";
+        }
 
-            if (array_Value.equals("DD_Bkd")) {
-                arrayList_CourtCase_Detilas = new ArrayList<>();
-                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_Booked;
-                btn_councelling_Date.setVisibility(View.VISIBLE);
-                courtspinner.setVisibility(View.VISIBLE);
-                spinnerAvailblity = "1";
-                sms_key = "COURT";
-            }
+        if (array_Value.equals("Txt_DD_CourtNot_Atnd")) {
+            arrayList_CourtCase_Detilas = new ArrayList<>();
+            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CourtNot_Atnd;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.VISIBLE);
+            spinnerAvailblity = "1";
+            sms_key = "COURT";
+        }
 
-            if (array_Value.equals("Txt_DD_CouncelngNot_Atnd")) {
-                arrayList_CourtCase_Detilas = new ArrayList<>();
-                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CouncelngNot_Atnd;
-                btn_councelling_Date.setVisibility(View.VISIBLE);
-                courtspinner.setVisibility(View.GONE);
-                spinnerAvailblity = "0";
-                sms_key = "COUNC";
-            }
+        if (array_Value.equals("CHG_Bkd")) {
+            arrayList_CourtCase_Detilas = new ArrayList<>();
+            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_Booked;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.VISIBLE);
+            spinnerAvailblity = "1";
+            sms_key = "COURT";
+        }
 
-            if (array_Value.equals("CHG_Bkd")) {
-                arrayList_CourtCase_Detilas = new ArrayList<>();
-                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_Booked;
-                btn_councelling_Date.setVisibility(View.VISIBLE);
-                courtspinner.setVisibility(View.VISIBLE);
-                spinnerAvailblity = "1";
-                sms_key = "COURT";
-            }
+        if (array_Value.equals("Txt_CHG_CouncelngNot_Atnd")) {
+            arrayList_CourtCase_Detilas = new ArrayList<>();
+            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CouncelngNot_Atnd;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.GONE);
+            spinnerAvailblity = "0";
+            sms_key = "COUNC";
+        }
 
-            if (array_Value.equals("Txt_CHG_CouncelngNot_Atnd")) {
-                arrayList_CourtCase_Detilas = new ArrayList<>();
-                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CouncelngNot_Atnd;
-                btn_councelling_Date.setVisibility(View.VISIBLE);
-                courtspinner.setVisibility(View.GONE);
-                spinnerAvailblity = "0";
-                sms_key = "COUNC";
-            }
+        if (array_Value.equals("Txt_CHG_CourtNot_Atnd")) {
+            arrayList_CourtCase_Detilas = new ArrayList<>();
+            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CourtNot_Atnd;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.VISIBLE);
+            spinnerAvailblity = "1";
+            sms_key = "COURT";
+        }
 
-            if (array_Value.equals("Txt_DD_CourtNot_Atnd")) {
-                arrayList_CourtCase_Detilas = new ArrayList<>();
-                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_DD_CourtNot_Atnd;
-                btn_councelling_Date.setVisibility(View.VISIBLE);
-                courtspinner.setVisibility(View.VISIBLE);
-                spinnerAvailblity = "1";
-                sms_key = "COURT";
-            }
-            if (array_Value.equals("Txt_CHG_CourtNot_Atnd")) {
-                arrayList_CourtCase_Detilas = new ArrayList<>();
-                arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_CHG_CourtNot_Atnd;
-                btn_councelling_Date.setVisibility(View.VISIBLE);
-                courtspinner.setVisibility(View.VISIBLE);
-                spinnerAvailblity = "1";
-                sms_key = "COURT";
-            }
+        if (array_Value.equals("TV_Bkd")) {
+            arrayList_CourtCase_Detilas = new ArrayList<>();
+            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_TV_Booked;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.VISIBLE);
+            spinnerAvailblity = "1";
+            sms_key = "COURT";
+        }
+
+        if (array_Value.equals("Txt_TV_CouncelngNot_Atnd")) {
+            arrayList_CourtCase_Detilas = new ArrayList<>();
+            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_TV_CouncelngNot_Atnd;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.GONE);
+            spinnerAvailblity = "0";
+            sms_key = "COUNC";
+        }
+
+        if (array_Value.equals("Txt_TV_CourtNot_Atnd")) {
+            arrayList_CourtCase_Detilas = new ArrayList<>();
+            arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_TV_CourtNot_Atnd;
+            btn_councelling_Date.setVisibility(View.VISIBLE);
+            courtspinner.setVisibility(View.VISIBLE);
+            spinnerAvailblity = "1";
+            sms_key = "COURT";
+        }
 
 
         custom_CourtCase_DetailsAdapter = new CustomRecyclerViewAdapter(this, arrayList_CourtCase_Detilas);
@@ -172,15 +199,19 @@ public class CourtCaseDetailsActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedCourtName = courtspinner.getSelectedItem().toString();
-
-                Log.i("court map size : ", "" + paramsCourt.size());
                 for (String mapCourtName : paramsCourt.keySet()) {
                     if (selectedCourtName.equals(mapCourtName)) {
                         selectedCourtCode = paramsCourt.get(mapCourtName);
-                        //Toast.makeText(getApplicationContext(), "COURT NAME : " + mapCourtName + " COURT CODE : " + selectedCourtCode, Toast.LENGTH_LONG).show();
                         break;
                     }
                 }
+                for (String mapCourt_Name : paramsCourt_Address.keySet()) {
+                    if (selectedCourtName.equals(mapCourt_Name)) {
+                        selectedCourtAddress = paramsCourt_Address.get(mapCourt_Name);
+                        break;
+                    }
+                }
+
             }
 
             @Override
@@ -225,6 +256,9 @@ public class CourtCaseDetailsActivity extends Activity {
                                 break;
                             } else {
                                 try {
+                                    if ("null".equals(selectedCourtAddress)){
+                                        selectedCourtAddress="";
+                                    }
 
                                     jsonObject.put("VEHICLE_NUMBER", casesDetailsPojo.getVEHICLE_NUMBER());
                                     jsonObject.put("CHALLAN_NUMBER", casesDetailsPojo.getCHALLAN_NUMBER());
@@ -232,11 +266,12 @@ public class CourtCaseDetailsActivity extends Activity {
                                     jsonObject.put("DRIVER_AADHAAR", casesDetailsPojo.getDRIVER_AADHAAR());
                                     jsonObject.put("DRIVER_MOBILE", casesDetailsPojo.getDRIVER_MOBILE());
                                     jsonObject.put("DRIVER_NAME", casesDetailsPojo.getDRIVER_NAME());
-                                    jsonObject.put("VIOLATION",casesDetailsPojo.getVIOLATION());
-                                    jsonObject.put("DISTRICT_NAME",casesDetailsPojo.getDISTRICT_NAME());
+                                    jsonObject.put("VIOLATION", casesDetailsPojo.getVIOLATION());
+                                    jsonObject.put("DISTRICT_NAME", casesDetailsPojo.getDISTRICT_NAME());
                                     jsonObject.put("SELECTED_COUNC_DATE", councelng_Date);
-                                    jsonObject.put("COURT_NAME", selectedCourtName!=null?selectedCourtName:"");
+                                    jsonObject.put("COURT_NAME", selectedCourtName != null ? selectedCourtName : "");
                                     jsonObject.put("COURT_CODE", selectedCourtCode);
+                                    jsonObject.put("COURT_ADDRESS",selectedCourtAddress);
                                     jsonObject.put("PID_CODE", MainActivity.user_id);
                                     jsonObject.put("PID_NAME", MainActivity.arr_logindetails[1]);
                                     jsonObject.put("PID_MOBILE", MainActivity.arr_logindetails[6]);
@@ -245,8 +280,8 @@ public class CourtCaseDetailsActivity extends Activity {
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-                                    jsonObject=new JSONObject();
-                                    jsonArray_caseDetails=new JSONArray();
+                                    jsonObject = new JSONObject();
+                                    jsonArray_caseDetails = new JSONArray();
 
                                 }
                             }
@@ -261,7 +296,7 @@ public class CourtCaseDetailsActivity extends Activity {
                             jsonResult = caseDetailsObj.toString();
                             if (isOnline()) {
                                 new Async_sendCourtCasesInfo().execute();
-                            }else{
+                            } else {
                                 showToast("Please check your net work connection");
                             }
 //                        Toast.makeText(getApplicationContext(), caseDetailsObj.toString(), Toast.LENGTH_LONG).show();
@@ -269,12 +304,13 @@ public class CourtCaseDetailsActivity extends Activity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        jsonResult="";
+                        jsonResult = "";
                     }
                 }
             }
         });
     }
+
     public Boolean isOnline() {
         ConnectivityManager conManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo nwInfo = conManager.getActiveNetworkInfo();
@@ -299,21 +335,22 @@ public class CourtCaseDetailsActivity extends Activity {
             showDialog(PROGRESS_DIALOG);
 
         }
+
         @SuppressWarnings("deprecation")
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             removeDialog(PROGRESS_DIALOG);
-            if (null!=ServiceHelper.Opdata_Chalana && !ServiceHelper.Opdata_Chalana.equals("NA")) {
+            if (null != ServiceHelper.Opdata_Chalana && !ServiceHelper.Opdata_Chalana.equals("NA")) {
                 try {
                     showToast(ServiceHelper.Opdata_Chalana);
                     Intent intent = new Intent(getApplicationContext(), CourtCaseStatusActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
-                }catch (Exception e){
+                } catch (Exception e) {
                     showToast("Updation Failed Please try again");
                 }
-            }else{
+            } else {
                 showToast("Updation Failed Please try again");
             }
         }
@@ -332,21 +369,32 @@ public class CourtCaseDetailsActivity extends Activity {
 
             if (cursor_courtnames.moveToFirst()) {
                 paramsCourt = new HashMap<String, String>();
+                paramsCourt_Address=new HashMap<>();
                 while (!cursor_courtnames.isAfterLast()) {
-                    mArrayListCourtNames.add(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)));
+                    try {
 
-                    paramsCourt.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_code_settings)));
-                    cursor_courtnames.moveToNext();
+                        mArrayListCourtNames.add(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)));
+
+                        paramsCourt.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_code_settings)));
+                        paramsCourt_Address.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_address_settings)));
+                        cursor_courtnames.moveToNext();
+                    }catch (Exception e){
+                       e.printStackTrace();
+                        showToast("Please download the Masters");
+                    }
                 }
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            paramsCourt = new HashMap<String, String>();
+            paramsCourt_Address=new HashMap<>();
+            showToast("Please download the Masters");
             e.printStackTrace();
         }
         cursor_courtnames.close();
         db.close();
 
     }
+
     private void showToast(String msg) {
 
 

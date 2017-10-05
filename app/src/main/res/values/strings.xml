@@ -331,7 +331,8 @@
     <!--COURT CASE STATUS-->
     <string name="dd_Bkd"><u>DD_BKD_Num</u></string>
     <string name="dd_Pnd"><u>DD_PND_Num</u></string>
-    <string name="chg_Bkd"><u>CHG_BKD_Num</u></string>
-    <string name="chg_Pnd"><u>CHG_PND_Num</u></string>
+    <string name="chg_Bkd"><u>CG_BKD_Num</u></string>
+    <string name="chg_Pnd"><u>CG_PND_Num</u></string>
+    <string name="TopVltn_Bkd"><u>TV_BKD_Num</u></string>
 
 </resources>

@@ -54,14 +54,18 @@ public class CourtCaseStatusActivity extends Activity {
     String offence_From_Date, offence_To_Date;
     CasesDetailsPojo casesDetailsPojo;
     RelativeLayout layout_TbleData;
-    TextView Txt_DD_Bkd, Txt_DD_CouncelngNot_Atnd, Txt_CHG_Bkd, Txt_CHG_CouncelngNot_Atnd, Txt_DD_CourtNot_Atnd, Txt_CHG_CourtNot_Atnd;
+    TextView Txt_DD_Bkd, Txt_DD_CouncelngNot_Atnd, Txt_DD_CourtNot_Atnd,Txt_CHG_Bkd, Txt_CHG_CouncelngNot_Atnd, Txt_CHG_CourtNot_Atnd,
+            Txt_TV_Bkd, Txt_TV_CouncelngNot_Atnd, Txt_TV_CourtNot_Atnd;
 
     public static ArrayList<CasesDetailsPojo> arrayList_DD_Booked;
     public static ArrayList<CasesDetailsPojo> arrayList_DD_CouncelngNot_Atnd;
+    public static ArrayList<CasesDetailsPojo> arrayList_DD_CourtNot_Atnd;
     public static ArrayList<CasesDetailsPojo> arrayList_CHG_Booked;
     public static ArrayList<CasesDetailsPojo> arrayList_CHG_CouncelngNot_Atnd;
-    public static ArrayList<CasesDetailsPojo> arrayList_DD_CourtNot_Atnd;
     public static ArrayList<CasesDetailsPojo> arrayList_CHG_CourtNot_Atnd;
+    public static ArrayList<CasesDetailsPojo> arrayList_TV_Booked;
+    public static ArrayList<CasesDetailsPojo> arrayList_TV_CouncelngNot_Atnd;
+    public static ArrayList<CasesDetailsPojo> arrayList_TV_CourtNot_Atnd;
 
 
     @Override
@@ -74,10 +78,14 @@ public class CourtCaseStatusActivity extends Activity {
         layout_TbleData = (RelativeLayout) findViewById(R.id.lyt_TableData);
         Txt_DD_Bkd = (TextView) findViewById(R.id.Txt_DD_Booked);
         Txt_DD_CouncelngNot_Atnd = (TextView) findViewById(R.id.Txt_DD_CouncelngNot_Atnd);
+        Txt_DD_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_DD_CourtNot_Atndg);
         Txt_CHG_Bkd = (TextView) findViewById(R.id.Txt_ChgBkd);
         Txt_CHG_CouncelngNot_Atnd = (TextView) findViewById(R.id.Txt_CHG_CouncelngNot_Atnd);
-        Txt_DD_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_DD_CourtNot_Atndg);
         Txt_CHG_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_CHG_CourtNot_Atndg);
+        Txt_TV_Bkd = (TextView) findViewById(R.id.Txt_TopVltnBkd);
+        Txt_TV_CouncelngNot_Atnd = (TextView) findViewById(R.id.Txt_TV_CouncelngNot_Atnd);
+        Txt_TV_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_TV_CourtNot_Atndg);
+
         compny_Name = (TextView) findViewById(R.id.CompanyName);
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
         compny_Name.startAnimation(marquee);
@@ -101,6 +109,7 @@ public class CourtCaseStatusActivity extends Activity {
                 showDialog(OFFENCE_TO_DATE_PICKER);
             }
         });
+
         btn_get_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +155,21 @@ public class CourtCaseStatusActivity extends Activity {
                 }
             }
         });
+
+        Txt_DD_CourtNot_Atnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (arrayList_DD_CourtNot_Atnd.size()>0) {
+                    Intent intent_DD_CourtNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ArrayValue", "Txt_DD_CourtNot_Atnd");
+                    intent_DD_CourtNot_Atnd.putExtras(bundle);
+                    startActivity(intent_DD_CourtNot_Atnd);
+                }else{
+                    showToast("No reports Found");
+                }
+            }
+        });
         Txt_CHG_Bkd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,20 +200,7 @@ public class CourtCaseStatusActivity extends Activity {
                 }
             }
         });
-        Txt_DD_CourtNot_Atnd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (arrayList_DD_CourtNot_Atnd.size()>0) {
-                    Intent intent_DD_CourtNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("ArrayValue", "Txt_DD_CourtNot_Atnd");
-                    intent_DD_CourtNot_Atnd.putExtras(bundle);
-                    startActivity(intent_DD_CourtNot_Atnd);
-                }else{
-                    showToast("No reports Found");
-                }
-            }
-        });
+
 
         Txt_CHG_CourtNot_Atnd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,6 +212,50 @@ public class CourtCaseStatusActivity extends Activity {
                     bundle.putString("ArrayValue", "Txt_CHG_CourtNot_Atnd");
                     intent_CHG_CourtNot_Atnd.putExtras(bundle);
                     startActivity(intent_CHG_CourtNot_Atnd);
+                }else{
+                    showToast("No reports Found");
+                }
+            }
+        });
+
+        Txt_TV_Bkd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (arrayList_TV_Booked.size()>0) {
+                    Intent intent_TV_Bkd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ArrayValue", "TV_Bkd");
+                    intent_TV_Bkd.putExtras(bundle);
+                    startActivity(intent_TV_Bkd);
+                }else{
+                    showToast("No reports Found");
+                }
+            }
+        });
+        Txt_TV_CouncelngNot_Atnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (arrayList_TV_CouncelngNot_Atnd.size()>0) {
+                    Intent intent_TV_CouncelngNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ArrayValue", "Txt_TV_CouncelngNot_Atnd");
+                    intent_TV_CouncelngNot_Atnd.putExtras(bundle);
+                    startActivity(intent_TV_CouncelngNot_Atnd);
+                }else{
+                    showToast("No reports Found");
+                }
+            }
+        });
+
+        Txt_TV_CourtNot_Atnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (arrayList_TV_CourtNot_Atnd.size()>0) {
+                    Intent intent_TV_CourtNot_Atnd = new Intent(getApplicationContext(), CourtCaseDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ArrayValue", "Txt_TV_CourtNot_Atnd");
+                    intent_TV_CourtNot_Atnd.putExtras(bundle);
+                    startActivity(intent_TV_CourtNot_Atnd);
                 }else{
                     showToast("No reports Found");
                 }
@@ -249,10 +304,13 @@ public class CourtCaseStatusActivity extends Activity {
 
                 arrayList_DD_Booked = new ArrayList<>();
                 arrayList_DD_CouncelngNot_Atnd = new ArrayList<>();
+                arrayList_DD_CourtNot_Atnd = new ArrayList<>();
                 arrayList_CHG_Booked = new ArrayList<>();
                 arrayList_CHG_CouncelngNot_Atnd = new ArrayList<>();
-                arrayList_DD_CourtNot_Atnd = new ArrayList<>();
                 arrayList_CHG_CourtNot_Atnd = new ArrayList<>();
+                arrayList_TV_Booked = new ArrayList<>();
+                arrayList_TV_CouncelngNot_Atnd = new ArrayList<>();
+                arrayList_TV_CourtNot_Atnd = new ArrayList<>();
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(ServiceHelper.Opdata_Chalana);
@@ -282,27 +340,42 @@ public class CourtCaseStatusActivity extends Activity {
                         if ((jb.getString("CHALLAN_TYPE").equals("12") || jb.getString("CHALLAN_TYPE").equals("23")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COUNC_STATUS").equals("0")) {
                             arrayList_DD_CouncelngNot_Atnd.add(casesDetailsPojo);
                         }
+                        if ((jb.getString("CHALLAN_TYPE").equals("12") || jb.getString("CHALLAN_TYPE").equals("23")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COURT_NOTICE_DT").equals("")) {
+                            arrayList_DD_CourtNot_Atnd.add(casesDetailsPojo);
+                        }
+
                         if (jb.getString("CHALLAN_TYPE").equals("26")) {
                             arrayList_CHG_Booked.add(casesDetailsPojo);
                         }
                         if ((jb.getString("CHALLAN_TYPE").equals("26")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COUNC_STATUS").equals("0")) {
                             arrayList_CHG_CouncelngNot_Atnd.add(casesDetailsPojo);
                         }
-                        if ((jb.getString("CHALLAN_TYPE").equals("12") || jb.getString("CHALLAN_TYPE").equals("23")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COURT_NOTICE_DT").equals("")) {
-                            arrayList_DD_CourtNot_Atnd.add(casesDetailsPojo);
-                        }
+
                         if ((jb.getString("CHALLAN_TYPE").equals("26")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COURT_NOTICE_DT").equals("")) {
                             arrayList_CHG_CourtNot_Atnd.add(casesDetailsPojo);
+                        }
+
+                        if (jb.getString("CHALLAN_TYPE").equals("99")) {
+                            arrayList_TV_Booked.add(casesDetailsPojo);
+                        }
+                        if ((jb.getString("CHALLAN_TYPE").equals("99")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COUNC_STATUS").equals("0")) {
+                            arrayList_TV_CouncelngNot_Atnd.add(casesDetailsPojo);
+                        }
+                        if ((jb.getString("CHALLAN_TYPE").equals("99")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COURT_NOTICE_DT").equals("")) {
+                            arrayList_TV_CourtNot_Atnd.add(casesDetailsPojo);
                         }
                     }
                     layout_TbleData.setVisibility(View.VISIBLE);
 
                     Txt_DD_Bkd.setText(Html.fromHtml("<u>" + arrayList_DD_Booked.size() + "</u>"));
                     Txt_DD_CouncelngNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_DD_CouncelngNot_Atnd.size() + "</u>"));
+                    Txt_DD_CourtNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_DD_CourtNot_Atnd.size() + "</u>"));
                     Txt_CHG_Bkd.setText(Html.fromHtml("<u>" + arrayList_CHG_Booked.size() + "</u>"));
                     Txt_CHG_CouncelngNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_CHG_CouncelngNot_Atnd.size() + "</u>"));
-                    Txt_DD_CourtNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_DD_CourtNot_Atnd.size() + "</u>"));
                     Txt_CHG_CourtNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_CHG_CourtNot_Atnd.size() + "</u>"));
+                    Txt_TV_Bkd.setText(Html.fromHtml("<u>" + arrayList_TV_Booked.size() + "</u>"));
+                    Txt_TV_CouncelngNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_TV_CouncelngNot_Atnd.size() + "</u>"));
+                    Txt_TV_CourtNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_TV_CourtNot_Atnd.size() + "</u>"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -417,14 +490,11 @@ public class CourtCaseStatusActivity extends Activity {
 
 //                dp_offenceTo_date.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_offenceTo_date;
-
             case PROGRESS_DIALOG:
                 ProgressDialog pd = ProgressDialog.show(this, "", "Please Wait...", true);
                 pd.setContentView(R.layout.custom_progress_dialog);
                 pd.setCancelable(false);
                 return pd;
-
-
             default:
                 break;
         }
