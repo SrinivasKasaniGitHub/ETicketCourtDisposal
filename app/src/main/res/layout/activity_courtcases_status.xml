@@ -164,7 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#90dedc"
-                android:weightSum="4">
+                android:weightSum="3">
 
                 <View
                     style="@style/Divider"
@@ -229,7 +229,8 @@
                     android:text="TopViolator"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/edittext_font"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <View
                     style="@style/Divider"
@@ -251,7 +252,7 @@
                 android:layout_height="wrap_content"
                 android:background="#daf7f6"
                 android:gravity="center"
-                android:weightSum="4">
+                android:weightSum="3">
 
 
                 <View
@@ -317,7 +318,8 @@
                     android:text="@string/TopVltn_Bkd"
                     android:textColor="@color/black"
                     android:textSize="@dimen/edittext_font"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <View
                     style="@style/Divider"
@@ -340,7 +342,7 @@
                 android:layout_height="wrap_content"
                 android:background="#daf7f6"
                 android:gravity="center"
-                android:weightSum="4">
+                android:weightSum="3">
 
                 <View
                     style="@style/Divider"
@@ -412,7 +414,8 @@
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/edittext_font"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <View
                     style="@style/Divider"
@@ -435,7 +438,7 @@
                 android:layout_height="wrap_content"
                 android:background="#daf7f6"
                 android:gravity="center"
-                android:weightSum="4">
+                android:weightSum="3">
 
                 <View
                     style="@style/Divider"
@@ -498,7 +501,8 @@
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/edittext_font"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <View
                     style="@style/Divider"

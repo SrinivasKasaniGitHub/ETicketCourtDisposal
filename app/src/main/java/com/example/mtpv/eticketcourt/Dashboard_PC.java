@@ -1014,7 +1014,7 @@ public class Dashboard_PC extends Activity implements OnClickListener {
 	@SuppressLint("WorldReadableFiles")
 	private void getPreferenceValues() {
 		// TODO Auto-generated method stub
-		preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+		preferences = getSharedPreferences("preferences", MODE_PRIVATE);
 		editor = preferences.edit();
 		psname_settings = preferences.getString("psname_name", "psname");
 		pointnameBycode_settings = preferences.getString("point_name",
@@ -1912,7 +1912,7 @@ public class Dashboard_PC extends Activity implements OnClickListener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		preferences = getSharedPreferences("preference", MODE_WORLD_READABLE);
+		preferences = getSharedPreferences("preference", MODE_PRIVATE);
 		editor = preferences.edit();
 		psname_settings = preferences.getString("psname_name", "psname");
 		pointnameBycode_settings = preferences.getString("point_name",

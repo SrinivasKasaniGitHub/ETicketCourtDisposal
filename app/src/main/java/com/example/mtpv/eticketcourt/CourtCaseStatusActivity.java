@@ -63,9 +63,9 @@ public class CourtCaseStatusActivity extends Activity {
     public static ArrayList<CasesDetailsPojo> arrayList_CHG_Booked;
     public static ArrayList<CasesDetailsPojo> arrayList_CHG_CouncelngNot_Atnd;
     public static ArrayList<CasesDetailsPojo> arrayList_CHG_CourtNot_Atnd;
-    public static ArrayList<CasesDetailsPojo> arrayList_TV_Booked;
+   /* public static ArrayList<CasesDetailsPojo> arrayList_TV_Booked;
     public static ArrayList<CasesDetailsPojo> arrayList_TV_CouncelngNot_Atnd;
-    public static ArrayList<CasesDetailsPojo> arrayList_TV_CourtNot_Atnd;
+    public static ArrayList<CasesDetailsPojo> arrayList_TV_CourtNot_Atnd;*/
 
 
     @Override
@@ -82,9 +82,9 @@ public class CourtCaseStatusActivity extends Activity {
         Txt_CHG_Bkd = (TextView) findViewById(R.id.Txt_ChgBkd);
         Txt_CHG_CouncelngNot_Atnd = (TextView) findViewById(R.id.Txt_CHG_CouncelngNot_Atnd);
         Txt_CHG_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_CHG_CourtNot_Atndg);
-        Txt_TV_Bkd = (TextView) findViewById(R.id.Txt_TopVltnBkd);
+       /* Txt_TV_Bkd = (TextView) findViewById(R.id.Txt_TopVltnBkd);
         Txt_TV_CouncelngNot_Atnd = (TextView) findViewById(R.id.Txt_TV_CouncelngNot_Atnd);
-        Txt_TV_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_TV_CourtNot_Atndg);
+        Txt_TV_CourtNot_Atnd = (TextView) findViewById(R.id.Txt_TV_CourtNot_Atndg);*/
 
         compny_Name = (TextView) findViewById(R.id.CompanyName);
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
@@ -218,7 +218,7 @@ public class CourtCaseStatusActivity extends Activity {
             }
         });
 
-        Txt_TV_Bkd.setOnClickListener(new View.OnClickListener() {
+       /* Txt_TV_Bkd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (arrayList_TV_Booked.size()>0) {
@@ -260,7 +260,7 @@ public class CourtCaseStatusActivity extends Activity {
                     showToast("No reports Found");
                 }
             }
-        });
+        });*/
 
 
     }
@@ -308,10 +308,10 @@ public class CourtCaseStatusActivity extends Activity {
                 arrayList_CHG_Booked = new ArrayList<>();
                 arrayList_CHG_CouncelngNot_Atnd = new ArrayList<>();
                 arrayList_CHG_CourtNot_Atnd = new ArrayList<>();
-                arrayList_TV_Booked = new ArrayList<>();
+               /* arrayList_TV_Booked = new ArrayList<>();
                 arrayList_TV_CouncelngNot_Atnd = new ArrayList<>();
-                arrayList_TV_CourtNot_Atnd = new ArrayList<>();
-                JSONObject jsonObject = null;
+                arrayList_TV_CourtNot_Atnd = new ArrayList<>();*/
+                JSONObject jsonObject=null;
                 try {
                     jsonObject = new JSONObject(ServiceHelper.Opdata_Chalana);
                     JSONArray jsonArray = jsonObject.getJSONArray("Cases Details");
@@ -355,7 +355,7 @@ public class CourtCaseStatusActivity extends Activity {
                             arrayList_CHG_CourtNot_Atnd.add(casesDetailsPojo);
                         }
 
-                        if (jb.getString("CHALLAN_TYPE").equals("99")) {
+                      /*  if (jb.getString("CHALLAN_TYPE").equals("99")) {
                             arrayList_TV_Booked.add(casesDetailsPojo);
                         }
                         if ((jb.getString("CHALLAN_TYPE").equals("99")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COUNC_STATUS").equals("0")) {
@@ -363,7 +363,7 @@ public class CourtCaseStatusActivity extends Activity {
                         }
                         if ((jb.getString("CHALLAN_TYPE").equals("99")) && jb.getString("PAYMENT_STATUS").equals("U") && jb.getString("COURT_NOTICE_DT").equals("")) {
                             arrayList_TV_CourtNot_Atnd.add(casesDetailsPojo);
-                        }
+                        }*/
                     }
                     layout_TbleData.setVisibility(View.VISIBLE);
 
@@ -373,9 +373,9 @@ public class CourtCaseStatusActivity extends Activity {
                     Txt_CHG_Bkd.setText(Html.fromHtml("<u>" + arrayList_CHG_Booked.size() + "</u>"));
                     Txt_CHG_CouncelngNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_CHG_CouncelngNot_Atnd.size() + "</u>"));
                     Txt_CHG_CourtNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_CHG_CourtNot_Atnd.size() + "</u>"));
-                    Txt_TV_Bkd.setText(Html.fromHtml("<u>" + arrayList_TV_Booked.size() + "</u>"));
+                   /* Txt_TV_Bkd.setText(Html.fromHtml("<u>" + arrayList_TV_Booked.size() + "</u>"));
                     Txt_TV_CouncelngNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_TV_CouncelngNot_Atnd.size() + "</u>"));
-                    Txt_TV_CourtNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_TV_CourtNot_Atnd.size() + "</u>"));
+                    Txt_TV_CourtNot_Atnd.setText(Html.fromHtml("<u>" + arrayList_TV_CourtNot_Atnd.size() + "</u>"));*/
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -420,7 +420,6 @@ public class CourtCaseStatusActivity extends Activity {
             offence_From_Date = format.format(new Date(present_year - 1900, (present_month), present_day));
             btn_offenceDate_From.setText(offence_From_Date.toUpperCase());
 
-            Log.i("DAY REPORT : ", "" + offence_From_Date);
 
 
         }
@@ -479,15 +478,15 @@ public class CourtCaseStatusActivity extends Activity {
         //10/02/2017
         switch (id) {
             case OFFENCE_FROM_DATE_PICKER:
-                DatePickerDialog dp_offenceFrom_date = new DatePickerDialog(this, offence_FromDate_Dialog, present_year, present_month,
+                DatePickerDialog dp_offenceFrom_date;
+                dp_offenceFrom_date = new DatePickerDialog(this, offence_FromDate_Dialog, present_year, present_month,
                         present_day);
-
 //                dp_offenceFrom_date.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_offenceFrom_date;
             case OFFENCE_TO_DATE_PICKER:
-                DatePickerDialog dp_offenceTo_date = new DatePickerDialog(this, offence_ToDate_Dialog, present_year, present_month,
+                DatePickerDialog dp_offenceTo_date;
+                dp_offenceTo_date = new DatePickerDialog(this, offence_ToDate_Dialog, present_year, present_month,
                         present_day);
-
 //                dp_offenceTo_date.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_offenceTo_date;
             case PROGRESS_DIALOG:

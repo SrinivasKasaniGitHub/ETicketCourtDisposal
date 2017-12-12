@@ -125,6 +125,9 @@ public class MainActivity extends Activity implements LocationListener {
     thirupathi 8309591117    2314189809  9809
     chan pasha 9848965575 */
 
+    //23001050
+    //1050
+
     ArrayList<String> ar_test = new ArrayList<String>();
     ArrayList<String> arr_for_logindetails;
 
@@ -304,7 +307,7 @@ public class MainActivity extends Activity implements LocationListener {
         values.put("UNIT_CODE", UNIT_CODE);
         values.put("UNIT_NAME", UNIT_NAME);
 
-        SQLiteDatabase db = openOrCreateDatabase(DBHelper.DATABASE_NAME, MODE_PRIVATE, null);
+        SQLiteDatabase db = openOrCreateDatabase(DBHelper.DATABASE_NAME,MODE_PRIVATE, null);
         db.execSQL(DBHelper.CREATE_USER_TABLE);
         db.execSQL("delete from " + DBHelper.USER_TABLE);
         db.insert(DBHelper.USER_TABLE, null, values); // Inserting Row
@@ -404,8 +407,8 @@ public class MainActivity extends Activity implements LocationListener {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             stopAnim();
-            MainActivity.arr_logindetails = ServiceHelper.Opdata_Chalana.split(":");
             if (ServiceHelper.Opdata_Chalana != null) {
+                MainActivity.arr_logindetails = ServiceHelper.Opdata_Chalana.split(":");
                 if (ServiceHelper.Opdata_Chalana.toString().trim().equals("1")) {
                     showToast("Invalid Login ID");
                 } else if (ServiceHelper.Opdata_Chalana.trim().equals("2")) {
@@ -686,7 +689,7 @@ public class MainActivity extends Activity implements LocationListener {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-        preference = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+        preference = getSharedPreferences("preferences", MODE_PRIVATE);
 
         services_url = preference.getString("serviceurl", "url1");
         ftps_url = preference.getString("ftpurl", "url2");
@@ -701,7 +704,7 @@ public class MainActivity extends Activity implements LocationListener {
     protected void onRestart() {
         // TODO Auto-generated method stub
         super.onRestart();
-        preference = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+        preference = getSharedPreferences("preferences", MODE_PRIVATE);
         services_url = preference.getString("serviceurl", "url1");
         ftps_url = preference.getString("ftpurl", "url2");
     }

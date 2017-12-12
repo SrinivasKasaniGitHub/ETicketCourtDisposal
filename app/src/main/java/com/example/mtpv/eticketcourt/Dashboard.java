@@ -24,6 +24,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.support.v4.content.FileProvider;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -306,7 +307,9 @@ public class Dashboard extends Activity implements View.OnClickListener {
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
                 // ftp://192.168.11.9:99/23/TabAPK/Version-1.5.1.txt
-                File downloadFile1 = new File("/sdcard/Download/ECourt.apk");
+//                File downloadFile1 = new File("/sdcard/Download/ECourt.apk");
+                File downloadFile1 = new File("/mnt/sdcard/Download/ECourt.apk");
+
                 // String remoteFile1 = "/23/TabAPK" + "/" + version;
                 String remoteFile1 = "/23/TabAPK" + "/ECourt.apk";
 
@@ -437,15 +440,32 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
                         finish();
 
-                        System.out.println("File #1 has been downloaded successfully.");
 
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                       /* Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setDataAndType(
                                 Uri.fromFile(new File(
                                         Environment.getExternalStorageDirectory() + "/download/" + "ECourt.apk")),
                                 "application/vnd.android.package-archive");
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        startActivity(intent);*/
+
+
+
+                        if (Build.VERSION.SDK_INT <= 23) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setDataAndType(
+                                    Uri.fromFile(new File("/mnt/sdcard/Download/ECourt.apk")),
+                                    "application/vnd.android.package-archive");
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        } else {
+                            Uri apkUri = FileProvider.getUriForFile(Dashboard.this, BuildConfig.APPLICATION_ID +
+                                    ".fileProvider", new File("/mnt/sdcard/Download/ECourt.apk"));
+                            Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
+                            intent.setData(apkUri);
+                            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            startActivity(intent);
+                        }
 
                     }
                 }
@@ -979,7 +999,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
     @SuppressLint("WorldReadableFiles")
     private void getPreferenceValues() {
         // TODO Auto-generated method stub
-        preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+        preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         editor = preferences.edit();
         psname_settings = preferences.getString("psname_name", "psname");
         pointnameBycode_settings = preferences.getString("point_name", "pointname");
@@ -2067,7 +2087,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-        preferences = getSharedPreferences("preference", MODE_WORLD_READABLE);
+        preferences = getSharedPreferences("preference", MODE_PRIVATE);
         editor = preferences.edit();
         psname_settings = preferences.getString("psname_name", "psname");
         pointnameBycode_settings = preferences.getString("point_name", "pointname");
@@ -2092,7 +2112,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
     public void onBackPressed() {
         // TODO Auto-generated method stub
         TextView title = new TextView(this);
-        title.setText("Hyderabad E-Ticket");
+        title.setText("Hyderabad E-Court");
         title.setBackgroundColor(Color.BLUE);
         title.setGravity(Gravity.CENTER);
         title.setTextColor(Color.WHITE);

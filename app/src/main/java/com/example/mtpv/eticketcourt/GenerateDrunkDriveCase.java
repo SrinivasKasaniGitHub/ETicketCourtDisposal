@@ -405,7 +405,7 @@ public class GenerateDrunkDriveCase extends Activity implements OnClickListener,
 		}
 		/* FIRST IT WILL MOVE TO RTADETAILS.CLASS */
 
-		preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+		preferences = getSharedPreferences("preferences", MODE_PRIVATE);
 		editor = preferences.edit();
 		/* FOR CHECKING FTP DETAILS */
 		/*

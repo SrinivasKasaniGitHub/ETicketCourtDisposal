@@ -220,6 +220,7 @@ public class ServiceHelper {
 
 		} catch (SoapFault fault) {
 			Log.i("****SOAP F", "soapfault = " + fault.getMessage());
+			Opdata_Chalana = null;
 
 		} catch (Exception E) {
 			E.printStackTrace();
@@ -1214,7 +1215,7 @@ public class ServiceHelper {
 	}
 
 
-	public static void getCourtClosingUpdateTicketInfo(String eticketNo, String regnNo, String dlNO, String aadhaarNO,
+	public static void getCourtClosingUpdateTicketInfo(String eticketNo, String regnNo, String dlNO,String dlDob, String aadhaarNO,
 													   String stcNO, String courtDispCD, String imprisDays,
 													   String imprisFrom, String imprisTo, String courtFine, String risingDetails,
 													   String courtCD, String coutrAttnDT, String vehRelease, String dlRelease,
@@ -1227,6 +1228,7 @@ public class ServiceHelper {
 			if (null!=eticketNo)request.addProperty("" + utils.TICKET_NO, "" + eticketNo);
 			if (null!=regnNo)request.addProperty("" + utils.E_REG_NO, "" + regnNo);
 			if (null!=dlNO)request.addProperty("" + utils.DL_NO, "" + dlNO);
+			if (null!=dlDob)request.addProperty("dlDob", "" + dlDob);
 			if (null!=aadhaarNO)request.addProperty("" + utils.ADHAR_NO, "" + aadhaarNO);
 			if (null!=stcNO)request.addProperty("" + utils.STC_NO, "" + stcNO);
 			if (null!=courtDispCD)request.addProperty("" + utils.COURT_DIS_CODE, "" + courtDispCD);
@@ -1250,8 +1252,7 @@ public class ServiceHelper {
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
 			envelope.setOutputSoapObject(request);
-
-			HttpTransportSE httpTransportSE = new HttpTransportSE(MainActivity.URL);
+            HttpTransportSE httpTransportSE = new HttpTransportSE(MainActivity.URL);
 			httpTransportSE.call(NAMESPACE+GET_COURT_CLOSING_UPDATE_TCKT_INFO, envelope);
 			Object result = envelope.getResponse();
 			Opdata_Chalana = "";

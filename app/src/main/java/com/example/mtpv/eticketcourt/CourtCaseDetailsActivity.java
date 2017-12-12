@@ -17,7 +17,6 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,7 +68,7 @@ public class CourtCaseDetailsActivity extends Activity {
     String councelng_Date;
     ArrayList<String> mArrayListCourtNames = new ArrayList<String>();
     HashMap<String, String> paramsCourt = new HashMap<String, String>();
-    HashMap<String, String> paramsCourt_Address = new HashMap<String, String>();
+//    HashMap<String, String> paramsCourt_Address = new HashMap<String, String>();
     DBHelper db;
     Cursor c, cursor_courtnames;
     ArrayList<String> courtNames;
@@ -159,7 +158,7 @@ public class CourtCaseDetailsActivity extends Activity {
             sms_key = "COURT";
         }
 
-        if (array_Value.equals("TV_Bkd")) {
+       /* if (array_Value.equals("TV_Bkd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
             arrayList_CourtCase_Detilas = CourtCaseStatusActivity.arrayList_TV_Booked;
             btn_councelling_Date.setVisibility(View.VISIBLE);
@@ -184,13 +183,13 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
             sms_key = "COURT";
-        }
+        }*/
 
 
         custom_CourtCase_DetailsAdapter = new CustomRecyclerViewAdapter(this, arrayList_CourtCase_Detilas);
         recyclerView.setAdapter(custom_CourtCase_DetailsAdapter);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, mArrayListCourtNames);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         courtspinner.setAdapter(dataAdapter);
@@ -205,12 +204,12 @@ public class CourtCaseDetailsActivity extends Activity {
                         break;
                     }
                 }
-                for (String mapCourt_Name : paramsCourt_Address.keySet()) {
+                /*for (String mapCourt_Name : paramsCourt_Address.keySet()) {
                     if (selectedCourtName.equals(mapCourt_Name)) {
                         selectedCourtAddress = paramsCourt_Address.get(mapCourt_Name);
                         break;
                     }
-                }
+                }*/
 
             }
 
@@ -369,14 +368,14 @@ public class CourtCaseDetailsActivity extends Activity {
 
             if (cursor_courtnames.moveToFirst()) {
                 paramsCourt = new HashMap<String, String>();
-                paramsCourt_Address=new HashMap<>();
+//                paramsCourt_Address=new HashMap<>();
                 while (!cursor_courtnames.isAfterLast()) {
                     try {
 
                         mArrayListCourtNames.add(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)));
 
                         paramsCourt.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_code_settings)));
-                        paramsCourt_Address.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_address_settings)));
+//                        paramsCourt_Address.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_address_settings)));
                         cursor_courtnames.moveToNext();
                     }catch (Exception e){
                        e.printStackTrace();
@@ -385,8 +384,8 @@ public class CourtCaseDetailsActivity extends Activity {
                 }
             }
         } catch (SQLException e) {
-            paramsCourt = new HashMap<String, String>();
-            paramsCourt_Address=new HashMap<>();
+            paramsCourt = new HashMap<>();
+//            paramsCourt_Address=new HashMap<>();
             showToast("Please download the Masters");
             e.printStackTrace();
         }
@@ -427,7 +426,7 @@ public class CourtCaseDetailsActivity extends Activity {
             present_day = dayOfMonth;
             format = new SimpleDateFormat("dd-MMM-yyyy");
             councelng_Date = format.format(new Date(present_year - 1900, (present_month), present_day));
-            btn_councelling_Date.setText("" + councelng_Date.toUpperCase());
+            btn_councelling_Date.setText(councelng_Date.toUpperCase());
         }
     };
 
@@ -436,7 +435,8 @@ public class CourtCaseDetailsActivity extends Activity {
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case COUNCELLING_DATE_PICKER:
-                DatePickerDialog dp_councelling_Date = new DatePickerDialog(this, councelling_Date_Dialog, present_year, present_month,
+                DatePickerDialog dp_councelling_Date;
+                dp_councelling_Date = new DatePickerDialog(this, councelling_Date_Dialog, present_year, present_month,
                         present_day);
 
 //                dp_councelling_Date.getDatePicker().setMaxDate(System.currentTimeMillis());

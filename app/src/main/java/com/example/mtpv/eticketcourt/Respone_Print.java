@@ -187,7 +187,7 @@ public class Respone_Print extends Activity {
 		CheckBlueToothState();
 		registerReceiver(null, new IntentFilter(BluetoothDevice.ACTION_FOUND));
 
-		preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+		preferences = getSharedPreferences("preferences", MODE_PRIVATE);
 		editor = preferences.edit();
 		address_spot = preferences.getString("btaddress", "btaddr");
 

@@ -322,27 +322,20 @@ public class SpotChallan extends Activity
 	final int OCCUPATION_DIALOG = 10;
 
 	StringBuffer message = new StringBuffer();
-
 	/* GPS DETAILS */
 	/* GPS VALUES */
 	// flag for GPS status
 	boolean isGPSEnabled = false;
-
 	public static String aadhr_Points, DL_Points, aadhr_point_frm_json, dl_point_frm_json, aadhaar_offence_year,
 			dl_offence_year;
-
 	// flag for network status
 	boolean isNetworkEnabled = false;
 	boolean canGetLocation = false;
 	ArrayList<Boolean> detained_items_status;
 	ArrayList<String> releasedDetained_items_list;// to bind all values
 	StringBuffer releasedDetained_items_list_toSend;
-	// vehicle
-	// history
-
 	// The minimum distance to change Updates in meters
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-
 	// The minimum time between updates in milliseconds
 	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
 
@@ -430,7 +423,6 @@ public class SpotChallan extends Activity
 	StringBuffer violations_details_send;
 	StringBuffer violation_desc_append;// after selecting the violations to
 	// append to btn_violations
-
 	public static StringBuffer sb_selected_penlist_send;
 
 	public static ArrayList<String> sb_selected_penlist;
@@ -547,7 +539,6 @@ public class SpotChallan extends Activity
 		// dateNTimeDialog();
 
 		final_image_data_tosend = null;
-
 		newtimer = new CountDownTimer(1000000000, 50) {
 
 			public void onTick(long millisUntilFinished) {
@@ -661,18 +652,10 @@ public class SpotChallan extends Activity
 		c_occptn.close();
 		db.close();
 
-		preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+		preferences = getSharedPreferences("preferences", MODE_PRIVATE);
 		editor = preferences.edit();
 
-		/* PREFERENCES */
-		/*
-		 * preferences = getSharedPreferences("preferences",
-		 * MODE_WORLD_READABLE); editor = preferences.edit(); FOR CHECKING FTP
-		 * DETAILS ftp_host_spot = preferences.getString("ftpurl", "host"); if
-		 * (!ftp_host_spot.equals("host")) { FTP_HOST_PORT_SPOT =
-		 * ftp_host_spot.split("\\:"); Log.i("DYNAMIC FTP DETAILS", "" +
-		 * FTP_HOST_PORT_SPOT[0] + "\nPort : " + FTP_HOST_PORT_SPOT[1]); }
-		 */
+
 	}
 
 	@SuppressWarnings("unused")
@@ -887,7 +870,6 @@ public class SpotChallan extends Activity
 		nationality_status = (RadioGroup) findViewById(R.id.nationality_status);
 		rb_indian = (RadioButton) findViewById(R.id.rb_indian);
 		rb_nri = (RadioButton) findViewById(R.id.rb_nri);
-
 		passport_layout = (LinearLayout) findViewById(R.id.passport_layout);
 		et_passport = (EditText) findViewById(R.id.et_passport);
 
@@ -1259,6 +1241,7 @@ public class SpotChallan extends Activity
 								Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 								dl_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 							} else {
+
 								dl_task.execute();
 							}
 

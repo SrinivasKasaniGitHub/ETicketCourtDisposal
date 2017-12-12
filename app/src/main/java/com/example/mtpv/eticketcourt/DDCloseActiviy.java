@@ -20,6 +20,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -77,12 +78,13 @@ public class DDCloseActiviy extends Activity {
     SimpleDateFormat format;
     Date date_From;
 
-    String present_date_toSend, date_courtAtnd, date_convFRom, date_convicTo;
+    String present_date_toSend, date_courtAtnd, date_convFRom, date_convicTo, date_dd_dl_dob;
     EditText et_dp_regno;
     EditText edtTxt_STC_No, edtTxt_FineAmnt, edtTxtConDays, edtTxtRisDays, edtTxt_Remarks;
     Button btn_dp_date_selection, btn_courtAttenddate, btn_courtConFromdate, btn_courtConTo, btn_courtSoclServceFromdate, btn_courtSoclServceTodate;
     Button btn_dp_get_onlinedetials;
     Button btn_payment;
+    AppCompatButton btn_Dl_dob;
 
     final int APPTYPE_DIALOG = 0;
     final int PRESENT_DATE_PICKER = 1;
@@ -92,6 +94,7 @@ public class DDCloseActiviy extends Activity {
     final int PRESENT_COURT_CONVI_TO = 7;
     final int PRESENT_COURT_SCL_SRC_FROM = 8;
     final int PRESENT_COURT_SCL_SRC_TO = 9;
+    final int PRESENT_DD_DL_DOB = 15;
     final int PRINT_DD_DIALOG = 10;
     final int PRINT_DD_DIALOG_EXIT = 11;
     final int REPORT_TYPE = 3;
@@ -117,25 +120,26 @@ public class DDCloseActiviy extends Activity {
     RelativeLayout dd_lyt;
     RelativeLayout pay_dd_lyt;
     TextView Reg_No, Mobile_No, Offender_Date, Challan_No, Aadhar_No, Dl_No;
-    EditText edtTxt_Mob_No, edtTxt_Aadhar_No, edtTxt_DlNo;
+    EditText edtTxt_Mob_No, edtTxt_Aadhar_No, edtTxt_DlNo, edtTxt_DL_SUSDAYS;
     ArrayList<String> courtNames;
     MaterialSpinner courtspinner;
     ArrayList<String> courtDisNames;
     MaterialSpinner courtDisspinner;
 
-    RadioGroup rdoGrp_VehcleRlse,rdoGrp_DLSUSCAN;
-    RadioButton rdoBtnYes_VehcleRlse,rdoBtn_DLSUS;
-    RadioButton rdoBtnNo_VehcleRlse,rdoBtn_DLCAN;
+    RadioGroup rdoGrp_VehcleRlse, rdoGrp_DLSUSCAN;
+    RadioButton rdoBtnYes_VehcleRlse, rdoBtn_DLSUS;
+    RadioButton rdoBtnNo_VehcleRlse, rdoBtn_DLCAN;
 
-    LinearLayout lytConFrom, lytConTo, lytConDays, lytFineAmnt, lytSoclFrom, lytSclSerTo, lytRisingDays;
+    LinearLayout lytConFrom, lytConTo, lytConDays, lytFineAmnt, lytSoclFrom, lytSclSerTo, lytRisingDays, lytSUSDAYS;
     DBHelper db;
     Cursor c, cursor_courtnames, cursor_court_Disnames, printer_cursor;
 
     String selectedCourtCode, selectedCourtDisCode;
     String vehcleRelse = "Y";
-    String dl_SUS="No";
-    String dl_CAN="No";
-    String vEHICLE_NUMBER, chall_No, offence_Date, driver_Adhar, driver_Mobile, driver_LCNCE;
+    String dl_SUS = "N";
+    String dl_CAN = "N";
+    String dl_SUS_Status = "N";
+    String vEHICLE_NUMBER, chall_No, offence_Date, driver_Adhar, driver_Mobile, driver_LCNCE, driver_DL_DOB;
     String dayDifference;
 
 
@@ -157,12 +161,9 @@ public class DDCloseActiviy extends Activity {
         present_month = cal.get(Calendar.MONTH);
         present_day = cal.get(Calendar.DAY_OF_MONTH);
 
-        preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+        preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         editor = preferences.edit();
         address = preferences.getString("btaddress", "btaddr");
-
-        Log.i("BT address :::::", "" + address);
-
         lytConFrom = (LinearLayout) findViewById(R.id.lytConvtdFrom);
         lytConTo = (LinearLayout) findViewById(R.id.lytConvtdTo);
         lytConDays = (LinearLayout) findViewById(R.id.lytConvtdDays);
@@ -170,6 +171,7 @@ public class DDCloseActiviy extends Activity {
         lytSoclFrom = (LinearLayout) findViewById(R.id.lytSoclFrom);
         lytSclSerTo = (LinearLayout) findViewById(R.id.lytSclSerTo);
         lytRisingDays = (LinearLayout) findViewById(R.id.lytRisingDays);
+        lytSUSDAYS = (LinearLayout) findViewById(R.id.lytSUSDAYS);
         compny_Name = (TextView) findViewById(R.id.CompanyName);
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
         compny_Name.startAnimation(marquee);
@@ -180,6 +182,7 @@ public class DDCloseActiviy extends Activity {
         edtTxtConDays = (EditText) findViewById(R.id.edtTxt_ConDays);
         edtTxtRisDays = (EditText) findViewById(R.id.edtTxt_RisingDays);
         edtTxt_Remarks = (EditText) findViewById(R.id.edtTxt_Remarks);
+        edtTxt_DL_SUSDAYS = (EditText) findViewById(R.id.edtTxt_DL_SUSDAYS);
 
         btn_dp_date_selection = (Button) findViewById(R.id.btn_dateselection_dp_xml);
         btn_courtAttenddate = (Button) findViewById(R.id.btn_dateselection_dp_xml1);
@@ -189,6 +192,7 @@ public class DDCloseActiviy extends Activity {
         btn_courtSoclServceTodate = (Button) findViewById(R.id.btn_dateselection_dp_xmlSST);
         btn_dp_get_onlinedetials = (Button) findViewById(R.id.btngetdetails_dp_xml);
         btn_payment = (Button) findViewById(R.id.btn_payment);
+        btn_Dl_dob = (AppCompatButton) findViewById(R.id.btn_Dl_dob);
         dd_lyt = (RelativeLayout) findViewById(R.id.Lyt_DD_Details);
         pay_dd_lyt = (RelativeLayout) findViewById(R.id.Lyt_Pay_details);
         Reg_No = (TextView) findViewById(R.id.Txt_Regno);
@@ -240,21 +244,24 @@ public class DDCloseActiviy extends Activity {
                 switch (checkedId) {
                     case R.id.rdoBtnDLSUS:
                         dl_SUS = "";
-                        dl_SUS = "Yes";
-                        dl_CAN = "No";
+                        dl_SUS = "Y";
+                        dl_CAN = "N";
+                        lytSUSDAYS.setVisibility(View.VISIBLE);
                         break;
 
                     case R.id.rdoBtnDLCAN:
                         dl_CAN = "";
-                        dl_CAN = "Yes";
-                        dl_SUS = "No";
+                        dl_CAN = "Y";
+                        dl_SUS = "N";
+                        lytSUSDAYS.setVisibility(View.GONE);
                         break;
 
                     case R.id.rdoBtnNONE:
                         dl_CAN = "";
                         dl_SUS = "";
-                        dl_CAN = "No";
-                        dl_SUS = "No";
+                        dl_CAN = "N";
+                        dl_SUS = "N";
+                        lytSUSDAYS.setVisibility(View.GONE);
                         break;
 
                     default:
@@ -370,7 +377,6 @@ public class DDCloseActiviy extends Activity {
                 } else {
                     lytConFrom.setVisibility(View.GONE);
                     lytConTo.setVisibility(View.GONE);
-
                     lytConDays.setVisibility(View.GONE);
                     lytFineAmnt.setVisibility(View.GONE);
                     lytSoclFrom.setVisibility(View.GONE);
@@ -410,7 +416,7 @@ public class DDCloseActiviy extends Activity {
                             "" + c.getString(c.getColumnIndex(DBHelper.dup_print_app_type)));
 
                 }
-                
+
 
             }
             c.close();
@@ -453,7 +459,6 @@ public class DDCloseActiviy extends Activity {
             }
         }
 
-
         btn_dp_date_selection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -477,6 +482,7 @@ public class DDCloseActiviy extends Activity {
                 // btn_courtConFromdate.setText("" + present_date_toSend.toUpperCase());
             }
         });
+
         btn_courtConTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -492,15 +498,25 @@ public class DDCloseActiviy extends Activity {
                 //btn_courtConTo.setText("" + present_date_toSend.toUpperCase());
             }
         });
-        btn_courtSoclServceTodate.setOnClickListener(new View.OnClickListener() {
+
+        btn_courtSoclServceTodate.setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        showDialog(PRESENT_COURT_SCL_SRC_TO);
+                        //btn_courtConTo.setText("" + present_date_toSend.toUpperCase());
+                    }
+                });
+        btn_Dl_dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(PRESENT_COURT_SCL_SRC_TO);
-                //btn_courtConTo.setText("" + present_date_toSend.toUpperCase());
+                showDialog(PRESENT_DD_DL_DOB);
             }
         });
 
         btn_dp_get_onlinedetials.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
@@ -512,7 +528,7 @@ public class DDCloseActiviy extends Activity {
                 } else {
                     if (isOnline()) {
                         new Async_getDD_details().execute();
-                    }else {
+                    } else {
                         showToast("Please check your network connection!");
                     }
                 }
@@ -528,6 +544,13 @@ public class DDCloseActiviy extends Activity {
                 String sTS_No = edtTxt_STC_No.getText().toString();
                 String court_Disposal_code = selectedCourtDisCode;
                 String fineAmnt = edtTxt_FineAmnt.getText().toString();
+                String dl_SusDays = edtTxt_DL_SUSDAYS.getText().toString();
+                if (dl_SUS.equals("Y")) {
+                    dl_SUS_Status = "Y";
+                    dl_SUS = dl_SUS + "!" + dl_SusDays;
+                }
+
+
                 String date_ConFrom = date_convFRom;
                 String date_ConTo = date_convicTo;
 
@@ -541,19 +564,23 @@ public class DDCloseActiviy extends Activity {
                 String dl = driver_LCNCE;
                 String ml = driver_Mobile;
                 String aN = driver_Adhar;
+                String dl_dob = driver_DL_DOB;
 //                driver_LCNCE=edtTxt_DlNo.getText().toString();
 //                driver_Mobile=edtTxt_Mob_No.getText().toString();
 //                driver_Adhar=edtTxt_Aadhar_No.getText().toString();
-                if (("null").equals(dl)||("").equals(dl)) {
+                if (("null").equals(dl) || ("").equals(dl)) {
                     driver_LCNCE = edtTxt_DlNo.getText().toString();
                 }
 
-                if (("null").equals(ml)||("").equals(ml)) {
+                if (("null").equals(ml) || ("").equals(ml)) {
                     driver_Mobile = edtTxt_Mob_No.getText().toString();
                 }
 
-                if (("null").equals(aN)||("").equals(aN)) {
+                if (("null").equals(aN) || ("").equals(aN)) {
                     driver_Adhar = edtTxt_Aadhar_No.getText().toString();
+                }
+                if (("null").equals(dl_dob) || ("").equals(dl_dob)) {
+                    driver_DL_DOB = btn_Dl_dob.getText().toString();
                 }
 
 //                if (!adhar_No.equals("")){
@@ -578,7 +605,13 @@ public class DDCloseActiviy extends Activity {
                 } else if ((!driver_Adhar.equals("")) && (driver_Adhar.length() <= 11 || driver_Adhar.length() >= 13)) {
                     edtTxt_Aadhar_No.setError(Html.fromHtml("<font color='white'>Enter valid Aadhar Number </font>"));
                     edtTxt_Aadhar_No.requestFocus();
+                } else if (dl_SUS_Status.equals("Y") && (!driver_LCNCE.equals("null")) && (driver_LCNCE.length() <= 3)) {
+                    edtTxt_DlNo.setError(Html.fromHtml("<font color='white'>Enter valid Dl Number </font>"));
+                    edtTxt_DlNo.requestFocus();
+                } else if (dl_SUS_Status.equals("Y") && (btn_Dl_dob.getText().toString().equals("Select Date"))) {
+                    showToast("Select Dl Date!");
                 }
+
 //                else if ((!driver_LCNCE.equals("")) && (driver_LCNCE.length() <= 3)) {
 //                    edtTxt_DlNo.setError(Html.fromHtml("<font color='white'>Enter valid Dl Number </font>"));
 //                    edtTxt_DlNo.requestFocus();
@@ -588,6 +621,9 @@ public class DDCloseActiviy extends Activity {
                 } else if (sTS_No.trim().equals("")) {
                     edtTxt_STC_No.setError(Html.fromHtml("<font color='white'>Enter STC No</font>"));
                     edtTxt_STC_No.requestFocus();
+                } else if (dl_SusDays.trim().equals("") && dl_SUS.equals("Y")) {
+                    edtTxt_DL_SUSDAYS.setError(Html.fromHtml("<font color='white'>Enter Suspention Days</font>"));
+                    edtTxt_DL_SUSDAYS.requestFocus();
                 } else if (court_Disposal_code == null) {
                     showToast("Select court Disposal Name");
                 } else if (court_Disposal_code.equals("3")) {
@@ -626,7 +662,7 @@ public class DDCloseActiviy extends Activity {
                     } else {
                         if (isOnline()) {
                             new Async_getCourtClosingUpdateTicketInfo().execute();
-                        }else{
+                        } else {
                             showToast("Please check your network connection");
                         }
 
@@ -678,6 +714,7 @@ public class DDCloseActiviy extends Activity {
 
 
     }
+
     public Boolean isOnline() {
         ConnectivityManager conManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo nwInfo = conManager.getActiveNetworkInfo();
@@ -747,10 +784,21 @@ public class DDCloseActiviy extends Activity {
         @Override
         protected String doInBackground(Void... params) {
 
-            ServiceHelper.getCourtClosingUpdateTicketInfo(chall_No, vEHICLE_NUMBER, driver_LCNCE.toUpperCase(), driver_Adhar, edtTxt_STC_No.getText().toString(),
+
+            if (dl_SUS.equals("Y") || dl_CAN.equals("Y")) {
+                if ((!driver_LCNCE.equals("null")) && (driver_LCNCE.length() <= 3)) {
+                    edtTxt_DlNo.setError(Html.fromHtml("<font color='white'>Enter valid Dl Number </font>"));
+                    edtTxt_DlNo.requestFocus();
+                } else if (btn_Dl_dob.getText().toString().equals("Select Date")) {
+                    showToast("Select Dl Date!");
+                }
+            }
+
+
+            ServiceHelper.getCourtClosingUpdateTicketInfo(chall_No, vEHICLE_NUMBER, driver_LCNCE.toUpperCase(), btn_Dl_dob.getText().toString(), driver_Adhar, edtTxt_STC_No.getText().toString(),
                     selectedCourtDisCode, edtTxtConDays.getText().toString(), date_convFRom, date_convicTo, edtTxt_FineAmnt.getText().toString(),
                     edtTxtRisDays.getText().toString(), selectedCourtCode, date_courtAtnd, vehcleRelse, "Y", edtTxt_Remarks.getText().toString(),
-                    MainActivity.user_id, MainActivity.arr_logindetails[1], "", driver_Mobile,dl_SUS,dl_CAN);
+                    MainActivity.user_id, MainActivity.arr_logindetails[1], "", driver_Mobile, dl_SUS, dl_CAN);
             return null;
         }
 
@@ -774,7 +822,7 @@ public class DDCloseActiviy extends Activity {
                 } else {
                     sucessFull_DialogMSG("Updation Failed \n Please try again");
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 sucessFull_DialogMSG("Updation Failed \n Please try again");
             }
@@ -783,7 +831,7 @@ public class DDCloseActiviy extends Activity {
         }
     }
 
-    public void sucessFull_DialogMSG(String msg){
+    public void sucessFull_DialogMSG(String msg) {
         TextView title = new TextView(this);
         title.setText("Hyderabad E-Ticket");
         title.setBackgroundColor(Color.BLUE);
@@ -809,7 +857,7 @@ public class DDCloseActiviy extends Activity {
 //                pay_dd_lyt.setVisibility(View.GONE);
 //                et_dp_regno.setText("");
 //                btn_dp_date_selection.setText("Select Date");
-                Intent intent=new Intent(getApplicationContext(),DDCloseActiviy.class);
+                Intent intent = new Intent(getApplicationContext(), DDCloseActiviy.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
@@ -864,7 +912,7 @@ public class DDCloseActiviy extends Activity {
             removeDialog(PROGRESS_DIALOG);
 
             online_report_status = "";
-            if (null!=ServiceHelper.Opdata_Chalana && !ServiceHelper.Opdata_Chalana.equals("NA") ) {
+            if (null != ServiceHelper.Opdata_Chalana && !ServiceHelper.Opdata_Chalana.equals("NA")) {
 
                 try {
                     JSONObject jsonObject = new JSONObject(ServiceHelper.Opdata_Chalana);
@@ -886,6 +934,8 @@ public class DDCloseActiviy extends Activity {
                             driver_Adhar = jsonObject1.getString("DRIVER AADHAAR");
                             driver_Mobile = jsonObject1.getString("DRIVER MOBILE");
                             driver_LCNCE = jsonObject1.getString("DRIVING LICENSE");
+                            driver_DL_DOB = jsonObject1.getString("DRIVER_LICENSE_DOB");
+
                             Reg_No.setText(vEHICLE_NUMBER);
                             Challan_No.setText(chall_No);
                             Offender_Date.setText(offence_Date);
@@ -914,16 +964,27 @@ public class DDCloseActiviy extends Activity {
                                 edtTxt_DlNo.setVisibility(View.VISIBLE);
                                 Dl_No.setVisibility(View.GONE);
                             }
+
+                            if (!Objects.equals("null", driver_DL_DOB)) {
+                                btn_Dl_dob.setText(driver_DL_DOB);
+
+                            } else {
+                                btn_Dl_dob.setText("Select Date");
+                            }
                         }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     showToast("" + getResources().getString(R.string.no_day_report));
+                    dd_lyt.setVisibility(View.GONE);
+                    pay_dd_lyt.setVisibility(View.GONE);
                 }
 
             } else {
                 online_report_status = "";
                 showToast("" + getResources().getString(R.string.no_day_report));
+                dd_lyt.setVisibility(View.GONE);
+                pay_dd_lyt.setVisibility(View.GONE);
             }
         }
     }
@@ -939,7 +1000,6 @@ public class DDCloseActiviy extends Activity {
 
                     @Override
                     public void run() {
-
                         showToast("Bluetooth NOT support");
                     }
                 });
@@ -947,24 +1007,18 @@ public class DDCloseActiviy extends Activity {
                 if (bluetoothAdapter.isEnabled()) {
                     if (bluetoothAdapter.isDiscovering()) {
                         runOnUiThread(new Runnable() {
-
                             @Override
                             public void run() {
-                                // TODO Auto-generated method stub
                                 showToast("Bluetooth is currently in device discovery process.");
                             }
                         });
                     } else {
                         runOnUiThread(new Runnable() {
-
                             @Override
                             public void run() {
-                                // TODO Auto-generated method stub
                                 showToast("Bluetooth is Enabled");
                             }
                         });
-
-                        Log.i("PRINT FROM", "" + Dashboard.check_vhleHistory_or_Spot);
 
                         if (!print_Data.equals("")) {
 
@@ -1024,8 +1078,6 @@ public class DDCloseActiviy extends Activity {
 
                                             @Override
                                             public void run() {
-                                                // TODO Auto-generated method
-                                                // stub
                                                 showToast("Check Your Device is Working Condition!");
                                             }
                                         });
@@ -1184,8 +1236,8 @@ public class DDCloseActiviy extends Activity {
 
 
                             try {
-									/*
-									 * String printdata =
+                                    /*
+                                     * String printdata =
 									 * bth_printer.font_Courier_41(""+
 									 * ServiceHelper.Opdata_Chalana);
 									 * actual_printer.Call_PrintertoPrint("" +
@@ -1216,8 +1268,8 @@ public class DDCloseActiviy extends Activity {
                                 Log.i("ONLINE PRINT", "ONLINE PRINT");
 
                                 try {
-									/*
-									 * String printdata =
+                                    /*
+                                     * String printdata =
 									 * bth_printer.font_Courier_41(""+
 									 * ServiceHelper.Opdata_Chalana);
 									 * actual_printer.Call_PrintertoPrint("" +
@@ -1248,8 +1300,8 @@ public class DDCloseActiviy extends Activity {
                                             .equals("" + getResources().getString(R.string.dup_drunk_drive)))
                                             && (!print_respose.get(selected_type).equals(""))) {
                                         try {
-											/*
-											 * String printdata =
+                                            /*
+                                             * String printdata =
 											 * bth_printer.font_Courier_41(""+
 											 * print_respose.get(selected_type))
 											 * ; actual_printer.
@@ -1513,8 +1565,8 @@ public class DDCloseActiviy extends Activity {
                 date_From = format.parse(date_convFRom);
             } catch (ParseException e) {
                 e.printStackTrace();
-            }
 
+            }
 
         }
     };
@@ -1561,6 +1613,7 @@ public class DDCloseActiviy extends Activity {
 
         }
     };
+
 
     DatePickerDialog.OnDateSetListener md_scl_servceFrom = new DatePickerDialog.OnDateSetListener() {
 
@@ -1631,6 +1684,23 @@ public class DDCloseActiviy extends Activity {
         }
     };
 
+    DatePickerDialog.OnDateSetListener md1_DD_DL_DOB = new DatePickerDialog.OnDateSetListener() {
+
+        @SuppressWarnings("deprecation")
+        @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
+
+        @Override
+        public void onDateSet(DatePicker view, int selectedYear, int monthOfYear, int dayOfMonth) {
+            present_year = selectedYear;
+            present_month = monthOfYear;
+            present_day = dayOfMonth;
+            format = new SimpleDateFormat("dd-MMM-yyyy");
+            date_dd_dl_dob = format.format(new Date(present_year - 1900, (present_month), present_day));
+            btn_Dl_dob.setText("" + date_dd_dl_dob.toUpperCase());
+            Log.i("DAY REPORT : ", "" + date_dd_dl_dob);
+        }
+    };
+
 
     @SuppressWarnings("deprecation")
     @Override
@@ -1680,6 +1750,13 @@ public class DDCloseActiviy extends Activity {
 
                 dp_SCL_SRC_TO.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_SCL_SRC_TO;
+
+            case PRESENT_DD_DL_DOB:
+                DatePickerDialog dp_DD_DL_DOB = new DatePickerDialog(this, md1_DD_DL_DOB, present_year, present_month,
+                        present_day);
+
+                dp_DD_DL_DOB.getDatePicker().setMaxDate(System.currentTimeMillis());
+                return dp_DD_DL_DOB;
 
             case PRINT_DD_DIALOG:
                 TextView title = new TextView(this);

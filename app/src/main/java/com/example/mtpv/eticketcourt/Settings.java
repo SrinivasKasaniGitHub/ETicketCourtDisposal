@@ -21,9 +21,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
@@ -243,7 +245,7 @@ public class Settings extends Activity implements View.OnClickListener {
 		}*/
 		/*---------------------------------------------*/
 
-        dashboard.preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+        dashboard.preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         dashboard.editor = dashboard.preferences.edit();
 
 		/* FOR PS NAMES */
@@ -270,7 +272,7 @@ public class Settings extends Activity implements View.OnClickListener {
 
         if (Dashboard.modified_url.equals("myurl")) {
         } else {
-            et_web_url.setText("" + Dashboard.modified_url);
+//            et_web_url.setText("" + Dashboard.modified_url);
         }
 
 		/* FOR PS NAME START */
@@ -403,7 +405,7 @@ public class Settings extends Activity implements View.OnClickListener {
         btn_scan_bluetooth = (Button) findViewById(R.id.btnscan_settings_xml);
         tv_stateBluetooth = (TextView) findViewById(R.id.tv_bluetoothState);
         et_bt_address = (EditText) findViewById(R.id.edt_bluetoothid_settings_xml);
-        et_web_url = (EditText) findViewById(R.id.edt_weburl_settings_xml);
+//        et_web_url = (EditText) findViewById(R.id.edt_weburl_settings_xml);
 
         btn_cancel = (Button) findViewById(R.id.btncancel_settings_xml);
         btn_save = (Button) findViewById(R.id.btnsubmit_settings_xml);
@@ -662,7 +664,7 @@ public class Settings extends Activity implements View.OnClickListener {
 			 */
                 else {
                     dashboard.preferences = getSharedPreferences("preferences",
-                            MODE_WORLD_READABLE);
+                            MODE_PRIVATE);
                     dashboard.editor = dashboard.preferences.edit();
 
 				/* FOR EXACT LOCATION PREF VALUES */
@@ -836,7 +838,7 @@ public class Settings extends Activity implements View.OnClickListener {
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
                 // ftp://192.168.11.9:99/23/TabAPK/Version-1.5.1.txt
-                File downloadFile1 = new File("/sdcard/Download/ECourt.apk");
+                File downloadFile1 = new File("/mnt/sdcard/Download/ECourt.apk");
                 //String remoteFile1 = "/23/TabAPK" + "/" + version;
                 String remoteFile1 = "/23/TabAPK" + "/ECourt.apk";
 
@@ -977,13 +979,30 @@ public class Settings extends Activity implements View.OnClickListener {
 
                         finish();
 
-                        System.out.println("File #1 has been downloaded successfully.");
+                       /* System.out.println("File #1 has been downloaded successfully.");
 
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory()+ "/download/"
                                 + "ECourt.apk")),"application/vnd.android.package-archive");
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        startActivity(intent);*/
+
+
+                        if (Build.VERSION.SDK_INT <= 23) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setDataAndType(
+                                    Uri.fromFile(new File("/mnt/sdcard/Download/ECourt.apk")),
+                                    "application/vnd.android.package-archive");
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        } else {
+                            Uri apkUri = FileProvider.getUriForFile(Settings.this, BuildConfig.APPLICATION_ID +
+                                    ".fileProvider", new File("/mnt/sdcard/Download/ECourt.apk"));
+                            Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
+                            intent.setData(apkUri);
+                            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            startActivity(intent);
+                        }
 
                     }
                 }
@@ -1044,7 +1063,7 @@ public class Settings extends Activity implements View.OnClickListener {
                                 selected_ps_name = which;
                                 btn_ps_name.setText(""+ psname_name[which].toString().trim());
                                 ps_code_pos = which;
-                                dashboard.preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+                                dashboard.preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                                 dashboard.editor = dashboard.preferences.edit();
                                 dashboard.editor.putInt("psname_code_toSet", which);
                                 dashboard.editor.putString("psname_code", psname_code[which].toString());
@@ -1053,7 +1072,7 @@ public class Settings extends Activity implements View.OnClickListener {
                                 removeDialog(PS_NAME_DIALOG);
                                 if (isOnline()) {
                                     selected_pointby_psname = -1;
-                                    dashboard.preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+                                    dashboard.preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                                     dashboard.editor = dashboard.preferences.edit();
                                     dashboard.editor.putInt("point_code_toSet", selected_pointby_psname);
                                     dashboard.editor.commit();
@@ -1093,7 +1112,7 @@ public class Settings extends Activity implements View.OnClickListener {
                                 // TODO Auto-generated method stub
                                 selected_pointby_psname = which;
                                 btn_pointby_ps_name.setText(""+ pointNameBy_PsName_arr.get(which).toString().trim());
-                                dashboard.preferences = getSharedPreferences("preferences", MODE_WORLD_READABLE);
+                                dashboard.preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                                 dashboard.editor = dashboard.preferences.edit();
 
                                 dashboard.editor.putInt("point_code_toSet", which);
