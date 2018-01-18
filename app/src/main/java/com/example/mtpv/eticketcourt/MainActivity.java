@@ -202,7 +202,7 @@ public class MainActivity extends Activity implements LocationListener {
         }
 
 
-        appVersion=getResources().getString(R.string.app_version);
+        appVersion = getResources().getString(R.string.app_version);
     }
 
 
@@ -307,7 +307,7 @@ public class MainActivity extends Activity implements LocationListener {
         values.put("UNIT_CODE", UNIT_CODE);
         values.put("UNIT_NAME", UNIT_NAME);
 
-        SQLiteDatabase db = openOrCreateDatabase(DBHelper.DATABASE_NAME,MODE_PRIVATE, null);
+        SQLiteDatabase db = openOrCreateDatabase(DBHelper.DATABASE_NAME, MODE_PRIVATE, null);
         db.execSQL(DBHelper.CREATE_USER_TABLE);
         db.execSQL("delete from " + DBHelper.USER_TABLE);
         db.insert(DBHelper.USER_TABLE, null, values); // Inserting Row
@@ -399,7 +399,6 @@ public class MainActivity extends Activity implements LocationListener {
         protected void onPreExecute() {
             super.onPreExecute();
             startAnim();
-
         }
 
         @SuppressWarnings("deprecation")
@@ -448,7 +447,6 @@ public class MainActivity extends Activity implements LocationListener {
 
                     // PUTTING IN SHARED PREFERENCES
                     editors.putString("PID_CODE", pidCode);
-
                     editors.putString("PID_NAME", pidName);
                     editors.putString("PS_CODE", psCd);
                     editors.putString("PS_NAME", psName);
@@ -457,31 +455,13 @@ public class MainActivity extends Activity implements LocationListener {
                     editors.putString("PASS_WORD", pass_word);
                     editors.putString("OFF_PHONE_NO", off_phone_no);
                     editors.putString("CURRENT_VERSION", current_version);
-
                     editors.putString("RTA_DATA_FLAG", rta_data_flg);
                     editors.putString("DL_DATA_FLAG", dl_data_flg);
                     editors.putString("AADHAAR_DATA_FLAG", aadhaar_data_flg);
                     editors.putString("OTP_NO_FLAG", otp_no_flg);
                     editors.putString("CASHLESS_FLAG", cashless_flg);
                     editors.putString("MOBILE_NO_FLAG", mobileNo_flg);
-
-                    Log.i("PID_CODE :::", pidCode);
-                    Log.i("PID_NAME :::", pidName);
-                    Log.i("PS_CODE   :::", psCd);
-                    Log.i("PS_NAME   :::", psName);
-                    Log.i("CADRE_CODE   :::", cadre_code);
-                    Log.i("CADRE_NAME   :::", cadre_name);
-                    Log.i("PASS_WORD   :::", pass_word);
-                    Log.i("OFF_PHONE_NO   :::", off_phone_no);
-                    Log.i("CURRENT_VERSION   :::", current_version);
-                    Log.i("RTA_DATA_FLAG   :::", rta_data_flg);
-                    Log.i("DL_DATA_FLAG   :::", dl_data_flg);
-                    Log.i("AADHAAR_DATA_FLAG   :::", aadhaar_data_flg);
-                    Log.i("OTP_NO_FLAG   :::", otp_no_flg);
-                    Log.i("CASHLESS_FLAG   :::", cashless_flg);
-                    Log.i("MOBILE_NO_FLAG   :::", mobileNo_flg);
-                    editors.commit();
-
+                    editors.apply();
                     startActivity(new Intent(getApplicationContext(), Dashboard.class));
                     finish();
                 }

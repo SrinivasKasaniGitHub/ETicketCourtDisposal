@@ -9,20 +9,12 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-
 import com.example.mtpv.eticketcourt.Dashboard;
 import com.example.mtpv.eticketcourt.Drunk_Drive;
 import com.example.mtpv.eticketcourt.GenerateDrunkDriveCase;
 import com.example.mtpv.eticketcourt.MainActivity;
 import com.example.mtpv.eticketcourt.Settings;
 import com.example.mtpv.eticketcourt.SpotChallan;
-
 
 @SuppressWarnings("unused")
 public class ServiceHelper {
@@ -229,8 +221,6 @@ public class ServiceHelper {
 		}
 	}
 
-	/*--------SENDING OTP TO MOBILE START-----*/
-	/*---first : send / second: confirm----*/
 	public static void sendOTPtoMobile(String regn_no, String mobileNo, String date) {
 		try {
 
@@ -320,8 +310,6 @@ public class ServiceHelper {
 			Log.e("Error", "" + E.toString());
 		}
 	}
-
-	/*-------------------------------------------*/
 
 	public static void getWheeler() {
 
@@ -540,6 +528,7 @@ public class ServiceHelper {
 			court_details_master = new String[0];
 		}
 	}
+
     public static void getCourtDisNames() {
         try {
             SoapObject request = new SoapObject(NAMESPACE, "" + GET_COURT_DIS_NAMES);
@@ -580,9 +569,6 @@ public class ServiceHelper {
         }
     }
 
-
-
-    /* TO GET OCCUPATION NAMES */
 	public static void getOccupationdetails() {
 		try {
 			SoapObject request = new SoapObject(NAMESPACE, "" + OCCUPATIONS);
@@ -755,6 +741,7 @@ public class ServiceHelper {
 			qualification_master = new String[0];
 		}
 	}
+
 	public static void getBar_Details() {
 
 		try {
@@ -840,7 +827,6 @@ public class ServiceHelper {
 		}
 	}
 
-	/* TO GET VEHCILE CATEGORY & VECHILE MAIN CATEOGRY DETAILS */
 	public static void getVechileCategory(String mName) {
 		try {
 			SoapObject request = new SoapObject(NAMESPACE, "" + mName);
@@ -903,7 +889,6 @@ public class ServiceHelper {
 		}
 	}
 
-	/* TO GET VEHCILE SUB CATEOGRY DETAILS */
 	public static void getVechileSubCategory(String mainCCode) {
 		try {
 			SoapObject request = new SoapObject(NAMESPACE, "" + VECHILE_SUB_CAT_METHOD_NAME);
@@ -948,6 +933,7 @@ public class ServiceHelper {
 			vchle_subCat_master = new String[0];
 		}
 	}
+
 	public static void getTerminalID(String unitCode) {
 
 		try {
@@ -995,7 +981,6 @@ public class ServiceHelper {
 		}
 	}
 
-
 	public static void getDayReports(String unitcode, String pidcd, String pidname, String reportdate, String simid,
 									 String imeino, String reprt_id) {
 		Utils utils = new Utils();
@@ -1037,8 +1022,6 @@ public class ServiceHelper {
 		}
 	}
 
-
-	/* ONLINE DUPLICATE PRINT */
 	public static void getOnlineDuplicatePrint(String unitcode, String pidcd, String pidname, String regno,
 											   String reportdate, String simid, String imeino) {
 		Utils utils = new Utils();
@@ -1079,7 +1062,6 @@ public class ServiceHelper {
 			Opdata_Chalana = "NA";
 		}
 	}
-
 
 	public static void getCourtClosingTicketInfo(String eticketRegNo, String offenceDT){
 
@@ -1162,9 +1144,6 @@ public class ServiceHelper {
 
 	}
 
-
-
-
 	public static void getCourtCasesInfo(String pidCode, String offenceFrDT,String offenceToDT){
 
 		Utils utils = new Utils();
@@ -1214,7 +1193,6 @@ public class ServiceHelper {
 
 	}
 
-
 	public static void getCourtClosingUpdateTicketInfo(String eticketNo, String regnNo, String dlNO,String dlDob, String aadhaarNO,
 													   String stcNO, String courtDispCD, String imprisDays,
 													   String imprisFrom, String imprisTo, String courtFine, String risingDetails,
@@ -1225,6 +1203,7 @@ public class ServiceHelper {
 		Utils utils = new Utils();
 		try {
 			SoapObject request = new SoapObject(NAMESPACE, "" + GET_COURT_CLOSING_UPDATE_TCKT_INFO);
+
 			if (null!=eticketNo)request.addProperty("" + utils.TICKET_NO, "" + eticketNo);
 			if (null!=regnNo)request.addProperty("" + utils.E_REG_NO, "" + regnNo);
 			if (null!=dlNO)request.addProperty("" + utils.DL_NO, "" + dlNO);
@@ -1274,8 +1253,6 @@ public class ServiceHelper {
 			Opdata_Chalana = "NA";
 		}
     }
-
-
 
 	public static void getRTADetails(String vhle_num) {
 		try {
@@ -1332,6 +1309,7 @@ public class ServiceHelper {
 			}
 		}
 	}
+
 	public static void getLicenceDetails(String lcnce_num) {
 
 		try {
@@ -1455,6 +1433,7 @@ public class ServiceHelper {
 			aadhaarDetailsCheck_resp = "0";
 		}
 	}
+
 	public static void getViolations_Points(String unit_Code, String aadhar_No, String driving_LicenseNo) {
 		// public String getViolationsPoints(String unitCode,String
 		// aadharNo,String drivingLicenseNo);
@@ -1490,7 +1469,6 @@ public class ServiceHelper {
 		}
 	}
 
-	/* TO GET VIOLATION DETAILS */
 	public static void getViolationDetails(String whlr_code) {
 		try {
 			Log.i("Violatio:::", "Yes");
@@ -1558,7 +1536,6 @@ public class ServiceHelper {
 		}
 	}
 
-	/* TO GET DETAINED ITEMS LIST */
 	public static void getDetainedItemsList(String v_num, String unt_code) {
 		Log.i("**gt**", "Please wait...");
 		try {
@@ -1624,7 +1601,6 @@ public class ServiceHelper {
 		}
 	}
 
-	/* TO GET AADHAR DETAILS */
 	public static void getAadharDetails(String uid, String eid) {
 		Log.i("**getAadharDetails ***", "Entered");
 		try {
@@ -1765,6 +1741,7 @@ public class ServiceHelper {
 			Log.i("**P**", "" + e.toString());
 		}
 	}
+
 	public static void getOffenderRemarks(String vhle_num, String license, String aadhar) {
 
 		try {
@@ -2929,54 +2906,6 @@ public class ServiceHelper {
 											   String mailid, String drvr_cntct_num, String is_spot, String cadre_cd, String cdre, String passport,
 											   String engNo, String chasisNo) {
 
-		Log.i("****VehicleH***", "Please wait...");
-		Log.i("****Vehnt***", "PARAMETERS PASSED START");
-		Log.i("****vans***", "" + vhle_hist_penchallans);
-		Log.i("****pen_challans***", "" + pen_challans);
-		Log.i("**regn_No*****", "" + regn_No);
-		Log.i("***gtwy_cd****", "" + gtwy_cd);
-		Log.i("**unit_cd*****", "" + unit_cd);
-		Log.i("***ps_code****", "" + ps_code);
-		Log.i("****ps_name***", "" + ps_name);
-		Log.i("****pid_cd***", "" + pid_cd);
-		Log.i("****pid_name***", "" + pid_name);
-		Log.i("***total_amnt****", "" + total_amnt);
-		Log.i("****detained_items***", "" + detained_items);
-		Log.i("****dateof_pymnt***", "" + dateof_pymnt);
-		Log.i("****pymnt_time***", "" + pymnt_time);
-		Log.i("****simid***", "" + simid);
-		Log.i("****imei_no***", "" + imei_no);
-		Log.i("*****lat_val**", "" + lat_val);
-		Log.i("***long_val****", "" + long_val);
-		Log.i("***point_cd****", "" + point_cd);
-		Log.i("***point_name****", "" + point_name);
-		Log.i("*onlinemode******", "" + onlinemode);
-		Log.i("***module_code****", "" + module_code);
-		Log.i("***re***", "" + released_detValues);
-		Log.i("***challan_num****", "" + challan_num);
-		Log.i("****service_code***", "" + service_code);
-		Log.i("***ownr_lic_no****", "" + ownr_lic_no);
-		Log.i("**drvr_lic_no*****", "" + drvr_lic_no);
-		Log.i("****pwd***", "" + pwd);
-		Log.i("***image_data****", "" + image_data);
-		Log.i("***challan_type****", "" + challan_type);
-		Log.i("*****challan_code**", "" + challan_code);
-		Log.i("*****location**", "" + location);
-		Log.i("****remarks***", "" + remarks);
-		Log.i("******pan_num*", "" + pan_num);
-		Log.i("****aadhar_num***", "" + aadhar_num);
-		Log.i("**voter_id*****", "" + voter_id);
-		Log.i("*****pasprt**", "" + pasprt);
-		Log.i("***mailid****", "" + mailid);
-		Log.i("**drvr_cntct_num*****", "" + drvr_cntct_num);
-		Log.i("*****is_spot**", "" + is_spot);
-		Log.i("*cadre_cd******", "" + cadre_cd);
-		Log.i("*****cdre**", "" + cdre);
-
-		Log.i("**passport No ::**", "" + passport);
-
-		Log.i("****Vehint***", "PARAMETERS PASSED ENDED");
-
 		Utils utils = new Utils();
 		try {
 			SoapObject request = null;
@@ -3206,7 +3135,6 @@ public class ServiceHelper {
 		}
 	}
 
-
 	public static void getTransactionNo(String all_challans, String imei_No, String email_ID, String contact_No,
 										String ter_ID, String bt_ID, String bt_Name, String sim_no, String gps_Latti, String gps_Longi,
 										String gps_Date) {
@@ -3361,64 +3289,6 @@ public class ServiceHelper {
 
 		Utils utils = new Utils();
 
-		Log.i(utils.REG_CD, "-->" + regn_Cd);
-		Log.i(utils.VEH_NO, "-->" + vehicle_No);
-		Log.i(utils.REG_NO, "-->" + regn_No);
-		Log.i(utils.OPTR_CD, "-->" + operater_Cd);
-		Log.i(utils.OPTR_NAME, "-->" + operater_Name);
-		Log.i(utils.PID_CD, "-->" + pid_Cd);
-		Log.i(utils.PID_NAME, "-->" + pid_Name);
-		Log.i(utils.PS_CODE, "-->" + ps_Code);
-		Log.i(utils.PS_NAME, "-->" + ps_Name);
-		Log.i(utils.BKD_PS_CODE, "-->" + booked_PsCode);
-		Log.i(utils.BKD_PS_NAME, "-->" + booked_PsName);
-		Log.i(utils.POINT_CODE, "-->" + point_Code);
-		Log.i(utils.POINT_NAME, "-->" + poin_tName);
-		Log.i(utils.EXCT_LOCATION, "-->" + exact_Location);
-		Log.i(utils.OFFNCE_DATE, "-->" + offence_Date);
-		Log.i(utils.OFFENCE_TIME, "-->" + offence_Time);
-		Log.i(utils.FINED_BY, "-->" + fined_By);
-		Log.i(utils.OWNR_DL_NO, "-->" + owner_DLNo);
-		Log.i(utils.DRIVER_DL_NO, "-->" + driver_DLNo);
-		Log.i(utils.DRIVER_NAME, "-->" + driver_Name);
-		Log.i(utils.DRIVER_FNAME, "-->" + father_Name);
-		Log.i(utils.AADHAR_NO, "-->" + aadhar_No);
-		Log.i(utils.PAN_NO, "-->" + panCard_No);
-		Log.i(utils.PSSPRT_NO, "-->" + passport_No);
-		Log.i(utils.VOTER_ID, "-->" + voter_Id);
-		Log.i(utils.CONTACT_NO, "-->" + contact_No);
-		Log.i(utils.OFENCE_CODE, "-->" + offence_Code);
-		Log.i(utils.OFENCE_AMNT, "-->");
-		Log.i(utils.DETAINED_ITEMS, "-->" + detained_Items);
-		Log.i(utils.COUNCELLING_DATE, "-->" + councelling_Date);
-		Log.i(utils.ALCHL_READING, "-->" + alcohol_Reading);
-		Log.i(utils.AGE, "-->" + user_age);
-		Log.i(utils.OCUPTN, "-->" + user_occupation);
-		Log.i(utils.QLFCTN, "-->" + user_qualification);
-		Log.i(utils.GENDER, "-->" + user_gendor);
-		Log.i(utils.CHECK_SI_NO, "-->" + check_SlNo);
-		Log.i(utils.WHLR_CODE, "-->" + wheeler_Cd);
-		Log.i(utils.MAKER_CODE, "-->" + maker_Cd);
-		Log.i(utils.VEH_MAIN_CAT, "-->" + vehMain_Category);
-		Log.i(utils.VEH_SUB_CAT, "-->" + vehSub_Category);
-		Log.i(utils.ADDRESS, "-->" + user_address);
-		Log.i(utils.CITY, "-->" + user_city);
-		Log.i(utils.UNIT_CD, "-->" + user_unitCd);
-		Log.i(utils.UNIT_NAME, "-->" + user_unitName);
-		Log.i(utils.CADRE_CODE, "-->" + cadre_Cd);
-		Log.i(utils.CADRE, "-->" + cadre_only);
-		Log.i(utils.BASE_64_IMG, "-->" + imgEncoded_String);
-		Log.i(utils.MOB_IMEI, "-->" + device_imei);
-		Log.i(utils.GPS_LAT, "-->" + gps_Lattitude);
-		Log.i(utils.GPS_LOG, "-->" + gps_Longitude);
-		Log.i(utils.MAC_ID, "-->" + mob_macId);
-		Log.i(utils.SIM_ID, "-->" + sim_Id);
-		Log.i(utils.BREATHE_ANYLSR_ID, "-->" + breath_AnalyserId);
-		Log.i(utils.LICENCE_STATUS, "-->" + lcnce_status);
-		Log.i(utils.DD_NAME_OF_BAR, "-->" + nameOfBar_WineShop);
-		Log.i(utils.DD_ADDRESS_OF_BAR, "-->" + addressOfBar_WineShop);
-		Log.i(utils.DD_OCCUPATION, "-->" + occupation_Name);
-		Log.i(utils.DD_OCCUP_ADDRSS, "-->" + occupation_Address);
 		try {
 			SoapObject request = new SoapObject(NAMESPACE, "" + GENERATE_DRUNK_DRIVE_CASE1_5_2);
 
@@ -3546,7 +3416,6 @@ public class ServiceHelper {
 
 		}
 	}
-
 
 	public static void getChange_PWDotp(String pid_cd, String security_Code, String contact_No) {
 

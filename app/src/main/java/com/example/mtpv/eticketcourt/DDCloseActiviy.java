@@ -151,16 +151,9 @@ public class DDCloseActiviy extends Activity {
         getCourtDisNamesFromDB();
         getCourtNamesFromDB();
         cal = Calendar.getInstance();
-        int a = 4;
-
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-		/* FOR DATE PICKER */
-
         present_year = cal.get(Calendar.YEAR);
         present_month = cal.get(Calendar.MONTH);
         present_day = cal.get(Calendar.DAY_OF_MONTH);
-
         preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         editor = preferences.edit();
         address = preferences.getString("btaddress", "btaddr");
@@ -558,7 +551,7 @@ public class DDCloseActiviy extends Activity {
                 String rising_days = edtTxtRisDays.getText().toString();
                 String vhcleRelse = vehcleRelse;
                 String remarks = edtTxt_Remarks.getText().toString();
-                //String mob_No=edtTxt_Mob_No.getText().toString();
+                // String mob_No=edtTxt_Mob_No.getText().toString();
                 // String adhar_No=edtTxt_Aadhar_No.getText().toString();
                 // String dl_no=edtTxt_DlNo.getText().toString();
                 String dl = driver_LCNCE;
@@ -784,21 +777,27 @@ public class DDCloseActiviy extends Activity {
         @Override
         protected String doInBackground(Void... params) {
 
+            try {
 
-            if (dl_SUS.equals("Y") || dl_CAN.equals("Y")) {
-                if ((!driver_LCNCE.equals("null")) && (driver_LCNCE.length() <= 3)) {
-                    edtTxt_DlNo.setError(Html.fromHtml("<font color='white'>Enter valid Dl Number </font>"));
-                    edtTxt_DlNo.requestFocus();
-                } else if (btn_Dl_dob.getText().toString().equals("Select Date")) {
-                    showToast("Select Dl Date!");
+
+                if (dl_SUS.equals("Y") || dl_CAN.equals("Y")) {
+                    if ((!driver_LCNCE.equals("null")) && (driver_LCNCE.length() <= 3)) {
+                        edtTxt_DlNo.setError(Html.fromHtml("<font color='white'>Enter valid Dl Number </font>"));
+                        edtTxt_DlNo.requestFocus();
+                    } else if (btn_Dl_dob.getText().toString().equals("Select Date")) {
+                        showToast("Select Dl Date!");
+                    }
                 }
+
+
+                ServiceHelper.getCourtClosingUpdateTicketInfo(chall_No, vEHICLE_NUMBER, driver_LCNCE.toUpperCase(), btn_Dl_dob.getText().toString(), driver_Adhar, edtTxt_STC_No.getText().toString(),
+                        selectedCourtDisCode, edtTxtConDays.getText().toString(), date_convFRom, date_convicTo, edtTxt_FineAmnt.getText().toString(),
+                        edtTxtRisDays.getText().toString(), selectedCourtCode, date_courtAtnd, vehcleRelse, "Y", edtTxt_Remarks.getText().toString(),
+                        MainActivity.user_id, MainActivity.arr_logindetails[1], "", driver_Mobile, dl_SUS, dl_CAN);
+            } catch (Exception e) {
+                e.printStackTrace();
+                showToast("Please check network and try again!");
             }
-
-
-            ServiceHelper.getCourtClosingUpdateTicketInfo(chall_No, vEHICLE_NUMBER, driver_LCNCE.toUpperCase(), btn_Dl_dob.getText().toString(), driver_Adhar, edtTxt_STC_No.getText().toString(),
-                    selectedCourtDisCode, edtTxtConDays.getText().toString(), date_convFRom, date_convicTo, edtTxt_FineAmnt.getText().toString(),
-                    edtTxtRisDays.getText().toString(), selectedCourtCode, date_courtAtnd, vehcleRelse, "Y", edtTxt_Remarks.getText().toString(),
-                    MainActivity.user_id, MainActivity.arr_logindetails[1], "", driver_Mobile, dl_SUS, dl_CAN);
             return null;
         }
 
@@ -965,7 +964,7 @@ public class DDCloseActiviy extends Activity {
                                 Dl_No.setVisibility(View.GONE);
                             }
 
-                            if (!Objects.equals("null", driver_DL_DOB)) {
+                            if (!Objects.equals("null", driver_DL_DOB) && (!Objects.equals("null", driver_LCNCE))) {
                                 btn_Dl_dob.setText(driver_DL_DOB);
 
                             } else {
@@ -1335,7 +1334,7 @@ public class DDCloseActiviy extends Activity {
                                             && (!print_respose.get(selected_type).equals(""))) {
 
                                         try {
-											/*
+                                            /*
 											 * String printdata =
 											 * bth_printer.font_Courier_41(""+
 											 * print_respose.get(selected_type))

@@ -77,7 +77,7 @@ public class CourtCaseDetailsActivity extends Activity {
     String selectedCourtName;
     String jsonResult;
     String spinnerAvailblity;
-    String sms_key;
+    String sms_key,btn_Txt;
     TextView compny_Name;
 
     @Override
@@ -111,6 +111,7 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
             sms_key = "COURT";
+            btn_Txt="COURT ATTEND";
         }
 
         if (array_Value.equals("Txt_DD_CouncelngNot_Atnd")) {
@@ -120,6 +121,7 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.GONE);
             spinnerAvailblity = "0";
             sms_key = "COUNC";
+            btn_Txt="COUNCELLING";
         }
 
         if (array_Value.equals("Txt_DD_CourtNot_Atnd")) {
@@ -129,6 +131,7 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
             sms_key = "COURT";
+            btn_Txt="COURT ATTEND";
         }
 
         if (array_Value.equals("CHG_Bkd")) {
@@ -138,6 +141,7 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
             sms_key = "COURT";
+            btn_Txt="COURT ATTEND";
         }
 
         if (array_Value.equals("Txt_CHG_CouncelngNot_Atnd")) {
@@ -147,6 +151,7 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.GONE);
             spinnerAvailblity = "0";
             sms_key = "COUNC";
+            btn_Txt="COUNCELLING";
         }
 
         if (array_Value.equals("Txt_CHG_CourtNot_Atnd")) {
@@ -156,7 +161,12 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
             sms_key = "COURT";
+            btn_Txt="COURT ATTEND";
         }
+
+        btn_councelling_Date.setText("Select "+btn_Txt+" Date");
+
+        //Top Violator
 
        /* if (array_Value.equals("TV_Bkd")) {
             arrayList_CourtCase_Detilas = new ArrayList<>();
@@ -228,7 +238,7 @@ public class CourtCaseDetailsActivity extends Activity {
         btn_Update_Case_Details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (btn_councelling_Date.getText().toString().equals("Select Date")) {
+                if (btn_councelling_Date.getText().toString().equals("Select "+btn_Txt+" Date")) {
                     showToast("Please select date!");
                 } else if (spinnerAvailblity.equals("1") && selectedCourtCode == null) {
                     showToast("Please select CourtName!");
@@ -323,7 +333,6 @@ public class CourtCaseDetailsActivity extends Activity {
         protected String doInBackground(Void... params) {
 
             ServiceHelper.sendCourtCasesInfo("" + jsonResult);
-
             return null;
         }
 
@@ -332,7 +341,6 @@ public class CourtCaseDetailsActivity extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
             showDialog(PROGRESS_DIALOG);
-
         }
 
         @SuppressWarnings("deprecation")

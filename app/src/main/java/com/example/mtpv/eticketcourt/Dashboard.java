@@ -276,7 +276,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
             btn.setTextColor(Color.WHITE);
             btn.setTypeface(btn.getTypeface(), Typeface.BOLD);
             btn.setBackgroundColor(Color.RED);
-
         }
 
         if (android.os.Build.VERSION.SDK_INT > 11) {
@@ -450,7 +449,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         startActivity(intent);*/
 
 
-
                         if (Build.VERSION.SDK_INT <= 23) {
                             Intent intent = new Intent(Intent.ACTION_VIEW);
                             intent.setDataAndType(
@@ -557,15 +555,12 @@ public class Dashboard extends Activity implements View.OnClickListener {
         return nwInfo != null;
     }
 
-    // http://www.reliancemart.com/index.php?show_price=yes
-
     @SuppressWarnings({"static-access", "deprecation"})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_generateticket_dashboard_xml:
                 check_vhleHistory_or_Spot = "drunkdrive";
-
                 getPreferenceValues();
                 preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                 editor = preferences.edit();
@@ -575,10 +570,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     db.open();
                     cursor_psnames = DBHelper.db.rawQuery("select * from " + db.psName_table, null);
                     cursor_courtnames = DBHelper.db.rawQuery("select * from " + db.courtName_table, null);
-
                     cursor_court_disnames = DBHelper.db.rawQuery("select * from " + db.court_disName_table, null);
-
-				/* TO GET WHEELER LENGTH */
                     c_whlr_details = DBHelper.db.rawQuery("select * from " + DBHelper.wheelercode_table, null);
 
                     if ((cursor_psnames.getCount() == 0) && (cursor_courtnames.getCount() == 0) && (cursor_court_disnames.getCount() == 0) && (c_whlr_details.getCount() == 0)) {
@@ -609,7 +601,6 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
             case R.id.tv_pending_booked_dashboard_xml:
                 check_vhleHistory_or_Spot = "drunkdrive";
-            /* TO CHECK PS NAME AND POINT NAME HAS SET OR NOT IN SETTINGS */
                 getPreferenceValues();
                 preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                 editor = preferences.edit();
@@ -1396,7 +1387,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
             if (ServiceHelper.Opdata_Chalana != null) {
 
-                if (null!=ServiceHelper.psNames_master && ServiceHelper.psNames_master.length > 0) {
+                if (null != ServiceHelper.psNames_master && ServiceHelper.psNames_master.length > 0) {
                     psname_name_code_arr = new String[ServiceHelper.psNames_master.length][2];
                     for (int i = 1; i < ServiceHelper.psNames_master.length; i++) {
                         psname_name_code_arr[i] = ServiceHelper.psNames_master[i].split("@");
@@ -1424,7 +1415,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     }
                     db.close();
                     db2.close();
-                }else {
+                } else {
                     showToast("Try Again");
                 }
 
@@ -1479,7 +1470,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
                     court_codes_fr_names_arr = new ArrayList<String>();
                     court_names_arr = new ArrayList<String>();
-                    court_address_arr=new ArrayList<>();
+                    court_address_arr = new ArrayList<>();
                     court_codes_fr_names_arr.clear();
                     court_names_arr.clear();
                     court_address_arr.clear();
@@ -1493,11 +1484,11 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         Log.d("ghf", "" + court_name_code_arr[j][0]);
                         Log.d("fdfgh", "" + court_name_code_arr[j][1]);
 
-                        db.insertCourtNameDetails("" + court_name_code_arr[j][0], "" + court_name_code_arr[j][1],""+ court_name_code_arr[j][2]);
+                        db.insertCourtNameDetails("" + court_name_code_arr[j][0], "" + court_name_code_arr[j][1], "" + court_name_code_arr[j][2]);
                     }
                     db.close();
                     db2.close();
-                }else {
+                } else {
                     showToast("Try Again");
                 }
                 // new Async_ocuptn().execute();
@@ -1533,7 +1524,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
             if (ServiceHelper.Opdata_Chalana != null) {
 
-                if (null!=ServiceHelper.court_dis_details_master && ServiceHelper.court_dis_details_master.length > 0) {
+                if (null != ServiceHelper.court_dis_details_master && ServiceHelper.court_dis_details_master.length > 0) {
                     court_dis_name_code_arr = new String[ServiceHelper.court_dis_details_master.length][2];
                     for (int i = 1; i < ServiceHelper.court_dis_details_master.length; i++) {
 
@@ -1566,7 +1557,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     }
                     db.close();
                     db2.close();
-                }else {
+                } else {
                     showToast("Try Again");
                 }
             } else {
@@ -1796,7 +1787,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     db.close();
                     db2.close();
                     // new Async_getViolationPoint_SystemMasterData().execute();
-                }else {
+                } else {
                     showToast("Try Again");
                 }
             } else {
@@ -1842,7 +1833,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                         DBHelper helper = new DBHelper(getApplicationContext());
 
 						/*
-						 * ContentValues values = new ContentValues();
+                         * ContentValues values = new ContentValues();
 						 * values.put("PINPAD_ID", "");
 						 * values.put("PINPAD_NAME", "");
 						 */
