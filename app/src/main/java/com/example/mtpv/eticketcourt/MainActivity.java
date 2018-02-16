@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
@@ -23,21 +22,17 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
 import android.telephony.TelephonyManager;
-import android.text.Html;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -47,7 +42,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import com.example.mtpv.eticketcourt.service.DBHelper;
@@ -62,75 +56,36 @@ public class MainActivity extends Activity implements LocationListener {
     final int SPLASH_DIALOG = 0;
     EditText et_pid;
     EditText et_pid_pwd;
-    Button btn_cancel;
-    Button btn_submit;
-    TextView tv_ip_settings;
     AVLoadingIndicatorView progIndicator;
-
-    public static String Pid_code = "", Pid_pswrd = "", Pid_Name = "", Ps_code = "", Ps_Name = "", CADRE_CODE = "",
-            CADRE_NAME = "", UNIT_CODE = "", UNIT_NAME = "", SECURITY_CD = "";
-
     DBHelper db;
-    Cursor c, cursor_officerdata, c_dup_res, c_whlr_details;
-
     final int PROGRESS_DIALOG = 1;
-
     public static String[] arr_logindetails;
-
     LocationManager m_locationlistner;
     android.location.Location location;
-
     public static double latitude = 0.0;
     public static double longitude = 0.0;
-    String provider = "";
     public static String IMEI = "";
     public static String user_id = "";
     public static String user_pwd = "";
-
-    public static String e_user_id = null, sim_No = null, mobile_no = null;
-    public static String e_user_tmp = "", e_imei = null, e_latitude = null, e_longitude = "";
-    /* GPS VALUES */
-    // flag for GPS status
+    public static String e_user_id = null, sim_No = null;
+    public static String e_user_tmp = "";
     boolean isGPSEnabled = false;
-    // flag for network statussetText
-
     boolean isNetworkEnabled = false;
     boolean canGetLocation = false;
-    // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-    // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
 
     SharedPreferences preference;
     SharedPreferences.Editor editor;
-    String service_type = "";
     String services_url = "";
     String ftps_url = "";
     public static String URL = "";
-    TextView textView2;
-    private ProgressDialog pDialog;
-
-    /* STATIC URL WHICH IS TO BE FIXED */
-    // http://192.168.11.4:8080/eTicketMobileHyd----- LIVE
-    // http://192.168.11.10:8080/eTicketMobileHyd---- TEST
-    private String url_to_fix = "/services/MobileEticketServiceImpl?wsdl";
+    ProgressDialog pDialog;
+    public String url_to_fix = "/services/MobileEticketServiceImpl?wsdl";
     @SuppressWarnings("unused")
     private String test_service_url = "http://192.168.11.97:8080/eTicketMobileHyd";
     @SuppressWarnings("unused")
     private String live_service_url = "http://192.168.11.4/eTicketMobileHyd";
-
-    public static String FTP_HOST = "";
-    /*Ananthaiah 9440494211
-    Raj Kumar 8686467986
-    thirupathi 8309591117    2314189809  9809
-    chan pasha 9848965575 */
-
-    //23001050
-    //1050
-
-    ArrayList<String> ar_test = new ArrayList<String>();
-    ArrayList<String> arr_for_logindetails;
-
     public static String appVersion;
     private static final int REQUEST_PERMISSIONS = 20;
     public SparseIntArray mErrorString;
@@ -143,24 +98,21 @@ public class MainActivity extends Activity implements LocationListener {
             Manifest.permission.INTERNET,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.INSTALL_SHORTCUT
+            Manifest.permission.INSTALL_SHORTCUT,
+            Manifest.permission.CAMERA
     };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         compny_Name = (TextView) findViewById(R.id.CompanyName);
         ip_Settings = (ImageView) findViewById(R.id.ip_settings);
         btn_login = (Button) findViewById(R.id.btnlog);
         et_pid = (EditText) findViewById(R.id.edtTxt_pid);
         et_pid_pwd = (EditText) findViewById(R.id.edtTxt_pwd);
-
-
-       /* et_pid.setText("23001004");
-        et_pid_pwd.setText("WdSt48Pr");*/
+        et_pid.setText("23001004");
+        et_pid_pwd.setText("DcHyd");
         progIndicator = (AVLoadingIndicatorView) findViewById(R.id.progIndicator);
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
         compny_Name.startAnimation(marquee);
@@ -171,7 +123,7 @@ public class MainActivity extends Activity implements LocationListener {
                 if (isOnline()) {
                     userlogin();
                 } else {
-                    showToast("Please check your Internet Connection");
+                    showToast("Please check your Internet Connection!");
                 }
 
             }
@@ -197,22 +149,17 @@ public class MainActivity extends Activity implements LocationListener {
                             Manifest.permission.INTERNET,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.INSTALL_SHORTCUT}, R.string.permissions
+                            Manifest.permission.INSTALL_SHORTCUT,Manifest.permission.CAMERA}, R.string.permissions
                     , REQUEST_PERMISSIONS);
         }
-
-
         appVersion = getResources().getString(R.string.app_version);
     }
 
-
-    void startAnim() {
-        // progIndicator.show();
+    public void startAnim() {
         progIndicator.smoothToShow();
     }
 
     public void stopAnim() {
-        //progIndicator.hide();
         progIndicator.smoothToHide();
     }
 
@@ -247,7 +194,6 @@ public class MainActivity extends Activity implements LocationListener {
         Toast.makeText(this, "Permissions Received.", Toast.LENGTH_LONG).show();
     }
 
-
     public boolean hasPermissions(String... permissions) {
         for (String permission : permissions)
             if (PackageManager.PERMISSION_GRANTED != checkCallingOrSelfPermission(permission))
@@ -256,7 +202,7 @@ public class MainActivity extends Activity implements LocationListener {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         int permissionCheck = PackageManager.PERMISSION_GRANTED;
         for (int permission : grantResults) {
@@ -294,8 +240,6 @@ public class MainActivity extends Activity implements LocationListener {
         String CADRE_NAME = null;
         String UNIT_CODE = null;
         String UNIT_NAME = null;
-
-        DBHelper helper = new DBHelper(getApplicationContext());
         ContentValues values = new ContentValues();
         values.put("PIDCODE", pidcode);
         values.put("PASSWORD", password);
@@ -306,13 +250,11 @@ public class MainActivity extends Activity implements LocationListener {
         values.put("CADRE_NAME", CADRE_NAME);
         values.put("UNIT_CODE", UNIT_CODE);
         values.put("UNIT_NAME", UNIT_NAME);
-
         SQLiteDatabase db = openOrCreateDatabase(DBHelper.DATABASE_NAME, MODE_PRIVATE, null);
         db.execSQL(DBHelper.CREATE_USER_TABLE);
         db.execSQL("delete from " + DBHelper.USER_TABLE);
         db.insert(DBHelper.USER_TABLE, null, values); // Inserting Row
         System.out.println("*********************OFFICER TABLE Insertion Successfully **********************");
-
         if (et_pid.getText().toString().trim().equals("")) {
             et_pid.setError("Enter PID");
             et_pid.requestFocus();
@@ -341,15 +283,14 @@ public class MainActivity extends Activity implements LocationListener {
                     }
 
                 } else {
-                    //showToast("Please check your network connection !");
+                    showToast("Please check your network connection !");
                 }
 
                 LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
                 if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     new Async_task_login().execute();
-
                 } else {
-                    // showGPSDisabledAlertToUser();
+                    //showGPSDisabledAlertToUser();
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                     alertDialogBuilder.setMessage("GPS is Disabled in your Device \nPlease Enable LOCATION ?")
                             .setCancelable(false)
@@ -388,9 +329,10 @@ public class MainActivity extends Activity implements LocationListener {
         @Override
         protected String doInBackground(Void... params) {
             // TODO Auto-generated method stub
+
             String[] version_split = appVersion.split("\\-");
-            ServiceHelper.login("" + user_id, "" + e_user_tmp, "" + IMEI, "" + sim_No, "" + latitude, "" + longitude,
-                    "" + version_split[1]);
+            ServiceHelper.authenticateLogin("" + user_id, "" + e_user_tmp, "" + IMEI, "" + sim_No, "" + latitude, "" + longitude,
+                    "" + version_split[1],"eCourt");
             return null;
         }
 
@@ -408,17 +350,17 @@ public class MainActivity extends Activity implements LocationListener {
             stopAnim();
             if (ServiceHelper.Opdata_Chalana != null) {
                 MainActivity.arr_logindetails = ServiceHelper.Opdata_Chalana.split(":");
-                if (ServiceHelper.Opdata_Chalana.toString().trim().equals("1")) {
+                if (ServiceHelper.Opdata_Chalana.trim().equals("1")) {
                     showToast("Invalid Login ID");
                 } else if (ServiceHelper.Opdata_Chalana.trim().equals("2")) {
                     showToast("Invalid Password");
-                } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("3")) {
+                } else if (ServiceHelper.Opdata_Chalana.trim().equals("3")) {
                     showToast("Unauthorized Device");
-                } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("4")) {
+                } else if (ServiceHelper.Opdata_Chalana.trim().equals("4")) {
                     showToast("Error, Please Contact E Challan Team at 040-27852721");
-                } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("5")) {
+                } else if (ServiceHelper.Opdata_Chalana.trim().equals("5")) {
                     showToast("You have Exceeded Number of \n Attempts with Wrong Password,\n Please Contact E Challan Team at 040-27852721 ");
-                } else if (ServiceHelper.Opdata_Chalana.toString().trim().equals("0")) {
+                } else if (ServiceHelper.Opdata_Chalana.trim().equals("0")) {
                     showToast("Please Contact E Challan Team at 040-27852721");
                 } else {
                     for (int i = 0; i < MainActivity.arr_logindetails.length; i++) {
@@ -469,25 +411,6 @@ public class MainActivity extends Activity implements LocationListener {
                 showToast("Login Failed!");
             }
         }
-    }
-
-
-    private void addShortcut() {
-        Intent shortcutIntent = new Intent(getApplicationContext(), MainActivity.class);
-        shortcutIntent.setAction(Intent.ACTION_MAIN);
-        shortcutIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
-                | Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT;
-        shortcutIntent.addFlags(flags);
-
-        Intent addIntent = new Intent();
-        addIntent.putExtra("duplicate", false);
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getResources().getString(R.string.app_name));
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-                Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.drawable.logo_hyd));
-        addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-        getApplicationContext().sendBroadcast(addIntent);
     }
 
     public void getLocation() {
@@ -619,7 +542,6 @@ public class MainActivity extends Activity implements LocationListener {
         }
     }
 
-
     @Override
     public void onLocationChanged(Location location) {
 
@@ -694,12 +616,9 @@ public class MainActivity extends Activity implements LocationListener {
         Toast toast = Toast.makeText(getApplicationContext(), "" + msg, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         View toastView = toast.getView();
-
         ViewGroup group = (ViewGroup) toast.getView();
         TextView messageTextView = (TextView) group.getChildAt(0);
         messageTextView.setTextSize(24);
-        // toastView.setBackgroundResource(R.drawable.toast_background);
         toast.show();
     }
-
 }

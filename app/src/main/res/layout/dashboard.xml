@@ -193,7 +193,8 @@
             android:drawableTop="@drawable/settings_m"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/settings"
-            android:textSize="19sp" />
+            android:textSize="19sp"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <LinearLayout

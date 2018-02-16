@@ -458,7 +458,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                             startActivity(intent);
                         } else {
                             Uri apkUri = FileProvider.getUriForFile(Dashboard.this, BuildConfig.APPLICATION_ID +
-                                    ".fileProvider", new File("/mnt/sdcard/Download/ECourt.apk"));
+                                    ".provider", new File("/mnt/sdcard/Download/ECourt.apk"));
                             Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
                             intent.setData(apkUri);
                             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -575,9 +575,11 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
                     if ((cursor_psnames.getCount() == 0) && (cursor_courtnames.getCount() == 0) && (cursor_court_disnames.getCount() == 0) && (c_whlr_details.getCount() == 0)) {
                         showToast("Please download master's !");
-                    } else if ((psname_settings.equals("psname")) && (pointnameBycode_settings.equals("pointname"))) {
-                        showToast("Configure Settings!");
                     }
+
+                   /* else if ((psname_settings.equals("psname")) && (pointnameBycode_settings.equals("pointname"))) {
+                        showToast("Configure Settings!");
+                    }*/
 //                    else if (address_spot.trim() != null && address_spot.trim().length() < 15) {
 //                        showToast("Configure BlueTooth Settings!");
 //                    }
@@ -617,11 +619,14 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
                     if ((cursor_psnames.getCount() == 0) && (cursor_courtnames.getCount() == 0) && (cursor_court_disnames.getCount() == 0) && (c_whlr_details.getCount() == 0)) {
                         showToast("Please download master's !");
-                    } else if ((psname_settings.equals("psname")) && (pointnameBycode_settings.equals("pointname"))) {
+                    }
+                   /* else if ((psname_settings.equals("psname")) && (pointnameBycode_settings.equals("pointname"))) {
                         showToast("Configure Settings!");
-                    } else if (address_spot.trim() != null && address_spot.trim().length() < 15) {
+                    }
+                    else if (address_spot.trim() != null && address_spot.trim().length() < 15) {
                         showToast("Configure BlueTooth Settings!");
-                    } else {
+                    } */
+                    else {
                         if (isOnline()) {
                             startActivity(new Intent(Dashboard.this, CourtCaseStatusActivity.class));
                         } else {

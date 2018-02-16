@@ -162,13 +162,14 @@ public class Settings extends Activity implements View.OnClickListener {
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
         compny_Name.startAnimation(marquee);
 
+
         bluetoothFLG = false;
         pinpadFLG = false;
 
         appversion = (TextView) findViewById(R.id.textView2);
         version = appversion.getText().toString().trim() + ".apk";
 
-        Log.i("APP_Version :::", ""+ version);
+        Log.i("APP_Version :::", "" + version);
 
         apkurl = "ftp://192.168.11.9:99/23/TabAPK/" + version;
 
@@ -178,7 +179,7 @@ public class Settings extends Activity implements View.OnClickListener {
         db = new DBHelper(getApplicationContext());
         try {
             db.open();
-            c_psnames = DBHelper.db.rawQuery("select * from "+ DBHelper.psName_table, null);
+            c_psnames = DBHelper.db.rawQuery("select * from " + DBHelper.psName_table, null);
             if (c_psnames.getCount() == 0) {
                 Log.i("WHEELER DB DETAILS", "0");
             } else {
@@ -189,8 +190,8 @@ public class Settings extends Activity implements View.OnClickListener {
                 while (c_psnames.moveToNext()) {
                     psname_code[count] = c_psnames.getString(1);
                     psname_name[count] = c_psnames.getString(2);
-                    Log.i("code", ""+ psname_code[count]);
-                    Log.i("name", ""+ psname_name[count]);
+                    Log.i("code", "" + psname_code[count]);
+                    Log.i("name", "" + psname_name[count]);
                     count++;
                 }
             }
@@ -199,10 +200,10 @@ public class Settings extends Activity implements View.OnClickListener {
             e.printStackTrace();
         }
 
-        et_pinpad = (EditText)findViewById(R.id.edt_pinpad_xml);
+        et_pinpad = (EditText) findViewById(R.id.edt_pinpad_xml);
 
 		/*if (et_pinpad.getText().toString().trim().equals("")) {
-			try {
+            try {
 				db.open();
 				android.database.sqlite.SQLiteDatabase db = openOrCreateDatabase(
 						DBHelper.DATABASE_NAME, MODE_PRIVATE, null);
@@ -257,10 +258,10 @@ public class Settings extends Activity implements View.OnClickListener {
 
 		/* FOR PS POINT NAME */
         dashboard.psnameby_point_code_set = dashboard.preferences.getInt("point_code_toSet", selected_pointby_psname);
-        dashboard.point_name = dashboard.preferences.getString("point_name","pointname");
+        dashboard.point_name = dashboard.preferences.getString("point_name", "pointname");
 
-        Log.i("POINT CODE", ""+ dashboard.psnameby_point_code_set);
-        Log.i("POINT NAME", ""+ dashboard.point_name);
+        Log.i("POINT CODE", "" + dashboard.psnameby_point_code_set);
+        Log.i("POINT NAME", "" + dashboard.point_name);
 		/*---------------------------------------------*/
 
 		/* GETTING BLUETOOTH ADDRESS */
@@ -286,7 +287,7 @@ public class Settings extends Activity implements View.OnClickListener {
             btn_ps_name.setText("" + dashboard.ps_name);
             if (isOnline()) {
                 selected_pointby_psname = -1;
-                btn_pointby_ps_name.setText(""+ getResources().getString(R.string.select_pointbypsname));
+                btn_pointby_ps_name.setText("" + getResources().getString(R.string.select_pointbypsname));
                 new Async_getPointNameByPsName().execute();
             } else {
                 showToast("Please check your network connection!");
@@ -302,7 +303,7 @@ public class Settings extends Activity implements View.OnClickListener {
 
         if (dashboard.point_name.equals("pointname")) {
         } else {
-            btn_pointby_ps_name.setText(""+ dashboard.point_name);
+            btn_pointby_ps_name.setText("" + dashboard.point_name);
         }
 		/* FOR PS POINT NAME END */
 
@@ -340,7 +341,7 @@ public class Settings extends Activity implements View.OnClickListener {
         lv_bt_items.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Log.i(" And ","" + pinpadFLG);
+                Log.i(" And ", "" + pinpadFLG);
 
                 if (bluetoothFLG) {
                     Log.i("", "" + bluetoothFLG);
@@ -584,7 +585,7 @@ public class Settings extends Activity implements View.OnClickListener {
     }
 
     @SuppressWarnings("deprecation")
-    @SuppressLint({ "CommitPrefEdits", "WorldReadableFiles" })
+    @SuppressLint({"CommitPrefEdits", "WorldReadableFiles"})
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
@@ -613,8 +614,8 @@ public class Settings extends Activity implements View.OnClickListener {
 
             case R.id.btncancel_settings_xml:
                 dashboard.preferences.edit().clear().commit();
-                btn_ps_name.setText(""+ getResources().getString(R.string.select_ps_name));
-                btn_pointby_ps_name.setText(""+ getResources().getString(R.string.select_pointbypsname));
+                btn_ps_name.setText("" + getResources().getString(R.string.select_ps_name));
+                btn_pointby_ps_name.setText("" + getResources().getString(R.string.select_pointbypsname));
                 et_exact_location.setText("");
                 et_analyser.setText("");
                 et_bt_address.setText("");
@@ -622,10 +623,10 @@ public class Settings extends Activity implements View.OnClickListener {
                 selected_ps_name = -1;
                 selected_pointby_psname = -1;
 
-                Log.i("B4 RESET ", ""+ pointNameBy_PsName_arr.size());
+                Log.i("B4 RESET ", "" + pointNameBy_PsName_arr.size());
                 pointNameBy_PsName_code_arr.clear();
                 pointNameBy_PsName_arr.clear();
-                Log.i("RESET po","" + pointNameBy_PsName_arr.size());
+                Log.i("RESET po", "" + pointNameBy_PsName_arr.size());
                 break;
 
             case R.id.btnback_settings_xml:
@@ -635,7 +636,7 @@ public class Settings extends Activity implements View.OnClickListener {
 
                 String cadre_code = shared_pc.getString("CADRE_CODE", "");
 
-                if(cadre_code!=null && Integer.parseInt(cadre_code)<=13){
+                if (cadre_code != null && Integer.parseInt(cadre_code) <= 13) {
                     startActivity(new Intent(getApplicationContext(), Dashboard.class));
                 } else {
                     startActivity(new Intent(getApplicationContext(), Dashboard_PC.class));
@@ -644,9 +645,9 @@ public class Settings extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.btnsubmit_settings_xml:
-                if (btn_ps_name.getText().toString().trim().equals(""+ getResources().getString(R.string.select_ps_name))) {
+                if (btn_ps_name.getText().toString().trim().equals("" + getResources().getString(R.string.select_ps_name))) {
                     showToast("Select PS Name");
-                } else if (btn_pointby_ps_name.getText().toString().trim().equals(""+ getResources().getString(R.string.select_pointbypsname))) {
+                } else if (btn_pointby_ps_name.getText().toString().trim().equals("" + getResources().getString(R.string.select_pointbypsname))) {
                     showToast("Select Point Name");
                 } else if ((et_bt_address.getText().toString().trim().equals(""))
                         && (et_bt_address.getText().toString().trim().length() < 10)) {
@@ -661,8 +662,7 @@ public class Settings extends Activity implements View.OnClickListener {
 			 * et_pinpad.setError(Html.fromHtml(
 			 * "<font color='black'>Check PIN pad Bluetooth Details Properly</font>"
 			 * )); et_pinpad.requestFocus(); }
-			 */
-                else {
+			 */ else {
                     dashboard.preferences = getSharedPreferences("preferences",
                             MODE_PRIVATE);
                     dashboard.editor = dashboard.preferences.edit();
@@ -679,13 +679,13 @@ public class Settings extends Activity implements View.OnClickListener {
                     if (et_analyser.getText().toString().trim().equals("")) {
                         dashboard.editor.putLong("analyser_id", 0);
                     } else {
-                        dashboard.editor.putLong("analyser_id",Integer.parseInt(et_analyser.getText().toString().trim()));
+                        dashboard.editor.putLong("analyser_id", Integer.parseInt(et_analyser.getText().toString().trim()));
                     }
 
-                    if (et_bt_address.getText().toString().trim().length()<15) {
+                    if (et_bt_address.getText().toString().trim().length() < 15) {
                         showToast("Please Pair Valid Bluetooth Device");
-                    }else{
-                        dashboard.editor.putString("btaddress", ""+ et_bt_address.getText().toString().trim());
+                    } else {
+                        dashboard.editor.putString("btaddress", "" + et_bt_address.getText().toString().trim());
                         dashboard.editor.commit();
 
                         showToast("Details Saved Successfully");
@@ -693,16 +693,15 @@ public class Settings extends Activity implements View.OnClickListener {
                     }
 
                     SharedPreferences case_Vals = getSharedPreferences("PS_POINT_NAMES", MODE_PRIVATE);
-                    SharedPreferences.Editor edit = case_Vals.edit() ;
+                    SharedPreferences.Editor edit = case_Vals.edit();
 
-                    edit.putString("BOOKED_PS", ""+btn_ps_name.getText().toString().trim());
-                    edit.putString("BOOKED_POINT", ""+btn_pointby_ps_name.getText().toString().trim());
+                    edit.putString("BOOKED_PS", "" + btn_ps_name.getText().toString().trim());
+                    edit.putString("BOOKED_POINT", "" + btn_pointby_ps_name.getText().toString().trim());
 
                     edit.commit();
 
                     // dashboard.editor.putString("weburl", ""
                     // + et_web_url.getText().toString().trim());
-
 
 
                 }
@@ -828,8 +827,9 @@ public class Settings extends Activity implements View.OnClickListener {
             FTPClient ftpClient = new FTPClient();
 
             try {
-                server = IPSettings.ftp_fix ;
-                Log.i("server URL ::", ""+server);
+
+                server = IPSettings.ftp_fix;
+                Log.i("server URL ::", "" + server);
 
                 ftpClient.connect(server, port);
                 ftpClient.login(username, password);
@@ -908,8 +908,7 @@ public class Settings extends Activity implements View.OnClickListener {
                             btn1.setBackgroundColor(Color.BLUE);
                         }
                     });
-                }
-                else {
+                } else {
                     try {
                         Log.i("SUCCess LOG 1::::::::", "***********ENTERED*******");
                         SQLiteDatabase db2 = openOrCreateDatabase(DBHelper.DATABASE_NAME, MODE_PRIVATE, null);
@@ -960,6 +959,7 @@ public class Settings extends Activity implements View.OnClickListener {
                     // close the output stream when complete //
                     fileOutput.close();
                     outputStream.close();
+                    dialog.dismiss();
 
                     if (success) {
                         ftpClient.logout();
@@ -997,7 +997,7 @@ public class Settings extends Activity implements View.OnClickListener {
                             startActivity(intent);
                         } else {
                             Uri apkUri = FileProvider.getUriForFile(Settings.this, BuildConfig.APPLICATION_ID +
-                                    ".fileProvider", new File("/mnt/sdcard/Download/ECourt.apk"));
+                                    ".provider", new File("/mnt/sdcard/Download/ECourt.apk"));
                             Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
                             intent.setData(apkUri);
                             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -1035,7 +1035,7 @@ public class Settings extends Activity implements View.OnClickListener {
     }
 
     @SuppressWarnings("deprecation")
-    @SuppressLint({ "NewApi", "WorldReadableFiles" })
+    @SuppressLint({"NewApi", "WorldReadableFiles"})
     @Override
     protected Dialog onCreateDialog(int id) {
 
@@ -1061,7 +1061,7 @@ public class Settings extends Activity implements View.OnClickListener {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 selected_ps_name = which;
-                                btn_ps_name.setText(""+ psname_name[which].toString().trim());
+                                btn_ps_name.setText("" + psname_name[which].toString().trim());
                                 ps_code_pos = which;
                                 dashboard.preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                                 dashboard.editor = dashboard.preferences.edit();
@@ -1076,7 +1076,7 @@ public class Settings extends Activity implements View.OnClickListener {
                                     dashboard.editor = dashboard.preferences.edit();
                                     dashboard.editor.putInt("point_code_toSet", selected_pointby_psname);
                                     dashboard.editor.commit();
-                                    btn_pointby_ps_name.setText(""+ getResources().getString(R.string.select_pointbypsname));
+                                    btn_pointby_ps_name.setText("" + getResources().getString(R.string.select_pointbypsname));
                                     new Async_getPointNameByPsName().execute();
 
                                 } else {
@@ -1111,7 +1111,7 @@ public class Settings extends Activity implements View.OnClickListener {
                             public void onClick(DialogInterface dialog, int which) {
                                 // TODO Auto-generated method stub
                                 selected_pointby_psname = which;
-                                btn_pointby_ps_name.setText(""+ pointNameBy_PsName_arr.get(which).toString().trim());
+                                btn_pointby_ps_name.setText("" + pointNameBy_PsName_arr.get(which).toString().trim());
                                 dashboard.preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                                 dashboard.editor = dashboard.preferences.edit();
 
@@ -1148,7 +1148,7 @@ public class Settings extends Activity implements View.OnClickListener {
         @Override
         protected String doInBackground(Void... params) {
             // TODO Auto-generated method stub
-            ServiceHelper.getPointNameByPsNames(""+ psname_code[selected_ps_name].toString().trim());
+            ServiceHelper.getPointNameByPsNames("" + psname_code[selected_ps_name].toString().trim());
             return null;
         }
 
@@ -1169,13 +1169,13 @@ public class Settings extends Activity implements View.OnClickListener {
 
             if (ServiceHelper.PointNamesBypsNames_master.length > 0) {
 
-                Log.i("Settingse", ""+ ServiceHelper.PointNamesBypsNames_master.length);
+                Log.i("Settingse", "" + ServiceHelper.PointNamesBypsNames_master.length);
                 pointNameBYpsname_name_code_arr = new String[0][0];
                 pointNameBYpsname_name_code_arr = new String[ServiceHelper.PointNamesBypsNames_master.length][2];
 
                 for (int i = 1; i < ServiceHelper.PointNamesBypsNames_master.length; i++) {
                     pointNameBYpsname_name_code_arr[i] = ServiceHelper.PointNamesBypsNames_master[i].toString().trim().split("@");
-                    Log.i("**POINT DETAILS**", ""+ pointNameBYpsname_name_code_arr[i][1].toString().trim());
+                    Log.i("**POINT DETAILS**", "" + pointNameBYpsname_name_code_arr[i][1].toString().trim());
                 }
             }
 			/*------------TO CLEAR POINT CODE OF SECOND BUTTON-----------*/
@@ -1186,7 +1186,7 @@ public class Settings extends Activity implements View.OnClickListener {
                 pointNameBy_PsName_code_arr.add(pointNameBYpsname_name_code_arr[j][0]);
                 pointNameBy_PsName_arr.add(pointNameBYpsname_name_code_arr[j][1]);
             }
-            Log.i("**PS NAMES**", ""+ pointNameBy_PsName_arr.size());
+            Log.i("**PS NAMES**", "" + pointNameBy_PsName_arr.size());
             btn_pointby_ps_name.setClickable(true);
             // showDialog(PS_NAME_DIALOG);
         }

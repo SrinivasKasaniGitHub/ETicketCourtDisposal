@@ -81,6 +81,20 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+
+    <style name="styleTextViewlyt_DD_imageTxt" style="@style/Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">#e20606</item>
+        <item name="android:textSize">@dimen/DD_Txt_font</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="styleTextViewlyt_DD_RadioText" style="@style/Widget.AppCompat.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

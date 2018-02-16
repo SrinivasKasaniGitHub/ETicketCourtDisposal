@@ -34,11 +34,11 @@ public class IPSettings extends Activity implements OnClickListener {
     // private String test_service_url4 = "http://192.168.11.55:8080/eTicketMobileHyd";
     //private String test_service_url = "http://192.168.11.10:8080/eTicketMobileHyd";
     //private String test_service_url = "http://192.168.11.97:8080/eTicketMobileHyd";
-   // private String local_network_url="http://192.168.11.4/eTicketMobileHyd";
+    // private String local_network_url="http://192.168.11.4/eTicketMobileHyd";
 
     //Connecting_sunilsys
     //private String local_network_url = "http://125.16.1.70:8080/eTicketMobileHyd";
-    private String local_network_url="http://192.168.11.10:8080/eTicketMobileHyd";
+    private String local_network_url = "http://192.168.11.10:8080/eTicketMobileHyd";
 
     //Connecting_madhusys
 
@@ -47,7 +47,7 @@ public class IPSettings extends Activity implements OnClickListener {
     // private String live_service_url = "http://192.168.11.4/eTicketMobileHyd";
     private String live_service_url = "https://www.echallan.org/eTicketMobileHyd";
 
-    public static String ftp_fix = "192.168.11.9";
+    public static String ftp_fix = "125.16.1.69";
     public static String open_ftp_fix = "125.16.1.69";
     String service_type = "";
 
@@ -191,6 +191,7 @@ public class IPSettings extends Activity implements OnClickListener {
         toastView.setBackgroundResource(R.drawable.toast_background);
         toast.show();
     }
+
     private void showError(EditText et, String msg) {
         et.setError("" + msg);
     }

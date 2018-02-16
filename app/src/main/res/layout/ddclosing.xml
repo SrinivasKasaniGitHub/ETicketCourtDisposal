@@ -333,7 +333,6 @@
                             </LinearLayout>
 
 
-
                         </LinearLayout>
 
                     </LinearLayout>
@@ -470,9 +469,9 @@
                                     android:layout_width="0dp"
                                     android:layout_height="40dp"
                                     android:layout_weight="1.3"
+                                    android:background="@color/dd_btn_blue_color"
                                     android:text="Select Date"
                                     android:textColor="@color/navi_color"
-                                    android:background="@color/dd_btn_blue_color"
                                     android:textSize="18sp" />
 
                             </LinearLayout>
@@ -506,17 +505,23 @@
 
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_above="@+id/footer_lyt"
-        android:layout_below="@+id/view2">
+        android:layout_below="@+id/view2"
+        android:fillViewport="true"
+        android:isScrollContainer="true">
 
         <RelativeLayout
             android:id="@+id/Lyt_Pay_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:padding="10dp"
             android:visibility="gone">
+
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -991,7 +996,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:weightSum="3">
 
                         <LinearLayout
@@ -1143,12 +1148,12 @@
                             android:layout_gravity="center"
                             android:layout_weight="1.2">
 
-                           <TextView
-                               style="@style/styleTextViewlyt_DD"
-                               android:id="@+id/chkBox_DLSUS"
-                               android:layout_width="match_parent"
-                               android:layout_height="wrap_content"
-                               android:text="DL SUSPENDED/CANCEL"/>
+                            <TextView
+                                android:id="@+id/chkBox_DLSUS"
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="DL SUSPENDED/CANCEL" />
 
                         </LinearLayout>
 
@@ -1180,6 +1185,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="CANCELLED" />
+
                                 <RadioButton
                                     android:id="@+id/rdoBtnNONE"
                                     style="@style/styleTextViewlyt_DD_RadioText"
@@ -1193,13 +1199,139 @@
                             </RadioGroup>
 
 
-
                         </LinearLayout>
 
 
                     </LinearLayout>
 
 
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:id="@+id/lytDLCanDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="DL Cancellation Date" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <Button
+                                android:id="@+id/btn_dateSeltion_DL_Canln"
+                                style="@style/dd_custom_blue_btn_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Select Date" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:id="@+id/lytDLSusFrom"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="DL Suspention from" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <Button
+                                android:id="@+id/btn_dateSeltion_DL_SusFrom"
+                                style="@style/dd_custom_blue_btn_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Select Date" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <!--Single Item start-->
+                    <LinearLayout
+                        android:id="@+id/lytDLSusTo"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.2">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="DL Suspention To" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8">
+
+                            <Button
+                                android:id="@+id/btn_dateSeltion_DL_SusTo"
+                                style="@style/dd_custom_blue_btn_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text="Select Date" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
 
                     <!--Single Item start-->
                     <LinearLayout
@@ -1207,8 +1339,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
-                        android:weightSum="3"
-                        android:visibility="gone">
+                        android:visibility="gone"
+                        android:weightSum="3">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -1237,6 +1369,7 @@
                                 android:hint="No of Days"
                                 android:inputType="number"
                                 android:maxLength="4">
+
                             </android.support.v7.widget.AppCompatEditText>
 
                         </LinearLayout>
@@ -1244,6 +1377,83 @@
 
                     </LinearLayout>
 
+
+                    <!--Single Images Item start-->
+                    <LinearLayout
+                        android:id="@+id/lytImages"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="0dp">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/txt_court"
+                                style="@style/styleTextViewlyt_DD_imageTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Court Order Copy" />
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <android.support.v7.widget.AppCompatImageView
+                                    android:id="@+id/img_CourtCopy"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/courtorder" />
+
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="0dp">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/styleTextViewlyt_DD_imageTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:gravity="center"
+                                android:text="DL Copy" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+
+                                <android.support.v7.widget.AppCompatImageView
+                                    android:id="@+id/img_DLCopy"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/dlcopy" />
+
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
 
 
                     <!--Single Item start-->
@@ -1284,8 +1494,6 @@
 
 
                     </LinearLayout>
-
-
 
 
                     <!--Single Item start-->

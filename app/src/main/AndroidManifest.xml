@@ -17,7 +17,6 @@
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.READ_LOGS" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo_hyd"
@@ -25,6 +24,17 @@
         android:roundIcon="@drawable/logo_hyd"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.mtpv.eticketcourt.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,26 +44,26 @@
         </activity>
         <activity android:name=".IPSettings" />
         <activity android:name=".Dashboard" />
-        <activity android:name=".Settings"/>
-        <activity android:name=".Dashboard_PC"/>
-        <activity android:name=".ChangePassword"/>
-        <activity android:name=".DateOfBirth_Update"/>
-        <activity android:name=".Drunk_Drive"/>
-        <activity android:name=".DuplicatePrint"/>
-        <activity android:name=".ExtraPassengers"/>
-        <activity android:name=".Fake_NO_Dialog"/>
-        <activity android:name=".GenerateDrunkDriveCase"/>
-        <activity android:name=".OTP_input"/>
-        <activity android:name=".PopupDetails"/>
-        <activity android:name=".ReleaseversionActivity"/>
-        <activity android:name=".Respone_Print"/>
-        <activity android:name=".SpotChallan"/>
-        <activity android:name=".VehicleHistoryPendingChallans"/>
-        <activity android:name=".DDCloseActiviy"/>
-        <activity android:name=".ChargeSheetClose"/>
-        <activity android:name=".PendingBookedCaseActiviy"/>
-        <activity android:name=".CourtCaseStatusActivity"/>
-        <activity android:name=".CourtCaseDetailsActivity"/>
+        <activity android:name=".Settings" />
+        <activity android:name=".Dashboard_PC" />
+        <activity android:name=".ChangePassword" />
+        <activity android:name=".DateOfBirth_Update" />
+        <activity android:name=".Drunk_Drive" />
+        <activity android:name=".DuplicatePrint" />
+        <activity android:name=".ExtraPassengers" />
+        <activity android:name=".Fake_NO_Dialog" />
+        <activity android:name=".GenerateDrunkDriveCase" />
+        <activity android:name=".OTP_input" />
+        <activity android:name=".PopupDetails" />
+        <activity android:name=".ReleaseversionActivity" />
+        <activity android:name=".Respone_Print" />
+        <activity android:name=".SpotChallan" />
+        <activity android:name=".VehicleHistoryPendingChallans" />
+        <activity android:name=".DDCloseActiviy" />
+        <activity android:name=".ChargeSheetClose" />
+        <activity android:name=".PendingBookedCaseActiviy" />
+        <activity android:name=".CourtCaseStatusActivity" />
+        <activity android:name=".CourtCaseDetailsActivity" />
 
 
     </application>

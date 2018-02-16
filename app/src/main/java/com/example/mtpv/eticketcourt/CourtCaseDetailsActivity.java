@@ -49,10 +49,12 @@ import java.util.HashMap;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class CourtCaseDetailsActivity extends Activity {
+
     private static RecyclerView.Adapter custom_CourtCase_DetailsAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    public static RecyclerView recyclerView;
-    public static AppCompatButton btn_Update_Case_Details;
+
+    RecyclerView recyclerView;
+    AppCompatButton btn_Update_Case_Details;
     public static ArrayList<CasesDetailsPojo> arrayList_CourtCase_Detilas;
     JSONObject jsonObject;
     Bundle bundle;
@@ -66,18 +68,17 @@ public class CourtCaseDetailsActivity extends Activity {
     final int PROGRESS_DIALOG = 2;
 
     String councelng_Date;
-    ArrayList<String> mArrayListCourtNames = new ArrayList<String>();
-    HashMap<String, String> paramsCourt = new HashMap<String, String>();
-//    HashMap<String, String> paramsCourt_Address = new HashMap<String, String>();
+    ArrayList<String> mArrayListCourtNames = new ArrayList<>();
+    HashMap<String, String> paramsCourt = new HashMap<>();
     DBHelper db;
     Cursor c, cursor_courtnames;
     ArrayList<String> courtNames;
     MaterialSpinner courtspinner;
-    String selectedCourtCode,selectedCourtAddress;
+    String selectedCourtCode, selectedCourtAddress;
     String selectedCourtName;
     String jsonResult;
     String spinnerAvailblity;
-    String sms_key,btn_Txt;
+    String sms_key, btn_Txt;
     TextView compny_Name;
 
     @Override
@@ -111,7 +112,7 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
             sms_key = "COURT";
-            btn_Txt="COURT ATTEND";
+            btn_Txt = "COURT ATTEND";
         }
 
         if (array_Value.equals("Txt_DD_CouncelngNot_Atnd")) {
@@ -121,7 +122,7 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.GONE);
             spinnerAvailblity = "0";
             sms_key = "COUNC";
-            btn_Txt="COUNCELLING";
+            btn_Txt = "COUNCELLING";
         }
 
         if (array_Value.equals("Txt_DD_CourtNot_Atnd")) {
@@ -131,7 +132,7 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
             sms_key = "COURT";
-            btn_Txt="COURT ATTEND";
+            btn_Txt = "COURT ATTEND";
         }
 
         if (array_Value.equals("CHG_Bkd")) {
@@ -141,7 +142,7 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
             sms_key = "COURT";
-            btn_Txt="COURT ATTEND";
+            btn_Txt = "COURT ATTEND";
         }
 
         if (array_Value.equals("Txt_CHG_CouncelngNot_Atnd")) {
@@ -151,7 +152,7 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.GONE);
             spinnerAvailblity = "0";
             sms_key = "COUNC";
-            btn_Txt="COUNCELLING";
+            btn_Txt = "COUNCELLING";
         }
 
         if (array_Value.equals("Txt_CHG_CourtNot_Atnd")) {
@@ -161,10 +162,10 @@ public class CourtCaseDetailsActivity extends Activity {
             courtspinner.setVisibility(View.VISIBLE);
             spinnerAvailblity = "1";
             sms_key = "COURT";
-            btn_Txt="COURT ATTEND";
+            btn_Txt = "COURT ATTEND";
         }
 
-        btn_councelling_Date.setText("Select "+btn_Txt+" Date");
+        btn_councelling_Date.setText("Select " + btn_Txt + " Date");
 
         //Top Violator
 
@@ -238,7 +239,7 @@ public class CourtCaseDetailsActivity extends Activity {
         btn_Update_Case_Details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (btn_councelling_Date.getText().toString().equals("Select "+btn_Txt+" Date")) {
+                if (btn_councelling_Date.getText().toString().equals("Select " + btn_Txt + " Date")) {
                     showToast("Please select date!");
                 } else if (spinnerAvailblity.equals("1") && selectedCourtCode == null) {
                     showToast("Please select CourtName!");
@@ -247,11 +248,11 @@ public class CourtCaseDetailsActivity extends Activity {
                     for (CasesDetailsPojo casesDetailsPojo : arrayList_CourtCase_Detilas) {
                         if (casesDetailsPojo.isSelected()) {
                             jsonObject = new JSONObject();
-                            if (casesDetailsPojo.getDRIVER_AADHAAR().equals("")) {
+                            if (sms_key.equals("COURT") && casesDetailsPojo.getDRIVER_AADHAAR().equals("")) {
                                 showToast("Please Enter Aadhaar Number!");
                                 jsonArray_caseDetails = new JSONArray();
                                 break;
-                            } else if (casesDetailsPojo.getDRIVER_AADHAAR().length() < 12) {
+                            } else if (sms_key.equals("COURT") && casesDetailsPojo.getDRIVER_AADHAAR().length() < 12) {
                                 showToast("Please Enter valid Aadhaar Number!");
                                 jsonArray_caseDetails = new JSONArray();
                                 break;
@@ -265,8 +266,8 @@ public class CourtCaseDetailsActivity extends Activity {
                                 break;
                             } else {
                                 try {
-                                    if ("null".equals(selectedCourtAddress)){
-                                        selectedCourtAddress="";
+                                    if ("null".equals(selectedCourtAddress)) {
+                                        selectedCourtAddress = "";
                                     }
 
                                     jsonObject.put("VEHICLE_NUMBER", casesDetailsPojo.getVEHICLE_NUMBER());
@@ -280,7 +281,7 @@ public class CourtCaseDetailsActivity extends Activity {
                                     jsonObject.put("SELECTED_COUNC_DATE", councelng_Date);
                                     jsonObject.put("COURT_NAME", selectedCourtName != null ? selectedCourtName : "");
                                     jsonObject.put("COURT_CODE", selectedCourtCode);
-                                    jsonObject.put("COURT_ADDRESS",selectedCourtAddress);
+                                    jsonObject.put("COURT_ADDRESS", selectedCourtAddress);
                                     jsonObject.put("PID_CODE", MainActivity.user_id);
                                     jsonObject.put("PID_NAME", MainActivity.arr_logindetails[1]);
                                     jsonObject.put("PID_MOBILE", MainActivity.arr_logindetails[6]);
@@ -385,8 +386,8 @@ public class CourtCaseDetailsActivity extends Activity {
                         paramsCourt.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_code_settings)));
 //                        paramsCourt_Address.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_address_settings)));
                         cursor_courtnames.moveToNext();
-                    }catch (Exception e){
-                       e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                         showToast("Please download the Masters");
                     }
                 }

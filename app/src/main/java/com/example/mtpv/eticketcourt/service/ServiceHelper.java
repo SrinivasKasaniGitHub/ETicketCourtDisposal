@@ -116,7 +116,7 @@ public class ServiceHelper {
 
 	public static String SEND_COURTCASEINFO="sendCourtCasesInfo";
 
-	public static String GET_COURT_CLOSING_UPDATE_TCKT_INFO="getCourtClosingUpdateTicketInfo";
+	public static String GET_COURT_CLOSING_UPDATE_TCKT_INFO="getCourtClosingUpdateTicketInfoNew";
 
 	public static String[] whlr_details_master;
 	public static String[] psNames_master, violation_points_masters, violation_points_masters_split;
@@ -162,13 +162,7 @@ public class ServiceHelper {
 	public static void login(String pid, String pidpwd, String mob_imei, String sim_No, String lat, String log,
 			String appVersion) {
 
-		Log.i("**login**",
-				"PID : " + pid + "\nPID_PWD : " + pidpwd + "\nIMEI: " + mob_imei + "\nLAT : " + lat + "\nLOG: " + log);
-
 		try {
-			// public String authenticateDeviceNPID(String pidCd, String
-			// password,String imei,String simNo,String gpsLattitude,String
-			// gpsLongitude);
 			SoapObject request = new SoapObject(NAMESPACE, "authenticateDeviceNPID");
 			request.addProperty("pidCd", pid);
 			request.addProperty("password", pidpwd);
@@ -185,40 +179,69 @@ public class ServiceHelper {
 			HttpTransportSE androidHttpTransport = new HttpTransportSE(MainActivity.URL);
 			androidHttpTransport.call(SOAP_ACTION, envelope);
 			Object result = envelope.getResponse();
-			// Toast.makeText(getApplicationContext(), "" + result,
-			// Toast.LENGTH_LONG).show();
-			// Opdata_Chalana = result.toString();
 			try {
 				Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Log.i("**LOGIN_RESPONSE***", "" + Opdata_Chalana);
 			if (Opdata_Chalana == "0") {
 				Log.i("NO_DATA_FOUND", "NO_DATA_FOUND");
 			} else {
-				// 09-21 20:12:32.715: I/**LOGIN***(10383): 23001004|TESTING
-				// PURPOSE|2300|TRAFFIC CELL|00|DEVP|12345
 				Opdata_Chalana = Opdata_Chalana.replace("|", ":");
-				/*
-				 * 09-21 20:12:32.715: I/LOGIN REPONSE(10383): 23001004:TESTING
-				 * PURPOSE:2300:TRAFFIC CELL:00:DEVP:12345
-				 */
-				Log.i("LOGIN_RESPONSE_AFTER", "" + Opdata_Chalana);
 				MainActivity.arr_logindetails = Opdata_Chalana.split(":");
-				// Log.i("pid_code", MainActivity.arr_logindetails[0]);
 			}
 
 		} catch (SoapFault fault) {
-			Log.i("****SOAP F", "soapfault = " + fault.getMessage());
 			Opdata_Chalana = null;
 
 		} catch (Exception E) {
 			E.printStackTrace();
 			Opdata_Chalana = "0";
-			Log.e("Error", "" + E.toString());
 		}
+	}
+
+
+	public static void authenticateLogin(String pidCd, String password,String imei,String simNo,String gpsLattitude,
+								  String gpsLongitude,String appVersion,String appName){
+
+
+		try {
+			SoapObject request = new SoapObject(NAMESPACE, "authenticateLogin");
+			request.addProperty("pidCd", pidCd);
+			request.addProperty("password", password);
+			request.addProperty("imei", imei);
+			request.addProperty("simNo", simNo);
+			request.addProperty("gpsLattitude", gpsLattitude);
+			request.addProperty("gpsLongitude", gpsLongitude);
+			request.addProperty("appVersion", appVersion);
+			request.addProperty("appName", appName);
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(request);
+			HttpTransportSE androidHttpTransport = new HttpTransportSE(MainActivity.URL);
+			androidHttpTransport.call(SOAP_ACTION, envelope);
+			Object result = envelope.getResponse();
+            Opdata_Chalana="";
+			try {
+				Opdata_Chalana = new com.example.mtpv.eticketcourt.service.PidSecEncrypt().decrypt(result.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (Opdata_Chalana == "0") {
+				Log.i("NO_DATA_FOUND", "NO_DATA_FOUND");
+			} else {
+				Opdata_Chalana = Opdata_Chalana.replace("|", ":");
+				MainActivity.arr_logindetails = Opdata_Chalana.split(":");
+			}
+
+		} catch (SoapFault fault) {
+			Opdata_Chalana = null;
+
+		} catch (Exception E) {
+			E.printStackTrace();
+			Opdata_Chalana = "0";
+		}
+
 	}
 
 	public static void sendOTPtoMobile(String regn_no, String mobileNo, String date) {
@@ -1198,7 +1221,10 @@ public class ServiceHelper {
 													   String imprisFrom, String imprisTo, String courtFine, String risingDetails,
 													   String courtCD, String coutrAttnDT, String vehRelease, String dlRelease,
 													   String ddRemarks, String pidCD, String pidName, String releaseDT,
-													   String mobileNo,String dlSusp, String dlCancel)
+													   String mobileNo,String dlSusp, String dlCancel,String suspensionFromDate,
+													   String suspensionToDate, String imgMegistrateCopy,String imgDlCopy,
+													   String noOfDaysSuspended,String challanType,String violations, String unitCode,
+													   String psCode,String officerPid,String offenceDate)
 	{
 		Utils utils = new Utils();
 		try {
@@ -1227,8 +1253,22 @@ public class ServiceHelper {
 			if (null!=mobileNo)request.addProperty("" + utils.RELSE_ITEMS, "" + mobileNo);
 			if (null!=dlSusp)request.addProperty("dlSusp", "" + dlSusp);
 			if (null!=dlCancel)request.addProperty("dlCancel", "" + dlCancel);
+			if (null!=suspensionFromDate)request.addProperty("suspensionFromDate",suspensionFromDate);
+            request.addProperty("suspensionToDate",null!=suspensionToDate ? suspensionToDate:"");
+			if (null!=imgMegistrateCopy)request.addProperty("imgMegistrateCopy",imgMegistrateCopy);
+			if (null!=imgDlCopy)request.addProperty("imgDlCopy",imgDlCopy);
+			if (null!=noOfDaysSuspended)request.addProperty("noOfDaysSuspended",noOfDaysSuspended);
+            if (null!=challanType)request.addProperty("challanType",challanType);
+            if (null!=violations)request.addProperty("violations",violations);
 
-			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+			if (null!=unitCode)request.addProperty("unitCode",unitCode);
+			if (null!=psCode)request.addProperty("psCode",psCode);
+			if (null!=officerPid)request.addProperty("officerPid",officerPid);
+			if (null!=offenceDate)request.addProperty("offenceDate",offenceDate);
+
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
 			envelope.setOutputSoapObject(request);
             HttpTransportSE httpTransportSE = new HttpTransportSE(MainActivity.URL);
