@@ -286,6 +286,7 @@ public class CourtCaseStatusActivity extends Activity {
             return null;
         }
 
+
         @SuppressWarnings("deprecation")
         @Override
         protected void onPreExecute() {

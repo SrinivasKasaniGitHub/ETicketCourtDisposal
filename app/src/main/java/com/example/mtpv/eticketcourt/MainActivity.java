@@ -375,10 +375,8 @@ public class MainActivity extends Activity implements LocationListener {
                     String cadre_code = "" + arr_logindetails[4];
                     String cadre_name = "" + arr_logindetails[5];
                     String pass_word = "" + user_pwd;
-
                     String off_phone_no = "" + arr_logindetails[6];
                     String current_version = "" + arr_logindetails[7];
-
                     String rta_data_flg = "" + arr_logindetails[8];
                     String dl_data_flg = "" + arr_logindetails[9];
                     String aadhaar_data_flg = "" + arr_logindetails[10];

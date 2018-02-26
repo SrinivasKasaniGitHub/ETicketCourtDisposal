@@ -158,15 +158,15 @@ public class DDCloseActiviy extends Activity {
     String dl_CAN = "N";
     String dl_SUS_Status = "N";
     String dl_SusDays = "";
-    String vEHICLE_NUMBER, chall_No,chall_Type,violations, offence_Date, driver_Adhar, driver_Mobile, driver_LCNCE, driver_DL_DOB,
-            unit_CODE,pid_CODE,ps_CODE;
+    String vEHICLE_NUMBER, chall_No, chall_Type, violations, offence_Date, driver_Adhar, driver_Mobile, driver_LCNCE, driver_DL_DOB,
+            unit_CODE, pid_CODE, ps_CODE;
     String dayDifference;
 
     DateUtil dateUtil;
     byte[] byteArray;
     String img_dataCourtCopy, img_dataDLCopy = null;
     String selection_Pic_Flag = "";
-    String tckt_UPdated_Flag="N";
+    String tckt_UPdated_Flag = "N";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -859,7 +859,7 @@ public class DDCloseActiviy extends Activity {
                         selectedCourtDisCode, edtTxtConDays.getText().toString(), date_convFRom, date_convicTo, edtTxt_FineAmnt.getText().toString(),
                         edtTxtRisDays.getText().toString(), selectedCourtCode, date_courtAtnd, vehcleRelse, "Y", edtTxt_Remarks.getText().toString(),
                         MainActivity.user_id, MainActivity.arr_logindetails[1], "", driver_Mobile, dl_SUS, dl_CAN, date_DL_SUS_FROM, date_DL_SUS_TO,
-                        img_dataCourtCopy, img_dataDLCopy, dl_SusDays,chall_Type,violations,unit_CODE,ps_CODE,pid_CODE,offence_Date);
+                        img_dataCourtCopy, img_dataDLCopy, dl_SusDays, chall_Type, violations, unit_CODE, ps_CODE, pid_CODE, offence_Date);
             } catch (Exception e) {
                 e.printStackTrace();
                 showToast("Please check network and try again!");
@@ -884,15 +884,15 @@ public class DDCloseActiviy extends Activity {
             try {
                 if (null != ServiceHelper.Opdata_Chalana && !ServiceHelper.Opdata_Chalana.equals("NA") && !"0".equals(ServiceHelper.Opdata_Chalana)) {
                     sucessFull_DialogMSG(ServiceHelper.Opdata_Chalana);
-                    tckt_UPdated_Flag="Y";
+                    tckt_UPdated_Flag = "Y";
                 } else {
                     sucessFull_DialogMSG("Updation Failed \n Please try again");
-                    tckt_UPdated_Flag="N";
+                    tckt_UPdated_Flag = "N";
                 }
             } catch (Exception e) {
                 e.printStackTrace();
                 sucessFull_DialogMSG("Updation Failed \n Please try again");
-                tckt_UPdated_Flag="N";
+                tckt_UPdated_Flag = "N";
             }
 
 
@@ -929,7 +929,7 @@ public class DDCloseActiviy extends Activity {
                     Intent intent = new Intent(getApplicationContext(), DDCloseActiviy.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
-                }else{
+                } else {
 //                    finish();
                     alertDialogBuilder.create().dismiss();
                 }
@@ -1004,15 +1004,15 @@ public class DDCloseActiviy extends Activity {
                             vEHICLE_NUMBER = jsonObject1.getString("VEHICLE NUMBER");
                             chall_No = jsonObject1.getString("CHALLAN NUMBER");
                             chall_Type = jsonObject1.getString("CHALLAN_TYPE");
-                            violations=jsonObject1.getString("VIOLATIONS");
+                            violations = jsonObject1.getString("VIOLATIONS");
                             offence_Date = jsonObject1.getString("OFFENCE DATE");
                             driver_Adhar = jsonObject1.getString("DRIVER AADHAAR");
                             driver_Mobile = jsonObject1.getString("DRIVER MOBILE");
                             driver_LCNCE = jsonObject1.getString("DRIVING LICENSE");
                             driver_DL_DOB = jsonObject1.getString("DRIVER_LICENSE_DOB");
-                            unit_CODE=jsonObject1.getString("UNIT_CODE");
-                            pid_CODE=jsonObject1.getString("PID_CODE");
-                            ps_CODE=jsonObject1.getString("PS_CODE");
+                            unit_CODE = jsonObject1.getString("UNIT_CODE");
+                            pid_CODE = jsonObject1.getString("PID_CODE");
+                            ps_CODE = jsonObject1.getString("PS_CODE");
                             Reg_No.setText(vEHICLE_NUMBER);
                             Challan_No.setText(chall_No);
                             Offender_Date.setText(offence_Date);
@@ -1115,8 +1115,7 @@ public class DDCloseActiviy extends Activity {
 
                                     @Override
                                     public void run() {
-                                        // TODO Auto-generated method stub
-                                        showToast("Check Your Device is Working Condition!");
+                                                                             showToast("Check Your Device is Working Condition!");
                                     }
                                 });
 
@@ -1699,7 +1698,7 @@ public class DDCloseActiviy extends Activity {
                             new SingleMediaScanner(this, file);
                             imgView_CourtOrderCopy.setRotation(0);
                             imgView_CourtOrderCopy.setImageBitmap(mutableBitmap);
-                           // imgView_CourtOrderCopy.setRotation(-90);
+                            // imgView_CourtOrderCopy.setRotation(-90);
                             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                             mutableBitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes);
                             byteArray = bytes.toByteArray();
@@ -1852,7 +1851,7 @@ public class DDCloseActiviy extends Activity {
 
             format = new SimpleDateFormat("dd-MMM-yyyy");
             date_courtAtnd = format.format(new Date(present_year - 1900, (present_month), present_day));
-            btn_courtAttenddate.setText("" + date_courtAtnd.toUpperCase());
+            btn_courtAttenddate.setText(date_courtAtnd.toUpperCase());
 
         }
 
@@ -1869,7 +1868,7 @@ public class DDCloseActiviy extends Activity {
             format = new SimpleDateFormat("dd-MMM-yyyy");
             date_convFRom = "";
             date_convFRom = format.format(new Date(present_year - 1900, (present_month), present_day));
-            btn_courtConFromdate.setText("" + date_convFRom.toUpperCase());
+            btn_courtConFromdate.setText(date_convFRom.toUpperCase());
             btn_courtConTo.setText("Select Date");
             edtTxtConDays.setText("");
             try {

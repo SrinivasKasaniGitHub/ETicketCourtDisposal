@@ -66,7 +66,6 @@ public class CourtCaseDetailsActivity extends Activity {
     SimpleDateFormat format;
     final int COUNCELLING_DATE_PICKER = 1;
     final int PROGRESS_DIALOG = 2;
-
     String councelng_Date;
     ArrayList<String> mArrayListCourtNames = new ArrayList<>();
     HashMap<String, String> paramsCourt = new HashMap<>();
@@ -364,7 +363,6 @@ public class CourtCaseDetailsActivity extends Activity {
         }
     }
 
-
     public void getCourtNamesFromDB() {
         try {
             db.open();
@@ -404,13 +402,9 @@ public class CourtCaseDetailsActivity extends Activity {
     }
 
     private void showToast(String msg) {
-
-
         LayoutInflater inflater = getLayoutInflater();
-
         View layout = inflater.inflate(R.layout.custom_toast,
                 (ViewGroup) findViewById(R.id.custom_toast_layout_id));
-
         // set a message
         TextView text = (TextView) layout.findViewById(R.id.text);
         text.setText(msg);
@@ -422,7 +416,6 @@ public class CourtCaseDetailsActivity extends Activity {
         toast.setView(layout);
         toast.show();
     }
-
 
     DatePickerDialog.OnDateSetListener councelling_Date_Dialog = new DatePickerDialog.OnDateSetListener() {
 
@@ -470,4 +463,5 @@ public class CourtCaseDetailsActivity extends Activity {
             }
         }
     }
+
 }
