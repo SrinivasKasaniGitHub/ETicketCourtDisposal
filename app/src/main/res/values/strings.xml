@@ -10,15 +10,13 @@
     <string name="CompanyName"><b> MOTHER TECHNOLOGIES PROJECT VENTURES </b></string>
     <string name="permissions">Please accept all permissions</string>
 
-
-
-    <!-- DASHBOARD -->
+     <!-- DASHBOARD -->
     <string name="release_documents">Release\nDocuments</string>
     <string name="release_documents_one_line">Release Documents</string>
     <string name="towing">Crane \n41 CP ACT</string>
     <string name="towing_one_line">Crane 41 CP ACT</string>
     <string name="reports">Reports</string>
-    <string name="app_version">Version-2.2.2</string>
+    <string name="app_version">Version-2.2.3</string>
     <string name="regNo">Regn.No</string>
     <string name="engine">Engine No</string>
     <string name="chasis">Chasis No</string>

@@ -147,7 +147,7 @@ public class DDCloseActiviy extends Activity {
     MaterialSpinner courtDisspinner;
     RadioGroup rdoGrp_VehcleRlse, rdoGrp_DLSUSCAN;
     RadioButton rdoBtnYes_VehcleRlse, rdoBtn_DLSUS;
-    RadioButton rdoBtnNo_VehcleRlse, rdoBtn_DLCAN;
+    RadioButton rdoBtnNo_VehcleRlse, rdoBtn_DLCAN, rdoBtnNONE;
     LinearLayout lytConFrom, lytConTo, lytConDays, lytFineAmnt, lytSoclFrom, lytSclSerTo, lytRisingDays, lytSUSDAYS, lytDLCanDate,
             lytDLSusFrom, lytDLSusTo, lytImages;
     DBHelper db;
@@ -209,6 +209,7 @@ public class DDCloseActiviy extends Activity {
         edtTxt_DL_SUSDAYS = (EditText) findViewById(R.id.edtTxt_DL_SUSDAYS);
         edtTxt_DL_SUSDAYS.setKeyListener(null);
 
+
         btn_dp_date_selection = (Button) findViewById(R.id.btn_dateselection_dp_xml);
         btn_courtAttenddate = (Button) findViewById(R.id.btn_dateselection_dp_xml1);
         btn_courtConFromdate = (Button) findViewById(R.id.btn_dateselection_dp_xml3);
@@ -244,6 +245,7 @@ public class DDCloseActiviy extends Activity {
         rdoGrp_DLSUSCAN = (RadioGroup) findViewById(R.id.rdoGrpDLSUSCAN);
         rdoBtn_DLSUS = (RadioButton) findViewById(R.id.rdoBtnDLSUS);
         rdoBtn_DLCAN = (RadioButton) findViewById(R.id.rdoBtnDLCAN);
+        rdoBtnNONE = (RadioButton) findViewById(R.id.rdoBtnNONE);
 
 
         rdoGrp_VehcleRlse.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -364,7 +366,7 @@ public class DDCloseActiviy extends Activity {
                     }
 
                 }
-                if (courtDis.contains("ONLY FINE")) {
+                if ("1".equals(selectedCourtDisCode)) {
 
                     lytConFrom.setVisibility(View.GONE);
                     lytConTo.setVisibility(View.GONE);
@@ -373,7 +375,11 @@ public class DDCloseActiviy extends Activity {
                     lytSclSerTo.setVisibility(View.GONE);
                     lytRisingDays.setVisibility(View.GONE);
                     lytFineAmnt.setVisibility(View.VISIBLE);
-                } else if (courtDis.contains("FINE AND RISING")) {
+                    rdoBtnNONE.setChecked(true);
+                    clearData();
+
+
+                } else if ("5".equals(selectedCourtDisCode)) {
                     lytConFrom.setVisibility(View.GONE);
                     lytConTo.setVisibility(View.GONE);
                     lytSoclFrom.setVisibility(View.GONE);
@@ -381,7 +387,9 @@ public class DDCloseActiviy extends Activity {
                     lytRisingDays.setVisibility(View.VISIBLE);
                     lytConDays.setVisibility(View.GONE);
                     lytFineAmnt.setVisibility(View.VISIBLE);
-                } else if (courtDis.contains("FINE, RISING, SOCIAL SERVIC")) {
+                    rdoBtnNONE.setChecked(true);
+
+                } else if ("7".equals(selectedCourtDisCode)) {
                     lytConFrom.setVisibility(View.GONE);
                     lytConTo.setVisibility(View.GONE);
                     lytConDays.setVisibility(View.GONE);
@@ -389,8 +397,10 @@ public class DDCloseActiviy extends Activity {
                     lytSoclFrom.setVisibility(View.VISIBLE);
                     lytSclSerTo.setVisibility(View.VISIBLE);
                     lytRisingDays.setVisibility(View.VISIBLE);
+                    rdoBtnNONE.setChecked(true);
+                    clearData();
 
-                } else if (courtDis.contains("FINE AND IMPRISONMENT")) {
+                } else if ("3".equals(selectedCourtDisCode)) {
                     lytConFrom.setVisibility(View.VISIBLE);
                     lytConTo.setVisibility(View.VISIBLE);
                     lytConDays.setVisibility(View.VISIBLE);
@@ -398,8 +408,10 @@ public class DDCloseActiviy extends Activity {
                     lytSoclFrom.setVisibility(View.GONE);
                     lytSclSerTo.setVisibility(View.GONE);
                     lytRisingDays.setVisibility(View.GONE);
+                    rdoBtnNONE.setChecked(true);
+                    clearData();
 
-                } else if (courtDis.contains("ONLY IMPRISONMENT")) {
+                } else if ("2".equals(selectedCourtDisCode)) {  // ONLY IMPRISONMENT
                     lytConFrom.setVisibility(View.VISIBLE);
                     lytConTo.setVisibility(View.VISIBLE);
                     lytConDays.setVisibility(View.VISIBLE);
@@ -407,7 +419,10 @@ public class DDCloseActiviy extends Activity {
                     lytSoclFrom.setVisibility(View.GONE);
                     lytSclSerTo.setVisibility(View.GONE);
                     lytRisingDays.setVisibility(View.GONE);
-                } else if (courtDis.contains("ONLY RISING")) {
+                    rdoBtnNONE.setChecked(true);
+                    clearData();
+
+                } else if ("4".equals(selectedCourtDisCode)) {
                     lytConFrom.setVisibility(View.GONE);
                     lytConTo.setVisibility(View.GONE);
                     lytConDays.setVisibility(View.GONE);
@@ -415,6 +430,81 @@ public class DDCloseActiviy extends Activity {
                     lytSoclFrom.setVisibility(View.GONE);
                     lytSclSerTo.setVisibility(View.GONE);
                     lytRisingDays.setVisibility(View.VISIBLE);
+                    rdoBtnNONE.setChecked(true);
+                    clearData();
+
+                } else if ("8".equals(selectedCourtDisCode)) {  //ONLY SOCIAL SERVICE
+                    lytConFrom.setVisibility(View.GONE);
+                    lytConTo.setVisibility(View.GONE);
+                    lytConDays.setVisibility(View.GONE);
+                    lytFineAmnt.setVisibility(View.GONE);
+                    lytSoclFrom.setVisibility(View.GONE);
+                    lytSclSerTo.setVisibility(View.GONE);
+                    lytRisingDays.setVisibility(View.VISIBLE);
+                    rdoBtnNONE.setChecked(true);
+                    clearData();
+
+
+                } else if ("9".equals(selectedCourtDisCode)) {  //DL SUSPENSION AND FINE
+
+                    lytConFrom.setVisibility(View.GONE);
+                    lytConTo.setVisibility(View.GONE);
+                    lytConDays.setVisibility(View.GONE);
+                    lytFineAmnt.setVisibility(View.VISIBLE);
+                    lytSoclFrom.setVisibility(View.GONE);
+                    lytSclSerTo.setVisibility(View.GONE);
+                    lytRisingDays.setVisibility(View.GONE);
+                    rdoBtn_DLSUS.setChecked(true);
+                    rdoBtn_DLCAN.setKeyListener(null);
+                    rdoBtnNONE.setKeyListener(null);
+                    clearData();
+
+
+                } else if ("10".equals(selectedCourtDisCode)) {  // DL SUSPENSION AND IMPRISONMENT
+
+                    lytConFrom.setVisibility(View.VISIBLE);
+                    lytConTo.setVisibility(View.VISIBLE);
+                    lytConDays.setVisibility(View.VISIBLE);
+                    lytFineAmnt.setVisibility(View.GONE);
+                    lytSoclFrom.setVisibility(View.GONE);
+                    lytSclSerTo.setVisibility(View.GONE);
+                    lytRisingDays.setVisibility(View.GONE);
+                    rdoBtn_DLSUS.setChecked(true);
+
+                    rdoBtn_DLCAN.setKeyListener(null);
+                    rdoBtnNONE.setKeyListener(null);
+
+
+                    clearData();
+
+                } else if ("11".equals(selectedCourtDisCode)) {  // DL CANCELLATION AND FINE
+
+                    lytConFrom.setVisibility(View.GONE);
+                    lytConTo.setVisibility(View.GONE);
+                    lytConDays.setVisibility(View.GONE);
+                    lytFineAmnt.setVisibility(View.VISIBLE);
+                    lytSoclFrom.setVisibility(View.GONE);
+                    lytSclSerTo.setVisibility(View.GONE);
+                    lytRisingDays.setVisibility(View.GONE);
+                    rdoBtn_DLCAN.setChecked(true);
+                    rdoBtn_DLSUS.setKeyListener(null);
+                    rdoBtnNONE.setKeyListener(null);
+                    clearData();
+
+                } else if ("12".equals(selectedCourtDisCode)) {  // DL CANCELLATION AND IMPRISON
+
+                    lytConFrom.setVisibility(View.VISIBLE);
+                    lytConTo.setVisibility(View.VISIBLE);
+                    lytConDays.setVisibility(View.VISIBLE);
+                    lytFineAmnt.setVisibility(View.GONE);
+                    lytSoclFrom.setVisibility(View.GONE);
+                    lytSclSerTo.setVisibility(View.GONE);
+                    lytRisingDays.setVisibility(View.GONE);
+                    rdoBtn_DLCAN.setChecked(true);
+                    rdoBtn_DLSUS.setKeyListener(null);
+                    rdoBtnNONE.setKeyListener(null);
+                    clearData();
+
                 } else {
                     lytConFrom.setVisibility(View.GONE);
                     lytConTo.setVisibility(View.GONE);
@@ -423,6 +513,9 @@ public class DDCloseActiviy extends Activity {
                     lytSoclFrom.setVisibility(View.GONE);
                     lytSclSerTo.setVisibility(View.GONE);
                     lytRisingDays.setVisibility(View.GONE);
+                    clearData();
+
+
                 }
 
             }
@@ -646,7 +739,7 @@ public class DDCloseActiviy extends Activity {
                     edtTxt_Mob_No.requestFocus();
                 } else if (driver_Adhar.trim().equals("") && driver_LCNCE.trim().equals("")) {
                     showToast("Please enter either Aadhar or Dl No");
-                } else if (!driver_Adhar.equals("")) {
+                } else if (!driver_Adhar.equals("")&& driver_Adhar.length() != 12 ) {
                     if ((driver_Adhar.length() <= 11 || driver_Adhar.length() >= 13)) {
                         edtTxt_Aadhar_No.setError(Html.fromHtml("<font color='white'>Enter valid Aadhar Number </font>"));
                         edtTxt_Aadhar_No.requestFocus();
@@ -702,7 +795,7 @@ public class DDCloseActiviy extends Activity {
                     }
 
 
-                } else if (court_Disposal_code.equals("1")) {
+                } else if (court_Disposal_code.equals("1") || court_Disposal_code.equals("11") || court_Disposal_code.equals("9")) {
 
                     if (fineAmnt.trim().equals("")) {
                         edtTxt_FineAmnt.setError(Html.fromHtml("<font color='white'>Enter Fine Amount </font>"));
@@ -745,7 +838,7 @@ public class DDCloseActiviy extends Activity {
 
                     }
 
-                } else if (court_Disposal_code.equals("2")) {
+                } else if (court_Disposal_code.equals("2") || court_Disposal_code.equals("12") || court_Disposal_code.equals("10")) {
 
                     if (btn_courtConFromdate.getText().toString().equals("Select Date")) {
                         showToast("Please select Court Convicted From date");
@@ -758,10 +851,10 @@ public class DDCloseActiviy extends Activity {
                         new Async_getCourtClosingUpdateTicketInfo().execute();
                     }
 
-                } else if (court_Disposal_code.equals("4")) {
+                } else if (court_Disposal_code.equals("4") || court_Disposal_code.equals("8")) {
 
                     if (rising_days.trim().equals("")) {
-                        edtTxtRisDays.setError(Html.fromHtml("<font color='white'>Enter Convicted Days </font>"));
+                        edtTxtRisDays.setError(Html.fromHtml("<font color='white'>Enter the Days </font>"));
                         edtTxtRisDays.requestFocus();
                     } else {
                         new Async_getCourtClosingUpdateTicketInfo().execute();
@@ -773,6 +866,24 @@ public class DDCloseActiviy extends Activity {
         });
 
 
+    }
+
+    public void clearData() {
+        edtTxt_FineAmnt.setText("");
+        edtTxtConDays.setText("");
+        edtTxtRisDays.setText("");
+        edtTxt_DL_SUSDAYS.setText("");
+        btn_courtConFromdate.setText("Select Date");
+
+        btn_courtConTo.setText("Select Date");
+        btn_courtSoclServceFromdate.setText("Select Date");
+        btn_courtSoclServceTodate.setText("Select Date");
+        btn_DLSUS_FromDate.setText("Select Date");
+        btn_DLSUS_ToDate.setText("Select Date");
+        imgView_CourtOrderCopy.setImageResource(R.drawable.courtorder);
+        imgView_DLCopy.setImageResource(R.drawable.dlcopy);
+        img_dataCourtCopy = null;
+        img_dataDLCopy = null;
     }
 
     public Boolean isOnline() {
@@ -882,7 +993,8 @@ public class DDCloseActiviy extends Activity {
             super.onPostExecute(result);
             removeDialog(PROGRESS_DIALOG);
             try {
-                if (null != ServiceHelper.Opdata_Chalana && !ServiceHelper.Opdata_Chalana.equals("NA") && !"0".equals(ServiceHelper.Opdata_Chalana)) {
+                if (null != ServiceHelper.Opdata_Chalana && !ServiceHelper.Opdata_Chalana.equals("NA") &&
+                        !"0".equals(ServiceHelper.Opdata_Chalana) && !"1".equals(ServiceHelper.Opdata_Chalana)) {
                     sucessFull_DialogMSG(ServiceHelper.Opdata_Chalana);
                     tckt_UPdated_Flag = "Y";
                 } else {
@@ -894,8 +1006,6 @@ public class DDCloseActiviy extends Activity {
                 sucessFull_DialogMSG("Updation Failed \n Please try again");
                 tckt_UPdated_Flag = "N";
             }
-
-
         }
     }
 
@@ -1987,6 +2097,7 @@ public class DDCloseActiviy extends Activity {
 
             } catch (ParseException e) {
                 e.printStackTrace();
+                showToast("Please select the dates! ");
             }
 
         }
@@ -2074,8 +2185,25 @@ public class DDCloseActiviy extends Activity {
             present_day = dayOfMonth;
             format = new SimpleDateFormat("dd-MMM-yyyy");
             date_dd_dl_dob = format.format(new Date(present_year - 1900, (present_month), present_day));
-            btn_Dl_dob.setText("" + date_dd_dl_dob.toUpperCase());
-            Log.i("DAY REPORT : ", "" + date_dd_dl_dob);
+            try {
+
+                String todaysdate = new DateUtil().getTodaysDate();
+
+                long days = new DateUtil().DaysCalucate(date_dd_dl_dob, todaysdate);
+
+                //Minimum Age should be 16
+                if (days > 5824) {
+                    btn_Dl_dob.setText(date_dd_dl_dob.toUpperCase());
+
+                } else {
+                    showToast("Please select Date of Birth Atleast Person Should be Age Greater Than 16");
+                    btn_Dl_dob.setText("Select Date");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                btn_Dl_dob.setText("Select Date");
+
+            }
 
         }
     };
@@ -2094,6 +2222,39 @@ public class DDCloseActiviy extends Activity {
             date_DL_SUS_FROM = "";
             date_DL_SUS_FROM = format.format(new Date(present_year - 1900, (present_month), present_day));
             btn_dateSeltion_DL_Canln.setText("" + date_DL_SUS_FROM.toUpperCase());
+           /* Date date1;
+            Date date2;
+
+            SimpleDateFormat dates = new SimpleDateFormat("dd-MMM-yyyy");
+
+            try {
+                date_From = format.parse(date_DL_SUS_FROM);
+                Calendar cal_For_DL_Can = Calendar.getInstance();
+                cal_For_DL_Can.setTime(date_From);
+                cal_For_DL_Can.set(Calendar.YEAR, 100);
+                int present_year_For_DL_Can = cal_For_DL_Can.get(Calendar.YEAR);
+                int present_month_For_DL_Can = cal_For_DL_Can.get(Calendar.MONTH);
+                int present_day_For_DL_Can = cal_For_DL_Can.get(Calendar.DAY_OF_MONTH);
+                format = new SimpleDateFormat("dd-MMM-yyyy");
+                String date_DL_SUS_FROM_for_DL_CAn = format.format(new Date(present_year_For_DL_Can - 1900, (present_month_For_DL_Can), present_day_For_DL_Can));
+                date1 = dates.parse(date_DL_SUS_FROM);
+                date2 = dates.parse(date_DL_SUS_FROM_for_DL_CAn);
+                if (date2.after(date1) || date2.equals(date1)) {
+
+                    btn_DLSUS_ToDate.setText("" + date_DL_SUS_TO.toUpperCase());
+                    //Comparing dates
+                    long difference = Math.abs(date1.getTime() - date2.getTime());
+                    long differenceDates = difference / (24 * 60 * 60 * 1000);
+
+                    //Convert long to String
+                    dayDifference = Long.toString(differenceDates);
+                }
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }*/
+
+
         }
     };
 
@@ -2150,7 +2311,7 @@ public class DDCloseActiviy extends Activity {
                 DatePickerDialog dp_SCL_SRC_TO = new DatePickerDialog(this, md_scl_servceTo, present_year, present_month,
                         present_day);
 
-                dp_SCL_SRC_TO.getDatePicker().setMaxDate(System.currentTimeMillis());
+               // dp_SCL_SRC_TO.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_SCL_SRC_TO;
 
 

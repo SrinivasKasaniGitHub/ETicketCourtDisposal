@@ -66,7 +66,7 @@ import java.util.Date;
 public class Dashboard extends Activity implements View.OnClickListener {
 
     String server = "192.168.11.9";
-    int port = 99;
+    int port = 1305;
     String username = "ftpuser";
     String password = "Dk0r$l1qMp6";
     String filename = "Version-1.5.1.apk";
@@ -214,6 +214,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
     TextView versin_txt;
     TextView compny_Name;
     static String current_version = "Y";
+    String unitCode="23";
 
 	/* DATE DETAILS END */
 
@@ -233,6 +234,8 @@ public class Dashboard extends Activity implements View.OnClickListener {
         version = versin_txt.getText().toString().trim().split("\\-")[1];
         SharedPreferences sharedPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         current_version = sharedPreference.getString("CURRENT_VERSION", "");
+        String pidCode=MainActivity.arr_logindetails[0];
+        unitCode=pidCode.substring(0,1);
 
         if (current_version.equals("N")) {
 
@@ -298,6 +301,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
         @Override
         protected String doInBackground(Void... arg0) {
             FTPClient ftpClient = new FTPClient();
+            server = IPSettings.ftp_fix;
             try {
                 ftpClient.connect(server, port);
                 ftpClient.login(username, password);
@@ -310,7 +314,9 @@ public class Dashboard extends Activity implements View.OnClickListener {
                 File downloadFile1 = new File("/mnt/sdcard/Download/ECourt.apk");
 
                 // String remoteFile1 = "/23/TabAPK" + "/" + version;
-                String remoteFile1 = "/23/TabAPK" + "/ECourt.apk";
+                String remoteFile1 = "Evidences/23/TabAPK" + "/ECourt.apk";
+                //String remoteFile1 = "Evidences/"+unitCode+"/TabAPK" + "/ECourt.apk";
+
 
                 OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(downloadFile1));
                 boolean success = ftpClient.retrieveFile(remoteFile1, outputStream);
@@ -411,7 +417,8 @@ public class Dashboard extends Activity implements View.OnClickListener {
                                 progress.setProgress(downloadedSize);
                                 float per = ((float) downloadedSize / totalSize) * 100;
 
-                                cur_val.setText((int) per / 1500000 + "%");
+
+                                cur_val.setText((int) per / 170000+ "%");
                             }
                         });
                     }

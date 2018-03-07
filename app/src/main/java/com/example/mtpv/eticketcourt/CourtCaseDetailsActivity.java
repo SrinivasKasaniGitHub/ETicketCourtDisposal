@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mtpv.eticketcourt.Pojos.CasesDetailsPojo;
+import com.example.mtpv.eticketcourt.adapter.CustomAdapter;
 import com.example.mtpv.eticketcourt.adapter.CustomRecyclerViewAdapter;
 import com.example.mtpv.eticketcourt.service.DBHelper;
 import com.example.mtpv.eticketcourt.service.ServiceHelper;
@@ -91,10 +92,9 @@ public class CourtCaseDetailsActivity extends Activity {
         compny_Name = (TextView) findViewById(R.id.CompanyName);
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
         compny_Name.startAnimation(marquee);
-        recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getApplicationContext().getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this) );
+        recyclerView.setHasFixedSize(true);
         db = new DBHelper(getApplicationContext());
         getCourtNamesFromDB();
         cal = Calendar.getInstance();
@@ -196,7 +196,7 @@ public class CourtCaseDetailsActivity extends Activity {
         }*/
 
 
-        custom_CourtCase_DetailsAdapter = new CustomRecyclerViewAdapter(this, arrayList_CourtCase_Detilas);
+        CustomRecyclerViewAdapter custom_CourtCase_DetailsAdapter = new CustomRecyclerViewAdapter(this,arrayList_CourtCase_Detilas);
         recyclerView.setAdapter(custom_CourtCase_DetailsAdapter);
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
@@ -458,9 +458,9 @@ public class CourtCaseDetailsActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         for (CasesDetailsPojo casesDetailsPojo : arrayList_CourtCase_Detilas) {
-            if (casesDetailsPojo.isSelected()) {
-                casesDetailsPojo.setSelected(false);
-            }
+            // if (casesDetailsPojo.isSelected()) {
+            casesDetailsPojo.setSelected(false);
+            // }
         }
     }
 
