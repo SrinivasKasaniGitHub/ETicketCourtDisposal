@@ -55,7 +55,6 @@
             />
     </RelativeLayout>
 
-
     <LinearLayout
         android:id="@+id/logo_lyt"
         android:layout_width="match_parent"
@@ -190,6 +189,7 @@
 
 
     </RelativeLayout>
+
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/progIndicator"
         style="@style/AVLoadingIndicatorView"

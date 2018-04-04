@@ -20,10 +20,7 @@ import com.example.mtpv.eticketcourt.SpotChallan;
 public class ServiceHelper {
 	public static String result = "", output = "";
 	private static String METHOD_NAME = "authenticateUser";
-	// LLRTS20437182016
-	// our web service method name
 	private static String NAMESPACE = "http://service.et.mtpv.com";
-	// Here package name in web service with reverse order.
 	public static String SOAP_ACTION = NAMESPACE + METHOD_NAME, Opdata_Chalana, getViolationPoint_resp,
 			spot_final_res_status, transactionNo_resp, makePayment_resp, terminaldetails_resp, points_resp = null,
 			aadhaarVehicle_resp, UpdateAadhaar_resp, aadhaarDetailsCheck_resp, changePswd_otp, changePSWDconfirm,
@@ -43,26 +40,22 @@ public class ServiceHelper {
 	static String GET_COURT_NAMES="getCourtsMaster";
     static String GET_COURT_DIS_NAMES="getCourtsDisposalMaster";
 	static String GET_POINTNAME_BY_PSNAME_MEHOD_NAME = "getPointNamesByPsName";
-
 	public static String OCUPTN_METHOD_NAME = "getOccupations";
 	public static String QLFCTION_METHOD_NAME = "getQualifications";
-
 	public static String BAR_DETAILS_METHOD_NAME = "getWineSellerDetails";
-
 	public static String VECHILE_CATEGORY = "getVehicleCategory";
 	public static String VECHILE_MAIN_CAT_METHOD_NAME = "getVehicleMainCategory";
 	public static String VECHILE_SUB_CAT_METHOD_NAME = "getVehicleSubCategory";
 	public static String GENERATE_DRUNK_DRIVE_CASE = "generateDrunDriveCase";
 	public static String GENERATE_DRUNK_DRIVE_CASE1_5_2 = "generateDrunDriveCase_v_1_5_2";
-
 	public static String RTA_DETAILS_BY_REGNO_METHOD_NAME = "getRTADetailsByVehicleNO";
 	public static String RTA_DETAILS_BY_REGNO_LICENSE_AADHAR_METHOD_NAME = "getOffenderRemarks";
-
 	public static String PENDING_CHALLANS_BY_REGNO = "getPendingChallansByRegnno";
 	public static String LICENCE_DETAILS_METHOD_NAME = "getRTADetailsByLicenceNo";
-	// getViolationsPoints
-	public static String GET_VIOLATIONS_POINTS = "getViolationsPoints";
 
+	// getViolationsPoints
+
+	public static String GET_VIOLATIONS_POINTS = "getViolationsPoints";
 	public static String VIOLATION_DETAILS_METHOD_NAME = "getOffenceDetailsbyWheeler";
 	public static String GET_DETAINED_ITEMS_METHOD_NAME = "getDetainedItems";
 	public static String AADHAR_DETAILS_METHOD_NAME = "getAADHARData";
@@ -76,61 +69,39 @@ public class ServiceHelper {
 	 * public static String MOBILE_SPOT_CHALLAN_METHOD_NAME =
 	 * "mobileSpotChallanPayment"; OLD METHOD NAME
 	 **/
+
 	public static String MOBILE_SPOT_CHALLAN_METHOD_NAME = "mobileSpotChallanPaymentNew13";
 	public static String TOWING_CPACT_METHOD_NAME = "mobile41CPAct13";
 	public static String VEHICLE_RELEASE_METHOD_NAME = "vehicleRelease15";
 	public static String VEHICLE_HISTORY_METHOD_NAME = "mobilePendingChallanPayment";
-
 	public static String SPOT_CHALLAN_PAYMENT_NEW_15 = "mobileSpotChallanPaymentNew15";
-
 	public static String SPOT_CHALLAN_PAYMENT_NEW_1_5_2 = "mobileSpotChallanPaymentNew_v_1_5_2";
-
 	public static String GET_TRANSACTION_NO = "getTxnRefNo10";
-
 	public static String MAKE_ONLINE_PAYMENT = "makeOnlinePayment10";
-
 	public static String GET_TERMINAL_DETAILS = "getTerminalDetails";
-
 	public static String GET_CHALLAN_DETAILS_FOR_AADHAAR = "getChallanDetailsForAadharUpdate";
-
 	public static String GET_AADHAAR_UPDATE = "aadharUpdateForChallanGeneration";
-
 	public static String GET_CHANGE_PSWD_OTP = "aadharUpdateForChallanGeneration";
-
-
 
 	// public static String GET_AADHAAR_UPDATE =
 	// "aadharUpdateForChallanGeneration";
 
 	public static String GET_AADHAAR_TICKET = "checkAadharTicket";// checkAadharTicket
-
-	/*
-	 * public String getOccupations(); public String getQualifications();
-	 */
 	public static String OCCUPATIONS = "getOccupations";
 	public static String QUALIFICATIONS = "getQualifications";
-
 	public static String GET_DDCLOSING_DETAILS="getCourtClosingTicketInfo";
-
 	public static String GET_COURTCASES_INFO="getCourtCasesInfo";
-
 	public static String SEND_COURTCASEINFO="sendCourtCasesInfo";
-
 	public static String GET_COURT_CLOSING_UPDATE_TCKT_INFO="getCourtClosingUpdateTicketInfoNew";
-
 	public static String[] whlr_details_master;
 	public static String[] psNames_master, violation_points_masters, violation_points_masters_split;
 	public static String[] court_details_master;
     public static String[] court_dis_details_master;
-
 	public static String[] occupationlist_master;
-
 	public static String[] PointNamesBypsNames_master;
 	public static String[] occupation_master;
 	public static String[] qualification_master;
-
 	public static String[] bar_master;
-
 	public static String[] vchle_cat_master, vchle_mainCat_master, vchle_subCat_master;
 	public static String[] final_reponse_split, final_response_master;
 	public static String[] pending_challans_master;
@@ -138,25 +109,24 @@ public class ServiceHelper {
 	public static String[] aadhar_details;
 	public static String[][] detained_items_list_details;
 	public static String[][] pending_challans_details;
+	public static String[] final_spot_reponse_master, final_spot_reponse_details;   // spot
 
-	public static String[] final_spot_reponse_master, final_spot_reponse_details;// spot
-																					// response
 	public static String[] final_spot_reponse_violations_master;// contains data
 																// like
 																// 44@100@500@desc
 	public static String[][] final_spot_reponse_violations;
 
 	/* VEHICLE HISTORY PAID CHALLANS */
-	public static String[] selected_paid_challans_master;// HYD123123123@100!..
-	public static String[][] selected_paid_challans_details;// HYD123123123,100...
+
+	public static String[] selected_paid_challans_master;
+	public static String[][] selected_paid_challans_details;
 
 	/* VILATION DETAILS */
+
 	public static String[] violation_details_master;
 	public static String[][] violation_detailed_views;
 	static StringBuffer sbuffer_allViolations;
-
 	public static String rc_send, dl_send, adhr_send;
-
 	public static StringBuffer onlinebuff = new StringBuffer();
 
 	public static void login(String pid, String pidpwd, String mob_imei, String sim_No, String lat, String log,
@@ -200,8 +170,7 @@ public class ServiceHelper {
 		}
 	}
 
-
-	public static void authenticateLogin(String pidCd, String password,String imei,String simNo,String gpsLattitude,
+    public static void authenticateLogin(String pidCd, String password,String imei,String simNo,String gpsLattitude,
 								  String gpsLongitude,String appVersion,String appName){
 
 
@@ -422,33 +391,6 @@ public class ServiceHelper {
 		}
 	}
 
-	/*
-	 * public static void getViolationPoint_SystemMasterData() { try {
-	 * SoapObject request = new SoapObject(NAMESPACE, "getVioPSyst");
-	 * SoapSerializationEnvelope envelope = new
-	 * SoapSerializationEnvelope(SoapEnvelope.VER11); envelope.dotNet = true;
-	 * envelope.setOutputSoapObject(request);
-	 *
-	 * HttpTransportSE httpTransportSE = new HttpTransportSE(MainActivity.URL);
-	 * httpTransportSE.call(SOAP_ACTION, envelope); Object result =
-	 * envelope.getResponse(); getViolationPoint_resp = "";
-	 * getViolationPoint_resp = result.toString();
-	 *
-	 * Log.i("*getViolationPoint_resp**  :::", " "+getViolationPoint_resp); if
-	 * (getViolationPoint_resp == null) { //
-	 * OFFENCE_CD|WHEELER_CD|PENALTY_POINTS@OFFENCE_CD|WHEELER_CD|PENALTY_POINTS
-	 * } else {
-	 *
-	 * }
-	 *
-	 * } catch (SoapFault fault) { Log.i("****SOAP FAULT ERROR****:::",
-	 * "soapfault = "+fault.getMessage());
-	 *
-	 * } catch (Exception e) { // TODO: handle exception getViolationPoint_resp
-	 * = "0"; } }
-	 */
-
-	/* TO GET PS_NAMES FOR SETTINGS */
 	public static void getPsNames() {
 		try {
 			SoapObject request = new SoapObject(NAMESPACE, "" + GET_PS_NAMES_MEHOD_NAME);
@@ -1229,7 +1171,6 @@ public class ServiceHelper {
 		Utils utils = new Utils();
 		try {
 			SoapObject request = new SoapObject(NAMESPACE, "" + GET_COURT_CLOSING_UPDATE_TCKT_INFO);
-
 			if (null!=eticketNo)request.addProperty("" + utils.TICKET_NO, "" + eticketNo);
 			if (null!=regnNo)request.addProperty("" + utils.E_REG_NO, "" + regnNo);
 			if (null!=dlNO)request.addProperty("" + utils.DL_NO, "" + dlNO);
@@ -1254,7 +1195,7 @@ public class ServiceHelper {
 			if (null!=dlSusp)request.addProperty("dlSusp", "" + dlSusp);
 			if (null!=dlCancel)request.addProperty("dlCancel", "" + dlCancel);
 			if (null!=suspensionFromDate)request.addProperty("suspensionFromDate",suspensionFromDate);
-            request.addProperty("suspensionToDate",null!=suspensionToDate ? suspensionToDate:"");
+			if (null!=suspensionToDate)request.addProperty("suspensionToDate",null!=suspensionToDate ? suspensionToDate:"");
 			if (null!=imgMegistrateCopy)request.addProperty("imgMegistrateCopy",imgMegistrateCopy);
 			if (null!=imgDlCopy)request.addProperty("imgDlCopy",imgDlCopy);
 			if (null!=noOfDaysSuspended)request.addProperty("noOfDaysSuspended",noOfDaysSuspended);
@@ -2677,6 +2618,7 @@ public class ServiceHelper {
 			}
 		}
 	}
+
 	public static void vehicleHistory(String vhle_hist_penchallans, String pen_challans, String regn_No, String gtwy_cd,
 									  String unit_cd, String ps_code, String ps_name, String pid_cd, String pid_name, String total_amnt,
 									  String detained_items, String dateof_pymnt, String pymnt_time, String simid, String imei_no, String lat_val,
@@ -3498,8 +3440,6 @@ public class ServiceHelper {
 		}
 	}
 
-	// public String updateChangePWD(String pidcd,String securityCode,String
-	// contactNo,String otp,String newPwd);
 	public static void updateChange_PWD(String pid_cd, String security_Code, String contact_No, String otpflg,
 										String new_Pwd) {
 		try {

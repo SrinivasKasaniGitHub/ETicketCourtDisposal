@@ -112,6 +112,7 @@ public class DDCloseActiviy extends Activity {
     Button btn_dp_get_onlinedetials;
     Button btn_payment;
     AppCompatButton btn_Dl_dob;
+    String btn_strng_dl_DOB;
     final int PRESENT_DATE_PICKER = 1;
     final int PROGRESS_DIALOG = 2;
     final int PRESENT_COURT_ATTEND_DATE = 5;
@@ -324,6 +325,7 @@ public class DDCloseActiviy extends Activity {
                 android.R.layout.simple_spinner_item, mArrayListCourtNames);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         courtspinner.setAdapter(dataAdapter);
+
         courtspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -345,9 +347,6 @@ public class DDCloseActiviy extends Activity {
 
             }
         });
-
-//        ArrayAdapter<String> courtDisAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.simple_spinner_item_court_disposal, R.id.spincourtdis, mArrayListCourtDis);
-//        courtDisAdapter.setDropDownViewResource(R.layout.simple_spinner_item_court_disposal);
         ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, mArrayListCourtDis);
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -356,8 +355,6 @@ public class DDCloseActiviy extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String courtDis = courtDisspinner.getSelectedItem().toString();
-
-                Log.i("disposal map size : ", "" + paramsCourtdis.size());
                 for (String mapCourtName : paramsCourtdis.keySet()) {
                     if (courtDis.equals(mapCourtName)) {
                         selectedCourtDisCode = paramsCourtdis.get(mapCourtName);
@@ -690,7 +687,7 @@ public class DDCloseActiviy extends Activity {
                 String court_Disposal_code = selectedCourtDisCode;
                 String fineAmnt = edtTxt_FineAmnt.getText().toString();
                 dl_SusDays = edtTxt_DL_SUSDAYS.getText().toString();
-                if (dl_SUS.equals("Y")) {
+                if (dl_SUS.equals("Y") || dl_CAN.equals("Y")) {
                     dl_SUS_Status = "Y";
 //                    dl_SUS = dl_SUS + "!" + dl_SusDays;
                 } else {
@@ -716,18 +713,15 @@ public class DDCloseActiviy extends Activity {
                 if (("null").equals(dl) || ("").equals(dl)) {
                     driver_LCNCE = edtTxt_DlNo.getText().toString();
                 }
-
                 if (("null").equals(ml) || ("").equals(ml)) {
                     driver_Mobile = edtTxt_Mob_No.getText().toString();
                 }
-
                 if (("null").equals(aN) || ("").equals(aN)) {
                     driver_Adhar = edtTxt_Aadhar_No.getText().toString();
                 }
                 if (("null").equals(dl_dob) || ("").equals(dl_dob)) {
                     driver_DL_DOB = btn_Dl_dob.getText().toString();
                 }
-
 
                 if (court_Code == null) {
                     showToast("Select Court Name");
@@ -739,7 +733,7 @@ public class DDCloseActiviy extends Activity {
                     edtTxt_Mob_No.requestFocus();
                 } else if (driver_Adhar.trim().equals("") && driver_LCNCE.trim().equals("")) {
                     showToast("Please enter either Aadhar or Dl No");
-                } else if (!driver_Adhar.equals("")&& driver_Adhar.length() != 12 ) {
+                } else if (!driver_Adhar.equals("") && driver_Adhar.length() != 12) {
                     if ((driver_Adhar.length() <= 11 || driver_Adhar.length() >= 13)) {
                         edtTxt_Aadhar_No.setError(Html.fromHtml("<font color='white'>Enter valid Aadhar Number </font>"));
                         edtTxt_Aadhar_No.requestFocus();
@@ -775,7 +769,7 @@ public class DDCloseActiviy extends Activity {
                 } else if (sTS_No.trim().equals("")) {
                     edtTxt_STC_No.setError(Html.fromHtml("<font color='white'>Enter STC No</font>"));
                     edtTxt_STC_No.requestFocus();
-                } else if (dl_SusDays.trim().equals("") && dl_SUS_Status.equals("Y")) {
+                } else if (dl_SusDays.trim().equals("") && dl_SUS.equals("Y")) {
                     edtTxt_DL_SUSDAYS.setError(Html.fromHtml("<font color='white'>Enter Suspention Days</font>"));
                     edtTxt_DL_SUSDAYS.requestFocus();
                 } else if (court_Disposal_code == null) {
@@ -956,17 +950,14 @@ public class DDCloseActiviy extends Activity {
         protected String doInBackground(Void... params) {
 
             try {
-                if (dl_SUS.equals("Y") || dl_CAN.equals("Y")) {
-                    if ((!driver_LCNCE.equals("null")) && (driver_LCNCE.length() <= 3)) {
-                        edtTxt_DlNo.setError(Html.fromHtml("<font color='white'>Enter valid Dl Number </font>"));
-                        edtTxt_DlNo.requestFocus();
-                    } else if (btn_Dl_dob.getText().toString().equals("Select Date")) {
-                        showToast("Select Dl Date!");
-                    }
+                if (btn_Dl_dob.getText().toString().equals("Select Date")) {
+                    driver_DL_DOB = "";
+                } else {
+                    driver_DL_DOB = "";
+                    driver_DL_DOB = btn_Dl_dob.getText().toString();
                 }
 
-
-                ServiceHelper.getCourtClosingUpdateTicketInfo(chall_No, vEHICLE_NUMBER, driver_LCNCE.toUpperCase(), btn_Dl_dob.getText().toString(), driver_Adhar, edtTxt_STC_No.getText().toString(),
+                ServiceHelper.getCourtClosingUpdateTicketInfo(chall_No, vEHICLE_NUMBER, driver_LCNCE.toUpperCase(), driver_DL_DOB, driver_Adhar, edtTxt_STC_No.getText().toString(),
                         selectedCourtDisCode, edtTxtConDays.getText().toString(), date_convFRom, date_convicTo, edtTxt_FineAmnt.getText().toString(),
                         edtTxtRisDays.getText().toString(), selectedCourtCode, date_courtAtnd, vehcleRelse, "Y", edtTxt_Remarks.getText().toString(),
                         MainActivity.user_id, MainActivity.arr_logindetails[1], "", driver_Mobile, dl_SUS, dl_CAN, date_DL_SUS_FROM, date_DL_SUS_TO,
@@ -2097,7 +2088,7 @@ public class DDCloseActiviy extends Activity {
 
             } catch (ParseException e) {
                 e.printStackTrace();
-                showToast("Please select the dates! ");
+                showToast("Please select the dates!");
             }
 
         }
@@ -2145,7 +2136,6 @@ public class DDCloseActiviy extends Activity {
 
             //Setting dates
             try {
-
 
                 date1 = dates.parse(date_DL_SUS_FROM);
                 date2 = dates.parse(date_DL_SUS_TO);
@@ -2311,7 +2301,7 @@ public class DDCloseActiviy extends Activity {
                 DatePickerDialog dp_SCL_SRC_TO = new DatePickerDialog(this, md_scl_servceTo, present_year, present_month,
                         present_day);
 
-               // dp_SCL_SRC_TO.getDatePicker().setMaxDate(System.currentTimeMillis());
+                // dp_SCL_SRC_TO.getDatePicker().setMaxDate(System.currentTimeMillis());
                 return dp_SCL_SRC_TO;
 
 

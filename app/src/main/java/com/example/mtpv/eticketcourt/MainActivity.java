@@ -111,8 +111,8 @@ public class MainActivity extends Activity implements LocationListener {
         btn_login = (Button) findViewById(R.id.btnlog);
         et_pid = (EditText) findViewById(R.id.edtTxt_pid);
         et_pid_pwd = (EditText) findViewById(R.id.edtTxt_pwd);
-       /* et_pid.setText("23001004");
-        et_pid_pwd.setText("DcHyd");*/
+       /* et_wpid.setText("23001004");
+        et_pid_pd.setText("DcHyd");*/
         progIndicator = (AVLoadingIndicatorView) findViewById(R.id.progIndicator);
         Animation marquee = AnimationUtils.loadAnimation(this, R.anim.marquee);
         compny_Name.startAnimation(marquee);
@@ -130,7 +130,8 @@ public class MainActivity extends Activity implements LocationListener {
         });
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
-        ip_Settings.setOnClickListener(new View.OnClickListener() {
+        ip_Settings.setOnClickListener(
+                new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent_ipSettings = new Intent(getApplicationContext(), IPSettings.class);

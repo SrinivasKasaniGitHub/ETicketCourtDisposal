@@ -70,6 +70,7 @@ public class CourtCaseDetailsActivity extends Activity {
     String councelng_Date;
     ArrayList<String> mArrayListCourtNames = new ArrayList<>();
     HashMap<String, String> paramsCourt = new HashMap<>();
+    HashMap<String, String> paramsCourt_Address = new HashMap<>();
     DBHelper db;
     Cursor c, cursor_courtnames;
     ArrayList<String> courtNames;
@@ -214,12 +215,13 @@ public class CourtCaseDetailsActivity extends Activity {
                         break;
                     }
                 }
-                /*for (String mapCourt_Name : paramsCourt_Address.keySet()) {
+                for (String mapCourt_Name : paramsCourt_Address.keySet()) {
                     if (selectedCourtName.equals(mapCourt_Name)) {
+                        selectedCourtAddress="";
                         selectedCourtAddress = paramsCourt_Address.get(mapCourt_Name);
                         break;
                     }
-                }*/
+                }
 
             }
 
@@ -375,14 +377,14 @@ public class CourtCaseDetailsActivity extends Activity {
 
             if (cursor_courtnames.moveToFirst()) {
                 paramsCourt = new HashMap<String, String>();
-//                paramsCourt_Address=new HashMap<>();
+                paramsCourt_Address=new HashMap<>();
                 while (!cursor_courtnames.isAfterLast()) {
                     try {
 
                         mArrayListCourtNames.add(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)));
 
                         paramsCourt.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_code_settings)));
-//                        paramsCourt_Address.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_address_settings)));
+                        paramsCourt_Address.put(cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_name_settings)), cursor_courtnames.getString(cursor_courtnames.getColumnIndex(db.court_address_settings)));
                         cursor_courtnames.moveToNext();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -392,7 +394,7 @@ public class CourtCaseDetailsActivity extends Activity {
             }
         } catch (SQLException e) {
             paramsCourt = new HashMap<>();
-//            paramsCourt_Address=new HashMap<>();
+            paramsCourt_Address=new HashMap<>();
             showToast("Please download the Masters");
             e.printStackTrace();
         }

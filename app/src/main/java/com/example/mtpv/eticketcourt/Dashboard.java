@@ -1465,7 +1465,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
                 if (ServiceHelper.court_details_master.length > 0) {
                     court_name_code_arr = new String[ServiceHelper.court_details_master.length][2];
-                    for (int i = 1; i < ServiceHelper.court_details_master.length; i++) {
+                    for (int i = 0; i < ServiceHelper.court_details_master.length; i++) {
 
                         court_name_code_arr[i] = ServiceHelper.court_details_master[i].split("@");
                     }
@@ -1487,7 +1487,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     court_names_arr.clear();
                     court_address_arr.clear();
 
-                    for (int j = 1; j < court_name_code_arr.length; j++) {
+                    for (int j = 0; j < court_name_code_arr.length; j++) {
                         court_codes_fr_names_arr.add(court_name_code_arr[j][0]);
                         court_names_arr.add(court_name_code_arr[j][1]);
                         court_address_arr.add(court_name_code_arr[j][2]);
@@ -1538,7 +1538,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
 
                 if (null != ServiceHelper.court_dis_details_master && ServiceHelper.court_dis_details_master.length > 0) {
                     court_dis_name_code_arr = new String[ServiceHelper.court_dis_details_master.length][2];
-                    for (int i = 1; i < ServiceHelper.court_dis_details_master.length; i++) {
+                    for (int i = 0; i < ServiceHelper.court_dis_details_master.length; i++) {
 
                         court_dis_name_code_arr[i] = ServiceHelper.court_dis_details_master[i].split("@");
                     }
@@ -1558,7 +1558,7 @@ public class Dashboard extends Activity implements View.OnClickListener {
                     court_dis_codes_fr_names_arr.clear();
                     court_dis_names_arr.clear();
 
-                    for (int j = 1; j < court_dis_name_code_arr.length; j++) {
+                    for (int j = 0; j < court_dis_name_code_arr.length; j++) {
                         court_dis_codes_fr_names_arr.add(court_dis_name_code_arr[j][0]);
                         court_dis_names_arr.add(court_dis_name_code_arr[j][1]);
 

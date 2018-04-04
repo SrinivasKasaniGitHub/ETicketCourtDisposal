@@ -444,7 +444,7 @@
                                     android:layout_weight="1"
                                     android:hint="DL_No"
                                     android:inputType="text|textCapCharacters"
-                                    android:maxLength="25"
+                                    android:maxLength="35"
                                     android:visibility="gone" />
 
                             </LinearLayout>
@@ -658,7 +658,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="STC No"
-                                android:inputType="number|textCapCharacters" />
+                                android:inputType="number|textCapCharacters"
+                                android:maxLength="16"/>
 
                         </LinearLayout>
 
@@ -749,7 +750,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Fine Amount"
-                                android:inputType="number">
+                                android:inputType="number"
+                                android:maxLength="5">
 
                             </android.support.v7.widget.AppCompatEditText>
 
@@ -1024,7 +1026,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Rising days"
-                                android:inputType="number">
+                                android:inputType="number"
+                                android:maxLength="5">
 
                             </android.support.v7.widget.AppCompatEditText>
 
@@ -1065,7 +1068,8 @@
                                 android:id="@+id/edtTxt_ConDays"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="conviction days">
+                                android:hint="conviction days"
+                                android:maxLength="5">
 
                             </android.support.v7.widget.AppCompatEditText>
 
